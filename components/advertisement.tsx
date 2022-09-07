@@ -5,14 +5,14 @@ import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 
 export default function Advertisement () {
-    const [company, setCompany] = useState('');
-    const [description, setDescription] = useState('');
-    const [mediaPreview, setMediaPreview] = useState('');
+    const [company, setCompany] = useState<string | undefined>('');
+    const [description, setDescription] = useState<string | undefined>('');
+    const [mediaPreview, setMediaPreview] = useState<string | undefined>('');
     const [image, setImage] = useState({name: '', media: ''});
-    const [width, setWidth] = useState(400);
-    const [height, setHeight] = useState(400);
-    const [left, setLeft] = useState(40);
-    const [top, setTop] = useState(20);
+    const [width, setWidth] = useState<number | undefined>(400);
+    const [height, setHeight] = useState<number | undefined>(400);
+    const [left, setLeft] = useState<number | undefined>(40);
+    const [top, setTop] = useState<number | undefined>(20);
 
     function handleChange(event) {
         const { name, files } = event.target;
@@ -62,9 +62,6 @@ export default function Advertisement () {
                                     <Grid.Column width={8}>
                                         <Form.Input
                                             fluid
-                                            // icon="chart bar"
-                                            // size="large"
-                                            // iconPosition="left"
                                             label="Company Name"
                                             placeholder="company"
                                             name="company"
@@ -84,9 +81,6 @@ export default function Advertisement () {
                                         /> */}
                                         <Form.Input
                                             fluid
-                                            // icon="chart bar"
-                                            // size="large"
-                                            // iconPosition="left"
                                             label="Advertisement Description"
                                             placeholder="description"
                                             name="description"
