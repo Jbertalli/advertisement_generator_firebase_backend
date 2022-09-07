@@ -7,13 +7,13 @@ import styles from '../styles/advertisement.module.css';
 export default function MobileAdvertisement () {
     const [company, setCompany] = useState('');
     // const [header, setHeader] = useState('');
-    const [description, setDescription] = useState('');
-    const [mediaPreview, setMediaPreview] = useState('');
+    const [description, setDescription] = useState<string | undefined>('');
+    const [mediaPreview, setMediaPreview] = useState<string | undefined>('');
     const [image, setImage] = useState({name: '', media: ''});
-    const [width, setWidth] = useState(400);
-    const [height, setHeight] = useState(400);
-    const [left, setLeft] = useState(40);
-    const [top, setTop] = useState(20);
+    const [width, setWidth] = useState<number | undefined>(400);
+    const [height, setHeight] = useState<number | undefined>(400);
+    const [left, setLeft] = useState<number | undefined>(40);
+    const [top, setTop] = useState<number | undefined>(20);
 
     function handleChange(event) {
         const { name, files } = event.target;
@@ -35,19 +35,16 @@ export default function MobileAdvertisement () {
             </Head>
             <FocusLock>
                 <div>
-                    <center style={{ color: '#125CA1', fontSize: '52px', fontWeight: '700', padding: '.5em 0em 0em 0em', lineHeight: '50px' }}>
+                    <div style={{ color: '#125CA1', fontSize: '52px', fontWeight: '700', padding: '.5em 0em 0em 0em', lineHeight: '50px', textAlign: 'center' }}>
                         Advertisement Generator
-                    </center>
-                    <center style={{ fontSize: '18px', fontWeight: '400px', padding: '0em 0em 1em 0em' }}>
+                    </div>
+                    <div style={{ fontSize: '18px', fontWeight: '400px', padding: '0em 0em 1em 0em', textAlign: 'center' }}>
                         Create and Generate Dynamic Ads
-                    </center>
+                    </div>
                 </div>  
                 <Form>
                     <Form.Input
                         fluid
-                        // icon="chart bar"
-                        // size="large"
-                        // iconPosition="left"
                         label="&nbsp;&nbsp;&nbsp;Company Name"
                         placeholder="company"
                         name="company"
@@ -68,9 +65,6 @@ export default function MobileAdvertisement () {
                     /> */}
                     <Form.Input
                         fluid
-                        // icon="chart bar"
-                        // size="large"
-                        // iconPosition="left"
                         label="&nbsp;&nbsp;&nbsp;Advertisement Description"
                         placeholder="description"
                         name="description"
@@ -101,8 +95,8 @@ export default function MobileAdvertisement () {
                     </>
                     ) : (
                     <>
-                        <center>
-                            <Card stackable itemsPerRow={1} style={{ marginTop: '2em', width: '90vw' }}>
+                        <div>
+                            <Card centered stackable itemsPerRow={1} style={{ marginTop: '2em', width: '90vw' }}>
                                 <Card.Content
                                     content="Create Advertisement"
                                     style={{ 
@@ -115,7 +109,7 @@ export default function MobileAdvertisement () {
                                     }}
                                 />
                             </Card>
-                        </center>
+                        </div>
                     </>)}
                     { !mediaPreview ? (<>
                         &nbsp;
@@ -174,11 +168,11 @@ export default function MobileAdvertisement () {
                 </>
                 )}
                 <Item style={{ fontSize: '1.3em', fontWeight: '900', padding: '1em 1em 1.5em 1em' }}>
-                    <center>
+                    <div>
                         <h1 style={{ display: 'flex', justifyContent: 'center' }}>
                             {company} Video Advertisement
                         </h1>
-                    </center>
+                    </div>
                     <div style={{ fontSize: '.91em', lineHeight: '20px' }}>
                         <div style={{ margin: '1em 0em 1em 0em' }}>
                             <Icon
@@ -199,7 +193,7 @@ export default function MobileAdvertisement () {
                             {`Your account needs to settle, which can take more than 30 days (due to possible returns). In this time, Earn and Trade users are credited with "Pending Points".`}
                         </div>
                     </div>
-                    <center>
+                    <div style={{ textAlign: 'center'}}>
                         <Button
                             content="Earn 20 points"
                             size="large"
@@ -207,7 +201,7 @@ export default function MobileAdvertisement () {
                             style={{ color: 'white', background: '#125CA1', borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%', marginTop: '1em' }}
                             href="/"
                         /> 
-                    </center>
+                    </div>
                 </Item>
                 <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: '3em' }}>
                     {description}
