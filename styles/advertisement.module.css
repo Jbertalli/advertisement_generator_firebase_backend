@@ -1,0 +1,18 @@
+.file {
+    color: transparent;
+    transform: translateX(13%);
+  }
+  
+.file::-webkit-file-upload-button{
+    background: #125CA1;
+    color: #FFF;
+    cursor: pointer;
+    padding: 0.78571429em 1.5em;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  
