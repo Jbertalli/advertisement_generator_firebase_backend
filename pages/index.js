@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Advertisement from '../components/advertisement';
+import MobileAdvertisement from '../components/mobileAdvertisement';
 
 export default function Home() {
   const [isDesktop, setDesktop] = useState(false);
@@ -30,7 +31,7 @@ export default function Home() {
       </>
       ):(
       <>
-        World
+        <MobileAdvertisement />
       </>
       )}
     </>
