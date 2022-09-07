@@ -11,9 +11,12 @@
   "dependencies": {
     "@types/node": "^18.7.16",
     "@types/react": "^18.0.18",
+    "firebase": "^9.9.4",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-firebase-hooks": "^5.0.3",
+    "react-firebaseui": "^6.0.0",
     "react-focus-lock": "^2.9.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.1.3",
