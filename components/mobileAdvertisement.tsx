@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Button, Form, Icon, Item, Card } from 'semantic-ui-react';
 import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
+import Local from '../components/mobileLocalStorage';
 
 export default function MobileAdvertisement () {
     const [company, setCompany] = useState('');
@@ -33,6 +34,7 @@ export default function MobileAdvertisement () {
                 <title>Earn and Trade Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
+            <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} />
             <FocusLock>
                 <div>
                     <div style={{ color: '#125CA1', fontSize: '52px', fontWeight: '700', padding: '.5em 0em 0em 0em', lineHeight: '50px', textAlign: 'center' }}>
@@ -86,7 +88,7 @@ export default function MobileAdvertisement () {
                     />
                     { company.length > 0 || description.length > 0 || mediaPreview ? (<>
                         {/* <strong style={{ fontSize: '1em', display: 'flex', justifyContent: 'center' }}>Advertisement</strong> */}
-                        <Card fluid stackable style={{ textAlign: 'left', fontSize: '1.2em', margin: '1em 1em 1em .6em', padding: '1em', width: '96vw' }}>
+                        <Card fluid style={{ textAlign: 'left', fontSize: '1.2em', margin: '1em 1em 1em .6em', padding: '1em', width: '96vw' }}>
                             <div style={{ margin: '1em 0em 0em 0em' }}>Company Name: {JSON.stringify(company, null, 2)}</div>
                             {/* <div style={{ margin: '1em 0em 0em 0em' }}>{JSON.stringify(header, null, 2)}</div> */}
                             <div style={{ margin: '1em 0em 1em 0em' }}>Advertisement Description: {JSON.stringify(description, null, 2)}</div>

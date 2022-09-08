@@ -22,6 +22,8 @@ export default function Advertisement () {
             ));
             setMediaPreview(window.URL.createObjectURL(files[0]));
         }
+        const img = files[0].name;
+        console.log(img);
         console.log(image);
         console.log(files[0].name);
         console.log(mediaPreview);
@@ -105,7 +107,7 @@ export default function Advertisement () {
                                     <Grid.Column width={8}>
                                         { company.length > 0 || description.length > 0 || mediaPreview ? (<>
                                             {/* <strong style={{ fontSize: '1em', display: 'flex', justifyContent: 'center' }}>Advertisement</strong> */}
-                                            <Card fluid stackable style={{ textAlign: 'left', fontSize: '1.2em', margin: '1em 0em 0em 0em', padding: '1em' }}>
+                                            <Card fluid style={{ textAlign: 'left', fontSize: '1.2em', margin: '1em 0em 0em 0em', padding: '1em' }}>
                                                 <div style={{ margin: '1em 0em 0em 0em' }}>Company Name: {JSON.stringify(company, null, 2)}</div>
                                                 {/* <div style={{ margin: '1em 0em 0em 0em' }}>{JSON.stringify(header, null, 2)}</div> */}
                                                 <div style={{ margin: '1em 0em 1em 0em' }}>Advertisement Description: {JSON.stringify(description, null, 2)}</div>
