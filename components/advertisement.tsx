@@ -112,7 +112,7 @@ export default function Advertisement () {
                                         </>
                                         ) : (
                                         <>
-                                            <Card fluid stackable itemsPerRow={1} style={{ margin: '.5em 0em 0em 0em' }}>
+                                            <Card fluid style={{ margin: '.5em 0em 0em 0em' }}>
                                                 <Card.Content
                                                     content="Create Advertisement"
                                                     style={{ 
@@ -214,7 +214,6 @@ export default function Advertisement () {
                                         <Button
                                             content="Earn 20 points"
                                             size="large"
-                                            rounded
                                             style={{ color: 'white', background: '#125CA1', borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%', transform: 'translateX(138%)', marginTop: '1em' }}
                                             href="/"
                                         />

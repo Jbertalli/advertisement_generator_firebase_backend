@@ -96,7 +96,7 @@ export default function MobileAdvertisement () {
                     ) : (
                     <>
                         <div>
-                            <Card centered stackable itemsPerRow={1} style={{ marginTop: '2em', width: '90vw' }}>
+                            <Card centered style={{ marginTop: '2em', width: '90vw' }}>
                                 <Card.Content
                                     content="Create Advertisement"
                                     style={{ 
@@ -197,7 +197,6 @@ export default function MobileAdvertisement () {
                         <Button
                             content="Earn 20 points"
                             size="large"
-                            rounded
                             style={{ color: 'white', background: '#125CA1', borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%', marginTop: '1em' }}
                             href="/"
                         /> 
