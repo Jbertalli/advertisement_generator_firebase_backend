@@ -89,17 +89,6 @@ export default function Advertisement () {
                 <title>Earn and Trade Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
-            {(company && description) ? (
-            <>
-                <Button onClick={() => addAdvertisement(company, description, width, height, left, top)}>
-                    Save
-                </Button>
-                <Button onClick={() => deleteAdvertisement(company, description, width, height, left, top)}>
-                    Delete
-                </Button>
-            </>
-            ):(
-            <></>)}
             <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} />
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
@@ -228,9 +217,17 @@ export default function Advertisement () {
                                     </>)}
                                 </Grid.Row>
                                 <Grid.Row>
-                                    <Button style={{ background: '#125CA1', color: 'white' }}>
-                                        Save
-                                    </Button>
+                                    {(company && description) ? (
+                                    <>
+                                        <Button onClick={() => addAdvertisement(company, description, width, height, left, top)} style={{ background: '#125CA1', color: 'white' }}>
+                                            Save
+                                        </Button>
+                                        <Button onClick={() => deleteAdvertisement(company, description, width, height, left, top)} style={{ background: '#125CA1', color: 'white' }}>
+                                            Delete
+                                        </Button>
+                                    </>
+                                    ):(
+                                    <></>)}
                                 </Grid.Row>
                             </Grid>
                         </Segment>
