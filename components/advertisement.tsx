@@ -61,9 +61,14 @@ export default function Advertisement () {
         logged();
       }, [])
 
-      const addCompanyName = async (company: number) => {
+      const addAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
         await setDoc(doc(db, "Advertisement", "Company"), {
-          Company: company,
+          company,
+          description,
+          width,
+          height,
+          left,
+          top,
         });
       }
 
@@ -73,7 +78,7 @@ export default function Advertisement () {
                 <title>Earn and Trade Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
-            <Button onClick={() => addCompanyName(1)}>Click Here</Button>
+            <Button onClick={() => addAdvertisement(10, 20, 30, 40, 50, 60)}>Click Here</Button>
             <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} />
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
