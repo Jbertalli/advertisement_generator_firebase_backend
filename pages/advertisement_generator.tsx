@@ -4,6 +4,7 @@ import MobileAdvertisement from '../components/mobileAdvertisement';
 import { auth } from '../firebase/clientApp';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/router';
+import { Button } from 'semantic-ui-react';
 
 export default function Home() {
   const [isDesktop, setDesktop] = useState(false);
@@ -42,9 +43,9 @@ export default function Home() {
 
   return (
     <>
-      <button onClick={handleLogOut}>
+      <Button onClick={handleLogOut} style={{ background: 'red', color: 'white' }}>
         Logout
-      </button>
+      </Button>
       {isDesktop ? (
       <>
         <Advertisement />
