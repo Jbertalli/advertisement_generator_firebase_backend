@@ -3,13 +3,13 @@ import Advertisement from '../components/advertisement';
 import MobileAdvertisement from '../components/mobileAdvertisement';
 import { auth } from '../firebase/clientApp';
 import { signOut } from 'firebase/auth';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import { Button } from 'semantic-ui-react';
 
 export default function Home() {
-  const [isDesktop, setDesktop] = useState(false);
+  const [isDesktop, setDesktop] = useState<boolean>(false);
 
-  const router = useRouter();
+  const router: NextRouter = useRouter();
 
   useEffect(() => {
     if (window.innerWidth > 440) {

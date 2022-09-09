@@ -6,17 +6,17 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from 'next/router';
 
 export default function authentication() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [account, setAccount] = useState(true);
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [account, setAccount] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   const router = useRouter();
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log("Current user:", user.email);
-      const uid = user.uid;
+      const uid: string = user.uid;
     } else {
       console.log("No user signed in");
     }
