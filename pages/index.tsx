@@ -39,6 +39,8 @@ export default function authentication() {
       console.log(error, "You are not registered");
     });
   }
+  
+  console.log(auth.currentUser);
 
   return (
     <>
