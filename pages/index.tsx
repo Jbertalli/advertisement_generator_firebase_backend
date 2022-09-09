@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { auth } from '../firebase/clientApp';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from 'next/router';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function authentication() {
   const [email, setEmail] = useState<string>("");
@@ -12,6 +13,7 @@ export default function authentication() {
   const [error, setError] = useState<string>("");
 
   const router = useRouter();
+  const [loading] = useAuthState(auth);
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -56,6 +58,7 @@ export default function authentication() {
           <title>Advertisement Generator Authentication</title>
           <meta name="description" content="auth, advertisement, login, signup" />
       </Head>
+      {loading && <h4>Loading...</h4>}
       {account ? (
       <>
         <div>
