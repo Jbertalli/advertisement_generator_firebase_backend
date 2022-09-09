@@ -4,6 +4,14 @@ import { Container, Segment, Button, Form, Icon, Grid, Item, Card } from 'semant
 import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/localStorage';
+import firebase from '../firebase/clientApp';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, getDocs, setDoc, collection, Timestamp  } from 'firebase/firestore';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../firebase/clientApp';
+
+auth;
+const db = getFirestore();
 
 export default function Advertisement () {
     const [company, setCompany] = useState<string | undefined>('');
@@ -42,12 +50,32 @@ export default function Advertisement () {
 
     //console.log(description.length);
 
+    // console.log data
+    const logged = async () => {
+        const colRef = collection(db, "Advertisement");
+        const docsSnap = await getDocs(colRef);
+        docsSnap.forEach(doc => {
+          console.log(doc.data());
+        })
+      }
+  
+      useEffect(() => {
+        logged();
+      }, [])
+
+      const addCompanyName = async (company: number) => {
+        await setDoc(doc(db, "Advertisement", "Company"), {
+          Company: company,
+        });
+      }
+
     return (
         <>
             <Head>
                 <title>Earn and Trade Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
+            <Button onClick={() => addCompanyName(11111)}>Click Here</Button>
             <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} />
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
@@ -174,6 +202,11 @@ export default function Advertisement () {
                                             />
                                         </Segment>
                                     </>)}
+                                </Grid.Row>
+                                <Grid.Row>
+                                    <Button>
+                                        Save
+                                    </Button>
                                 </Grid.Row>
                             </Grid>
                         </Segment>
