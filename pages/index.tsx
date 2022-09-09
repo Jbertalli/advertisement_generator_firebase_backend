@@ -6,6 +6,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default function authentication() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [account, setAccount] = useState(false);
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -40,67 +41,71 @@ export default function authentication() {
 
   return (
     <>
-      <div>
-        <h1>Firebase Login</h1>
-        <form onSubmit={handleLogin}>
-          <div>
-            Email
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              type="email"
-              placeholder="Email"
-            />
-          </div>
-          <div>
-            Password
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              type="password"
-              placeholder="Password"
-            />
-          </div>
-          <div>
-            <input type="submit" value="Login" />
-          </div>
-        </form>
-      </div>
-      <div>
-        Don't have an account? <a style={{ cursor: 'pointer', color: '#125CA1' }}>Signup</a>
-      </div>
-
-
-
-      <div>
-        <h1>Firebase Signup</h1>
-        <form onSubmit={handleSignup}>
-          <div>
+      {account ? (
+      <>
+        <div>
+          <h1>Firebase Login</h1>
+          <form onSubmit={handleLogin}>
+            <div>
               Email
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              type="email"
-              placeholder="Email"
-            />
-          </div>
-          <div>
-            Password
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              type="password"
-              placeholder="Password"
-            />
-          </div>
-          <div>
-            <input type="submit" value="Signup" />
-          </div>
-        </form>
-      </div>
-      <div>
-        Already have an account? <a style={{ cursor: 'pointer', color: '#125CA1' }}>Login</a>
-      </div>
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                type="email"
+                placeholder="Email"
+              />
+            </div>
+            <div>
+              Password
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                type="password"
+                placeholder="Password"
+              />
+            </div>
+            <div>
+              <input type="submit" value="Login" />
+            </div>
+          </form>
+        </div>
+        <div>
+          Don't have an account? <a onClick={() => {setAccount(false), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Signup</a>
+        </div>
+      </>
+      ):(
+      <>
+        <div>
+          <h1>Firebase Signup</h1>
+          <form onSubmit={handleSignup}>
+            <div>
+                Email
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                type="email"
+                placeholder="Email"
+              />
+            </div>
+            <div>
+              Password
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                type="password"
+                placeholder="Password"
+              />
+            </div>
+            <div>
+              <input type="submit" value="Signup" />
+            </div>
+          </form>
+        </div>
+        <div>
+          Already have an account? <a onClick={() => {setAccount(true), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Login</a>
+        </div>
+      </>
+      )}
     </>
   );
 }
