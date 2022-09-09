@@ -49,6 +49,9 @@ export default function login() {
           </div>
         </form>
       </div>
+      <div>
+        Don't have an account? <a>Signup</a>
+      </div>
     </>
   );
 }
