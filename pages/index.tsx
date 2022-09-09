@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@firebase/auth';
 import React, { useState } from 'react';
 import { auth } from '../firebase/clientApp';
@@ -41,6 +42,10 @@ export default function authentication() {
 
   return (
     <>
+      <Head>
+          <title>Advertisement Generator Authentication</title>
+          <meta name="description" content="auth, advertisement, login, signup" />
+      </Head>
       {account ? (
       <>
         <div>
