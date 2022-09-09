@@ -5,7 +5,7 @@ import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/localStorage';
 import firebase from '../firebase/clientApp';
-import { getFirestore, doc, getDocs, setDoc, collection, Timestamp  } from 'firebase/firestore';
+import { getFirestore, doc, getDocs, setDoc, collection, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 
 auth;
@@ -70,6 +70,17 @@ export default function Advertisement () {
           left,
           top,
         });
+      }
+
+      const deleteAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
+          await updateDoc(doc(db, "Advertisement", "Company"), {
+            company: deleteField(),
+            description: deleteField(),
+            width: deleteField(),
+            height: deleteField(),
+            left: deleteField(),
+            top: deleteField(),
+          })
       }
 
     return (
