@@ -31,7 +31,7 @@ export default function authentication() {
     })
     .catch((error) => {
       console.log(error, "User not found");
-      setError("Email or password does not match.");
+      setError("Invalid email or password");
     });
   }
 
@@ -115,6 +115,11 @@ export default function authentication() {
                 type="password"
                 placeholder="Password"
               />
+            </div>
+            <div style={{ color: 'red' }}>
+              {error && (
+                <p>{error}</p>
+              )}
             </div>
             <div>
               <input type="submit" value="Signup" />
