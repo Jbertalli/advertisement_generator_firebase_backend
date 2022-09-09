@@ -89,7 +89,7 @@ export default function Advertisement () {
                 <title>Earn and Trade Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
-            <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} />
+            <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} width={width} setWidth={setWidth} height={height} setHeight={setHeight} left={left} setLeft={setLeft} top={top} setTop={setTop} />
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
                     <Segment attached textAlign="center">
