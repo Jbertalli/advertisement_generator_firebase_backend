@@ -1,10 +1,20 @@
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@firebase/auth';
 import React, { useState } from 'react';
 import { auth } from '../firebase/clientApp';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function authentication() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+       console.log("Current user:", user.email);
+        const uid = user.uid;
+      } else {
+        console.log("No user signed in");
+      }
+    });
 
   function handleLogin(e) {
     e.preventDefault();
