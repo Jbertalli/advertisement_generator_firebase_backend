@@ -202,7 +202,7 @@ export default function Advertisement () {
                                     </>)}
                                 </Grid.Row>
                                 <Grid.Row>
-                                    <Button>
+                                    <Button style={{ background: '#125CA1', color: 'white' }}>
                                         Save
                                     </Button>
                                 </Grid.Row>
