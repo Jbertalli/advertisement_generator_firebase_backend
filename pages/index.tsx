@@ -23,9 +23,7 @@ export default function login() {
         <h1>Firebase Login</h1>
         <form onSubmit={handleLogin}>
           <div>
-            <label>
-              Email
-            </label>
+            Email
             <input
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -34,9 +32,7 @@ export default function login() {
             />
           </div>
           <div>
-            <label>
-              Password
-            </label>
+            Password
             <input
               onChange={(e) => setPassword(e.target.value)}
               value={password}
@@ -50,7 +46,7 @@ export default function login() {
         </form>
       </div>
       <div>
-        Don't have an account? <a>Signup</a>
+        Don't have an account? <a style={{ cursor: 'pointer', color: '#125CA1' }}>Signup</a>
       </div>
     </>
   );
