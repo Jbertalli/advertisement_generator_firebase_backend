@@ -5,6 +5,7 @@ import { auth } from '../firebase/clientApp';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import styles from '../styles/advertisement.module.css';
 
 export default function authentication() {
   const [email, setEmail] = useState<string>("");
@@ -88,7 +89,7 @@ export default function authentication() {
               )}
             </div>
             <div>
-              <input type="submit" value="Login" />
+              <input type="submit" value="Login" className={styles.buttons} />
             </div>
           </form>
         </div>
@@ -125,7 +126,7 @@ export default function authentication() {
               )}
             </div>
             <div>
-              <input type="submit" value="Signup" />
+              <input type="submit" value="Signup" className={styles.buttons} />
             </div>
           </form>
         </div>

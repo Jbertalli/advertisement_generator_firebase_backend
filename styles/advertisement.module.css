@@ -15,4 +15,13 @@
     position: relative;
     z-index: 1;
   }
+
+  .buttons{
+    color: white;
+    background: #125CA1;
+    border: 0px solid #125CA1;
+    padding: 10px 30px 10px 30px;
+    border-radius: 5px;
+    font-weight: 600;
+  }
   
