@@ -78,7 +78,12 @@ export default function Advertisement () {
                 <title>Earn and Trade Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
-            <Button onClick={() => addAdvertisement(company, description, width, height, left, top)}>Click Here</Button>
+            <Button onClick={() => addAdvertisement(company, description, width, height, left, top)}>
+                Click Here
+            </Button>
+            <Button onClick={() => deleteAdvertisement(company, description, width, height, left, top)}>
+                Delete
+            </Button>
             <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} />
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
