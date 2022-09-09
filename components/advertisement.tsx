@@ -5,9 +5,7 @@ import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/localStorage';
 import firebase from '../firebase/clientApp';
-import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, getDocs, setDoc, collection, Timestamp  } from 'firebase/firestore';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from '../firebase/clientApp';
 
 auth;
@@ -75,7 +73,7 @@ export default function Advertisement () {
                 <title>Earn and Trade Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
-            <Button onClick={() => addCompanyName(11111)}>Click Here</Button>
+            <Button onClick={() => addCompanyName(1)}>Click Here</Button>
             <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} />
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
