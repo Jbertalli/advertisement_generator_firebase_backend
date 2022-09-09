@@ -8,7 +8,8 @@ import { useRouter } from 'next/router';
 export default function authentication() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [account, setAccount] = useState(false);
+  const [account, setAccount] = useState(true);
+  const [error, setError] = useState("");
 
   const router = useRouter();
 
@@ -30,6 +31,7 @@ export default function authentication() {
     })
     .catch((error) => {
       console.log(error, "User not found");
+      setError("Email or password does not match.");
     });
   }
 
@@ -42,6 +44,7 @@ export default function authentication() {
     })
     .catch((error) => {
       console.log(error, "You are not registered");
+      setError("Invalid email or password");
     });
   }
   
@@ -75,6 +78,11 @@ export default function authentication() {
                 type="password"
                 placeholder="Password"
               />
+            </div>
+            <div style={{ color: 'red' }}>
+              {error && (
+                <p>{error}</p>
+              )}
             </div>
             <div>
               <input type="submit" value="Login" />
