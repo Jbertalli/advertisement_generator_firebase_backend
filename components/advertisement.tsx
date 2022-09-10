@@ -30,9 +30,9 @@ export default function Advertisement () {
         }
         const img = files[0].name;
         console.log(img);
-        console.log(image);
         console.log(files[0].name);
-        console.log(mediaPreview);
+        // console.log(image);
+        // console.log(mediaPreview);
     }
 
     // useEffect(() => {
@@ -222,7 +222,7 @@ export default function Advertisement () {
                                         <Button onClick={() => addAdvertisement(company, description, width, height, left, top)} style={{ background: '#125CA1', color: 'white' }}>
                                             Save
                                         </Button>
-                                        <Button onClick={() => deleteAdvertisement(company, description, width, height, left, top)} style={{ background: '#125CA1', color: 'white' }}>
+                                        <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top), setCompany(''), setDescription('')}} style={{ background: '#125CA1', color: 'white' }}>
                                             Delete
                                         </Button>
                                     </>

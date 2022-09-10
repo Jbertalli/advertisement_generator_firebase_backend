@@ -7,6 +7,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import styles from '../styles/advertisement.module.css';
+import { Container, Grid, Icon, Card } from 'semantic-ui-react';
 
 export default function authentication() {
   const [email, setEmail] = useState<string>("");
@@ -60,86 +61,98 @@ export default function authentication() {
           <title>Advertisement Generator Authentication</title>
           <meta name="description" content="auth, advertisement, login, signup" />
       </Head>
-      {loading && <h4>Loading...</h4>}
-      {account ? (
-      <>
-        <FocusLock>
-          <div>
-            <h1>Firebase Login</h1>
-            <form onSubmit={handleLogin}>
+      <Container>
+        <Card style={{ display: 'flex', justifyContent: 'center', boxShadow: '2px 2px 15px #125CA1' }}>
+          {/* {loading && <h4>Loading...</h4>} */}
+          {account ? (
+          <>
+            <FocusLock>
               <div>
-                Email
-                <input
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  type="email"
-                  placeholder="Email"
-                />
+                <h1>Firebase Login</h1>
+                <form onSubmit={handleLogin}>
+                  <div>
+                    <div>
+                      Email
+                    </div>
+                    <input
+                      onChange={(e) => setEmail(e.target.value)}
+                      value={email}
+                      type="email"
+                      placeholder="Email"
+                    />
+                  </div>
+                  <div>
+                    <div>
+                      Password
+                    </div>
+                    <input
+                      onChange={(e) => setPassword(e.target.value)}
+                      value={password}
+                      type="password"
+                      placeholder="Password"
+                    />
+                  </div>
+                  <div style={{ color: 'red' }}>
+                    {error && (
+                      <p>{error}</p>
+                    )}
+                  </div>
+                  <div>
+                    <input type="submit" value="Login" className={styles.buttons} />
+                  </div>
+                </form>
               </div>
+            </FocusLock>
+            <div>
+              Don't have an account? <a onClick={() => {setAccount(false), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Signup</a>
+            </div>
+          </>
+          ):(
+          <>
+            <FocusLock>
               <div>
-                Password
-                <input
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  type="password"
-                  placeholder="Password"
-                />
+                <h1>Firebase Signup</h1>
+                <form onSubmit={handleSignup}>
+                  <div>
+                    <div>
+                      Email
+                    </div>
+                    <input
+                      onChange={(e) => setEmail(e.target.value)}
+                      value={email}
+                      type="email"
+                      placeholder="Email"
+                    />
+                  </div>
+                  <div>
+                    <div>
+                      Password
+                    </div>
+                    <input
+                      onChange={(e) => setPassword(e.target.value)}
+                      value={password}
+                      type="password"
+                      placeholder="Password"
+                    />
+                  </div>
+                  <div style={{ color: 'red' }}>
+                    {error && (
+                      <p>{error}</p>
+                    )}
+                  </div>
+                  <div>
+                    <input type="submit" value="Signup" className={styles.buttons} />
+                  </div>
+                </form>
               </div>
-              <div style={{ color: 'red' }}>
-                {error && (
-                  <p>{error}</p>
-                )}
-              </div>
-              <div>
-                <input type="submit" value="Login" className={styles.buttons} />
-              </div>
-            </form>
-          </div>
-        </FocusLock>
-        <div>
-          Don't have an account? <a onClick={() => {setAccount(false), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Signup</a>
-        </div>
-      </>
-      ):(
-      <>
-        <FocusLock>
-          <div>
-            <h1>Firebase Signup</h1>
-            <form onSubmit={handleSignup}>
-              <div>
-                  Email
-                <input
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  type="email"
-                  placeholder="Email"
-                />
-              </div>
-              <div>
-                Password
-                <input
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  type="password"
-                  placeholder="Password"
-                />
-              </div>
-              <div style={{ color: 'red' }}>
-                {error && (
-                  <p>{error}</p>
-                )}
-              </div>
-              <div>
-                <input type="submit" value="Signup" className={styles.buttons} />
-              </div>
-            </form>
-          </div>
-        </FocusLock>
-        <div>
-          Already have an account? <a onClick={() => {setAccount(true), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Login</a>
-        </div>
-      </>
-      )}
+            </FocusLock>
+            <div>
+              Already have an account? <a onClick={() => {setAccount(true), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Login</a>
+            </div>
+          </>
+          )}
+        </Card>
+      </Container>
     </>
   );
 }
