@@ -76,7 +76,21 @@ export default function authentication() {
                       value={email}
                       type="email"
                       placeholder="Email"
-                      style={{ borderRight: 'transparent', borderLeft: 'transparent', borderTop: 'transparent', margin: '20px 0px 20px' }}
+                      style={{ 
+                        borderRight: 'transparent', 
+                        borderLeft: 'transparent', 
+                        borderTop: 'transparent', 
+                        borderBottom: '.5px solid gray', 
+                        margin: '20px 0px 20px', 
+                        padding: '4px', 
+                        width: '80%', 
+                        fontSize: '17px' , 
+                        fontWeight: '300' 
+                      }}
+                    />
+                    <Icon
+                      name="user"
+                      style={{ transform: 'translate(-23px, 23px) scale(1.2)', color: '#80808099' }}
                     />
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -85,11 +99,21 @@ export default function authentication() {
                       value={password}
                       type="password"
                       placeholder="Password"
-                      style={{ borderRight: 'transparent', borderLeft: 'transparent', borderTop: 'transparent', borderBottom: '.5px solid gray', margin: '20px 0px 20px', padding: '4px', width: '80%', fontSize: '17px' , fontWeight: '300' }}
+                      style={{ 
+                        borderRight: 'transparent', 
+                        borderLeft: 'transparent', 
+                        borderTop: 'transparent', 
+                        borderBottom: '.5px solid gray', 
+                        margin: '20px 0px 20px', 
+                        padding: '4px', 
+                        width: '80%', 
+                        fontSize: '17px' , 
+                        fontWeight: '300' 
+                      }}
                     />
                     <Icon
                       name="eye"
-                      style={{ transform: 'translate(-23px, 24px) scale(1.3)', color: 'gray' }}
+                      style={{ transform: 'translate(-23px, 24px) scale(1.3)', color: '#80808099' }}
                     />
                   </div>
                   <div style={{ color: 'red' }}>
