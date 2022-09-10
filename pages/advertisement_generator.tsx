@@ -43,21 +43,22 @@ export default function Home() {
 
   return (
     <>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2%' }}>
+        <Button onClick={handleLogOut} style={{ background: 'white', color: 'red' }}>
+          Logout
+        </Button>
+      </div>
       {isDesktop ? (
       <>
-        <Advertisement />
+        <div style={{ marginTop: '-70px', paddingBottom: '30px' }}>
+           <Advertisement />
+        </div>
       </>
       ):(
       <>
         <MobileAdvertisement />
       </>
       )}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '-5vh 5vw 0px 0px', paddingBottom: '10px' }}>
-        <Button onClick={handleLogOut} style={{ background: 'red', color: 'white' }}>
-          Logout
-        </Button>
-      </div>
-      
     </>
   );
 }
