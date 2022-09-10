@@ -56,7 +56,7 @@ export default function authentication() {
   console.log(auth.currentUser);
 
   return (
-    <>
+    <div style={{ background: 'linear-gradient(45deg, #0f0ade, #52b3d9)', height: '100vh' }}>
       <Head>
           <title>Advertisement Generator Authentication</title>
           <meta name="description" content="auth, advertisement, login, signup" />
@@ -205,6 +205,6 @@ export default function authentication() {
           )}
         </Card>
       </Container>
-    </>
+    </div>
   );
 }
