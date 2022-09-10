@@ -62,7 +62,7 @@ export default function authentication() {
           <meta name="description" content="auth, advertisement, login, signup" />
       </Head>
       <Container>
-        <Card style={{ display: 'flex', justifyContent: 'center', boxShadow: '2px 2px 15px #125CA1' }}>
+        <Card style={{ display: 'flex', justifyContent: 'center', boxShadow: '-2px 2px 10px black' }}>
           {/* {loading && <h4>Loading...</h4>} */}
           {account ? (
           <>
@@ -85,7 +85,11 @@ export default function authentication() {
                       value={password}
                       type="password"
                       placeholder="Password"
-                      style={{ borderRight: 'transparent', borderLeft: 'transparent', borderTop: 'transparent', margin: '20px 0px 20px' }}
+                      style={{ borderRight: 'transparent', borderLeft: 'transparent', borderTop: 'transparent', borderBottom: '.5px solid gray', margin: '20px 0px 20px', padding: '4px', width: '80%', fontSize: '17px' , fontWeight: '300' }}
+                    />
+                    <Icon
+                      name="eye"
+                      style={{ transform: 'translate(-23px, 24px) scale(1.3)', color: 'gray' }}
                     />
                   </div>
                   <div style={{ color: 'red' }}>
