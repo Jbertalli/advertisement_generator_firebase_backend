@@ -73,8 +73,9 @@ export default function authentication() {
           <title>Advertisement Generator Authentication</title>
           <meta name="description" content="auth, advertisement, login, signup" />
       </Head>
-      <Button onClick={signInWithGoogle}>
-        Google Login
+      <Button onClick={signInWithGoogle} style={{ background: '#FFFFFF', position: 'absolute', paddingLeft: '50px' }}>
+        <div className={styles.google} style={{ transform: 'translate(-180px, -223px) scale(0.07)', position: 'absolute' }} />
+        Sign in with Google
       </Button>
       <Container style={{ display: 'flex', justifyContent: 'center', paddingTop: '20vh' }}>
         <Card style={{ display: 'flex', justifyContent: 'center', boxShadow: '-2px 2px 10px black', width: '55vw', maxWidth: '500px', paddingTop: '30px' }}>
