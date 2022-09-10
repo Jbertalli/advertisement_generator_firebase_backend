@@ -5,7 +5,7 @@ const LOCAL_STORAGE_KEY_DESCRIPTION = 'AdvertisementDescription';
 const LOCAL_STORAGE_KEY_WIDTH = 'ImageWidth';
 const LOCAL_STORAGE_KEY_HEIGHT = 'ImageHeight';
 const LOCAL_STORAGE_KEY_LEFT = 'ImageLeft';
-// const LOCAL_STORAGE_KEY_TOP = 'ImageTop';
+const LOCAL_STORAGE_KEY_TOP = 'ImageTop';
 
 export default function Local({ company, setCompany, description, setDescription, width, setWidth, height, setHeight, left, setLeft, top, setTop }) {
     
@@ -65,15 +65,15 @@ export default function Local({ company, setCompany, description, setDescription
       }, [left]);
       
       // top
-      // useEffect(() => {
-      //   const storedDescription = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_DESCRIPTION))
-      //   if (storedDescription) setDescription(storedDescription)
-      // }, [])
+      useEffect(() => {
+        const storedTop = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TOP))
+        if (storedTop) setTop(storedTop)
+      }, [])
     
-      // useEffect(() => {
-      //   localStorage.setItem(LOCAL_STORAGE_KEY_DESCRIPTION, 
-      //   JSON.stringify(description))
-      // }, [description]);
+      useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_TOP, 
+        JSON.stringify(top))
+      }, [top]);
 
     return (
         <>
