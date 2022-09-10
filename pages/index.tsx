@@ -68,28 +68,24 @@ export default function authentication() {
           <>
             <FocusLock>
               <div>
-                <h1>Firebase Login</h1>
+                <h1 style={{ display: 'flex', justifyContent: 'center' }}>Firebase Login</h1>
                 <form onSubmit={handleLogin}>
-                  <div>
-                    <div>
-                      Email
-                    </div>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <input
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
                       type="email"
                       placeholder="Email"
+                      style={{ borderRight: 'transparent', borderLeft: 'transparent', borderTop: 'transparent', margin: '20px 0px 20px' }}
                     />
                   </div>
-                  <div>
-                    <div>
-                      Password
-                    </div>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <input
                       onChange={(e) => setPassword(e.target.value)}
                       value={password}
                       type="password"
                       placeholder="Password"
+                      style={{ borderRight: 'transparent', borderLeft: 'transparent', borderTop: 'transparent', margin: '20px 0px 20px' }}
                     />
                   </div>
                   <div style={{ color: 'red' }}>
@@ -97,42 +93,38 @@ export default function authentication() {
                       <p>{error}</p>
                     )}
                   </div>
-                  <div>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <input type="submit" value="Login" className={styles.buttons} />
                   </div>
                 </form>
               </div>
             </FocusLock>
-            <div>
-              Don't have an account? <a onClick={() => {setAccount(false), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Signup</a>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              Don't have an account?&nbsp;<a onClick={() => {setAccount(false), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Signup</a>
             </div>
           </>
           ):(
           <>
             <FocusLock>
               <div>
-                <h1>Firebase Signup</h1>
+                <h1 style={{ display: 'flex', justifyContent: 'center' }}>Firebase Signup</h1>
                 <form onSubmit={handleSignup}>
-                  <div>
-                    <div>
-                      Email
-                    </div>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <input
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
                       type="email"
                       placeholder="Email"
+                      style={{ borderRight: 'transparent', borderLeft: 'transparent', borderTop: 'transparent', margin: '20px 0px 20px' }}
                     />
                   </div>
-                  <div>
-                    <div>
-                      Password
-                    </div>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <input
                       onChange={(e) => setPassword(e.target.value)}
                       value={password}
                       type="password"
                       placeholder="Password"
+                      style={{ borderRight: 'transparent', borderLeft: 'transparent', borderTop: 'transparent', margin: '20px 0px 20px' }}
                     />
                   </div>
                   <div style={{ color: 'red' }}>
@@ -140,14 +132,14 @@ export default function authentication() {
                       <p>{error}</p>
                     )}
                   </div>
-                  <div>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <input type="submit" value="Signup" className={styles.buttons} />
                   </div>
                 </form>
               </div>
             </FocusLock>
-            <div>
-              Already have an account? <a onClick={() => {setAccount(true), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Login</a>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              Already have an account?&nbsp;<a onClick={() => {setAccount(true), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Login</a>
             </div>
           </>
           )}
