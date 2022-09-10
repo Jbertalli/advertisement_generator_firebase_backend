@@ -219,7 +219,7 @@ export default function Advertisement () {
                                 <Grid.Row>
                                     {(company && description) ? (
                                     <>
-                                        <div>
+                                        <div style={{ transform: 'translateX(13.5px)' }}>
                                             <Button onClick={() => addAdvertisement(company, description, width, height, left, top)} style={{ background: '#125CA1', color: 'white' }}>
                                                 Save
                                             </Button>
@@ -227,7 +227,6 @@ export default function Advertisement () {
                                                 Delete
                                             </Button>
                                         </div>
-                                        
                                     </>
                                     ):(
                                     <></>)}
