@@ -68,7 +68,13 @@ export default function authentication() {
           <>
             <FocusLock>
               <div>
-                <h1 style={{ display: 'flex', justifyContent: 'center', fontWeight: '100' }}>Login</h1>
+                <h1 style={{ display: 'flex', justifyContent: 'center', fontWeight: '100' }}>
+                <Icon
+                  name="lightning"
+                  style={{ position: 'absolute', transform: 'translate(-45px, 1px) scale(0.8)', color: '#0f0ade' }}
+                />
+                  Login
+                </h1>
                 <form onSubmit={handleLogin}>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <input
@@ -118,7 +124,7 @@ export default function authentication() {
                       style={{ transform: 'translate(-23px, 24px) scale(1.3)', color: '#80808099' }}
                     />
                   </div>
-                  <div style={{ color: 'red' }}>
+                  <div style={{ color: 'red', display: 'flex', justifyContent: 'center' }}>
                     {error && (
                       <p>{error}</p>
                     )}
@@ -137,7 +143,13 @@ export default function authentication() {
           <>
             <FocusLock>
               <div>
-                <h1 style={{ display: 'flex', justifyContent: 'center', fontWeight: '100' }}>Signup</h1>
+                <h1 style={{ display: 'flex', justifyContent: 'center', fontWeight: '100' }}>
+                  <Icon
+                    name="lightning"
+                    style={{ position: 'absolute', transform: 'translate(-55px, 1px) scale(0.8)', color: '#0f0ade' }}
+                  />
+                  Signup
+                </h1>
                 <form onSubmit={handleSignup}>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <input
@@ -187,7 +199,7 @@ export default function authentication() {
                       style={{ transform: 'translate(-23px, 24px) scale(1.3)', color: '#80808099' }}
                     />
                   </div>
-                  <div style={{ color: 'red' }}>
+                  <div style={{ color: 'red', display: 'flex', justifyContent: 'center' }}>
                     {error && (
                       <p>{error}</p>
                     )}
