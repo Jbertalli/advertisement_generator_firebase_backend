@@ -4,10 +4,15 @@ import { Button, Form, Icon, Item, Card } from 'semantic-ui-react';
 import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/mobileLocalStorage';
+import firebase from '../firebase/clientApp';
+import { getFirestore, doc, getDocs, setDoc, collection, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
+import { auth } from '../firebase/clientApp';
+
+auth;
+const db = getFirestore();
 
 export default function MobileAdvertisement () {
     const [company, setCompany] = useState('');
-    // const [header, setHeader] = useState('');
     const [description, setDescription] = useState<string | undefined>('');
     const [mediaPreview, setMediaPreview] = useState<string | undefined>('');
     const [image, setImage] = useState({name: '', media: ''});
@@ -23,9 +28,46 @@ export default function MobileAdvertisement () {
             ));
             setMediaPreview(window.URL.createObjectURL(files[0]));
         }
-        console.log(image);
+        const img = files[0].name;
+        console.log(img);
         console.log(files[0].name);
-        console.log(mediaPreview);
+        // console.log(image);
+        // console.log(mediaPreview);
+    }
+
+    // console.log data
+    const logged = async () => {
+        const colRef = collection(db, "Advertisement");
+        const docsSnap = await getDocs(colRef);
+        docsSnap.forEach(doc => {
+            console.log(doc.data());
+        })
+    }
+
+    useEffect(() => {
+        logged();
+    }, [])
+
+    const addAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
+        await setDoc(doc(db, "Advertisement", "Company"), {
+            company,
+            description,
+            width,
+            height,
+            left,
+            top,
+        });
+    }
+
+    const deleteAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
+        await updateDoc(doc(db, "Advertisement", "Company"), {
+            company: deleteField(),
+            description: deleteField(),
+            width: deleteField(),
+            height: deleteField(),
+            left: deleteField(),
+            top: deleteField(),
+        })
     }
 
     return (
@@ -153,6 +195,21 @@ export default function MobileAdvertisement () {
                             />
                         </div>
                     </>)}
+                    <div>
+                        {(company && description) ? (
+                        <>
+                            <div style={{ transform: 'translateX(13.5px)' }}>
+                                <Button onClick={() => addAdvertisement(company, description, width, height, left, top)} style={{ background: '#125CA1', color: 'white' }}>
+                                    Save
+                                </Button>
+                                <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top), setCompany(''), setDescription('')}} style={{ background: '#125CA1', color: 'white' }}>
+                                    Delete
+                                </Button>
+                            </div>
+                        </>
+                        ):(
+                        <></>)}
+                    </div>
                 </Form>
                 { company.length === 0 || description.length === 0 || !mediaPreview ? (
                 <>
