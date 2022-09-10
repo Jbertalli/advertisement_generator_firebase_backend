@@ -62,7 +62,7 @@ export default function authentication() {
           <meta name="description" content="auth, advertisement, login, signup" />
       </Head>
       <Container style={{ display: 'flex', justifyContent: 'center', paddingTop: '20vh' }}>
-        <Card style={{ display: 'flex', justifyContent: 'center', boxShadow: '-2px 2px 10px black' }}>
+        <Card style={{ display: 'flex', justifyContent: 'center', boxShadow: '-2px 2px 10px black', width: '55vw', maxWidth: '500px', paddingTop: '30px' }}>
           {/* {loading && <h4>Loading...</h4>} */}
           {account ? (
           <>
@@ -84,6 +84,7 @@ export default function authentication() {
                         margin: '20px 0px 20px', 
                         padding: '4px', 
                         width: '80%', 
+                        maxWidth: '300px',
                         fontSize: '17px' , 
                         fontWeight: '300' 
                       }}
@@ -107,6 +108,7 @@ export default function authentication() {
                         margin: '20px 0px 20px', 
                         padding: '4px', 
                         width: '80%', 
+                        maxWidth: '300px',
                         fontSize: '17px' , 
                         fontWeight: '300' 
                       }}
@@ -124,7 +126,7 @@ export default function authentication() {
                   <div style={{ display: 'flex', justifyContent: 'center', color: '#808080' }}>
                     Don't have an account?&nbsp;<a onClick={() => {setAccount(false), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Signup</a>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', padding: '20px 0px 30px' }}>
                     <input type="submit" value="Login" className={styles.buttons} />
                   </div>
                 </form>
@@ -151,6 +153,7 @@ export default function authentication() {
                         margin: '20px 0px 20px', 
                         padding: '4px', 
                         width: '80%', 
+                        maxWidth: '300px',
                         fontSize: '17px' , 
                         fontWeight: '300' 
                       }}
@@ -174,6 +177,7 @@ export default function authentication() {
                         margin: '20px 0px 20px', 
                         padding: '4px', 
                         width: '80%', 
+                        maxWidth: '300px',
                         fontSize: '17px' , 
                         fontWeight: '300' 
                       }}
@@ -191,7 +195,7 @@ export default function authentication() {
                   <div style={{ display: 'flex', justifyContent: 'center', color: '#808080' }}>
                     Already have an account?&nbsp;<a onClick={() => {setAccount(true), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Login</a>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', padding: '20px 0px 30px' }}>
                     <input type="submit" value="Signup" className={styles.buttons} />
                   </div>
                 </form>
