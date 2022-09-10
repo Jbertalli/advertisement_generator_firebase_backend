@@ -89,7 +89,7 @@ export default function authentication() {
                 </h1>
                 <div style={{ display: 'flex', justifyContent: 'center', transform: 'translate(-5px, 10px)' }}>
                   <Button onClick={signInWithGoogle} style={{ background: '#FFFFFF', position: 'absolute', paddingLeft: '50px', borderRadius: '50px', border: '.5px solid #80808099', color: 'black' }}>
-                    <div className={styles.google} style={{ transform: 'translate(-170px, -225px) scale(0.07)', position: 'absolute' }} />
+                    <div className={styles.google} style={{ transform: 'translate(-170px, -225px) scale(0.07)', position: 'fixed' }} />
                     Sign in with Google
                   </Button>
                 </div>
@@ -173,6 +173,17 @@ export default function authentication() {
                   />
                   Signup
                 </h1>
+                <div style={{ display: 'flex', justifyContent: 'center', transform: 'translate(-5px, 10px)' }}>
+                  <Button onClick={signInWithGoogle} style={{ background: '#FFFFFF', position: 'absolute', paddingLeft: '50px', borderRadius: '50px', border: '.5px solid #80808099', color: 'black' }}>
+                    <div className={styles.google} style={{ transform: 'translate(-170px, -225px) scale(0.07)', position: 'fixed' }} />
+                    Sign in with Google
+                  </Button>
+                </div>
+                <div style={{ transform: 'translate(-7px, 75px)', fontSize: '10px', color: '#808080', display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ background: '#808080', width: '18.5%', height: '0.5px', transform: 'translate(-10px, 10px)' }} />
+                    or Sign in with Email
+                  <div style={{ background: '#808080', width: '18.5%', height: '0.5px', transform: 'translate(10px, 10px)' }} />
+                </div>
                 <form onSubmit={handleSignup}>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <input
@@ -185,7 +196,7 @@ export default function authentication() {
                         borderLeft: 'transparent', 
                         borderTop: 'transparent', 
                         borderBottom: '.5px solid gray', 
-                        margin: '20px 0px 20px', 
+                        margin: '90px 0px 20px', 
                         padding: '4px', 
                         width: '80%', 
                         maxWidth: '300px',
@@ -195,7 +206,7 @@ export default function authentication() {
                     />
                     <Icon
                       name="user"
-                      style={{ transform: 'translate(-23px, 23px) scale(1.2)', color: '#80808099' }}
+                      style={{ transform: 'translate(-23px, 93px) scale(1.2)', color: '#80808099' }}
                     />
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
