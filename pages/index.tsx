@@ -89,7 +89,7 @@ export default function authentication() {
                 </h1>
                 <div style={{ display: 'flex', justifyContent: 'center', transform: 'translate(-5px, 10px)' }}>
                   <Button onClick={signInWithGoogle} style={{ background: '#FFFFFF', position: 'absolute', paddingLeft: '50px', borderRadius: '50px', border: '.5px solid #80808099', color: 'black' }}>
-                    <div className={styles.google} style={{ transform: 'translate(-170px, -225px) scale(0.07)', position: 'fixed' }} />
+                    <div className={styles.google} style={{ transform: 'translate(-170px, -225px) scale(0.07)', position: 'fixed', marginTop: '82px' }} />
                     Sign in with Google
                   </Button>
                 </div>
@@ -175,7 +175,7 @@ export default function authentication() {
                 </h1>
                 <div style={{ display: 'flex', justifyContent: 'center', transform: 'translate(-5px, 10px)' }}>
                   <Button onClick={signInWithGoogle} style={{ background: '#FFFFFF', position: 'absolute', paddingLeft: '50px', borderRadius: '50px', border: '.5px solid #80808099', color: 'black' }}>
-                    <div className={styles.google} style={{ transform: 'translate(-170px, -225px) scale(0.07)', position: 'fixed' }} />
+                    <div className={styles.google} style={{ transform: 'translate(-170px, -225px) scale(0.07)', position: 'fixed', marginTop: '82px' }} />
                     Sign in with Google
                   </Button>
                 </div>
