@@ -43,9 +43,6 @@ export default function Home() {
 
   return (
     <>
-      <Button onClick={handleLogOut} style={{ background: 'red', color: 'white' }}>
-        Logout
-      </Button>
       {isDesktop ? (
       <>
         <Advertisement />
@@ -55,6 +52,12 @@ export default function Home() {
         <MobileAdvertisement />
       </>
       )}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '-5vh 5vw 0px 0px', paddingBottom: '10px' }}>
+        <Button onClick={handleLogOut} style={{ background: 'red', color: 'white' }}>
+          Logout
+        </Button>
+      </div>
+      
     </>
   );
 }

@@ -16,8 +16,8 @@ export default function Advertisement () {
     const [description, setDescription] = useState<string | undefined>('');
     const [mediaPreview, setMediaPreview] = useState<string | undefined>('');
     const [image, setImage] = useState({name: '', media: ''});
-    const [width, setWidth] = useState<number | undefined>(400);
-    const [height, setHeight] = useState<number | undefined>(400);
+    const [width, setWidth] = useState<number | undefined>(350);
+    const [height, setHeight] = useState<number | undefined>(350);
     const [left, setLeft] = useState<number | undefined>(40);
     const [top, setTop] = useState<number | undefined>(20);
 
@@ -140,7 +140,7 @@ export default function Advertisement () {
                                             type="file"
                                             accept="image/*"
                                             content="Select Image"
-                                            style={{ width: '10vw', transform: 'translateX(-.2vw)' }}
+                                            style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
                                             className={styles.file}
                                             onChange={handleChange}
                                         />
@@ -148,7 +148,7 @@ export default function Advertisement () {
                                     <Grid.Column width={8}>
                                         { company.length > 0 || description.length > 0 || mediaPreview ? (<>
                                             {/* <strong style={{ fontSize: '1em', display: 'flex', justifyContent: 'center' }}>Advertisement</strong> */}
-                                            <Card fluid style={{ textAlign: 'left', fontSize: '1.2em', margin: '1em 0em 0em 0em', padding: '1em' }}>
+                                            <Card fluid style={{ textAlign: 'left', fontSize: '22px', margin: '1em 0em 0em 0em', padding: '1em' }}>
                                                 <div style={{ margin: '1em 0em 0em 0em' }}>Company Name: {JSON.stringify(company, null, 2)}</div>
                                                 {/* <div style={{ margin: '1em 0em 0em 0em' }}>{JSON.stringify(header, null, 2)}</div> */}
                                                 <div style={{ margin: '1em 0em 1em 0em' }}>Advertisement Description: {JSON.stringify(description, null, 2)}</div>
@@ -162,7 +162,7 @@ export default function Advertisement () {
                                                     content="Create Advertisement"
                                                     style={{ 
                                                         textAlign: 'center', 
-                                                        fontSize: '1.5em', 
+                                                        fontSize: '25px', 
                                                         fontWeight: '50', 
                                                         margin: '0em 0em 0em 0em', 
                                                         color: 'gray', 
@@ -185,7 +185,7 @@ export default function Advertisement () {
                                                 label="Logo Width"
                                                 placeholder="width (pixels)"
                                                 type="number"
-                                                style={{ width: '200px' }}
+                                                style={{ width: '20vw' }}
                                                 // value={width}
                                                 onChange = {e => setWidth(e.target.value)}
                                             />
@@ -193,7 +193,7 @@ export default function Advertisement () {
                                                 label="Logo Height"
                                                 placeholder="height (pixels)"
                                                 type="number"
-                                                style={{ width: '200px' }}
+                                                style={{ width: '20vw' }}
                                                 // value={height}
                                                 onChange = {e => setHeight(e.target.value)}
                                             />
@@ -201,7 +201,7 @@ export default function Advertisement () {
                                                 label="Left Margin"
                                                 placeholder="left (pixels)"
                                                 type="number"
-                                                style={{ width: '200px' }}
+                                                style={{ width: '20vw' }}
                                                 // value={left}
                                                 onChange = {e => setLeft(e.target.value)}
                                             />
@@ -209,7 +209,7 @@ export default function Advertisement () {
                                                 label="Top Margin"
                                                 placeholder="top (pixels)"
                                                 type="number"
-                                                style={{ width: '200px' }}
+                                                style={{ width: '20vw' }}
                                                 // value={top}
                                                 onChange = {e => setTop(e.target.value)}
                                             />
@@ -219,12 +219,15 @@ export default function Advertisement () {
                                 <Grid.Row>
                                     {(company && description) ? (
                                     <>
-                                        <Button onClick={() => addAdvertisement(company, description, width, height, left, top)} style={{ background: '#125CA1', color: 'white' }}>
-                                            Save
-                                        </Button>
-                                        <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top), setCompany(''), setDescription('')}} style={{ background: '#125CA1', color: 'white' }}>
-                                            Delete
-                                        </Button>
+                                        <div>
+                                            <Button onClick={() => addAdvertisement(company, description, width, height, left, top)} style={{ background: '#125CA1', color: 'white' }}>
+                                                Save
+                                            </Button>
+                                            <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top), setCompany(''), setDescription('')}} style={{ background: '#125CA1', color: 'white' }}>
+                                                Delete
+                                            </Button>
+                                        </div>
+                                        
                                     </>
                                     ):(
                                     <></>)}
@@ -235,7 +238,7 @@ export default function Advertisement () {
                     <Segment attached>
                         <Grid>
                             <Grid.Row>
-                                <Grid.Column width={7}>
+                                <Grid.Column width={7} style={{ display: 'flex', justifyContent: 'flex-start', transform: '' }}>
                                     <input 
                                         type="image" 
                                         width={width}
@@ -268,13 +271,15 @@ export default function Advertisement () {
                                                 />
                                                 {`Your account needs to settle, which can take more than 30 days (due to possible returns). In this time, Earn and Trade users are credited with "Pending Points".`}
                                             </div>
+                                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                                <Button
+                                                    content="Earn 20 points"
+                                                    size="large"
+                                                    style={{ color: 'white', background: '#125CA1', borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%', marginTop: '1em' }}
+                                                    href="/"
+                                                />
+                                            </div>
                                         </div>
-                                        <Button
-                                            content="Earn 20 points"
-                                            size="large"
-                                            style={{ color: 'white', background: '#125CA1', borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%', transform: 'translateX(138%)', marginTop: '1em' }}
-                                            href="/"
-                                        />
                                     </Item>
                                 </Grid.Column>
                             </Grid.Row>

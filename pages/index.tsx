@@ -7,7 +7,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import styles from '../styles/advertisement.module.css';
-import { Container, Grid, Icon, Card } from 'semantic-ui-react';
+import { Container, Icon, Card } from 'semantic-ui-react';
 
 export default function authentication() {
   const [email, setEmail] = useState<string>("");
