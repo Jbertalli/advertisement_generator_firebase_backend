@@ -3,11 +3,11 @@ import FocusLock from 'react-focus-lock';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@firebase/auth';
 import React, { useState } from 'react';
 import { auth } from '../firebase/clientApp';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import styles from '../styles/advertisement.module.css';
-import { Container, Icon, Card } from 'semantic-ui-react';
+import { Container, Icon, Card, Button } from 'semantic-ui-react';
 
 export default function authentication() {
   const [email, setEmail] = useState<string>("");
@@ -55,12 +55,27 @@ export default function authentication() {
   
   console.log(auth.currentUser);
 
+  const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+    .then((re) => {
+      console.log(re);
+      router.push('/advertisement_generator');
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
   return (
     <div style={{ background: 'linear-gradient(45deg, #0f0ade, #52b3d9)', height: '100vh' }}>
       <Head>
           <title>Advertisement Generator Authentication</title>
           <meta name="description" content="auth, advertisement, login, signup" />
       </Head>
+      <Button onClick={signInWithGoogle}>
+        Google Login
+      </Button>
       <Container style={{ display: 'flex', justifyContent: 'center', paddingTop: '20vh' }}>
         <Card style={{ display: 'flex', justifyContent: 'center', boxShadow: '-2px 2px 10px black', width: '55vw', maxWidth: '500px', paddingTop: '30px' }}>
           {/* {loading && <h4>Loading...</h4>} */}
