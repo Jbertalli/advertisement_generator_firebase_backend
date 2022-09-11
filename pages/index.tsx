@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import FocusLock from 'react-focus-lock';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence } from '@firebase/auth';
 import React, { useState } from 'react';
 import { auth } from '../firebase/clientApp';
 import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -29,7 +29,11 @@ export default function authentication() {
 
   function handleLogin(e) {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+    // signInWithEmailAndPassword(auth, email, password)
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        return signInWithEmailAndPassword(auth, email, password);
+      })
     .then((userCredential) => {
       console.log('logged in');
       router.push('/advertisement_generator');
