@@ -7,7 +7,7 @@ import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from
 import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import styles from '../styles/advertisement.module.css';
-import { Container, Icon, Card, Button } from 'semantic-ui-react';
+import { Container, Icon, Card, Button, Loader } from 'semantic-ui-react';
 
 export default function authentication() {
   const [email, setEmail] = useState<string>("");
@@ -75,7 +75,14 @@ export default function authentication() {
       </Head>
       <Container style={{ display: 'flex', justifyContent: 'center', paddingTop: '20vh' }}>
         <Card style={{ display: 'flex', justifyContent: 'center', boxShadow: '-2px 2px 10px black', width: '55vw', maxWidth: '500px', paddingTop: '30px' }}>
-          {/* {loading && <h4>Loading...</h4>} */}
+          {loading && 
+            <div style={{ display: 'flex', justifyContent: 'center', fontSize: '17px', fontWeight: '300' }}>
+              <div style={{ transform: 'translateY(-10px)' }}>
+                Loading...
+              </div>
+              <Loader active size="large" />
+            </div>
+          }
           {account ? (
           <>
             <FocusLock>
@@ -110,7 +117,7 @@ export default function authentication() {
                         borderLeft: 'transparent', 
                         borderTop: 'transparent', 
                         borderBottom: '.5px solid gray', 
-                        margin: '90px 0px 20px', 
+                        margin: '100px 0px 20px', 
                         padding: '4px', 
                         width: '80%', 
                         maxWidth: '300px',
@@ -120,7 +127,7 @@ export default function authentication() {
                     />
                     <Icon
                       name="user"
-                      style={{ transform: 'translate(-23px, 93px) scale(1.2)', color: '#80808099' }}
+                      style={{ transform: 'translate(-23px, 103px) scale(1.2)', color: '#80808099' }}
                     />
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -196,7 +203,7 @@ export default function authentication() {
                         borderLeft: 'transparent', 
                         borderTop: 'transparent', 
                         borderBottom: '.5px solid gray', 
-                        margin: '90px 0px 20px', 
+                        margin: '100px 0px 20px', 
                         padding: '4px', 
                         width: '80%', 
                         maxWidth: '300px',
@@ -206,7 +213,7 @@ export default function authentication() {
                     />
                     <Icon
                       name="user"
-                      style={{ transform: 'translate(-23px, 93px) scale(1.2)', color: '#80808099' }}
+                      style={{ transform: 'translate(-23px, 103px) scale(1.2)', color: '#80808099' }}
                     />
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
