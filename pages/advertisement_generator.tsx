@@ -41,6 +41,17 @@ export default function Home() {
     });
   }
 
+  useEffect(() => {
+    if (!auth.currentUser) {
+      const isProtectedRoute = router.pathname === '/advertisement_generator';
+      if (isProtectedRoute) {
+        router.push('/');
+      }
+    }
+  }, [])
+
+  console.log(router.pathname);
+
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2%' }}>

@@ -187,12 +187,12 @@ export default function authentication() {
                 <div style={{ display: 'flex', justifyContent: 'center', transform: 'translate(-5px, 10px)' }}>
                   <Button onClick={signInWithGoogle} style={{ background: '#FFFFFF', position: 'absolute', paddingLeft: '50px', borderRadius: '50px', border: '.5px solid #80808099', color: 'black' }}>
                     <div className={styles.google} style={{ transform: 'translate(-170px, -225px) scale(0.07)', position: 'fixed', marginTop: '82px' }} />
-                    Sign in with Google
+                    Sign up with Google
                   </Button>
                 </div>
                 <div style={{ transform: 'translate(-7px, 75px)', fontSize: '10px', color: '#808080', display: 'flex', justifyContent: 'center' }}>
                   <div style={{ background: '#808080', width: '18.5%', height: '0.5px', transform: 'translate(-10px, 10px)' }} />
-                    or Sign in with Email
+                    or Sign up with Email
                   <div style={{ background: '#808080', width: '18.5%', height: '0.5px', transform: 'translate(10px, 10px)' }} />
                 </div>
                 <form onSubmit={handleSignup}>
