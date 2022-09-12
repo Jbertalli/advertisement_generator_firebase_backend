@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import FocusLock from 'react-focus-lock';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserSessionPersistence } from '@firebase/auth';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase/clientApp';
-import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import styles from '../styles/advertisement.module.css';
@@ -70,6 +70,17 @@ export default function authentication() {
       console.log(err);
     })
   }
+
+  useEffect(() => {
+    signOut(auth)
+    .then(() => {
+        console.log("you are logged out");
+        router.push('/');
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+  }, [])
 
   return (
     <div style={{ background: 'linear-gradient(45deg, #0f0ade, #52b3d9)', height: '100vh' }}>
