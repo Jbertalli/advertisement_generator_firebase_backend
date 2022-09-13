@@ -42,7 +42,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (!auth.currentUser) {
+    if (!auth) {
       const isProtectedRoute = router.pathname === '/advertisement_generator';
       if (isProtectedRoute) {
         router.push('/');
