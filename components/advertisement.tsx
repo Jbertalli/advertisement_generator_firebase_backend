@@ -5,7 +5,7 @@ import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/localStorage';
 import firebase from '../firebase/clientApp';
-import { getFirestore, doc, getDocs, setDoc, collection, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
+import { getFirestore, doc, getDocs, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 
 auth;
@@ -20,6 +20,7 @@ export default function Advertisement () {
     const [height, setHeight] = useState<number | undefined>(350);
     const [left, setLeft] = useState<number | undefined>(40);
     const [top, setTop] = useState<number | undefined>(20);
+    const [userData, setUserData] = useState([]);
 
     function handleChange(event) {
         const { name, files } = event.target;
@@ -72,6 +73,18 @@ export default function Advertisement () {
           created: Timestamp.now()
         });
       }
+
+      useEffect(() => {
+        const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'))
+        onSnapshot(q, (querySnapshot) => {
+            setUserData(querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                data: doc.data()
+            })))
+        })
+      }, [])
+
+      console.log(userData);
 
       const deleteAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
           await updateDoc(doc(db, "Advertisement", "Company"), {
