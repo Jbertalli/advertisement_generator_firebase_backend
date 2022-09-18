@@ -69,6 +69,7 @@ export default function Advertisement () {
           height,
           left,
           top,
+          created: Timestamp.now()
         });
       }
 
