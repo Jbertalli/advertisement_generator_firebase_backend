@@ -93,10 +93,12 @@ export default function Advertisement () {
       let dbId = userData?.[0]?.id;
       let dbCompany = userData?.[0]?.company;
       let dbDescription = userData?.[0]?.description;
+      let dbHeight = userData?.[0]?.height;
       
       console.log(dbId);
       console.log(dbCompany);
       console.log(dbDescription);
+      console.log(dbHeight);
 
       const deleteAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
           await updateDoc(doc(db, "Advertisement", "Company"), {
@@ -125,6 +127,9 @@ export default function Advertisement () {
                 </ul>
                 <ul>
                     {dbDescription}
+                </ul>
+                <ul>
+                    {dbHeight}
                 </ul>
             </li>
             <FocusLock>
