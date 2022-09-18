@@ -54,7 +54,7 @@ export default function Advertisement () {
         const colRef = collection(db, "Advertisement");
         const docsSnap = await getDocs(colRef);
         docsSnap.forEach(doc => {
-          console.log(doc.data());
+        //   console.log(doc.data());
         })
       }
   
@@ -79,12 +79,22 @@ export default function Advertisement () {
         onSnapshot(q, (querySnapshot) => {
             setUserData(querySnapshot.docs.map(doc => ({
                 id: doc.id,
-                data: doc.data()
+                company: doc.data().company,
+                created: doc.data().created,
+                description: doc.data().description,
+                height: doc.data().height,
+                left: doc.data().left,
+                top: doc.data().top,
+                width: doc.data().width
             })))
         })
-      }, [])
+      }, []) 
 
-      console.log(userData);
+      let dbId = userData?.[0]?.id;
+      let dbCompany = userData?.[0]?.company;
+      
+      console.log(dbId);
+      console.log(dbCompany);
 
       const deleteAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
           await updateDoc(doc(db, "Advertisement", "Company"), {
@@ -104,6 +114,14 @@ export default function Advertisement () {
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
             <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} width={width} setWidth={setWidth} height={height} setHeight={setHeight} left={left} setLeft={setLeft} top={top} setTop={setTop} />
+            <li style={{ transform: 'translateY(50px)' }}>
+                <ul>
+                    {dbId}
+                </ul>
+                <ul>
+                    {dbCompany}
+                </ul>
+            </li>
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
                     <Segment attached textAlign="center">

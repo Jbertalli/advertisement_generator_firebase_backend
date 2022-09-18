@@ -40,7 +40,7 @@ export default function MobileAdvertisement () {
         const colRef = collection(db, "Advertisement");
         const docsSnap = await getDocs(colRef);
         docsSnap.forEach(doc => {
-            console.log(doc.data());
+            // console.log(doc.data());
         })
     }
 
