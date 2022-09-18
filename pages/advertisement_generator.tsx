@@ -41,16 +41,14 @@ export default function Home() {
     });
   }
 
-  useEffect(() => {
-    if (!auth) {
-      const isProtectedRoute = router.pathname === '/advertisement_generator';
-      if (isProtectedRoute) {
-        router.push('/');
-      }
-    }
-  }, [])
+  // useEffect(() => {
+  //   const isProtectedRoute = router.pathname === '/advertisement_generator';
+  //   if (!auth.currentUser && isProtectedRoute) {
+  //     router.push('/')
+  //   }
+  // }, [auth.currentUser])
 
-  console.log(router.pathname);
+  // console.log(router.pathname);
 
   return (
     <>
