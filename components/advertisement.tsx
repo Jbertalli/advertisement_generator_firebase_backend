@@ -125,6 +125,9 @@ export default function Advertisement () {
             </Head>
             <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} width={width} setWidth={setWidth} height={height} setHeight={setHeight} left={left} setLeft={setLeft} top={top} setTop={setTop} />
             <li style={{ transform: 'translateY(50px)' }}>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    User History
+                </div>
                 <ul>
                     ID: {dbId}
                 </ul>
@@ -149,11 +152,11 @@ export default function Advertisement () {
                 <ul>
                     Ternary: {dbDescription ? (
                     <>
-                        Hello
+                        Full
                     </>
                     ):(
                     <>
-                        Goodbye
+                        Empty
                     </>
                     )}
                 </ul>
