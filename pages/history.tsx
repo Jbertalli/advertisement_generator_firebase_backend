@@ -83,22 +83,36 @@ export default function History() {
                     )}
                 </ul>
             </div>
-            <Table striped>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>1</Table.HeaderCell>
-                        <Table.HeaderCell>2</Table.HeaderCell>
-                        <Table.HeaderCell>3</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                    <Table.Row>
-                        <Table.Cell>4</Table.Cell>
-                        <Table.Cell>5</Table.Cell>
-                        <Table.Cell>6</Table.Cell>
-                    </Table.Row>
-                </Table.Body>
-            </Table>      
+            <div style={{ margin: '30px' }}>
+                <Table striped textAlign="center" unstackable>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>
+                                1
+                            </Table.HeaderCell>
+                            <Table.HeaderCell>
+                                2
+                            </Table.HeaderCell>
+                            <Table.HeaderCell>
+                                3
+                            </Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        <Table.Row>
+                            <Table.Cell>
+                                4
+                            </Table.Cell>
+                            <Table.Cell>
+                                5
+                            </Table.Cell>
+                            <Table.Cell>
+                                6
+                            </Table.Cell>
+                        </Table.Row>
+                    </Table.Body>
+                </Table>      
+            </div>
         </>
     );
 }
