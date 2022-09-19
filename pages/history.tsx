@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { Table } from 'semantic-ui-react';
 
 auth;
 const db = getFirestore();
@@ -82,6 +83,22 @@ export default function History() {
                     )}
                 </ul>
             </div>
+            <Table striped>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>1</Table.HeaderCell>
+                        <Table.HeaderCell>2</Table.HeaderCell>
+                        <Table.HeaderCell>3</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                    <Table.Row>
+                        <Table.Cell>4</Table.Cell>
+                        <Table.Cell>5</Table.Cell>
+                        <Table.Cell>6</Table.Cell>
+                    </Table.Row>
+                </Table.Body>
+            </Table>      
         </>
     );
 }
