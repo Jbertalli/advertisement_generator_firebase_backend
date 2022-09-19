@@ -44,34 +44,22 @@ export default function History() {
                 <meta name="description" content="history" />
             </Head>
             <div style={{ transform: 'translateY(20px)' }}>
-                <div style={{ display: 'flex', justifyContent: 'center', background: 'black', color: 'white',  height: '10vh', fontSize: '40px', fontWeight: '300' }}>
+                <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    background: 'black', 
+                    color: 'white',  
+                    height: '10vh', 
+                    fontSize: '40px', 
+                    fontWeight: '300',
+                    marginBottom: '30px' 
+                }}>
                     <div style={{ transform: 'translateY(4vh)' }}>
                         {/* {user.email} History */}
                         History
                     </div>
                 </div>
-                <ul>
-                    ID: {dbId}
-                </ul>
-                <ul>
-                    Company: {dbCompany}
-                </ul>
-                <ul>
-                    Description: {dbDescription}
-                </ul>
-                <ul>
-                    Height: {dbHeight}
-                </ul>
-                <ul>
-                    Left: {dbLeft}
-                </ul>
-                <ul>
-                    Top: {dbTop}
-                </ul>
-                <ul>
-                    Width: {dbWidth}
-                </ul>
-                <ul>
+                {/* <ul>
                     Ternary: {dbDescription ? (
                     <>
                         Full
@@ -81,33 +69,65 @@ export default function History() {
                         Empty
                     </>
                     )}
-                </ul>
+                </ul> */}
             </div>
-            <div style={{ margin: '30px' }}>
+            <div style={{ margin: '10px' }}>
                 <Table striped textAlign="center" unstackable>
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell>
-                                1
-                            </Table.HeaderCell>
-                            <Table.HeaderCell>
-                                2
-                            </Table.HeaderCell>
-                            <Table.HeaderCell>
-                                3
-                            </Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
                     <Table.Body>
                         <Table.Row>
                             <Table.Cell>
-                                4
+                                <b>Database ID</b>
                             </Table.Cell>
                             <Table.Cell>
-                                5
+                                {dbId}
+                            </Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                            <Table.Cell>
+                                <b>Company Name:</b>
                             </Table.Cell>
                             <Table.Cell>
-                                6
+                                {dbCompany}
+                            </Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                            <Table.Cell>
+                                <b>Company Description: </b>
+                            </Table.Cell>
+                            <Table.Cell>
+                                {dbDescription}
+                            </Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                            <Table.Cell>
+                                <b>Image Height:</b> 
+                            </Table.Cell>
+                            <Table.Cell>
+                                {dbHeight}
+                            </Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                            <Table.Cell>
+                                <b>Image Left:</b> 
+                            </Table.Cell>
+                            <Table.Cell>
+                                {dbLeft}
+                            </Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                            <Table.Cell>
+                                <b>Image Top:</b> 
+                            </Table.Cell>
+                            <Table.Cell>
+                                {dbTop}
+                            </Table.Cell>
+                        </Table.Row>
+                        <Table.Row>
+                            <Table.Cell>
+                                <b>Image Width:</b> 
+                            </Table.Cell>
+                            <Table.Cell>
+                                {dbWidth}
                             </Table.Cell>
                         </Table.Row>
                     </Table.Body>
