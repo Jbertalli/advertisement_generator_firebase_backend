@@ -126,28 +126,28 @@ export default function Advertisement () {
             <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} width={width} setWidth={setWidth} height={height} setHeight={setHeight} left={left} setLeft={setLeft} top={top} setTop={setTop} />
             <li style={{ transform: 'translateY(50px)' }}>
                 <ul>
-                    {dbId}
+                    ID: {dbId}
                 </ul>
                 <ul>
-                    {dbCompany}
+                    Company: {dbCompany}
                 </ul>
                 <ul>
-                    {dbDescription}
+                    Description: {dbDescription}
                 </ul>
                 <ul>
-                    {dbHeight}
+                    Height: {dbHeight}
                 </ul>
                 <ul>
-                    {dbLeft}
+                    Left: {dbLeft}
                 </ul>
                 <ul>
-                    {dbTop}
+                    Top: {dbTop}
                 </ul>
                 <ul>
-                    {dbWidth}
+                    Width: {dbWidth}
                 </ul>
                 <ul>
-                    {dbWidth ? (
+                    Ternary: {dbDescription ? (
                     <>
                         Hello
                     </>
