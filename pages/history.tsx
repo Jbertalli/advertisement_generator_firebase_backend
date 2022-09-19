@@ -41,22 +41,23 @@ export default function History() {
         <>
             <Head>
                 <title>User History</title>
-                <meta name="description" content="history" />
+                <meta name="description" content="information" />
             </Head>
             <div style={{ transform: 'translateY(20px)' }}>
                 <div style={{ 
                     display: 'flex', 
                     justifyContent: 'center', 
-                    background: 'black', 
+                    background: '#125CA1', 
                     color: 'white',  
                     height: '10vh', 
                     fontSize: '40px', 
                     fontWeight: '300',
-                    marginBottom: '30px' 
+                    marginBottom: '30px',
+                    marginTop: '-20px' 
                 }}>
                     <div style={{ transform: 'translateY(4vh)' }}>
-                        {/* {user.email} History */}
-                        History
+                        {/* {user.email} Information */}
+                        User Information
                     </div>
                 </div>
                 {/* <ul>
@@ -84,7 +85,7 @@ export default function History() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell>
-                                <b>Company Name:</b>
+                                <b>Company Name</b>
                             </Table.Cell>
                             <Table.Cell>
                                 {dbCompany}
@@ -92,7 +93,7 @@ export default function History() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell>
-                                <b>Company Description: </b>
+                                <b>Company Description</b>
                             </Table.Cell>
                             <Table.Cell>
                                 {dbDescription}
@@ -100,7 +101,7 @@ export default function History() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell>
-                                <b>Image Height:</b> 
+                                <b>Image Height</b> 
                             </Table.Cell>
                             <Table.Cell>
                                 {dbHeight}
@@ -108,7 +109,7 @@ export default function History() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell>
-                                <b>Image Left:</b> 
+                                <b>Image Left</b> 
                             </Table.Cell>
                             <Table.Cell>
                                 {dbLeft}
@@ -116,7 +117,7 @@ export default function History() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell>
-                                <b>Image Top:</b> 
+                                <b>Image Top</b> 
                             </Table.Cell>
                             <Table.Cell>
                                 {dbTop}
@@ -124,7 +125,7 @@ export default function History() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell>
-                                <b>Image Width:</b> 
+                                <b>Image Width</b> 
                             </Table.Cell>
                             <Table.Cell>
                                 {dbWidth}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Advertisement from '../components/advertisement';
 import MobileAdvertisement from '../components/mobileAdvertisement';
 import { auth } from '../firebase/clientApp';
@@ -52,6 +53,13 @@ export default function Home() {
 
   return (
     <>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2%' }}>
+        <Link href="/history">
+          <Button style={{ background: 'white', color: '#125CA1' }}>
+            User Information
+          </Button>
+        </Link>
+      </div>
       <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2%' }}>
         <Button onClick={handleLogOut} style={{ background: 'white', color: 'red' }}>
           Logout

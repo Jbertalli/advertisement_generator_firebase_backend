@@ -124,7 +124,7 @@ export default function Advertisement () {
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
             <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} width={width} setWidth={setWidth} height={height} setHeight={setHeight} left={left} setLeft={setLeft} top={top} setTop={setTop} />
-            <div style={{ transform: 'translateY(50px)' }}>
+            {/* <div style={{ transform: 'translateY(50px)' }}>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     User History
                 </div>
@@ -160,7 +160,7 @@ export default function Advertisement () {
                     </>
                     )}
                 </ul>
-            </div>
+            </div> */}
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
                     <Segment attached textAlign="center">
