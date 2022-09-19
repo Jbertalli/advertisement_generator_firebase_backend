@@ -10,7 +10,7 @@ const db = getFirestore();
 export default function History() {
     const [userData, setUserData] = useState([]);
     const [user] = useAuthState(auth);
-    console.log(user.email);
+    // console.log(user.email);
 
     useEffect(() => {
         const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'))
@@ -43,8 +43,11 @@ export default function History() {
                 <meta name="description" content="history" />
             </Head>
             <div style={{ transform: 'translateY(20px)' }}>
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    {user.email} History
+                <div style={{ display: 'flex', justifyContent: 'center', background: 'black', color: 'white',  height: '10vh', fontSize: '40px', fontWeight: '300' }}>
+                    <div style={{ transform: 'translateY(4vh)' }}>
+                        {/* {user.email} History */}
+                        History
+                    </div>
                 </div>
                 <ul>
                     ID: {dbId}
