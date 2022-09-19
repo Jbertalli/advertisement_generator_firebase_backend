@@ -44,7 +44,7 @@ export default function History() {
             </Head>
             <div style={{ transform: 'translateY(20px)' }}>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    User History
+                    {user.email} History
                 </div>
                 <ul>
                     ID: {dbId}
