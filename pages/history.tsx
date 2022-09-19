@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase/clientApp';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 
 auth;
@@ -8,6 +9,8 @@ const db = getFirestore();
 
 export default function History() {
     const [userData, setUserData] = useState([]);
+    const [user] = useAuthState(auth);
+    console.log(user.email);
 
     useEffect(() => {
         const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'))
@@ -39,7 +42,7 @@ export default function History() {
                 <title>User History</title>
                 <meta name="description" content="history" />
             </Head>
-            <li style={{ transform: 'translateY(50px)' }}>
+            <div style={{ transform: 'translateY(20px)' }}>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     User History
                 </div>
@@ -75,7 +78,7 @@ export default function History() {
                     </>
                     )}
                 </ul>
-            </li>
+            </div>
         </>
     );
 }
