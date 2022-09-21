@@ -1,12 +1,26 @@
 import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'semantic-ui-react';
 import { NextRouter, useRouter } from 'next/router';
 import { auth } from '../firebase/clientApp';
 import { signOut } from 'firebase/auth';
+import styles from '../styles/advertisement.module.css';
 
 export default function Header() {
+    const [adUnderline, setAdUnderline] = useState('');
+    const [historyUnderline, setHistoryUnderline] = useState('');
 
     const router: NextRouter = useRouter();
+
+    useEffect(() => {
+        if (router.pathname === '/advertisement_generator') {
+            setAdUnderline('underline');
+        } else if (router.pathname === '/history') {
+            setHistoryUnderline('underline');
+        } else {
+            return;
+        }
+    }, []);
 
     function handleLogOut(e) {
         e.preventDefault();
@@ -22,24 +36,26 @@ export default function Header() {
 
     return (
         <>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2%' }}>
-                <Link href="/advertisement_generator">
-                    <Button style={{ background: 'white', color: '#125CA1' }}>
-                        Advertisement Generator
+            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                <div style={{ paddingRight: '2%', textDecoration: `underline` }}>
+                    <Link href="/advertisement_generator">
+                        <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${adUnderline}` }} className={styles.hovering}>
+                            Advertisement
+                        </Button>
+                    </Link>
+                </div>
+                <div style={{ paddingRight: '2%' }}>
+                    <Link href="/history">
+                        <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${historyUnderline}` }} className={styles.hovering}>
+                            Saved Advertisements
+                        </Button>
+                    </Link>
+                </div>
+                <div style={{ paddingRight: '2%' }}>
+                    <Button onClick={handleLogOut} className={styles.hovering} style={{ background: 'white', color: 'red' }}>
+                        Logout
                     </Button>
-                </Link>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2%' }}>
-                <Link href="/history">
-                    <Button style={{ background: 'white', color: '#125CA1' }}>
-                        User Information
-                    </Button>
-                </Link>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2%' }}>
-                <Button onClick={handleLogOut} style={{ background: 'white', color: 'red' }}>
-                    Logout
-                </Button>
+                </div>
             </div>
         </>
     );

@@ -61,4 +61,8 @@
     top: -72px;
     right: -70px;
   }
-  
+
+
+  .hovering:hover {
+    text-decoration: underline;
+  }

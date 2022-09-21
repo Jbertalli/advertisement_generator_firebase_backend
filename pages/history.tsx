@@ -1,10 +1,9 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { Table, Button } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 import Header from '../components/Header';
 
 auth;
@@ -64,7 +63,7 @@ export default function History() {
                     }}>
                         <div style={{ transform: 'translateY(20px)' }}>
                             {/* {user.email} Information */}
-                            User Information
+                            Saved Advertisements
                         </div>
                     </div>
                     {/* <ul>
