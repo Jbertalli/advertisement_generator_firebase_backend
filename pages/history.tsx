@@ -14,7 +14,7 @@ export default function History() {
     // console.log(user.email);
 
     useEffect(() => {
-        const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'))
+        const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'));
         onSnapshot(q, (querySnapshot) => {
             setUserData(querySnapshot.docs.map(doc => ({
                 id: doc.id,
@@ -43,97 +43,110 @@ export default function History() {
                 <title>User History</title>
                 <meta name="description" content="information" />
             </Head>
-            <div style={{ transform: 'translateY(20px)' }}>
-                <div style={{ 
-                    display: 'flex', 
-                    justifyContent: 'center', 
-                    background: '#125CA1', 
-                    color: 'white',  
-                    height: '10vh', 
-                    fontSize: '40px', 
-                    fontWeight: '300',
-                    marginBottom: '30px',
-                    marginTop: '-20px' 
-                }}>
-                    <div style={{ transform: 'translateY(4vh)' }}>
-                        {/* {user.email} Information */}
-                        User Information
+            <center>
+                <div style={{ transform: 'translateY(0px)', padding: '40px', position: 'relative', zIndex: '10', maxWidth: '800px' }}>
+                    <div style={{ 
+                        display: 'flex', 
+                        justifyContent: 'center', 
+                        background: 'linear-gradient(to right, rgb(0, 255, 255), #1F51FF', 
+                        color: 'white',  
+                        height: '60px', 
+                        fontSize: '30px', 
+                        fontWeight: '300',
+                        marginBottom: '30px',
+                        marginTop: '0px',
+                        borderRadius: '3px',
+                        boxShadow: '2px 2px 15px black',
+                        position: 'relative'
+                    }}>
+                        <div style={{ transform: 'translateY(20px)' }}>
+                            {/* {user.email} Information */}
+                            User Information
+                        </div>
                     </div>
+                    {/* <ul>
+                        Ternary: {dbDescription ? (
+                        <>
+                            Full
+                        </>
+                        ):(
+                        <>
+                            Empty
+                        </>
+                        )}
+                    </ul> */}
                 </div>
-                {/* <ul>
-                    Ternary: {dbDescription ? (
-                    <>
-                        Full
-                    </>
-                    ):(
-                    <>
-                        Empty
-                    </>
-                    )}
-                </ul> */}
-            </div>
-            <div style={{ margin: '10px' }}>
-                <Table striped textAlign="center" unstackable>
-                    <Table.Body>
-                        <Table.Row>
-                            <Table.Cell>
-                                <b>Database ID</b>
-                            </Table.Cell>
-                            <Table.Cell>
-                                {dbId}
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <b>Company Name</b>
-                            </Table.Cell>
-                            <Table.Cell>
-                                {dbCompany}
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <b>Company Description</b>
-                            </Table.Cell>
-                            <Table.Cell>
-                                {dbDescription}
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <b>Image Height</b> 
-                            </Table.Cell>
-                            <Table.Cell>
-                                {dbHeight}
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <b>Image Left</b> 
-                            </Table.Cell>
-                            <Table.Cell>
-                                {dbLeft}
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <b>Image Top</b> 
-                            </Table.Cell>
-                            <Table.Cell>
-                                {dbTop}
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <b>Image Width</b> 
-                            </Table.Cell>
-                            <Table.Cell>
-                                {dbWidth}
-                            </Table.Cell>
-                        </Table.Row>
-                    </Table.Body>
-                </Table>      
-            </div>
+                <div style={{ margin: '-90px  20px 0px 20px', position: 'relative', zIndex: '0' }}>
+                    <Table textAlign="center" unstackable style={{ maxWidth: '800px' }}>
+                        <Table.Body>
+                            <Table.Row>
+                                <Table.Cell>
+                                    &nbsp;
+                                </Table.Cell>
+                                <Table.Cell>
+                                    &nbsp;
+                                </Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>
+                                    <b>Database ID</b>
+                                </Table.Cell>
+                                <Table.Cell>
+                                    {dbId}
+                                </Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>
+                                    <b>Company Name</b>
+                                </Table.Cell>
+                                <Table.Cell>
+                                    {dbCompany}
+                                </Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>
+                                    <b>Company Description</b>
+                                </Table.Cell>
+                                <Table.Cell>
+                                    {dbDescription}
+                                </Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>
+                                    <b>Image Height</b> 
+                                </Table.Cell>
+                                <Table.Cell>
+                                    {dbHeight}
+                                </Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>
+                                    <b>Image Left</b> 
+                                </Table.Cell>
+                                <Table.Cell>
+                                    {dbLeft}
+                                </Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>
+                                    <b>Image Top</b> 
+                                </Table.Cell>
+                                <Table.Cell>
+                                    {dbTop}
+                                </Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>
+                                    <b>Image Width</b> 
+                                </Table.Cell>
+                                <Table.Cell>
+                                    {dbWidth}
+                                </Table.Cell>
+                            </Table.Row>
+                        </Table.Body>
+                    </Table>      
+                </div>
+            </center>
         </>
     );
 }

@@ -54,13 +54,13 @@ export default function Advertisement () {
         const colRef = collection(db, "Advertisement");
         const docsSnap = await getDocs(colRef);
         docsSnap.forEach(doc => {
-        //   console.log(doc.data());
+          console.log(doc.data());
         })
       }
   
       useEffect(() => {
         logged();
-      }, [])
+      }, []);
 
       const addAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
         await setDoc(doc(db, "Advertisement", "Company"), {
@@ -75,7 +75,7 @@ export default function Advertisement () {
       }
 
       useEffect(() => {
-        const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'))
+        const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'));
         onSnapshot(q, (querySnapshot) => {
             setUserData(querySnapshot.docs.map(doc => ({
                 id: doc.id,
