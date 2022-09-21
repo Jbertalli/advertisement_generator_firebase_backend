@@ -1,9 +1,10 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { Table, Divider } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-react';
 
 auth;
 const db = getFirestore();
@@ -147,6 +148,11 @@ export default function History() {
                     </Table>      
                 </div>
             </center>
+            <Link href="/advertisement_generator">
+                <Button style={{ background: 'white', color: '#125CA1' }}>
+                    Advertisement Generator
+                </Button>
+            </Link>
         </>
     );
 }
