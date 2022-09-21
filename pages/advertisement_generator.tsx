@@ -6,6 +6,7 @@ import { auth } from '../firebase/clientApp';
 import { signOut } from 'firebase/auth';
 import { NextRouter, useRouter } from 'next/router';
 import { Button } from 'semantic-ui-react';
+import Header from '../components/Header';
 
 export default function Home() {
   const [isDesktop, setDesktop] = useState<boolean>(false);
@@ -30,17 +31,17 @@ export default function Home() {
       return () => window.removeEventListener('resize', updateMedia);
   }, []);
 
-  function handleLogOut(e) {
-    e.preventDefault();
-    signOut(auth)
-    .then(() => {
-        console.log("you are logged out");
-        router.push('/');
-    })
-    .catch((error) => {
-        console.log(error);
-    });
-  }
+  // function handleLogOut(e) {
+  //   e.preventDefault();
+  //   signOut(auth)
+  //   .then(() => {
+  //       console.log("you are logged out");
+  //       router.push('/');
+  //   })
+  //   .catch((error) => {
+  //       console.log(error);
+  //   });
+  // }
 
   // useEffect(() => {
   //   const isProtectedRoute = router.pathname === '/advertisement_generator';
@@ -53,7 +54,7 @@ export default function Home() {
 
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2%' }}>
+      {/* <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2%' }}>
         <Link href="/history">
           <Button style={{ background: 'white', color: '#125CA1' }}>
             User Information
@@ -64,7 +65,8 @@ export default function Home() {
         <Button onClick={handleLogOut} style={{ background: 'white', color: 'red' }}>
           Logout
         </Button>
-      </div>
+      </div> */}
+      <Header />
       {isDesktop ? (
       <>
         <div style={{ marginTop: '-70px', paddingBottom: '30px' }}>
