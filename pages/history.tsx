@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { Table } from 'semantic-ui-react';
+import { Table, Divider } from 'semantic-ui-react';
 
 auth;
 const db = getFirestore();
@@ -44,7 +44,7 @@ export default function History() {
                 <meta name="description" content="information" />
             </Head>
             <center>
-                <div style={{ transform: 'translateY(0px)', padding: '40px', position: 'relative', zIndex: '10', maxWidth: '800px' }}>
+                <div style={{ transform: 'translateY(-15px)', padding: '70px', position: 'relative', zIndex: '10', maxWidth: '600px' }}>
                     <div style={{ 
                         display: 'flex', 
                         justifyContent: 'center', 
@@ -54,7 +54,7 @@ export default function History() {
                         fontSize: '30px', 
                         fontWeight: '300',
                         marginBottom: '30px',
-                        marginTop: '0px',
+                        marginTop: '-30px',
                         borderRadius: '3px',
                         boxShadow: '2px 2px 15px black',
                         position: 'relative'
@@ -76,8 +76,8 @@ export default function History() {
                         )}
                     </ul> */}
                 </div>
-                <div style={{ margin: '-90px  20px 0px 20px', position: 'relative', zIndex: '0' }}>
-                    <Table textAlign="center" unstackable style={{ maxWidth: '800px' }}>
+                <div style={{ margin: '-140px  40px 0px 40px', position: 'relative', zIndex: '0' }}>
+                    <Table striped celled textAlign="center" unstackable style={{ maxWidth: '600px' }}>
                         <Table.Body>
                             <Table.Row>
                                 <Table.Cell>
@@ -96,7 +96,7 @@ export default function History() {
                                 </Table.Cell>
                             </Table.Row>
                             <Table.Row>
-                                <Table.Cell>
+                                <Table.Cell style={{ width: '50%' }}>
                                     <b>Company Name</b>
                                 </Table.Cell>
                                 <Table.Cell>
