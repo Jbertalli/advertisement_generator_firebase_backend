@@ -5,6 +5,7 @@ import { auth } from '../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { Table, Button } from 'semantic-ui-react';
+import Header from '../components/Header';
 
 auth;
 const db = getFirestore();
@@ -44,6 +45,7 @@ export default function History() {
                 <title>User History</title>
                 <meta name="description" content="information" />
             </Head>
+            <Header />
             <center>
                 <div style={{ transform: 'translateY(-15px)', padding: '70px', position: 'relative', zIndex: '10', maxWidth: '600px' }}>
                     <div style={{ 
@@ -148,11 +150,6 @@ export default function History() {
                     </Table>      
                 </div>
             </center>
-            <Link href="/advertisement_generator">
-                <Button style={{ background: 'white', color: '#125CA1' }}>
-                    Advertisement Generator
-                </Button>
-            </Link>
         </>
     );
 }
