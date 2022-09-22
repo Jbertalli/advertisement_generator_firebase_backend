@@ -45,13 +45,13 @@ export default function History() {
                 <meta name="description" content="information" />
             </Head>
             <Header />
-            <center>
-                <div style={{ transform: 'translateY(-15px)', padding: '70px', position: 'relative', zIndex: '10', maxWidth: '600px' }}>
+            <center style={{ background: 'linear-gradient(to top, blue, #125CA180)', height: '100vh' }}>
+                {/* <div style={{ transform: 'translateY(-15px)', padding: '70px', position: 'relative', zIndex: '10', maxWidth: '600px' }}>
                     <div style={{ 
                         display: 'flex', 
                         justifyContent: 'center', 
-                        background: 'linear-gradient(to right, rgb(0, 255, 255), #1F51FF', 
-                        color: 'white',  
+                        background: 'white', 
+                        color: '#125CA1',  
                         height: '60px', 
                         fontSize: '30px', 
                         fontWeight: '300',
@@ -62,32 +62,40 @@ export default function History() {
                         position: 'relative'
                     }}>
                         <div style={{ transform: 'translateY(20px)' }}>
-                            {/* {user.email} Information */}
                             Saved Advertisements
                         </div>
                     </div>
-                    {/* <ul>
-                        Ternary: {dbDescription ? (
-                        <>
-                            Full
-                        </>
-                        ):(
-                        <>
-                            Empty
-                        </>
-                        )}
-                    </ul> */}
-                </div>
-                <div style={{ margin: '-140px  40px 0px 40px', position: 'relative', zIndex: '0' }}>
-                    <Table striped celled textAlign="center" unstackable style={{ maxWidth: '600px' }}>
+                </div> */}
+                {/* <ul>
+                    Ternary: {dbDescription ? (
+                    <>
+                        Full
+                    </>
+                    ):(
+                    <>
+                        Empty
+                    </>
+                    )}
+                </ul> */}
+                <div style={{ margin: '0px  40px 0px 40px', position: 'relative', zIndex: '0' }}>
+                    <Table 
+                        striped 
+                        celled 
+                        textAlign="center" 
+                        unstackable 
+                        style={{ 
+                            maxWidth: '600px', 
+                            color: '#125CA1', 
+                            boxShadow: '2px 2px 15px black',
+                            background: 'rgb(255, 255, 255, 0.8)', 
+                            transform: 'translateY(60px)'
+                        }}
+                    >
                         <Table.Body>
-                            <Table.Row>
-                                <Table.Cell>
-                                    &nbsp;
-                                </Table.Cell>
-                                <Table.Cell>
-                                    &nbsp;
-                                </Table.Cell>
+                            <Table.Row style={{ fontSize: '30px' }}>
+                                <div style={{ padding: '10px' }}>
+                                    Saved Advertisements
+                                </div>
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>
