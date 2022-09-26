@@ -39,14 +39,14 @@ export default function Header() {
             <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <div style={{ paddingRight: '2%', textDecoration: `underline` }}>
                     <Link href="/advertisement_generator">
-                        <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${adUnderline}` }} className={styles.hovering}>
+                        <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${adUnderline}` }}>
                             Advertisement
                         </Button>
                     </Link>
                 </div>
                 <div style={{ paddingRight: '2%' }}>
                     <Link href="/history">
-                        <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${historyUnderline}` }} className={styles.hovering}>
+                        <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${historyUnderline}` }}>
                             Saved Advertisements
                         </Button>
                     </Link>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { Table } from 'semantic-ui-react';
+import { Table, Segment } from 'semantic-ui-react';
 import Header from '../components/Header';
 
 auth;
@@ -92,11 +92,11 @@ export default function History() {
                         }}
                     >
                         <Table.Body>
-                            <Table.Row style={{ fontSize: '30px' }}>
+                            <Table.Header style={{ fontSize: '30px', transform: 'translateX(50%)' }}>
                                 <div style={{ padding: '10px' }}>
                                     Saved Advertisements
                                 </div>
-                            </Table.Row>
+                            </Table.Header>
                             <Table.Row>
                                 <Table.Cell>
                                     <b>Database ID</b>
