@@ -8,6 +8,8 @@ import { NextRouter, useRouter } from 'next/router';
 import { Button } from 'semantic-ui-react';
 import Header from '../components/Header';
 
+auth;
+
 export default function Home() {
   const [isDesktop, setDesktop] = useState<boolean>(false);
 
@@ -43,8 +45,25 @@ export default function Home() {
   //   });
   // }
 
+  console.log(auth);
+
+  // const isProtectedRoute1 = router.pathname === '/advertisement_generator';
+  // const isProtectedRoute2 = router.pathname === '/history';
+
   // useEffect(() => {
-  //   const isProtectedRoute = router.pathname === '/advertisement_generator';
+  //   if () {
+  //     console.log('Authenticated!');
+  //   } else if ( && (isProtectedRoute1 || isProtectedRoute2)) {
+  //     router.push('/');
+  //   }
+  // }, [])
+
+  // if (!) {
+  //   return null;
+  // }
+
+  // useEffect(() => {
+  //   const isProtectedRoute = router.pathname === '/advertisement_generator' || router.pathname === '/history';
   //   if (!auth.currentUser && isProtectedRoute) {
   //     router.push('/')
   //   }

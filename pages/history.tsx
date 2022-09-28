@@ -77,7 +77,7 @@ export default function History() {
                     </>
                     )}
                 </ul> */}
-                <div style={{ margin: '0px  40px 0px 40px', position: 'relative', zIndex: '0' }}>
+                <div style={{ margin: '0px  40px 0px 40px', position: 'relative', zIndex: '0', fontSize: '20px' }}>
                     <Table 
                         striped 
                         celled 
@@ -85,21 +85,22 @@ export default function History() {
                         unstackable 
                         style={{ 
                             maxWidth: '600px', 
+                            height: '60vh',
                             color: '#125CA1', 
                             boxShadow: '2px 2px 15px black',
                             background: 'rgb(255, 255, 255, 0.8)', 
-                            transform: 'translateY(60px)'
+                            transform: 'translateY(60px)',
                         }}
                     >
                         <Table.Body>
                             <Table.Header style={{ fontSize: '30px', transform: 'translateX(50%)' }}>
-                                <div style={{ padding: '10px' }}>
+                                <div style={{ padding: '10px', lineHeight: '30px' }}>
                                     Saved Advertisements
                                 </div>
                             </Table.Header>
                             <Table.Row>
                                 <Table.Cell>
-                                    <b>Database ID</b>
+                                    Database ID
                                 </Table.Cell>
                                 <Table.Cell>
                                     {dbId}
@@ -107,7 +108,7 @@ export default function History() {
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell style={{ width: '50%' }}>
-                                    <b>Company Name</b>
+                                    Company Name
                                 </Table.Cell>
                                 <Table.Cell>
                                     {dbCompany}
@@ -115,7 +116,7 @@ export default function History() {
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>
-                                    <b>Company Description</b>
+                                    Company Description
                                 </Table.Cell>
                                 <Table.Cell>
                                     {dbDescription}
@@ -123,7 +124,7 @@ export default function History() {
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>
-                                    <b>Image Height</b> 
+                                    Image Height 
                                 </Table.Cell>
                                 <Table.Cell>
                                     {dbHeight}
@@ -131,7 +132,7 @@ export default function History() {
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>
-                                    <b>Image Left</b> 
+                                    Image Left 
                                 </Table.Cell>
                                 <Table.Cell>
                                     {dbLeft}
@@ -139,7 +140,7 @@ export default function History() {
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>
-                                    <b>Image Top</b> 
+                                    Image Top 
                                 </Table.Cell>
                                 <Table.Cell>
                                     {dbTop}
@@ -147,7 +148,7 @@ export default function History() {
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>
-                                    <b>Image Width</b> 
+                                    Image Width 
                                 </Table.Cell>
                                 <Table.Cell>
                                     {dbWidth}

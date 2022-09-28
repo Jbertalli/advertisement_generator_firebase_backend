@@ -49,6 +49,8 @@ export default function Advertisement () {
 
     //console.log(description.length);
 
+    // console.log(auth);
+
     // console.log data
     const logged = async () => {
         const colRef = collection(db, "Advertisement");
