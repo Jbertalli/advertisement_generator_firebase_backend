@@ -45,7 +45,7 @@ export default function Home() {
   //   });
   // }
 
-  console.log(auth);
+  // console.log(auth);
 
   // const isProtectedRoute1 = router.pathname === '/advertisement_generator';
   // const isProtectedRoute2 = router.pathname === '/history';
