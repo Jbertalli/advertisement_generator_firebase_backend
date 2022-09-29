@@ -71,6 +71,17 @@ export default function Home() {
 
   // console.log(router.pathname);
 
+  if (typeof window !== "undefined") {
+    useEffect(() => {
+      console.log(document.cookie.length);
+      if (document.cookie.length > 6) {
+        console.log('Authenticated!')
+      } else {
+        router.push('/');
+      }
+    }, [])
+  }
+
   return (
     <>
       {/* <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: '2%' }}>

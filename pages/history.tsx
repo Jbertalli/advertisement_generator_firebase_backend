@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { Table, Segment } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
+import { NextRouter, useRouter } from 'next/router';
 import Header from '../components/Header';
 
 auth;
@@ -13,6 +14,7 @@ export default function History() {
     const [userData, setUserData] = useState([]);
     const [user] = useAuthState(auth);
     // console.log(user.email);
+    const router: NextRouter = useRouter();
 
     useEffect(() => {
         const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'));
@@ -37,6 +39,17 @@ export default function History() {
       let dbLeft = userData?.[0]?.left;
       let dbTop = userData?.[0]?.top;
       let dbWidth = userData?.[0]?.width;
+
+      if (typeof window !== "undefined") {
+        useEffect(() => {
+          console.log(document.cookie.length);
+          if (document.cookie.length > 6) {
+            console.log('Authenticated!')
+          } else {
+            router.push('/');
+          }
+        }, [])
+      }
 
     return (
         <>

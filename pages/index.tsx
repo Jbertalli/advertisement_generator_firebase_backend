@@ -77,7 +77,7 @@ export default function Authentication() {
   useEffect(() => {
     signOut(auth)
     .then(() => {
-        document.cookie = 'name=; expires=Thu, 01 Jan 1970'
+        document.cookie = 'name=; expires=Thu, 01 Jan 1970';
         console.log("you are logged out");
         router.push('/');
     })
@@ -86,7 +86,27 @@ export default function Authentication() {
     });
   }, [])
 
-  console.log(document.cookie);
+  if (typeof window !== "undefined") {
+    // your code with access to window or document object here 
+
+  // const isProtectedRoute1 = router.pathname === '/advertisement_generator';
+  // const isProtectedRoute2 = router.pathname === '/history';
+
+  useEffect(() => {
+    console.log(document.cookie.length);
+    if (document.cookie.length > 6) {
+      console.log('Authenticated!')
+    } else {
+      router.push('/');
+    }
+  }, [])
+
+  // if (document.cookie == null) {
+  //   return null;
+  // }
+}
+
+// console.log(document.cookie.length);
 
   return (
     <>
