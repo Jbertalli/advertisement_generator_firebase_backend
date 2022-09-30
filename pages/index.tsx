@@ -86,22 +86,20 @@ export default function Authentication() {
     });
   }, [])
 
+   // access to window or document object 
   if (typeof window !== "undefined") {
-    // your code with access to window or document object here 
+    useEffect(() => {
+      console.log(document.cookie.length);
+      if (document.cookie.length > 6) {
+        console.log('Authenticated!')
+      } else if (document.cookie.length == 5) {
+        router.push('/');
+      } else {
+        return null;
+      }
+    }, [])
 
-  // const isProtectedRoute1 = router.pathname === '/advertisement_generator';
-  // const isProtectedRoute2 = router.pathname === '/history';
-
-  useEffect(() => {
-    console.log(document.cookie.length);
-    if (document.cookie.length > 6) {
-      console.log('Authenticated!')
-    } else {
-      router.push('/');
-    }
-  }, [])
-
-  // if (document.cookie == null) {
+  // if (document.cookie.length == 5) {
   //   return null;
   // }
 }

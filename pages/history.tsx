@@ -45,8 +45,10 @@ export default function History() {
           console.log(document.cookie.length);
           if (document.cookie.length > 6) {
             console.log('Authenticated!')
-          } else {
+          } else if (document.cookie.length == 5) {
             router.push('/');
+          } else {
+            return null;
           }
         }, [])
       }
