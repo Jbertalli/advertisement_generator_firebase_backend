@@ -35,7 +35,7 @@ export default function Authentication() {
         return signInWithEmailAndPassword(auth, email, password);
       })
     .then((userCredential) => {
-      document.cookie = 'name=Signed In'
+      document.cookie = 'name=Signed In';
       console.log('logged in');
       router.push('/advertisement_generator');
     })
@@ -49,7 +49,7 @@ export default function Authentication() {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      document.cookie = 'name=Signed Up'
+      document.cookie = 'name=Signed Up';
       console.log('You are registered');
       router.push('/advertisement_generator');
     })
@@ -65,7 +65,7 @@ export default function Authentication() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
     .then((re) => {
-      document.cookie = 'name=Google Signed In'
+      document.cookie = 'name=Google Signed In';
       console.log(re);
       router.push('/advertisement_generator');
     })
