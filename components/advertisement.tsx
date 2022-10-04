@@ -126,47 +126,10 @@ export default function Advertisement () {
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
             <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} width={width} setWidth={setWidth} height={height} setHeight={setHeight} left={left} setLeft={setLeft} top={top} setTop={setTop} />
-            {/* <div style={{ transform: 'translateY(50px)' }}>
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    User History
-                </div>
-                <ul>
-                    ID: {dbId}
-                </ul>
-                <ul>
-                    Company: {dbCompany}
-                </ul>
-                <ul>
-                    Description: {dbDescription}
-                </ul>
-                <ul>
-                    Height: {dbHeight}
-                </ul>
-                <ul>
-                    Left: {dbLeft}
-                </ul>
-                <ul>
-                    Top: {dbTop}
-                </ul>
-                <ul>
-                    Width: {dbWidth}
-                </ul>
-                <ul>
-                    Ternary: {dbDescription ? (
-                    <>
-                        Full
-                    </>
-                    ):(
-                    <>
-                        Empty
-                    </>
-                    )}
-                </ul>
-            </div> */}
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
                     <Segment attached textAlign="center">
-                        <div style={{ color: '#125CA1', fontSize: '52px', fontWeight: '700', padding: '1em 0em .5em 0em' }}>
+                        <div style={{ color: '#125CA1', fontSize: '52px', fontWeight: '700', padding: '1em 0em .5em 0em', lineHeight: '50px' }}>
                             Advertisement Generator
                         </div>
                         <div style={{ fontSize: '18px', fontWeight: '400px', padding: '0em 0em 1em 0em' }}>
