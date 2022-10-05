@@ -13,6 +13,7 @@ const db = getFirestore();
 export default function History() {
     const [userData, setUserData] = useState([]);
     const [tableMargin, setTableMargin] = useState<string>('0px  40px 0px 40px');
+    const [tableScale, setTableScale] = useState<string>('');
     const [user] = useAuthState(auth);
     // console.log(user.email);
     const router: NextRouter = useRouter();
@@ -20,15 +21,19 @@ export default function History() {
     useEffect(() => {
         if (window.innerWidth > 440) {
             setTableMargin('0px  40px 0px 40px');
+            setTableScale("");
         } else {
             setTableMargin('0px 10px 0px 0px');
+            setTableScale("translate(0.8vw) scale(0.8)");
         }
     
         const updateMedia = () => {
           if (window.innerWidth > 440) {
             setTableMargin('0px  40px 0px 40px');
+            setTableScale("");
           } else {
             setTableMargin('0px 10px 0px 0px');
+            setTableScale("translate(0.8vw) scale(0.8)");
           }
         };
           window.addEventListener('resize', updateMedia);
@@ -100,18 +105,7 @@ export default function History() {
                         </div>
                     </div>
                 </div> */}
-                {/* <ul>
-                    Ternary: {dbDescription ? (
-                    <>
-                        Full
-                    </>
-                    ):(
-                    <>
-                        Empty
-                    </>
-                    )}
-                </ul> */}
-                <div style={{ margin: `${tableMargin}`, position: 'relative', zIndex: '0', fontSize: '20px' }}>
+                <div style={{ margin: `${tableMargin}`, transform: `${tableScale}`, position: 'relative', zIndex: '0', fontSize: '20px' }}>
                     <Table 
                         striped 
                         celled 
