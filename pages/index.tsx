@@ -15,6 +15,7 @@ export default function Authentication() {
   const [account, setAccount] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [width, setWidth] = useState<string>('55vw');
+  const [mobileHeight, setMobileHeight] = useState<string>("");
 
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
@@ -24,6 +25,7 @@ export default function Authentication() {
       setWidth('55vw');
     } else {
       setWidth('75vw');
+      setMobileHeight('500px');
     }
 
     const updateMedia = () => {
@@ -31,6 +33,7 @@ export default function Authentication() {
         setWidth('55vw');
       } else {
         setWidth('75vw');
+        setMobileHeight('500px');
       }
     };
       window.addEventListener('resize', updateMedia);
@@ -133,7 +136,7 @@ export default function Authentication() {
       </Head>
       <div style={{ background: 'linear-gradient(45deg, #0f0ade, #52b3d9)', height: '100vh' }}>
         <Container style={{ display: 'flex', justifyContent: 'center', paddingTop: '20vh' }}>
-          <Card style={{ display: 'flex', justifyContent: 'center', boxShadow: '-2px 2px 10px black', width: `${width}`, maxWidth: '500px', paddingTop: '30px' }}>
+          <Card style={{ display: 'flex', justifyContent: 'center', boxShadow: '-2px 2px 10px black', width: `${width}`, height: `${mobileHeight}`, maxWidth: '500px', paddingTop: '30px' }}>
             {loading && 
               <div style={{ display: 'flex', justifyContent: 'center', fontSize: '17px', fontWeight: '300' }}>
                 <div style={{ transform: 'translateY(-10px)' }}>
