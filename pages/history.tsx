@@ -12,22 +12,23 @@ const db = getFirestore();
 
 export default function History() {
     const [userData, setUserData] = useState([]);
+    const [tableMargin, setTableMargin] = useState<string>('0px  40px 0px 40px');
     const [user] = useAuthState(auth);
     // console.log(user.email);
     const router: NextRouter = useRouter();
 
     useEffect(() => {
         if (window.innerWidth > 440) {
-          
+            setTableMargin('0px  40px 0px 40px');
         } else {
-          
+            setTableMargin('0px 10px 0px 0px');
         }
     
         const updateMedia = () => {
           if (window.innerWidth > 440) {
-            
+            setTableMargin('0px  40px 0px 40px');
           } else {
-            
+            setTableMargin('0px 10px 0px 0px');
           }
         };
           window.addEventListener('resize', updateMedia);
@@ -110,7 +111,7 @@ export default function History() {
                     </>
                     )}
                 </ul> */}
-                <div style={{ margin: '0px  40px 0px 40px', position: 'relative', zIndex: '0', fontSize: '20px' }}>
+                <div style={{ margin: `${tableMargin}`, position: 'relative', zIndex: '0', fontSize: '20px' }}>
                     <Table 
                         striped 
                         celled 
