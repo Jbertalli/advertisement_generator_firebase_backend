@@ -22,24 +22,29 @@ export default function Advertisement () {
     const [top, setTop] = useState<number | undefined>(20);
     const [imageWidth, setImageWidth] = useState<string>('7');
     const [adWidth, setAdWidth] = useState<string>('9');
+    const [imageAspect, setImageAspect] = useState<string>('translate(0px)');
     const [userData, setUserData] = useState([]);
 
     useEffect(() => {
         if (window.innerWidth > 991) {
             setImageWidth('7');
             setAdWidth('9');
+            setImageAspect('translate(0px)');
         } else {
             setImageWidth('16');
             setAdWidth('16');
+            setImageAspect('translate(-6%)');
         }
     
         const updateMedia = () => {
           if (window.innerWidth > 991) {
             setImageWidth('7');
             setAdWidth('9');
+            setImageAspect('translate(0px)');
           } else {
             setImageWidth('16');
             setAdWidth('16');
+            setImageAspect('translate(-6%)');
           }
         };
           window.addEventListener('resize', updateMedia);
@@ -297,7 +302,7 @@ export default function Advertisement () {
                     <Segment attached>
                         <Grid>
                             <Grid.Row>
-                                <Grid.Column width={`${imageWidth}`} style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                                <Grid.Column width={`${imageWidth}`} style={{ transform: `${imageAspect}`, display: 'flex', justifyContent: 'center' }}>
                                     <input 
                                         type="image" 
                                         width={width}
