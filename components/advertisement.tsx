@@ -20,7 +20,31 @@ export default function Advertisement () {
     const [height, setHeight] = useState<number | undefined>(350);
     const [left, setLeft] = useState<number | undefined>(40);
     const [top, setTop] = useState<number | undefined>(20);
+    const [imageWidth, setImageWidth] = useState<string>('7');
+    const [adWidth, setAdWidth] = useState<string>('9');
     const [userData, setUserData] = useState([]);
+
+    useEffect(() => {
+        if (window.innerWidth > 991) {
+            setImageWidth('7');
+            setAdWidth('9');
+        } else {
+            setImageWidth('16');
+            setAdWidth('16');
+        }
+    
+        const updateMedia = () => {
+          if (window.innerWidth > 991) {
+            setImageWidth('7');
+            setAdWidth('9');
+          } else {
+            setImageWidth('16');
+            setAdWidth('16');
+          }
+        };
+          window.addEventListener('resize', updateMedia);
+          return () => window.removeEventListener('resize', updateMedia);
+    }, []);
 
     function handleChange(event) {
         const { name, files } = event.target;
@@ -273,7 +297,7 @@ export default function Advertisement () {
                     <Segment attached>
                         <Grid>
                             <Grid.Row>
-                                <Grid.Column width={7} style={{ display: 'flex', justifyContent: 'flex-start', transform: '' }}>
+                                <Grid.Column width={`${imageWidth}`} style={{ display: 'flex', justifyContent: 'flex-start' }}>
                                     <input 
                                         type="image" 
                                         width={width}
@@ -282,7 +306,7 @@ export default function Advertisement () {
                                         src={mediaPreview}
                                     />
                                 </Grid.Column>
-                                <Grid.Column width={9}>
+                                <Grid.Column width={`${adWidth}`}>
                                     <Item style={{ fontSize: '1.5em', fontWeight: '900', padding: '1em 1em 1.5em 1em' }}>
                                         <h1 style={{ display: 'flex', justifyContent: 'center' }}>
                                             {company} Video Advertisement
