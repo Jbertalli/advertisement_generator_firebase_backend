@@ -17,6 +17,24 @@ export default function History() {
     const router: NextRouter = useRouter();
 
     useEffect(() => {
+        if (window.innerWidth > 440) {
+          
+        } else {
+          
+        }
+    
+        const updateMedia = () => {
+          if (window.innerWidth > 440) {
+            
+          } else {
+            
+          }
+        };
+          window.addEventListener('resize', updateMedia);
+          return () => window.removeEventListener('resize', updateMedia);
+    }, []);
+
+    useEffect(() => {
         const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'));
         onSnapshot(q, (querySnapshot) => {
             setUserData(querySnapshot.docs.map(doc => ({
