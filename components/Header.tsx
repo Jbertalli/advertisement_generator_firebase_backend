@@ -7,8 +7,27 @@ import { signOut } from 'firebase/auth';
 import styles from '../styles/advertisement.module.css';
 
 export default function Header() {
-    const [adUnderline, setAdUnderline] = useState('');
-    const [historyUnderline, setHistoryUnderline] = useState('');
+    const [adUnderline, setAdUnderline] = useState<string>('');
+    const [historyUnderline, setHistoryUnderline] = useState<string>('');
+    const [headerAspect, setHeaderAspect] = useState<string>("Saved Advertisements");
+
+    useEffect(() => {
+        if (window.innerWidth > 440) {
+            setHeaderAspect("Saved Advertisements");
+        } else {
+            setHeaderAspect("Saved Ads");
+        }
+    
+        const updateMedia = () => {
+          if (window.innerWidth > 440) {
+            setHeaderAspect("Saved Advertisements");
+          } else {
+            setHeaderAspect("Saved Ads");
+          }
+        };
+          window.addEventListener('resize', updateMedia);
+          return () => window.removeEventListener('resize', updateMedia);
+    }, []);
 
     const router: NextRouter = useRouter();
 
@@ -47,7 +66,7 @@ export default function Header() {
                 <div style={{ paddingRight: '2%' }}>
                     <Link href="/history">
                         <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${historyUnderline}` }}>
-                            Saved Advertisements
+                            {headerAspect}
                         </Button>
                     </Link>
                 </div>
