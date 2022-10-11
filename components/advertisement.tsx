@@ -20,30 +20,30 @@ export default function Advertisement () {
     const [height, setHeight] = useState<any>(350);
     const [left, setLeft] = useState<any>(40);
     const [top, setTop] = useState<any>(20);
-    const [imageWidth, setImageWidth] = useState<string>('7');
-    const [adWidth, setAdWidth] = useState<string>('9');
+    const [imageWidth, setImageWidth] = useState<string>('44%');
+    const [adWidth, setAdWidth] = useState<string>('56%');
     const [imageAspect, setImageAspect] = useState<string>('translate(0px)');
     const [userData, setUserData] = useState([]);
 
     useEffect(() => {
         if (window.innerWidth > 991) {
-            setImageWidth('7');
-            setAdWidth('9');
+            setImageWidth('44%');
+            setAdWidth('56%');
             setImageAspect('translate(0px)');
         } else {
-            setImageWidth('16');
-            setAdWidth('16');
+            setImageWidth('100%');
+            setAdWidth('100%');
             setImageAspect('translate(-6%)');
         }
     
         const updateMedia = () => {
           if (window.innerWidth > 991) {
-            setImageWidth('7');
-            setAdWidth('9');
+            setImageWidth('44%');
+            setAdWidth('56%');
             setImageAspect('translate(0px)');
           } else {
-            setImageWidth('16');
-            setAdWidth('16');
+            setImageWidth('100%');
+            setAdWidth('100%');
             setImageAspect('translate(-6%)');
           }
         };
@@ -204,7 +204,7 @@ export default function Advertisement () {
                                             name="media"
                                             type="file"
                                             accept="image/*"
-                                            content="Select Image"
+                                            // content="Select Image"
                                             style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
                                             className={styles.file}
                                             onChange={handleChange}
@@ -302,7 +302,7 @@ export default function Advertisement () {
                     <Segment attached>
                         <Grid>
                             <Grid.Row>
-                                <Grid.Column width={`${imageWidth}`} style={{ transform: `${imageAspect}`, display: 'flex', justifyContent: 'center' }}>
+                                <Grid.Column style={{ transform: `${imageAspect}`, width: `${imageWidth}`, display: 'flex', justifyContent: 'center' }}>
                                     <input 
                                         type="image" 
                                         width={width}
@@ -311,7 +311,7 @@ export default function Advertisement () {
                                         src={mediaPreview}
                                     />
                                 </Grid.Column>
-                                <Grid.Column width={`${adWidth}`}>
+                                <Grid.Column style={{ width: `${adWidth}` }}>
                                     <Item style={{ fontSize: '1.5em', fontWeight: '900', padding: '1em 1em 1.5em 1em' }}>
                                         <h1 style={{ display: 'flex', justifyContent: 'center' }}>
                                             {company} Video Advertisement
