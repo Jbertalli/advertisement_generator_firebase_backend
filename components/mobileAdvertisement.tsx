@@ -123,7 +123,7 @@ export default function MobileAdvertisement () {
                         name="media"
                         type="file"
                         accept="image/*"
-                        content="Select Image"
+                        // content="Select Image"
                         style={{ width: '40vw', transform: 'translate(2vw)' }}
                         className={styles.file}
                         onChange={handleChange}
