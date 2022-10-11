@@ -84,7 +84,7 @@ export default function History() {
                 <meta name="description" content="information" />
             </Head>
             <Header />
-            <center style={{ background: 'linear-gradient(to top, blue, #125CA180)', height: '100vh' }}>
+            <div style={{ background: 'linear-gradient(to top, blue, #125CA180)', height: '100vh' }}>
                 {/* <div style={{ transform: 'translateY(-15px)', padding: '70px', position: 'relative', zIndex: '10', maxWidth: '600px' }}>
                     <div style={{ 
                         display: 'flex', 
@@ -105,7 +105,7 @@ export default function History() {
                         </div>
                     </div>
                 </div> */}
-                <div style={{ margin: `${tableMargin}`, transform: `${tableScale}`, position: 'relative', zIndex: '0', fontSize: '20px' }}>
+                <div style={{ margin: `${tableMargin}`, transform: `${tableScale}`, position: 'relative', zIndex: '0', fontSize: '20px', display: 'flex', justifyContent: 'center' }}>
                     <Table 
                         striped 
                         celled 
@@ -185,7 +185,7 @@ export default function History() {
                         </Table.Body>
                     </Table>      
                 </div>
-            </center>
+            </div>
         </>
     );
 }
