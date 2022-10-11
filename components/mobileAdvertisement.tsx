@@ -13,13 +13,13 @@ const db = getFirestore();
 
 export default function MobileAdvertisement () {
     const [company, setCompany] = useState('');
-    const [description, setDescription] = useState<string | undefined>('');
-    const [mediaPreview, setMediaPreview] = useState<string | undefined>('');
+    const [description, setDescription] = useState<string>('');
+    const [mediaPreview, setMediaPreview] = useState<string>('');
     const [image, setImage] = useState({name: '', media: ''});
-    const [width, setWidth] = useState<number | undefined>(400);
-    const [height, setHeight] = useState<number | undefined>(400);
-    const [left, setLeft] = useState<number | undefined>(40);
-    const [top, setTop] = useState<number | undefined>(20);
+    const [width, setWidth] = useState<any>(400);
+    const [height, setHeight] = useState<any>(400);
+    const [left, setLeft] = useState<any>(40);
+    const [top, setTop] = useState<any>(20);
 
     function handleChange(event) {
         const { name, files } = event.target;
