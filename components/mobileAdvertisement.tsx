@@ -4,7 +4,7 @@ import { Button, Form, Icon, Item, Card } from 'semantic-ui-react';
 import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/mobileLocalStorage';
-import firebase from '../firebase/clientApp';
+// import firebase from '../firebase/clientApp';
 import { getFirestore, doc, getDocs, setDoc, collection, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 

@@ -4,7 +4,7 @@ import { Container, Segment, Button, Form, Icon, Grid, Item, Card } from 'semant
 import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/localStorage';
-import firebase from '../firebase/clientApp';
+// import firebase from '../firebase/clientApp';
 import { getFirestore, doc, getDocs, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 
@@ -12,14 +12,14 @@ auth;
 const db = getFirestore();
 
 export default function Advertisement () {
-    const [company, setCompany] = useState<string | undefined>('');
-    const [description, setDescription] = useState<string | undefined>('');
-    const [mediaPreview, setMediaPreview] = useState<string | undefined>('');
+    const [company, setCompany] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [mediaPreview, setMediaPreview] = useState<string>('');
     const [image, setImage] = useState({name: '', media: ''});
-    const [width, setWidth] = useState<number | undefined>(350);
-    const [height, setHeight] = useState<number | undefined>(350);
-    const [left, setLeft] = useState<number | undefined>(40);
-    const [top, setTop] = useState<number | undefined>(20);
+    const [width, setWidth] = useState<any>(350);
+    const [height, setHeight] = useState<any>(350);
+    const [left, setLeft] = useState<any>(40);
+    const [top, setTop] = useState<any>(20);
     const [imageWidth, setImageWidth] = useState<string>('7');
     const [adWidth, setAdWidth] = useState<string>('9');
     const [imageAspect, setImageAspect] = useState<string>('translate(0px)');
