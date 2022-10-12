@@ -6,7 +6,7 @@ import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/f
 import { Table } from 'semantic-ui-react';
 import { NextRouter, useRouter } from 'next/router';
 import Header from '../components/Header';
-import { Loader } from 'semantic-ui-react';
+import { Loader, Dimmer } from 'semantic-ui-react';
 
 auth;
 const db = getFirestore();
@@ -85,10 +85,11 @@ export default function History() {
                 <meta name="description" content="information" />
             </Head>
             <Header />
-            {!loading ? (
+            {loading ? (
             <>
-                
-                <Loader />
+                <Dimmer active>
+                    <Loader />
+                </Dimmer>
             </>
             ):(
             <>
