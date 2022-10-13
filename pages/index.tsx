@@ -229,34 +229,36 @@ export default function Authentication() {
                         <p>{error}</p>
                       )}
                     </div>
-                    <div style={{ position: 'absolute', transform: 'translate(20px, -40px)' }}>
-                      {toggle ? (
-                      <>
-                        <div>
-                          <Checkbox 
-                            onClick={() => {setShowPassword('password'), setToggle(false)}}
-                            label={
-                              <label>
-                                Hide Password
-                              </label>
-                            } 
-                          />
-                        </div>
-                      </>
-                      ):(
-                      <>
-                        <div>
-                          <Checkbox 
-                            onClick={() => {setShowPassword('text'), setToggle(true)}}
-                            label={
-                              <label>
-                                Show Password
-                              </label>
-                            } 
-                          />
-                        </div>
-                      </>
-                      )}
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                      <div style={{ position: 'absolute', transform: 'translate(-38px, -40px)' }}>
+                        {toggle ? (
+                        <>
+                          <div>
+                            <Checkbox 
+                              onClick={() => {setShowPassword('password'), setToggle(false)}}
+                              label={
+                                <label>
+                                  Hide Password
+                                </label>
+                              } 
+                            />
+                          </div>
+                        </>
+                        ):(
+                        <>
+                          <div>
+                            <Checkbox 
+                              onClick={() => {setShowPassword('text'), setToggle(true)}}
+                              label={
+                                <label>
+                                  Show Password
+                                </label>
+                              } 
+                            />
+                          </div>
+                        </>
+                        )}
+                      </div>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', color: '#808080' }}>
                       Don't have an account?&nbsp;<a onClick={() => {setAccount(false), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Signup</a>
