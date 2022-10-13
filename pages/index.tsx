@@ -7,7 +7,7 @@ import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signO
 import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import styles from '../styles/advertisement.module.css';
-import { Container, Icon, Card, Button, Loader } from 'semantic-ui-react';
+import { Container, Icon, Card, Button, Loader, Checkbox } from 'semantic-ui-react';
 
 export default function Authentication() {
   const [email, setEmail] = useState<string>("");
@@ -17,6 +17,9 @@ export default function Authentication() {
   const [width, setWidth] = useState<string>('55vw');
   const [mobileHeight, setMobileHeight] = useState<string>("");
   const [paddingTop, setPaddingTop] = useState<string>("20vh");
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<string>('password');
+  const [checked, setChecked] = useState<boolean>(false);
 
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
@@ -201,7 +204,7 @@ export default function Authentication() {
                       <input
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
-                        type="password"
+                        type={`${showPassword}`}
                         placeholder="Password"
                         style={{ 
                           borderRight: 'transparent', 
@@ -224,6 +227,35 @@ export default function Authentication() {
                     <div style={{ color: 'red', display: 'flex', justifyContent: 'center' }}>
                       {error && (
                         <p>{error}</p>
+                      )}
+                    </div>
+                    <div>
+                      {toggle ? (
+                      <>
+                        <div>
+                          <Checkbox 
+                            onClick={() => {setShowPassword('password'), setToggle(false)}}
+                            label={
+                              <label>
+                                Hide Password
+                              </label>
+                            } 
+                          />
+                        </div>
+                      </>
+                      ):(
+                      <>
+                        <div>
+                          <Checkbox 
+                            onClick={() => {setShowPassword('text'), setToggle(true)}}
+                            label={
+                              <label>
+                                Show Password
+                              </label>
+                            } 
+                          />
+                        </div>
+                      </>
                       )}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', color: '#808080' }}>
