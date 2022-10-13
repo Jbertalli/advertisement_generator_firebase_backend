@@ -211,7 +211,7 @@ export default function Authentication() {
                           borderLeft: 'transparent', 
                           borderTop: 'transparent', 
                           borderBottom: '.5px solid gray', 
-                          margin: '20px 0px 20px', 
+                          margin: '20px 0px 60px', 
                           padding: '4px', 
                           width: '80%', 
                           maxWidth: '300px',
@@ -229,7 +229,7 @@ export default function Authentication() {
                         <p>{error}</p>
                       )}
                     </div>
-                    <div>
+                    <div style={{ position: 'absolute', transform: 'translate(20px, -40px)' }}>
                       {toggle ? (
                       <>
                         <div>
