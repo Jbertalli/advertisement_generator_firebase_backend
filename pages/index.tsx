@@ -321,14 +321,14 @@ export default function Authentication() {
                       <input
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
-                        type="password"
+                        type={`${showPassword}`}
                         placeholder="Password"
                         style={{ 
                           borderRight: 'transparent', 
                           borderLeft: 'transparent', 
                           borderTop: 'transparent', 
                           borderBottom: '.5px solid gray', 
-                          margin: '20px 0px 20px', 
+                          margin: '20px 0px 60px', 
                           padding: '4px', 
                           width: '80%', 
                           maxWidth: '300px',
@@ -345,6 +345,37 @@ export default function Authentication() {
                       {error && (
                         <p>{error}</p>
                       )}
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                      <div style={{ position: 'absolute', transform: 'translate(-38px, -40px)' }}>
+                        {toggle ? (
+                        <>
+                          <div>
+                            <Checkbox 
+                              onClick={() => {setShowPassword('password'), setToggle(false)}}
+                              label={
+                                <label>
+                                  Hide Password
+                                </label>
+                              } 
+                            />
+                          </div>
+                        </>
+                        ):(
+                        <>
+                          <div>
+                            <Checkbox 
+                              onClick={() => {setShowPassword('text'), setToggle(true)}}
+                              label={
+                                <label>
+                                  Show Password
+                                </label>
+                              } 
+                            />
+                          </div>
+                        </>
+                        )}
+                      </div>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', color: '#808080' }}>
                       Already have an account?&nbsp;<a onClick={() => {setAccount(true), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Login</a>
