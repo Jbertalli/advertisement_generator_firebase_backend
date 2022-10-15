@@ -214,7 +214,7 @@ export default function MobileAdvertisement () {
                                 <Button onClick={() => addAdvertisement(company, description, width, height, left, top)} style={{ background: '#125CA1', color: 'white' }}>
                                     Save
                                 </Button>
-                                <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top), setCompany(''), setDescription('')}} style={{ background: '#125CA1', color: 'white' }}>
+                                <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top), setCompany(''), setDescription(''), setMediaPreview('')}} style={{ background: '#125CA1', color: 'white' }}>
                                     Delete
                                 </Button>
                             </div>
