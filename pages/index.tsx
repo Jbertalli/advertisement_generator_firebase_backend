@@ -19,7 +19,6 @@ export default function Authentication() {
   const [paddingTop, setPaddingTop] = useState<string>("20vh");
   const [toggle, setToggle] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<string>('password');
-  const [checked, setChecked] = useState<boolean>(false);
 
   const router = useRouter();
   const [user, loading] = useAuthState(auth);

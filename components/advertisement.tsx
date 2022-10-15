@@ -10,6 +10,7 @@ import { auth } from '../firebase/clientApp';
 
 auth;
 const db = getFirestore();
+const LOCAL_STORAGE_KEY_IMAGE = 'Image';
 
 export default function Advertisement () {
     const [company, setCompany] = useState<string>('');
@@ -51,6 +52,8 @@ export default function Advertisement () {
           return () => window.removeEventListener('resize', updateMedia);
     }, []);
 
+    let pics = [];
+
     function handleChange(event) {
         const { name, files } = event.target;
         if (name === 'media') {
@@ -64,6 +67,19 @@ export default function Advertisement () {
         // console.log(image);
         // console.log(mediaPreview);
     }
+
+    console.log(mediaPreview);
+
+    // Image
+    useEffect(() => {
+        const storedImage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE))
+        if (storedImage) setMediaPreview(storedImage)
+      }, [])
+    
+      useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE, 
+        JSON.stringify(mediaPreview))
+      }, [mediaPreview]);
 
     // useEffect(() => {
     //     document.body.style.overflow = "hidden";
