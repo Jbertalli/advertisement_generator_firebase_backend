@@ -10,6 +10,7 @@ import { auth } from '../firebase/clientApp';
 
 auth;
 const db = getFirestore();
+const LOCAL_STORAGE_KEY_MOBILE_IMAGE = 'MobileImage';
 
 export default function MobileAdvertisement () {
     const [company, setCompany] = useState('');
@@ -34,6 +35,17 @@ export default function MobileAdvertisement () {
         // console.log(image);
         // console.log(mediaPreview);
     }
+
+    // Image
+    useEffect(() => {
+        const storedImage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_MOBILE_IMAGE))
+        if (storedImage) setMediaPreview(storedImage)
+      }, [])
+    
+      useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_MOBILE_IMAGE, 
+        JSON.stringify(mediaPreview))
+      }, [mediaPreview]);
 
     // console.log data
     const logged = async () => {
