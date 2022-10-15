@@ -16,6 +16,7 @@ export default function History() {
     const [tableMargin, setTableMargin] = useState<string>('0px  40px 0px 40px');
     const [tableScale, setTableScale] = useState<string>('');
     const [savedAd, setSavedAd] = useState<string>('Saved Advertisements');
+    const [transform, setTransform] = useState<string>('0px');
     const [user, loading] = useAuthState(auth);
     // console.log(user.email);
     const router: NextRouter = useRouter();
@@ -25,10 +26,12 @@ export default function History() {
             setTableMargin('0px  40px 0px 40px');
             setTableScale('');
             setSavedAd('Saved Advertisements');
+            setTransform('0px');
         } else {
             setTableMargin('0px 10px 0px 0px');
             setTableScale('translate(0.8vw) scale(0.8)');
             setSavedAd('Saved Ads');
+            setTransform('20px');
         }
     
         const updateMedia = () => {
@@ -36,10 +39,12 @@ export default function History() {
             setTableMargin('0px  40px 0px 40px');
             setTableScale("");
             setSavedAd('Saved Advertisements');
+            setTransform('0px');
           } else {
             setTableMargin('0px 10px 0px 0px');
             setTableScale('translate(0.8vw) scale(0.8)');
             setSavedAd('Saved Ads');
+            setTransform('20px');
           }
         };
           window.addEventListener('resize', updateMedia);
@@ -138,7 +143,7 @@ export default function History() {
                         >
                             <Table.Body>
                                 <Table.Header style={{ fontSize: '30px', transform: 'translateX(50%)' }}>
-                                    <div style={{ padding: '10px', lineHeight: '30px', transform: 'translateX(20px)' }}>
+                                    <div style={{ padding: '10px', lineHeight: '30px', transform: `${transform}` }}>
                                         {`${savedAd}`}
                                     </div>
                                 </Table.Header>
