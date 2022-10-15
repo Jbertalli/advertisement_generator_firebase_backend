@@ -197,7 +197,7 @@ export default function History() {
                                     <Table.Cell>
                                         Image String 
                                     </Table.Cell>
-                                    <Table.Cell>
+                                    <Table.Cell style={{ maxWidth: '100px' }}>
                                         {dbImage}
                                     </Table.Cell>
                                 </Table.Row>
