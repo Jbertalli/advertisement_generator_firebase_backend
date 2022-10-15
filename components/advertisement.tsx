@@ -95,7 +95,7 @@ export default function Advertisement () {
         logged();
       }, []);
 
-      const addAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
+      const addAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number, mediaPreview: string) => {
         await setDoc(doc(db, "Advertisement", "Company"), {
           company,
           description,
@@ -103,6 +103,7 @@ export default function Advertisement () {
           height,
           left,
           top,
+          mediaPreview,
           created: Timestamp.now()
         });
       }
@@ -118,7 +119,8 @@ export default function Advertisement () {
                 height: doc.data().height,
                 left: doc.data().left,
                 top: doc.data().top,
-                width: doc.data().width
+                width: doc.data().width,
+                mediaPreview: doc.data().mediaPreview
             })))
         })
       }, []) 
@@ -130,6 +132,7 @@ export default function Advertisement () {
       let dbLeft = userData?.[0]?.left;
       let dbTop = userData?.[0]?.top;
       let dbWidth = userData?.[0]?.width;
+      let dbImage = userData?.[0]?.mediaPreview;
       
     //   console.log(dbId);
     //   console.log(dbCompany);
@@ -138,8 +141,9 @@ export default function Advertisement () {
     //   console.log(dbLeft);
     //   console.log(dbTop);
     //   console.log(dbWidth);
+      console.log(dbImage);
 
-      const deleteAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
+      const deleteAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number, mediaPreview: string) => {
           await updateDoc(doc(db, "Advertisement", "Company"), {
             company: deleteField(),
             description: deleteField(),
@@ -147,6 +151,7 @@ export default function Advertisement () {
             height: deleteField(),
             left: deleteField(),
             top: deleteField(),
+            mediaPreview: deleteField(),
           })
       }
 
@@ -287,10 +292,10 @@ export default function Advertisement () {
                                     {(company && description) ? (
                                     <>
                                         <div style={{ transform: 'translateX(13.5px)' }}>
-                                            <Button onClick={() => addAdvertisement(company, description, width, height, left, top)} style={{ background: '#125CA1', color: 'white' }}>
+                                            <Button onClick={() => addAdvertisement(company, description, width, height, left, top, mediaPreview)} style={{ background: '#125CA1', color: 'white' }}>
                                                 Save
                                             </Button>
-                                            <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top), setCompany(''), setDescription(''), setMediaPreview('')}} style={{ background: '#125CA1', color: 'white' }}>
+                                            <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top, mediaPreview), setCompany(''), setDescription(''), setMediaPreview('')}} style={{ background: '#125CA1', color: 'white' }}>
                                                 Delete
                                             </Button>
                                         </div>
