@@ -10,7 +10,6 @@ import { auth } from '../firebase/clientApp';
 
 auth;
 const db = getFirestore();
-const LOCAL_STORAGE_KEY_IMAGE = 'Image';
 
 export default function Advertisement () {
     const [company, setCompany] = useState<string>('');
@@ -52,8 +51,6 @@ export default function Advertisement () {
           return () => window.removeEventListener('resize', updateMedia);
     }, []);
 
-    let pics = [];
-
     function handleChange(event) {
         const { name, files } = event.target;
         if (name === 'media') {
@@ -69,17 +66,6 @@ export default function Advertisement () {
     }
 
     console.log(mediaPreview);
-
-    // Image
-    useEffect(() => {
-        const storedImage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE))
-        if (storedImage) setMediaPreview(storedImage)
-      }, [])
-    
-      useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE, 
-        JSON.stringify(mediaPreview))
-      }, [mediaPreview]);
 
     // useEffect(() => {
     //     document.body.style.overflow = "hidden";
@@ -170,7 +156,7 @@ export default function Advertisement () {
                 <title>Earn and Trade Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
-            <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} width={width} setWidth={setWidth} height={height} setHeight={setHeight} left={left} setLeft={setLeft} top={top} setTop={setTop} />
+            <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} width={width} setWidth={setWidth} height={height} setHeight={setHeight} left={left} setLeft={setLeft} top={top} setTop={setTop} mediaPreview={mediaPreview} setMediaPreview={setMediaPreview} />
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
                     <Segment attached textAlign="center">

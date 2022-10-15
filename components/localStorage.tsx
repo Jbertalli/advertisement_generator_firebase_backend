@@ -6,8 +6,9 @@ const LOCAL_STORAGE_KEY_WIDTH = 'ImageWidth';
 const LOCAL_STORAGE_KEY_HEIGHT = 'ImageHeight';
 const LOCAL_STORAGE_KEY_LEFT = 'ImageLeft';
 const LOCAL_STORAGE_KEY_TOP = 'ImageTop';
+const LOCAL_STORAGE_KEY_IMAGE = 'Image';
 
-export default function Local({ company, setCompany, description, setDescription, width, setWidth, height, setHeight, left, setLeft, top, setTop }) {
+export default function Local({ company, setCompany, description, setDescription, width, setWidth, height, setHeight, left, setLeft, top, setTop, mediaPreview, setMediaPreview }) {
     
     // Company name
     useEffect(() => {
@@ -74,6 +75,17 @@ export default function Local({ company, setCompany, description, setDescription
         localStorage.setItem(LOCAL_STORAGE_KEY_TOP, 
         JSON.stringify(top))
       }, [top]);
+
+      // Image
+      useEffect(() => {
+        const storedImage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE))
+        if (storedImage) setMediaPreview(storedImage)
+      }, [])
+    
+      useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE, 
+        JSON.stringify(mediaPreview))
+      }, [mediaPreview]);
 
     return (
         <>
