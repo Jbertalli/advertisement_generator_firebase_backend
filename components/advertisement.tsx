@@ -141,7 +141,7 @@ export default function Advertisement () {
     //   console.log(dbLeft);
     //   console.log(dbTop);
     //   console.log(dbWidth);
-      console.log(dbImage);
+    //   console.log(dbImage);
 
       const deleteAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number, mediaPreview: string) => {
           await updateDoc(doc(db, "Advertisement", "Company"), {

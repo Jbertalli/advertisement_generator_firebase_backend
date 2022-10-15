@@ -52,7 +52,8 @@ export default function History() {
                 height: doc.data().height,
                 left: doc.data().left,
                 top: doc.data().top,
-                width: doc.data().width
+                width: doc.data().width,
+                mediaPreview: doc.data().mediaPreview
             })))
         })
       }, []) 
@@ -64,6 +65,7 @@ export default function History() {
       let dbLeft = userData?.[0]?.left;
       let dbTop = userData?.[0]?.top;
       let dbWidth = userData?.[0]?.width;
+      let dbImage = userData?.[0]?.mediaPreview;
 
       if (typeof window !== "undefined") {
         useEffect(() => {
@@ -189,6 +191,14 @@ export default function History() {
                                     </Table.Cell>
                                     <Table.Cell>
                                         {dbWidth}
+                                    </Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>
+                                        Image String 
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        {dbImage}
                                     </Table.Cell>
                                 </Table.Row>
                             </Table.Body>
