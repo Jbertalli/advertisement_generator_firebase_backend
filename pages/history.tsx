@@ -197,7 +197,7 @@ export default function History() {
                                     <Table.Cell>
                                         Image String 
                                     </Table.Cell>
-                                    <Table.Cell style={{ maxWidth: '100px' }}>
+                                    <Table.Cell style={{ wordBreak: 'break-all' }}>
                                         {dbImage}
                                     </Table.Cell>
                                 </Table.Row>
