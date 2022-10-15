@@ -15,6 +15,7 @@ export default function History() {
     const [userData, setUserData] = useState([]);
     const [tableMargin, setTableMargin] = useState<string>('0px  40px 0px 40px');
     const [tableScale, setTableScale] = useState<string>('');
+    const [savedAd, setSavedAd] = useState<string>('Saved Advertisements');
     const [user, loading] = useAuthState(auth);
     // console.log(user.email);
     const router: NextRouter = useRouter();
@@ -22,19 +23,23 @@ export default function History() {
     useEffect(() => {
         if (window.innerWidth > 440) {
             setTableMargin('0px  40px 0px 40px');
-            setTableScale("");
+            setTableScale('');
+            setSavedAd('Saved Advertisements');
         } else {
             setTableMargin('0px 10px 0px 0px');
-            setTableScale("translate(0.8vw) scale(0.8)");
+            setTableScale('translate(0.8vw) scale(0.8)');
+            setSavedAd('Saved Ads');
         }
     
         const updateMedia = () => {
           if (window.innerWidth > 440) {
             setTableMargin('0px  40px 0px 40px');
             setTableScale("");
+            setSavedAd('Saved Advertisements');
           } else {
             setTableMargin('0px 10px 0px 0px');
-            setTableScale("translate(0.8vw) scale(0.8)");
+            setTableScale('translate(0.8vw) scale(0.8)');
+            setSavedAd('Saved Ads');
           }
         };
           window.addEventListener('resize', updateMedia);
@@ -133,8 +138,8 @@ export default function History() {
                         >
                             <Table.Body>
                                 <Table.Header style={{ fontSize: '30px', transform: 'translateX(50%)' }}>
-                                    <div style={{ padding: '10px', lineHeight: '30px' }}>
-                                        Saved Advertisements
+                                    <div style={{ padding: '10px', lineHeight: '30px', transform: 'translateX(20px)' }}>
+                                        {`${savedAd}`}
                                     </div>
                                 </Table.Header>
                                 <Table.Row>
