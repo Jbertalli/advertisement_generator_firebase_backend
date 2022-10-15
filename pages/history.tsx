@@ -17,6 +17,7 @@ export default function History() {
     const [tableScale, setTableScale] = useState<string>('');
     const [savedAd, setSavedAd] = useState<string>('Saved Advertisements');
     const [transform, setTransform] = useState<string>('0px');
+    const [top, setTop] = useState('60px');
     const [user, loading] = useAuthState(auth);
     // console.log(user.email);
     const router: NextRouter = useRouter();
@@ -27,11 +28,13 @@ export default function History() {
             setTableScale('');
             setSavedAd('Saved Advertisements');
             setTransform('0px');
+            setTop('60px');
         } else {
             setTableMargin('0px 10px 0px 0px');
             setTableScale('translate(0.8vw) scale(0.8)');
             setSavedAd('Saved Ads');
             setTransform('20px');
+            setTop('30px');
         }
     
         const updateMedia = () => {
@@ -40,11 +43,13 @@ export default function History() {
             setTableScale("");
             setSavedAd('Saved Advertisements');
             setTransform('0px');
+            setTop('60px');
           } else {
             setTableMargin('0px 10px 0px 0px');
             setTableScale('translate(0.8vw) scale(0.8)');
             setSavedAd('Saved Ads');
             setTransform('20px');
+            setTop('30px');
           }
         };
           window.addEventListener('resize', updateMedia);
@@ -138,7 +143,7 @@ export default function History() {
                                 color: '#125CA1', 
                                 boxShadow: '2px 2px 15px black',
                                 background: 'rgb(255, 255, 255, 0.8', 
-                                transform: 'translateY(60px)',
+                                transform:`translateY(${top})`,
                             }}
                         >
                             <Table.Body>
