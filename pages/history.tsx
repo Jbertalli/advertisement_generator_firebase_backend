@@ -17,10 +17,10 @@ export default function History() {
     const [tableScale, setTableScale] = useState<string>('');
     const [savedAd, setSavedAd] = useState<string>('Saved Advertisements');
     const [transform, setTransform] = useState<string>('0px');
-    const [top, setTop] = useState('60px');
+    const [top, setTop] = useState<string>('60px');
     const [user, loading] = useAuthState(auth);
-    // console.log(user.email);
     const router: NextRouter = useRouter();
+    // console.log(user.email);
 
     useEffect(() => {
         if (window.innerWidth > 440) {
@@ -33,7 +33,7 @@ export default function History() {
             setTableMargin('0px 10px 0px 0px');
             setTableScale('translate(0.8vw) scale(0.8)');
             setSavedAd('Saved Ads');
-            setTransform('20px');
+            setTransform('40px');
             setTop('30px');
         }
     
@@ -48,7 +48,7 @@ export default function History() {
             setTableMargin('0px 10px 0px 0px');
             setTableScale('translate(0.8vw) scale(0.8)');
             setSavedAd('Saved Ads');
-            setTransform('20px');
+            setTransform('40px');
             setTop('30px');
           }
         };
@@ -148,7 +148,7 @@ export default function History() {
                         >
                             <Table.Body>
                                 <Table.Header style={{ fontSize: '30px', transform: 'translateX(50%)' }}>
-                                    <div style={{ padding: '10px', lineHeight: '30px', transform: `${transform}` }}>
+                                    <div style={{ padding: '10px', lineHeight: '30px', transform: `translate(${transform})` }}>
                                         {`${savedAd}`}
                                     </div>
                                 </Table.Header>
