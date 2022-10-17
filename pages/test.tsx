@@ -162,7 +162,11 @@ export default function Test() {
                 Student Answer
                 <Input
                     placeholder="Answer"
+                    onChange={(e) => setStudentAnswer(e.target.value)}
                 />
+            </div>
+            <div>
+                {studentAnswer}
             </div>
             <Button color="blue" style={{ transform: 'translateY(300px)' }}>
                 <Icon
