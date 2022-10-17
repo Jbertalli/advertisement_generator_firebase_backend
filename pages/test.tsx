@@ -6,12 +6,13 @@ export default function Test() {
     const [newQuestion, setNewQuestion] = useState<boolean>(true);
     const [question, setQuestion] = useState<string>('');
     const [answer, setAnswer] = useState<string>('');
+    const [studentAnswer, setStudentAnswer] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [date, setDate] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [nameClicked, setNameClicked] = useState<boolean>(false);
     const [dateClicked, setDateClicked] = useState<boolean>(false);
-    const  [titleClicked, setTitleClicked] = useState<boolean>(false);
+    const [titleClicked, setTitleClicked] = useState<boolean>(false);
 
     return (
         <>
@@ -53,6 +54,7 @@ export default function Test() {
                         Date
                     </div>
                     <input 
+                        type="date"
                         placeholder="Date"
                         onChange={(e) => setDate(e.target.value)}
                     />
@@ -96,7 +98,9 @@ export default function Test() {
             </>
             ):(
             <>
-                {title}
+                <b>
+                    {title}
+                </b>
                 <Button onClick={() => {setTitle(''), setTitleClicked(false)}}>
                     Edit
                 </Button>
@@ -113,11 +117,17 @@ export default function Test() {
             </>
             ):(
             <>
-                <Button onClick={() => {setNewQuestion(true), setQuestion(''), setAnswer('')}}>
+                <Button onClick={() => {setNewQuestion(true), setQuestion(''), setAnswer('')}} color="red">
                     <Icon
                         name="plus"
                     />
                     Delete Question
+                </Button>
+                <Button color="blue">
+                    <Icon
+                        name="save"
+                    />
+                    Save Question
                 </Button>
             </>
             )}
