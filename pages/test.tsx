@@ -19,6 +19,7 @@ export default function Test() {
     const grade = function () {
         if (answer == studentAnswer) {
             setCorrect('Correct');
+            setScore(score + 1);
             console.log('%c Correct!', 'color: green');
         } else {
             setCorrect('Incorrect');
@@ -198,7 +199,7 @@ export default function Test() {
             </h2>
            <Divider />
            <div>
-               Grade: 
+               Grade: {score}
            </div>
         </>
     );
