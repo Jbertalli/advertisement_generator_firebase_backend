@@ -56,7 +56,14 @@ export default function Test() {
                 </>
                 ):(
                 <>
-                    Name: {name}
+                    <span style={{ fontSize: '24px' }}>
+                        <span style={{ fontWeight: '500' }}>
+                            Name:{' '} 
+                        </span>
+                        <span style={{ fontWeight: '300' }}>
+                            {name}
+                        </span>
+                    </span>
                     <Button onClick={() => {setName(''), setNameClicked(false)}}>
                         Edit
                     </Button>
