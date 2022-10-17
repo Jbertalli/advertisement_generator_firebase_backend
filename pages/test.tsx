@@ -142,21 +142,37 @@ export default function Test() {
                         </div>
                         {(title.length > 0) ? (
                         <>
-                            <Button onClick={() => setTitleClicked(true)}>
-                                Save
-                            </Button>
+                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-37px)' }}>
+                                <Button 
+                                    color="blue"
+                                    onClick={() => setTitleClicked(true)}
+                                >
+                                    Save
+                                </Button>
+                            </span>
                         </>
                         ): null}
                     </div>
                 </>
                 ):(
                 <>
-                    <b>
-                        {title}
-                    </b>
-                    <Button onClick={() => {setTitle(''), setTitleClicked(false)}}>
-                        Edit
-                    </Button>
+                    <div style={{ transform: 'translateY(20px)' }}>
+                        <span style={{ fontSize: '24px' }}>
+                            <span style={{ fontWeight: '500', display: 'flex', justifyContent: 'center' }}>
+                                <b>
+                                    {title}
+                                </b>
+                            </span>
+                        </span>
+                        <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-32px)' }}>
+                            <Button 
+                                color="blue"
+                                onClick={() => {setTitle(''), setTitleClicked(false)}}
+                            >
+                                Edit
+                            </Button>
+                        </span>
+                    </div>
                 </>
                 )}
                 <Divider />
