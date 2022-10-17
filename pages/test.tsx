@@ -10,6 +10,7 @@ export default function Test() {
     const [date, setDate] = useState<string>('');
     const [nameClicked, setNameClicked] = useState<boolean>(false);
     const [dateClicked, setDateClicked] = useState<boolean>(false);
+    const [title, setTitle] = useState<string>('');
 
     return (
         <>
@@ -73,11 +74,13 @@ export default function Test() {
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <input 
                         placeholder="Title"
+                        onChange={(e) => setTitle(e.target.value)}
                     />
                 </div>
                 <Button>
                     Save
                 </Button>
+                {title}
             </div>
             {newQuestion ? (
             <>
