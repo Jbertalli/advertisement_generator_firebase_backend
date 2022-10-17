@@ -8,9 +8,10 @@ export default function Test() {
     const [answer, setAnswer] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [date, setDate] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
     const [nameClicked, setNameClicked] = useState<boolean>(false);
     const [dateClicked, setDateClicked] = useState<boolean>(false);
-    const [title, setTitle] = useState<string>('');
+    const  [titleClicked, setTitleClicked] = useState<boolean>(false);
 
     return (
         <>
@@ -66,22 +67,32 @@ export default function Test() {
                 {date}
             </>
             )}
-            
-            <div>
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    Title
+            {!titleClicked ? (
+            <>
+                <div>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        Title
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <input 
+                            placeholder="Title"
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </div>
+                    {(title.length >  0) ? (
+                    <>
+                        <Button onClick={() => setTitleClicked(true)}>
+                            Save
+                        </Button>
+                    </>
+                    ): null}
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <input 
-                        placeholder="Title"
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                </div>
-                <Button>
-                    Save
-                </Button>
+            </>
+            ):(
+            <>
                 {title}
-            </div>
+            </>
+            )}
             {newQuestion ? (
             <>
                 <Button onClick={() => setNewQuestion(false)}>
