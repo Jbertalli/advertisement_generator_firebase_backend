@@ -38,9 +38,9 @@ export default function Test() {
                 {!nameClicked ? (
                 <>
                     <div>
-                        <div>
-                            Student Name
-                        </div>
+                        <h2 style={{ marginBottom: '0px' }}>
+                            Name
+                        </h2>
                         <Input 
                             placeholder="Name"
                             onChange={(e) => setName(e.target.value)}
@@ -65,9 +65,9 @@ export default function Test() {
                 {!dateClicked ? (
                 <>
                     <div>
-                        <div>
+                        <h2 style={{ marginBottom: '0px', marginTop: '20px' }}>
                             Date
-                        </div>
+                        </h2>
                         <Input 
                             type="date"
                             placeholder="Date"
@@ -93,9 +93,9 @@ export default function Test() {
                 {!titleClicked ? (
                 <>
                     <div>
-                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <h2 style={{ display: 'flex', justifyContent: 'center', marginBottom: '0px', marginTop: '20px' }}>
                             Assignment Title
-                        </div>
+                        </h2>
                         <div style={{ display: 'flex', justifyContent: 'center' }}>
                             <Input 
                                 placeholder="Title"
@@ -121,6 +121,7 @@ export default function Test() {
                     </Button>
                 </>
                 )}
+                <Divider />
                 {newQuestion ? (
                 <>
                     <Button onClick={() => {setNewQuestion(false),setQuestionNumber(questionNumber + 1)}}>
