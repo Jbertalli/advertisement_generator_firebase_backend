@@ -14,6 +14,14 @@ export default function Test() {
     const [dateClicked, setDateClicked] = useState<boolean>(false);
     const [titleClicked, setTitleClicked] = useState<boolean>(false);
 
+    const grade = function () {
+        if (answer == studentAnswer) {
+            console.log('%c Correct!', 'color: green');
+        } else {
+            console.log('%c Incorrect.', 'color: red');
+        }
+    }
+
     return (
         <>
             <Head>
@@ -168,11 +176,14 @@ export default function Test() {
             <div>
                 {studentAnswer}
             </div>
-            <Button color="blue" style={{ transform: 'translateY(300px)' }}>
-                <Icon
-                    name="check"
-                />
-                Grade
+            <Button 
+                onClick={() => grade()}
+                color="blue" 
+                style={{ transform: 'translateY(300px)' }}>
+                    <Icon
+                        name="check"
+                    />
+                    Grade
             </Button>
         </>
     );
