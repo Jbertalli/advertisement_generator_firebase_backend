@@ -68,6 +68,9 @@ export default function Test() {
             ):(
             <>
                 Date: {date}
+                <Button onClick={() => {setDate(''), setDateClicked(false)}}>
+                    Edit
+                </Button>
             </>
             )}
             {!titleClicked ? (
