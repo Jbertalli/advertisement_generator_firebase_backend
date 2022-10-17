@@ -26,7 +26,7 @@ export default function Test() {
                     <div>
                         Name
                     </div>
-                    <input 
+                    <Input 
                         placeholder="Name"
                         onChange={(e) => setName(e.target.value)}
                     />
@@ -53,7 +53,7 @@ export default function Test() {
                     <div>
                         Date
                     </div>
-                    <input 
+                    <Input 
                         type="date"
                         placeholder="Date"
                         onChange={(e) => setDate(e.target.value)}
@@ -82,7 +82,7 @@ export default function Test() {
                         Title
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <input 
+                        <Input 
                             placeholder="Title"
                             onChange={(e) => setTitle(e.target.value)}
                         />
@@ -145,7 +145,6 @@ export default function Test() {
                     <div>
                         Answer
                         <Input 
-
                             placeholder="Answer"
                             onChange={(e) => setAnswer(e.target.value)}
                         />
@@ -159,7 +158,13 @@ export default function Test() {
             <div>
                 {answer}
             </div>
-            <Button color="blue" style={{ transform: 'translateY(600px)' }}>
+            <div>
+                Student Answer
+                <Input
+                    placeholder="Answer"
+                />
+            </div>
+            <Button color="blue" style={{ transform: 'translateY(300px)' }}>
                 <Icon
                     name="check"
                 />
