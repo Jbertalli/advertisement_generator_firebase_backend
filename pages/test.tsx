@@ -97,6 +97,9 @@ export default function Test() {
             ):(
             <>
                 {title}
+                <Button onClick={() => {setTitle(''), setTitleClicked(false)}}>
+                    Edit
+                </Button>
             </>
             )}
             {newQuestion ? (
