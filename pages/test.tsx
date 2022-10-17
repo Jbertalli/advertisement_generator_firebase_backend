@@ -40,7 +40,10 @@ export default function Test() {
             </>
             ):(
             <>
-                {name}
+                Name: {name}
+                <Button onClick={() => {setName(''), setNameClicked(false)}}>
+                    Edit
+                </Button>
             </>
             )}
             {!dateClicked ? (
@@ -64,7 +67,7 @@ export default function Test() {
             </>
             ):(
             <>
-                {date}
+                Date: {date}
             </>
             )}
             {!titleClicked ? (
