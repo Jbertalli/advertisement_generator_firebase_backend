@@ -1,6 +1,8 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button, Icon, Input, Divider, Container } from 'semantic-ui-react';
+import TestList from '../components/TestList';
+import { v4 as uuidv4 } from 'uuid';    
 
 export default function Test() {
     const [newQuestion, setNewQuestion] = useState<boolean>(true);
@@ -16,8 +18,10 @@ export default function Test() {
     const [correct, setCorrect] = useState<string>('');
     const [score, setScore] = useState<number>(0);
     const [questionNumber, setQuestionNumber] = useState<number>(0);
+    const [testQuestions, setTestQuestions] = useState<any>([]);
+    const questionNameRef = useRef<any>();
 
-    const grade = function () {
+    const grade = function() {
         if (answer == studentAnswer) {
             setCorrect('Correct');
             setScore(score + 1);
@@ -28,8 +32,19 @@ export default function Test() {
         }
     }
 
+    function handleAddQuestion(e) {
+        const quest = questionNameRef.current.value
+        if (quest === '') return 
+        console.log(quest);
+        setTestQuestions(prevQuestions => {
+            return [...prevQuestions, { id: uuidv4(), name: quest }]
+        })
+        questionNameRef.current.value = null;
+    }
+
     return (
         <>
+            <TestList testQuestions={testQuestions} />
             <Head>
                 <title>Test Generator</title>
                 <meta name="description" content="test" />
@@ -157,7 +172,7 @@ export default function Test() {
                 ):(
                 <>
                     <div style={{ transform: 'translateY(20px)' }}>
-                        <span style={{ fontSize: '24px' }}>
+                        <span style={{ fontSize: '35px' }}>
                             <span style={{ fontWeight: '500', display: 'flex', justifyContent: 'center' }}>
                                 <b>
                                     {title}
@@ -178,7 +193,7 @@ export default function Test() {
                 <Divider />
                 {newQuestion ? (
                 <>
-                    <Button onClick={() => {setNewQuestion(false),setQuestionNumber(questionNumber + 1)}}>
+                    <Button onClick={() => {setNewQuestion(false), setQuestionNumber(questionNumber + 1)}}>
                         <Icon
                             name="plus"
                         />
@@ -193,7 +208,10 @@ export default function Test() {
                         />
                         Delete Question
                     </Button>
-                    <Button color="blue">
+                    <Button 
+                        color="blue"
+                        onClick={handleAddQuestion}
+                    >
                         <Icon
                             name="save"
                         />
@@ -223,15 +241,15 @@ export default function Test() {
                     <>
                         <div>
                             Question
-                            <Input
+                            <input
+                                ref={questionNameRef}
                                 placeholder="Question"
                                 onChange={(e) => setQuestion(e.target.value)}
                             />
                         </div>
-                        
                         <div>
                             Answer
-                            <Input 
+                            <input 
                                 placeholder="Answer"
                                 onChange={(e) => setAnswer(e.target.value)}
                             />
@@ -247,7 +265,7 @@ export default function Test() {
                 </div>
                 <div>
                     Student Answer
-                    <Input
+                    <input
                         placeholder="Answer"
                         onChange={(e) => setStudentAnswer(e.target.value)}
                     />
