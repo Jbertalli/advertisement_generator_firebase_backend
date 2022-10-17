@@ -37,7 +37,7 @@ export default function Test() {
             <Container>
                 {!nameClicked ? (
                 <>
-                    <div>
+                    <div style={{ transform: 'translateY(20px)' }}>
                         <h2 style={{ marginBottom: '0px' }}>
                             Name
                         </h2>
@@ -47,26 +47,38 @@ export default function Test() {
                         />
                         {(name.length > 0) ? (
                         <>
-                            <Button onClick= {() => setNameClicked(true)}>
-                                Save
-                            </Button>
+                            <span style={{  display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-37px)' }}>
+                                <Button 
+                                    color="blue"
+                                    onClick= {() => setNameClicked(true)}
+                                >
+                                    Save
+                                </Button>
+                            </span>
                         </>
                         ): null}
                     </div>
                 </>
                 ):(
                 <>
-                    <span style={{ fontSize: '24px' }}>
-                        <span style={{ fontWeight: '500' }}>
-                            Name:{' '} 
+                    <div style={{ transform: 'translateY(25px)' }}>
+                        <span style={{ fontSize: '24px' }}>
+                            <span style={{ fontWeight: '500' }}>
+                                Name:{' '} 
+                            </span>
+                            <span style={{ fontWeight: '300' }}>
+                                {name}
+                            </span>
                         </span>
-                        <span style={{ fontWeight: '300' }}>
-                            {name}
+                        <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-30px)' }}>
+                            <Button 
+                                color="blue"
+                                onClick={() => {setName(''), setNameClicked(false)}}
+                            >
+                                Edit
+                            </Button>
                         </span>
-                    </span>
-                    <Button onClick={() => {setName(''), setNameClicked(false)}}>
-                        Edit
-                    </Button>
+                    </div>
                 </>
                 )}
                 {!dateClicked ? (
