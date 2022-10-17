@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
-import { Button, Icon, Input } from 'semantic-ui-react';
+import { Button, Icon, Input, Divider } from 'semantic-ui-react';
 
 export default function Test() {
     const [newQuestion, setNewQuestion] = useState<boolean>(true);
@@ -13,11 +13,15 @@ export default function Test() {
     const [nameClicked, setNameClicked] = useState<boolean>(false);
     const [dateClicked, setDateClicked] = useState<boolean>(false);
     const [titleClicked, setTitleClicked] = useState<boolean>(false);
+    const [correct, setCorrect] = useState<string>('');
+    const [score, setScore] = useState<number>(0);
 
     const grade = function () {
         if (answer == studentAnswer) {
+            setCorrect('Correct');
             console.log('%c Correct!', 'color: green');
         } else {
+            setCorrect('Incorrect');
             console.log('%c Incorrect.', 'color: red');
         }
     }
@@ -139,6 +143,19 @@ export default function Test() {
                 </Button>
             </>
             )}
+            {(studentAnswer.length > 0) ? (
+            <>
+                <Button 
+                    onClick={() => grade()}
+                    color="blue" 
+                >
+                        <Icon
+                            name="check"
+                        />
+                        Grade
+                </Button>
+            </>
+            ): null}
             <div>
                 {!newQuestion ? (
                 <>
@@ -176,15 +193,13 @@ export default function Test() {
             <div>
                 {studentAnswer}
             </div>
-            <Button 
-                onClick={() => grade()}
-                color="blue" 
-                style={{ transform: 'translateY(300px)' }}>
-                    <Icon
-                        name="check"
-                    />
-                    Grade
-            </Button>
+            <h2>
+                {correct}
+            </h2>
+           <Divider />
+           <div>
+               Grade: 
+           </div>
         </>
     );
 }
