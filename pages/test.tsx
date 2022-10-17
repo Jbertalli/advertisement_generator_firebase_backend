@@ -37,7 +37,7 @@ export default function Test() {
             <Container>
                 {!nameClicked ? (
                 <>
-                    <div style={{ transform: 'translateY(20px)' }}>
+                    <div style={{ transform: 'translateY(20px)', paddingBottom: '20px' }}>
                         <h2 style={{ marginBottom: '0px' }}>
                             Name
                         </h2>
@@ -94,19 +94,38 @@ export default function Test() {
                         />
                         {(date.length > 0) ? (
                         <>
-                            <Button onClick={() => setDateClicked(true)}>
-                                Save
-                            </Button>
+                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-38px)' }}>
+                                <Button 
+                                    color="blue"
+                                    onClick={() => setDateClicked(true)}
+                                >
+                                    Save
+                                </Button>
+                            </span>
                         </>
                         ):null}
                     </div>
                 </>
                 ):(
                 <>
-                    Date: {date}
-                    <Button onClick={() => {setDate(''), setDateClicked(false)}}>
-                        Edit
-                    </Button>
+                    <div style={{ transform: 'translateY(20px)' }}>
+                        <span style={{ fontSize: '24px' }}>
+                            <span style={{ fontWeight: '500' }}>
+                                Date:{' '}
+                            </span>
+                            <span style={{ fontWeight: '300' }}>
+                                {date}
+                            </span>
+                        </span>
+                        <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-32px)' }}>
+                            <Button 
+                                color="blue"
+                                onClick={() => {setDate(''), setDateClicked(false)}}
+                            >
+                                Edit
+                            </Button>
+                        </span>
+                    </div>
                 </>
                 )}
                 {!titleClicked ? (
