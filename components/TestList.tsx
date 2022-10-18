@@ -7,43 +7,45 @@ export default function TestList({ testQuestions, questionNumber }) {
     const questions = testQuestions.map(testQuestions => {
         return (
             <>
-            <div style={{ transform: 'translateY(15px)' }}>
-                <div style={{ fontSize: '30px', paddingBottom: '10px' }}>
-                    <h2>
-                        Question {questionNumber}:{' '}
-                        <span style={{ fontWeight: '100' }}>
-                            {testQuestions.name}
-                        </span>
-                    </h2>
+                <div style={{ transform: 'translateY(20px)' }}>
+                    <div style={{ fontSize: '30px', paddingBottom: '10px' }}>
+                        <h2>
+                            Question {questionNumber}:{' '}
+                            <span style={{ fontWeight: '100' }}>
+                                {testQuestions.name}
+                            </span>
+                        </h2>
+                    </div>
+                    {revealAnswer ? (
+                    <>
+                        <div style={{ fontSize: '20px', color: 'red' }}>
+                            Answer {questionNumber}:{' '}
+                            <span>
+                                {testQuestions.value}
+                            </span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -140%) scale(0.8)' }}>
+                            <Button
+                                color="blue"
+                                onClick={() => setRevealAnswer(false)}
+                            >
+                                Hide Answer
+                            </Button>
+                        </div>
+                    </>
+                    ):(
+                    <>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -120%) scale(0.8)' }}>
+                            <Button
+                                color="blue"
+                                onClick={() => setRevealAnswer(true)}
+                            >
+                                Show Answer
+                            </Button>
+                        </div>
+                    </>
+                    )}
                 </div>
-                {revealAnswer ? (
-                <>
-                    <div style={{ fontSize: '20px', color: 'red' }}>
-                        Answer {questionNumber}:{' '}
-                        <span>
-                            {testQuestions.value}
-                        </span>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -44px) scale(0.8)' }}>
-                        <Button
-                            color="blue"
-                            onClick={() => setRevealAnswer(false)}
-                        >
-                            Hide Answer
-                        </Button>
-                    </div>
-                </>
-                ):(
-                <>
-                    <Button
-                        color="blue"
-                        onClick={() => setRevealAnswer(true)}
-                    >
-                        Show Answer
-                    </Button>
-                </>
-                )}
-            </div>
                 <Divider />
             </>
         )
