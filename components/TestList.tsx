@@ -17,8 +17,11 @@ export default function TestList({ testQuestions, questionNumber }) {
                 </div>
                 {revealAnswer ? (
                 <>
-                    <div>
-                        Answer # {testQuestions.value}
+                    <div style={{ fontSize: '20px', color: 'red' }}>
+                        Answer {questionNumber}:{' '}
+                        <span>
+                            {testQuestions.value}
+                        </span>
                     </div>
                     <Button
                         color="blue"
