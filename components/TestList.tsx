@@ -1,7 +1,8 @@
-import React from 'react';
-import { Divider } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Divider, Button } from 'semantic-ui-react';
 
 export default function TestList({ testQuestions, questionNumber }) {
+    const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
 
     const questions = testQuestions.map(testQuestions => {
         return (
@@ -9,9 +10,28 @@ export default function TestList({ testQuestions, questionNumber }) {
                 <div>
                     Question # {testQuestions.name}
                 </div>
-                <div>
-                    Answer # {testQuestions.value}
-                </div>
+                {revealAnswer ? (
+                <>
+                    <div>
+                        Answer # {testQuestions.value}
+                    </div>
+                    <Button
+                        color="blue"
+                        onClick={() => setRevealAnswer(false)}
+                    >
+                        Hide Answer
+                    </Button>
+                </>
+                ):(
+                <>
+                    <Button
+                        color="blue"
+                        onClick={() => setRevealAnswer(true)}
+                    >
+                        Show Answer
+                    </Button>
+                </>
+                )}
                 <Divider />
             </>
         )
