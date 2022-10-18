@@ -46,14 +46,13 @@ export default function Test() {
         setTestQuestions(prevQuestions => {
             return [...prevQuestions, { id: uuidv4(), name: quest, value: answ }]
         })
-        
+
         questionNameRef.current.value = null;
         answerNameRef.current.value = null;
     }
 
     return (
         <>
-            <TestList testQuestions={testQuestions} questionNumber={questionNumber} />
             <Head>
                 <title>Test Generator</title>
                 <meta name="description" content="test" />
@@ -200,6 +199,7 @@ export default function Test() {
                 </>
                 )}
                 <Divider />
+                <TestList testQuestions={testQuestions} questionNumber={questionNumber} />
                 {newQuestion ? (
                 <>
                     <Button onClick={() => {setNewQuestion(false), setQuestionNumber(questionNumber + 1)}}>
