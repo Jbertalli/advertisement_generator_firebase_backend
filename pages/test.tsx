@@ -20,6 +20,7 @@ export default function Test() {
     const [questionNumber, setQuestionNumber] = useState<number>(0);
     const [testQuestions, setTestQuestions] = useState<any>([]);
     const questionNameRef = useRef<any>();
+    const answerNameRef = useRef<any>();
 
     const grade = function() {
         if (answer == studentAnswer) {
@@ -33,18 +34,26 @@ export default function Test() {
     }
 
     function handleAddQuestion(e) {
-        const quest = questionNameRef.current.value
+        const quest = questionNameRef.current.value;
+        const answ = answerNameRef.current.value;
+
         if (quest === '') return 
+        if (answ === '') return 
+        
         console.log(quest);
+        console.log(answ);
+
         setTestQuestions(prevQuestions => {
-            return [...prevQuestions, { id: uuidv4(), name: quest }]
+            return [...prevQuestions, { id: uuidv4(), name: quest, value: answ }]
         })
+        
         questionNameRef.current.value = null;
+        answerNameRef.current.value = null;
     }
 
     return (
         <>
-            <TestList testQuestions={testQuestions} />
+            <TestList testQuestions={testQuestions} questionNumber={questionNumber} />
             <Head>
                 <title>Test Generator</title>
                 <meta name="description" content="test" />
@@ -250,6 +259,7 @@ export default function Test() {
                         <div>
                             Answer
                             <input 
+                                ref={answerNameRef}
                                 placeholder="Answer"
                                 onChange={(e) => setAnswer(e.target.value)}
                             />
@@ -263,6 +273,7 @@ export default function Test() {
                 <div>
                     {answer}
                 </div>
+                <Divider />
                 <div>
                     Student Answer
                     <input
