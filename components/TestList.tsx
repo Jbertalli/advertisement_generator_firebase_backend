@@ -7,7 +7,8 @@ export default function TestList({ testQuestions, questionNumber }) {
     const questions = testQuestions.map(testQuestions => {
         return (
             <>
-                <div style={{ fontSize: '30px' }}>
+            <div style={{ transform: 'translateY(15px)' }}>
+                <div style={{ fontSize: '30px', paddingBottom: '10px' }}>
                     <h2>
                         Question {questionNumber}:{' '}
                         <span style={{ fontWeight: '100' }}>
@@ -23,12 +24,14 @@ export default function TestList({ testQuestions, questionNumber }) {
                             {testQuestions.value}
                         </span>
                     </div>
-                    <Button
-                        color="blue"
-                        onClick={() => setRevealAnswer(false)}
-                    >
-                        Hide Answer
-                    </Button>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -44px) scale(0.8)' }}>
+                        <Button
+                            color="blue"
+                            onClick={() => setRevealAnswer(false)}
+                        >
+                            Hide Answer
+                        </Button>
+                    </div>
                 </>
                 ):(
                 <>
@@ -40,6 +43,7 @@ export default function TestList({ testQuestions, questionNumber }) {
                     </Button>
                 </>
                 )}
+            </div>
                 <Divider />
             </>
         )
@@ -47,7 +51,7 @@ export default function TestList({ testQuestions, questionNumber }) {
 
     return (
         <>
-            <div>
+            <div style={{ padding: '10px' }}>
                 {questions}
             </div>
         </>
