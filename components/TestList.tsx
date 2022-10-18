@@ -7,8 +7,13 @@ export default function TestList({ testQuestions, questionNumber }) {
     const questions = testQuestions.map(testQuestions => {
         return (
             <>
-                <div>
-                    Question # {testQuestions.name}
+                <div style={{ fontSize: '30px' }}>
+                    <h2>
+                        Question {questionNumber}:{' '}
+                        <span style={{ fontWeight: '100' }}>
+                            {testQuestions.name}
+                        </span>
+                    </h2>
                 </div>
                 {revealAnswer ? (
                 <>
