@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Divider, Button } from 'semantic-ui-react';
+import { Divider, Button, Input } from 'semantic-ui-react';
 
 export default function TestList({ testQuestions, questionNumber, answerNumber }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
@@ -46,6 +46,20 @@ export default function TestList({ testQuestions, questionNumber, answerNumber }
                     </>
                     )}
                 </div>
+                <input
+                    placeholder="Student Answer"
+                    style={{ 
+                        padding: '9px 14px 9px 14px', 
+                        fontSize: '14px', 
+                        fontWeight: '400', 
+                        cursor: 'text', 
+                        width: '178.5px', 
+                        borderRadius: '4px', 
+                        border: '1px solid rgba(34, 36, 38, 0.15)',
+                        position: 'relative', 
+                        zIndex: '100' 
+                    }}
+                />
                 <Divider />
             </>
         )

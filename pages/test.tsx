@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React, { useState, useEffect, useRef } from 'react';
-import { Button, Icon, Input, Divider, Container } from 'semantic-ui-react';
+import { Button, Icon, Divider, Container } from 'semantic-ui-react';
 import TestList from '../components/TestList';
 import { v4 as uuidv4 } from 'uuid';    
 
@@ -68,8 +68,19 @@ export default function Test() {
                         <h2 style={{ marginBottom: '5px' }}>
                             Name
                         </h2>
-                        <Input 
+                        <input 
                             placeholder="Name"
+                            style={{ 
+                                padding: '9px 14px 9px 14px', 
+                                fontSize: '14px', 
+                                fontWeight: '400', 
+                                cursor: 'text', 
+                                width: '178.5px', 
+                                borderRadius: '4px', 
+                                border: '1px solid rgba(34, 36, 38, 0.15)',
+                                position: 'relative',
+                                zIndex: '1000'
+                            }}
                             onChange={(e) => setName(e.target.value)}
                         />
                         {(name.length > 0) ? (
@@ -114,9 +125,20 @@ export default function Test() {
                         <h2 style={{ marginBottom: '5px', marginTop: '20px' }}>
                             Date
                         </h2>
-                        <Input 
+                        <input 
                             type="date"
                             placeholder="Date"
+                            style={{ 
+                                padding: '9px 14px 9px 14px', 
+                                fontSize: '14px', 
+                                fontWeight: '400', 
+                                cursor: 'text', 
+                                width: '178.5px', 
+                                borderRadius: '4px', 
+                                border: '1px solid rgba(34, 36, 38, 0.15)',
+                                position: 'relative',
+                                zIndex: '1000'
+                            }}
                             onChange={(e) => setDate(e.target.value)}
                         />
                         {(date.length > 0) ? (
@@ -162,8 +184,19 @@ export default function Test() {
                             Assignment Title
                         </h2>
                         <div style={{ display: 'flex', justifyContent: 'center' }}>
-                            <Input 
+                            <input 
                                 placeholder="Title"
+                                style={{ 
+                                    padding: '9px 14px 9px 14px', 
+                                    fontSize: '14px', 
+                                    fontWeight: '400', 
+                                    cursor: 'text', 
+                                    width: '178.5px', 
+                                    borderRadius: '4px', 
+                                    border: '1px solid rgba(34, 36, 38, 0.15)',
+                                    position: 'relative',
+                                    zIndex: '1000'
+                                }}
                                 onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
