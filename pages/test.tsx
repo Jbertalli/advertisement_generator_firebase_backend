@@ -61,7 +61,7 @@ export default function Test() {
                 {!nameClicked ? (
                 <>
                     <div style={{ transform: 'translateY(20px)', paddingBottom: '20px' }}>
-                        <h2 style={{ marginBottom: '0px' }}>
+                        <h2 style={{ marginBottom: '5px' }}>
                             Name
                         </h2>
                         <Input 
@@ -107,7 +107,7 @@ export default function Test() {
                 {!dateClicked ? (
                 <>
                     <div>
-                        <h2 style={{ marginBottom: '0px', marginTop: '20px' }}>
+                        <h2 style={{ marginBottom: '5px', marginTop: '20px' }}>
                             Date
                         </h2>
                         <Input 
@@ -154,7 +154,7 @@ export default function Test() {
                 {!titleClicked ? (
                 <>
                     <div>
-                        <h2 style={{ display: 'flex', justifyContent: 'center', marginBottom: '0px', marginTop: '20px' }}>
+                        <h2 style={{ display: 'flex', justifyContent: 'center', marginBottom: '5px', marginTop: '20px' }}>
                             Assignment Title
                         </h2>
                         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -200,9 +200,15 @@ export default function Test() {
                 )}
                 <Divider />
                 <TestList testQuestions={testQuestions} questionNumber={questionNumber} />
+                <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
+                    Create New Questions
+                </h2>
                 {newQuestion ? (
                 <>
-                    <Button onClick={() => {setNewQuestion(false), setQuestionNumber(questionNumber + 1)}}>
+                    <Button 
+                        color="blue"
+                        onClick={() => {setNewQuestion(false), setQuestionNumber(questionNumber + 1)}}
+                    >
                         <Icon
                             name="plus"
                         />
@@ -241,10 +247,6 @@ export default function Test() {
                     </Button>
                 </>
                 ): null}
-                <Divider />
-                <h2>
-                    Question #{questionNumber}
-                </h2>
                 <div>
                     {!newQuestion ? (
                     <>
