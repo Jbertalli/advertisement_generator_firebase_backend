@@ -217,21 +217,23 @@ export default function Test() {
                 </>
                 ):(
                 <>
-                    <Button onClick={() => {setNewQuestion(true), setQuestion(''), setAnswer('')}} color="red">
-                        <Icon
-                            name="plus"
-                        />
-                        Delete Question
-                    </Button>
-                    <Button 
-                        color="blue"
-                        onClick={handleAddQuestion}
-                    >
-                        <Icon
-                            name="save"
-                        />
-                        Save Question
-                    </Button>
+                    <div style={{ paddingBottom: '10px' }}>
+                        <Button onClick={() => {setNewQuestion(true), setQuestion(''), setAnswer('')}} color="red">
+                            <Icon
+                                name="plus"
+                            />
+                            Delete Question
+                        </Button>
+                        <Button 
+                            color="blue"
+                            onClick={handleAddQuestion}
+                        >
+                            <Icon
+                                name="save"
+                            />
+                            Save Question
+                        </Button>
+                    </div>
                 </>
                 )}
                 {(studentAnswer.length > 0 && answer.length > 0) ? (
@@ -250,8 +252,10 @@ export default function Test() {
                 <div>
                     {!newQuestion ? (
                     <>
-                        <div>
-                            Question
+                        <div style={{ paddingBottom: '10px' }}>
+                            <h2 style={{ marginBottom: '5px' }}>
+                                Question
+                            </h2>
                             <input
                                 ref={questionNameRef}
                                 placeholder="Question"
@@ -268,7 +272,9 @@ export default function Test() {
                             />
                         </div>
                         <div>
-                            Answer
+                            <h2 style={{ marginBottom: '5px' }}>
+                                Answer
+                            </h2>
                             <input 
                                 ref={answerNameRef}
                                 placeholder="Answer"
@@ -279,7 +285,8 @@ export default function Test() {
                                     cursor: 'text', 
                                     width: '178.5px', 
                                     borderRadius: '4px', 
-                                    border: '1px solid rgba(34, 36, 38, 0.15)' 
+                                    border: '1px solid rgba(34, 36, 38, 0.15)',
+                                    marginBottom: '10px'
                                 }}
                                 onChange={(e) => setAnswer(e.target.value)}
                             />
@@ -295,7 +302,9 @@ export default function Test() {
                 </div> */}
                 <Divider />
                 <div>
-                    Student Answer
+                    <h2 style={{ marginBottom: '5px' }}>
+                        Student Answer
+                    </h2>
                     <input
                         placeholder="Answer"
                         style={{ 
