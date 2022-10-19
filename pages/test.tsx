@@ -255,6 +255,15 @@ export default function Test() {
                             <input
                                 ref={questionNameRef}
                                 placeholder="Question"
+                                style={{ 
+                                    padding: '9px 14px 9px 14px', 
+                                    fontSize: '14px', 
+                                    fontWeight: '400', 
+                                    cursor: 'text', 
+                                    width: '178.5px', 
+                                    borderRadius: '4px', 
+                                    border: '1px solid rgba(34, 36, 38, 0.15)' 
+                                }}
                                 onChange={(e) => setQuestion(e.target.value)}
                             />
                         </div>
@@ -263,23 +272,41 @@ export default function Test() {
                             <input 
                                 ref={answerNameRef}
                                 placeholder="Answer"
+                                style={{ 
+                                    padding: '9px 14px 9px 14px', 
+                                    fontSize: '14px', 
+                                    fontWeight: '400', 
+                                    cursor: 'text', 
+                                    width: '178.5px', 
+                                    borderRadius: '4px', 
+                                    border: '1px solid rgba(34, 36, 38, 0.15)' 
+                                }}
                                 onChange={(e) => setAnswer(e.target.value)}
                             />
                         </div>
                     </>
                     ): null}
                 </div>
-                <div>
+                {/* <div>
                     {question}
                 </div>
                 <div>
                     {answer}
-                </div>
+                </div> */}
                 <Divider />
                 <div>
                     Student Answer
                     <input
                         placeholder="Answer"
+                        style={{ 
+                            padding: '9px 14px 9px 14px', 
+                            fontSize: '14px', 
+                            fontWeight: '400', 
+                            cursor: 'text', 
+                            width: '178.5px', 
+                            borderRadius: '4px', 
+                            border: '1px solid rgba(34, 36, 38, 0.15)' 
+                        }}
                         onChange={(e) => setStudentAnswer(e.target.value)}
                     />
                 </div>
