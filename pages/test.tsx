@@ -17,7 +17,8 @@ export default function Test() {
     const [titleClicked, setTitleClicked] = useState<boolean>(false);
     const [correct, setCorrect] = useState<string>('');
     const [score, setScore] = useState<number>(0);
-    const [questionNumber, setQuestionNumber] = useState<number>(0);
+    const [questionNumber, setQuestionNumber] = useState<any>(0);
+    const [answerNumber, setAnswerNumber] = useState<any>(0);
     const [testQuestions, setTestQuestions] = useState<any>([]);
     const questionNameRef = useRef<any>();
     const answerNameRef = useRef<any>();
@@ -40,12 +41,15 @@ export default function Test() {
         if (quest === '') return 
         if (answ === '') return 
         
-        console.log(quest);
-        console.log(answ);
+        const id = uuidv4();
 
         setTestQuestions(prevQuestions => {
-            return [...prevQuestions, { id: uuidv4(), name: quest, value: answ }]
+            return [...prevQuestions, { id: id, name: quest, value: answ }]
         })
+
+        // console.log(quest);
+        // console.log(answ);
+        // console.log(id);
 
         questionNameRef.current.value = null;
         answerNameRef.current.value = null;
@@ -199,7 +203,7 @@ export default function Test() {
                 </>
                 )}
                 <Divider />
-                <TestList testQuestions={testQuestions} questionNumber={questionNumber} />
+                <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} />
                 <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
                     Create New Questions
                 </h2>
@@ -207,7 +211,7 @@ export default function Test() {
                 <>
                     <Button 
                         color="blue"
-                        onClick={() => {setNewQuestion(false), setQuestionNumber(questionNumber + 1)}}
+                        onClick={() => setNewQuestion(false)}
                     >
                         <Icon
                             name="plus"
@@ -328,6 +332,9 @@ export default function Test() {
             <Divider />
             <h2 style={{ marginBottom: '5px' }}>
                 Grade: {score}/{score}
+            </h2>
+            <h2>
+                %
             </h2>
            </Container>
         </>

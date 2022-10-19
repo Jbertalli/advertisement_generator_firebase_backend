@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Divider, Button } from 'semantic-ui-react';
 
-export default function TestList({ testQuestions, questionNumber }) {
+export default function TestList({ testQuestions, questionNumber, answerNumber }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
 
     const questions = testQuestions.map(testQuestions => {
@@ -10,7 +10,7 @@ export default function TestList({ testQuestions, questionNumber }) {
                 <div style={{ transform: 'translateY(20px)' }}>
                     <div style={{ fontSize: '30px', paddingBottom: '10px' }}>
                         <h2>
-                            Question {questionNumber}:{' '}
+                            Question #{questionNumber += 1}:{' '}
                             <span style={{ fontWeight: '100' }}>
                                 {testQuestions.name}
                             </span>
@@ -19,7 +19,7 @@ export default function TestList({ testQuestions, questionNumber }) {
                     {revealAnswer ? (
                     <>
                         <div style={{ fontSize: '20px', color: 'red' }}>
-                            Answer {questionNumber}:{' '}
+                            Answer #{answerNumber += 1}:{' '}
                             <span>
                                 {testQuestions.value}
                             </span>
