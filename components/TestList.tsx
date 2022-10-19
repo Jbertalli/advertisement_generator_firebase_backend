@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Divider, Button, Input } from 'semantic-ui-react';
+import { Divider, Button } from 'semantic-ui-react';
+import Grade from '../components/grade';
 
-export default function TestList({ testQuestions, questionNumber, answerNumber }) {
+export default function TestList({ testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
 
     const questions = testQuestions.map(testQuestions => {
+
         return (
             <>
                 <div style={{ transform: 'translateY(20px)' }}>
@@ -59,7 +61,9 @@ export default function TestList({ testQuestions, questionNumber, answerNumber }
                         position: 'relative', 
                         zIndex: '100' 
                     }}
+                    onChange={(e) => setStudentAnswer(e.target.value)}
                 />
+                <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} />
                 <Divider />
             </>
         )

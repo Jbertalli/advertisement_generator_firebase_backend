@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button, Icon, Divider, Container } from 'semantic-ui-react';
 import TestList from '../components/TestList';
 import { v4 as uuidv4 } from 'uuid';    
@@ -236,7 +236,8 @@ export default function Test() {
                 </>
                 )}
                 <Divider />
-                <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} />
+                    <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} answer={answer} setCorrect={setCorrect} score={score} setScore={setScore} correct={correct} />
+                <Divider />
                 <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
                     Create New Questions
                 </h2>
@@ -273,11 +274,11 @@ export default function Test() {
                     </div>
                 </>
                 )}
-                {(studentAnswer.length > 0 && answer.length > 0) ? (
+                {/* {(studentAnswer.length > 0 && answer.length > 0) ? (
                 <>
                     <Button 
-                        onClick={() => grade()}
                         color="blue" 
+                        onClick={() => grade()}
                     >
                             <Icon
                                 name="check"
@@ -285,7 +286,7 @@ export default function Test() {
                             Grade
                     </Button>
                 </>
-                ): null}
+                ): null} */}
                 <div>
                     {!newQuestion ? (
                     <>
@@ -337,8 +338,8 @@ export default function Test() {
                 <div>
                     {answer}
                 </div> */}
-                <Divider />
-                <div>
+                {/* <Divider /> */}
+                {/* <div>
                     <h2 style={{ marginBottom: '5px' }}>
                         Student Answer
                     </h2>
@@ -355,11 +356,11 @@ export default function Test() {
                         }}
                         onChange={(e) => setStudentAnswer(e.target.value)}
                     />
-                </div>
-                <div>
+                </div> */}
+                {/* <div>
                     {studentAnswer}
-                </div>
-                <h2>
+                </div> */}
+                {/* <h2>
                     {correct}
                 </h2>
             <Divider />
@@ -368,7 +369,7 @@ export default function Test() {
             </h2>
             <h2>
                 %
-            </h2>
+            </h2> */}
            </Container>
         </>
     );
