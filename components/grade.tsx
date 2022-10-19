@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 export default function Grade({ testQuestions, studentAnswer }) {
     const [correct, setCorrect] = useState<boolean>(false);
@@ -21,21 +21,35 @@ export default function Grade({ testQuestions, studentAnswer }) {
             >
                 Grade
             </Button>
-            <div>
+            <div style={{ marginTop: '10px' }}>
                 {graded ? (
                 <>
                     {correct ? (
                     <>
-                        Correct
+                        <div style={{ fontSize: '30px', fontWeight: '500', color: 'green' }}>
+                            <Icon
+                                name="check"
+                            />
+                            <span>
+                                Correct
+                            </span>  
+                        </div>
                     </>
                     ):(
                     <>
-                        Incorrect
+                        <div style={{ fontSize: '30px', fontWeight: '500', color: 'red' }}>
+                            <Icon
+                                name="plus"
+                                style={{ transform: 'rotate(45deg)' }}
+                            />
+                            <span>
+                                Incorrect
+                            </span>
+                        </div>
                     </>
                     )}
                 </>
                 ): null}
-                
             </div>
         </>
     );

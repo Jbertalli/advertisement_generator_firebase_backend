@@ -15,8 +15,8 @@ export default function Test() {
     const [nameClicked, setNameClicked] = useState<boolean>(false);
     const [dateClicked, setDateClicked] = useState<boolean>(false);
     const [titleClicked, setTitleClicked] = useState<boolean>(false);
-    const [correct, setCorrect] = useState<string>('');
-    const [score, setScore] = useState<number>(0);
+    // const [correct, setCorrect] = useState<string>('');
+    // const [score, setScore] = useState<number>(0);
     const [questionNumber, setQuestionNumber] = useState<any>(0);
     const [answerNumber, setAnswerNumber] = useState<any>(0);
     const [testQuestions, setTestQuestions] = useState<any>([]);
@@ -236,7 +236,7 @@ export default function Test() {
                 </>
                 )}
                 <Divider />
-                <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} answer={answer} setCorrect={setCorrect} score={score} setScore={setScore} correct={correct} />
+                <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} />
                 <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
                     Create New Questions
                 </h2>
