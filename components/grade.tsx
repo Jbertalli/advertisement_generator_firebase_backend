@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Button } from 'semantic-ui-react';
 
 export default function Grade({ testQuestions, studentAnswer }) {
-    const [correct, setCorrect] = useState(false);
+    const [correct, setCorrect] = useState<boolean>(false);
+    const [graded, setGraded] = useState<boolean>(false);
 
     const grade = function() {
         if (testQuestions.value == studentAnswer) {
@@ -16,20 +17,25 @@ export default function Grade({ testQuestions, studentAnswer }) {
         <>
             <Button
                 color="green"
-                onClick={grade}
+                onClick={() => {grade(), setGraded(true)}}
             >
                 Grade
             </Button>
             <div>
-                {correct ? (
+                {graded ? (
                 <>
-                    Correct
+                    {correct ? (
+                    <>
+                        Correct
+                    </>
+                    ):(
+                    <>
+                        Incorrect
+                    </>
+                    )}
                 </>
-                ):(
-                <>
-                    Incorrect
-                </>
-                )}
+                ): null}
+                
             </div>
         </>
     );

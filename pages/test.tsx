@@ -23,16 +23,16 @@ export default function Test() {
     const questionNameRef = useRef<any>();
     const answerNameRef = useRef<any>();
 
-    const grade = function() {
-        if (answer == studentAnswer) {
-            setCorrect('Correct');
-            setScore(score + 1);
-            console.log('%c Correct!', 'color: green');
-        } else {
-            setCorrect('Incorrect');
-            console.log('%c Incorrect.', 'color: red');
-        }
-    }
+    // const grade = function() {
+    //     if (answer == studentAnswer) {
+    //         setCorrect('Correct');
+    //         setScore(score + 1);
+    //         console.log('%c Correct!', 'color: green');
+    //     } else {
+    //         setCorrect('Incorrect');
+    //         console.log('%c Incorrect.', 'color: red');
+    //     }
+    // }
 
     function handleAddQuestion(e) {
         const quest = questionNameRef.current.value;
@@ -236,8 +236,7 @@ export default function Test() {
                 </>
                 )}
                 <Divider />
-                    <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} answer={answer} setCorrect={setCorrect} score={score} setScore={setScore} correct={correct} />
-                <Divider />
+                <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} answer={answer} setCorrect={setCorrect} score={score} setScore={setScore} correct={correct} />
                 <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
                     Create New Questions
                 </h2>
