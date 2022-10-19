@@ -217,13 +217,7 @@ export default function Test() {
                 </>
                 ):(
                 <>
-                    <div style={{ paddingBottom: '10px' }}>
-                        <Button onClick={() => {setNewQuestion(true), setQuestion(''), setAnswer('')}} color="red">
-                            <Icon
-                                name="plus"
-                            />
-                            Delete Question
-                        </Button>
+                    <div style={{ paddingBottom: '10px', display: 'flex', justifyContent: 'space-around' }}>
                         <Button 
                             color="blue"
                             onClick={handleAddQuestion}
@@ -232,6 +226,12 @@ export default function Test() {
                                 name="save"
                             />
                             Save Question
+                        </Button>
+                        <Button onClick={() => {setNewQuestion(true), setQuestion(''), setAnswer('')}} color="red">
+                            <Icon
+                                name="plus"
+                            />
+                            Delete Question
                         </Button>
                     </div>
                 </>
@@ -326,9 +326,9 @@ export default function Test() {
                     {correct}
                 </h2>
             <Divider />
-            <div>
-                Grade: {score}
-            </div>
+            <h2 style={{ marginBottom: '5px' }}>
+                Grade: {score}/{score}
+            </h2>
            </Container>
         </>
     );
