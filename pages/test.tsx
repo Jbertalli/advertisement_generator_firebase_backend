@@ -80,11 +80,12 @@ export default function Test() {
             setLetterGrade('C-');
         } else if (finalGrade >= 64.5 && finalGrade <= 67.5) {
             setLetterGrade('D');
+        } else if (finalGrade >= 0.0 && finalGrade <= 64.5) {
+            setLetterGrade('F');
         } else {
             return;
         }
     }, [finalGrade])
-    // F 0 - 64.5
 
     return (
         <>
