@@ -432,27 +432,32 @@ export default function Test() {
                     {/* <h2>
                         {correct}
                     </h2> */}
-                    <h2 style={{ marginBottom: '5px' }}>
-                        {(finalGrade) ? (
-                        <>
-                            <Divider />
-                            Grade: {score}/{total}
-                        </>
-                        ): null}
-                    </h2>
-                    <h2>
-                        {(finalGrade).toFixed(2).replace('NaN', '')}
-                        <span>
+                    <div>
+                        <h2 style={{ marginBottom: '5px' }}>
                             {(finalGrade) ? (
                             <>
-                                %
+                                <Divider />
+                                <h1 style={{ display: 'flex', justifyContent: 'center', paddingBottom: '10px' }}>
+                                    Grade Report
+                                </h1>
+                                Grade: {score}/{total}
                             </>
                             ): null}
-                        </span>
-                    </h2>
-                    <h2 style={{ color: `${color}` }}>
-                        {letterGrade}
-                    </h2>
+                        </h2>
+                        <h2>
+                            {(finalGrade).toFixed(2).replace('NaN', '')}
+                            <span>
+                                {(finalGrade) ? (
+                                <>
+                                    %
+                                </>
+                                ): null}
+                            </span>
+                        </h2>
+                        <h2 style={{ color: `${color}`, paddingBottom: '30px' }}>
+                            {letterGrade}
+                        </h2>
+                    </div>
                 </Container>
            </FocusLock>
         </>
