@@ -72,6 +72,8 @@ export default function Test() {
             setLetterGrade('B');
         } else if (finalGrade >= 77.5 && finalGrade <= 81.5) {
             setLetterGrade('B-');
+        } else if (finalGrade >= 74.5 && finalGrade <= 77.5) {
+            setLetterGrade('C+');
         } else {
             return;
         }
