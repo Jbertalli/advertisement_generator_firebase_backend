@@ -102,18 +102,24 @@ export default function Test() {
     }, [finalGrade])
 
     useEffect(() => {
-        if (letterGrade == 'A+' || letterGrade == 'A' || letterGrade == 'A-') {
-            setColor('darkgreen');
-        } else if (letterGrade == 'B+' || letterGrade == 'B' || letterGrade == 'B-') {
-            setColor('green');
-        } else if (letterGrade == 'C+' || letterGrade == 'C' || letterGrade == 'C-') {
-            setColor('yellow');
-        } else if (letterGrade == 'D') {
-            setColor('orange');
-        } else if (letterGrade == 'F') {
-            setColor('red');
-        } else {
-            return;
+        switch(true) {
+            case (letterGrade == 'A+' || letterGrade == 'A' || letterGrade == 'A-'):
+              setColor('darkgreen');
+              break;
+            case (letterGrade == 'B+' || letterGrade == 'B' || letterGrade == 'B-'):
+              setColor('green');
+              break;
+            case (letterGrade == 'C+' || letterGrade == 'C' || letterGrade == 'C-'):
+              setColor('yellow');
+              break;
+            case (letterGrade == 'D'):
+              setColor('orange');
+              break;
+            case (letterGrade == 'F'):
+              setColor('red');
+              break;
+            default:
+               null;
         }
     }, [letterGrade])
 
