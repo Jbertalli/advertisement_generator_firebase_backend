@@ -56,6 +56,8 @@ export default function Test() {
         answerNameRef.current.value = null;
     }
 
+    const finalGrade = ((score / total) * 100).toFixed(2)
+
     return (
         <>
             <Head>
@@ -368,7 +370,7 @@ export default function Test() {
                 Grade: {score}/{total}
             </h2>
             <h2>
-                {((score / total) * 100).toFixed(2)}%
+                {finalGrade}%
             </h2>
            </Container>
         </>
