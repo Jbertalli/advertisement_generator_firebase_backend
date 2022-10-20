@@ -56,7 +56,14 @@ export default function Test() {
         answerNameRef.current.value = null;
     }
 
-    const finalGrade = ((score / total) * 100).toFixed(2)
+    const finalGrade: number = (((score / total) * 100));
+    // console.log(typeof finalGrade);
+    const bracket = {
+        //switch statement
+        if () {
+
+        }
+    }
 
     return (
         <>
@@ -370,7 +377,7 @@ export default function Test() {
                 Grade: {score}/{total}
             </h2>
             <h2>
-                {finalGrade}%
+                {(finalGrade).toFixed(2)}%
             </h2>
            </Container>
         </>
