@@ -62,7 +62,7 @@ export default function Test() {
 
     //switch statement
     useEffect(() => {
-         if (finalGrade >= 91.5 && finalGrade <= 100.0) {
+        if (finalGrade >= 91.5 && finalGrade <= 100.0) {
             setLetterGrade('A');
         } else if (finalGrade >= 88.5 && finalGrade <= 91.5) {
             setLetterGrade('A-');
@@ -78,11 +78,12 @@ export default function Test() {
             setLetterGrade('C');
         } else if (finalGrade >= 67.5 && finalGrade <= 70.5) {
             setLetterGrade('C-');
+        } else if (finalGrade >= 64.5 && finalGrade <= 67.5) {
+            setLetterGrade('D');
         } else {
             return;
         }
     }, [finalGrade])
-    // D 64.5 - 67.5
     // F 0 - 64.5
 
     return (
