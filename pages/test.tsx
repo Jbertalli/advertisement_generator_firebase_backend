@@ -367,9 +367,9 @@ export default function Test() {
             <h2 style={{ marginBottom: '5px' }}>
                 Grade: {score}/{total}
             </h2>
-            {/* <h2>
-                %
-            </h2> */}
+            <h2>
+                {((score / total) * 100).toFixed(2)}%
+            </h2>
            </Container>
         </>
     );
