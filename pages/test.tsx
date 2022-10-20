@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button, Icon, Divider, Container } from 'semantic-ui-react';
 import TestList from '../components/TestList';
 import { v4 as uuidv4 } from 'uuid';    
@@ -21,6 +21,7 @@ export default function Test() {
     const [questionNumber, setQuestionNumber] = useState<any>(0);
     const [answerNumber, setAnswerNumber] = useState<any>(0);
     const [testQuestions, setTestQuestions] = useState<any>([]);
+    const [letterGrade, setLetterGrade] = useState<string>('');
     const questionNameRef = useRef<any>();
     const answerNameRef = useRef<any>();
 
@@ -58,12 +59,32 @@ export default function Test() {
 
     const finalGrade: number = (((score / total) * 100));
     // console.log(typeof finalGrade);
-    const bracket = {
-        //switch statement
-        if () {
 
+    //switch statement
+    useEffect(() => {
+         if (finalGrade >= 91.5 && finalGrade <= 100.0) {
+            setLetterGrade('A');
+        } else {
+            return;
         }
-    }
+    }, [finalGrade])
+
+    // if (finalGrade >= 91.5 && finalGrade <= 100.0) {
+    //     letterGrade = 'A'
+    // } else {
+    //     return;
+    // }
+
+    // A   100.0 - 91.5
+    // A- 88.5 - 91.5
+    // B+ 84.5 - 88.5
+    // B 81.5 - 84.5
+    // B- 77.5 - 81.5
+    // C+ 74.5 - 77.5
+    // C   70.5 - 74.5 
+    // C- 67.5 - 70.5
+    // D 64.5 - 67.5
+    // F 0 - 64.5
 
     return (
         <>
@@ -378,6 +399,9 @@ export default function Test() {
             </h2>
             <h2>
                 {(finalGrade).toFixed(2)}%
+            </h2>
+            <h2>
+                {letterGrade}
             </h2>
            </Container>
         </>
