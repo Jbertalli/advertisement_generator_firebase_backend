@@ -22,6 +22,7 @@ export default function Test() {
     const [answerNumber, setAnswerNumber] = useState<any>(0);
     const [testQuestions, setTestQuestions] = useState<any>([]);
     const [letterGrade, setLetterGrade] = useState<string>('');
+    const [color, setColor] = useState<string>('');
     const questionNameRef = useRef<any>();
     const answerNameRef = useRef<any>();
 
@@ -98,8 +99,23 @@ export default function Test() {
             default:
               null;
         }
-          
     }, [finalGrade])
+
+    useEffect(() => {
+        if (letterGrade == 'A+' || letterGrade == 'A' || letterGrade == 'A-') {
+            setColor('darkgreen');
+        } else if (letterGrade == 'B+' || letterGrade == 'B' || letterGrade == 'B-') {
+            setColor('green');
+        } else if (letterGrade == 'C+' || letterGrade == 'C' || letterGrade == 'C-') {
+            setColor('yellow');
+        } else if (letterGrade == 'D') {
+            setColor('orange');
+        } else if (letterGrade == 'F') {
+            setColor('red');
+        } else {
+            return;
+        }
+    }, [letterGrade])
 
     return (
         <>
@@ -408,16 +424,16 @@ export default function Test() {
                 {/* <h2>
                     {correct}
                 </h2> */}
-            <Divider />
-            <h2 style={{ marginBottom: '5px' }}>
-                Grade: {score}/{total}
-            </h2>
-            <h2>
-                {(finalGrade).toFixed(2)}%
-            </h2>
-            <h2>
-                {letterGrade}
-            </h2>
+                <Divider />
+                <h2 style={{ marginBottom: '5px' }}>
+                    Grade: {score}/{total}
+                </h2>
+                <h2>
+                    {(finalGrade).toFixed(2)}%
+                </h2>
+                <h2 style={{ color: `${color}` }}>
+                    {letterGrade}
+                </h2>
            </Container>
         </>
     );
