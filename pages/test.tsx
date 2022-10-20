@@ -111,10 +111,10 @@ export default function Test() {
               setColor('green');
               break;
             case (letterGrade == 'C+' || letterGrade == 'C' || letterGrade == 'C-'):
-              setColor('yellow');
+              setColor('orange');
               break;
             case (letterGrade == 'D'):
-              setColor('orange');
+              setColor('darkred');
               break;
             case (letterGrade == 'F'):
               setColor('red');
@@ -432,12 +432,23 @@ export default function Test() {
                     {/* <h2>
                         {correct}
                     </h2> */}
-                    <Divider />
                     <h2 style={{ marginBottom: '5px' }}>
-                        Grade: {score}/{total}
+                        {(finalGrade) ? (
+                        <>
+                            <Divider />
+                            Grade: {score}/{total}
+                        </>
+                        ): null}
                     </h2>
                     <h2>
-                        {(finalGrade).toFixed(2)}%
+                        {(finalGrade).toFixed(2).replace('NaN', '')}
+                        <span>
+                            {(finalGrade) ? (
+                            <>
+                                %
+                            </>
+                            ): null}
+                        </span>
                     </h2>
                     <h2 style={{ color: `${color}` }}>
                         {letterGrade}
