@@ -74,11 +74,12 @@ export default function Test() {
             setLetterGrade('B-');
         } else if (finalGrade >= 74.5 && finalGrade <= 77.5) {
             setLetterGrade('C+');
+        } else if (finalGrade >= 70.5 && finalGrade <= 74.5) {
+            setLetterGrade('C');
         } else {
             return;
         }
     }, [finalGrade])
-    // C+ 74.5 - 77.5
     // C   70.5 - 74.5 
     // C- 67.5 - 70.5
     // D 64.5 - 67.5
