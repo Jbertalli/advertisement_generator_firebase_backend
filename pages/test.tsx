@@ -6,7 +6,9 @@ import { v4 as uuidv4 } from 'uuid';
 import FocusLock from 'react-focus-lock';
 
 const LOCAL_STORAGE_KEY_NAME = 'Name';
-const LOCAL_STORAGE_KEY_CLICKNAME = 'ClickName';
+const LOCAL_STORAGE_KEY_CLICK_NAME = 'ClickName';
+const LOCAL_STORAGE_KEY_DATE = 'Date';
+const LOCAL_STORAGE_KEY_CLICK_DATE = 'ClickDate';
 
 export default function Test() {
     const [newQuestion, setNewQuestion] = useState<boolean>(true);
@@ -43,14 +45,36 @@ export default function Test() {
 
     // Name Clicked
     useEffect(() => {
-        const storedClickedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CLICKNAME))
+        const storedClickedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CLICK_NAME))
         if (storedClickedName) setNameClicked(storedClickedName)
       }, [])
     
       useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY_CLICKNAME, 
+        localStorage.setItem(LOCAL_STORAGE_KEY_CLICK_NAME, 
         JSON.stringify(nameClicked))
       }, [nameClicked]);
+
+    // Date
+    useEffect(() => {
+        const storedDate = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_DATE))
+        if (storedDate) setDate(storedDate)
+      }, [])
+    
+      useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_DATE, 
+        JSON.stringify(date))
+      }, [date]);
+
+    // Date Clicked
+    useEffect(() => {
+        const storedClickDate = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CLICK_DATE))
+        if (storedClickDate) setDateClicked(storedClickDate)
+      }, [])
+    
+      useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_CLICK_DATE, 
+        JSON.stringify(dateClicked))
+      }, [dateClicked]);
 
     // const grade = function() {
     //     if (answer == studentAnswer) {
