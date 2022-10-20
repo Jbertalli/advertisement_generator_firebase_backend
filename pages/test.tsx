@@ -9,6 +9,8 @@ const LOCAL_STORAGE_KEY_NAME = 'Name';
 const LOCAL_STORAGE_KEY_CLICK_NAME = 'ClickName';
 const LOCAL_STORAGE_KEY_DATE = 'Date';
 const LOCAL_STORAGE_KEY_CLICK_DATE = 'ClickDate';
+const LOCAL_STORAGE_KEY_TITLE = 'Title';
+const LOCAL_STORAGE_KEY_CLICK_TITLE = 'ClickTitle';
 
 export default function Test() {
     const [newQuestion, setNewQuestion] = useState<boolean>(true);
@@ -75,6 +77,28 @@ export default function Test() {
         localStorage.setItem(LOCAL_STORAGE_KEY_CLICK_DATE, 
         JSON.stringify(dateClicked))
       }, [dateClicked]);
+
+    // Title
+    useEffect(() => {
+        const storedTitle = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TITLE))
+        if (storedTitle) setTitle(storedTitle)
+      }, [])
+    
+      useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_TITLE, 
+        JSON.stringify(title))
+      }, [title]);
+
+    // Title Clicked
+    useEffect(() => {
+        const storedClickTitle = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CLICK_TITLE))
+        if (storedClickTitle) setTitleClicked(storedClickTitle)
+      }, [])
+    
+      useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_CLICK_TITLE, 
+        JSON.stringify(titleClicked))
+      }, [titleClicked]);
 
     // const grade = function() {
     //     if (answer == studentAnswer) {
