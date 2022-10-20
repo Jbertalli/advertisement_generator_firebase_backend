@@ -17,6 +17,7 @@ export default function Test() {
     const [titleClicked, setTitleClicked] = useState<boolean>(false);
     // const [correct, setCorrect] = useState<string>('');
     const [score, setScore] = useState<number>(0);
+    const [total, setTotal] = useState<number>(0);
     const [questionNumber, setQuestionNumber] = useState<any>(0);
     const [answerNumber, setAnswerNumber] = useState<any>(0);
     const [testQuestions, setTestQuestions] = useState<any>([]);
@@ -236,7 +237,7 @@ export default function Test() {
                 </>
                 )}
                 <Divider />
-                <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} />
+                <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
                 <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
                     Create New Questions
                 </h2>
@@ -364,7 +365,7 @@ export default function Test() {
                 </h2> */}
             <Divider />
             <h2 style={{ marginBottom: '5px' }}>
-                Grade: {score}/{score}
+                Grade: {score}/{total}
             </h2>
             {/* <h2>
                 %

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 
-export default function Grade({ testQuestions, studentAnswer, score, setScore }) {
+export default function Grade({ testQuestions, studentAnswer, score, setScore, total, setTotal }) {
     const [correct, setCorrect] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [graded, setGraded] = useState<boolean>(false);
@@ -25,11 +25,11 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore })
         <>
             {submitted ? (
             <>
-                <Button
+                {/* <Button
                     color="blue"
                 >
                     Submit
-                </Button>
+                </Button> */}
             </>
             ):(
             <>
@@ -37,7 +37,7 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore })
                 <>
                     <Button
                         color="red"
-                        onClick={() => setGradeClicked(false)}
+                        onClick={() => {setGradeClicked(false), setTotal(total - 1)}}
                     >
                         Redo Grade
                     </Button>
@@ -46,7 +46,7 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore })
                 <>
                     <Button
                         color="green"
-                        onClick={() => {grade(), setGraded(true), setGradeClicked(true)}}
+                        onClick={() => {grade(), setGraded(true), setGradeClicked(true), setTotal(total + 1)}}
                     >
                         Grade
                     </Button>
