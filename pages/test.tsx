@@ -64,18 +64,12 @@ export default function Test() {
     useEffect(() => {
          if (finalGrade >= 91.5 && finalGrade <= 100.0) {
             setLetterGrade('A');
+        } else if (finalGrade >= 88.5 && finalGrade <= 91.5) {
+            setLetterGrade('A-');
         } else {
             return;
         }
     }, [finalGrade])
-
-    // if (finalGrade >= 91.5 && finalGrade <= 100.0) {
-    //     letterGrade = 'A'
-    // } else {
-    //     return;
-    // }
-
-    // A   100.0 - 91.5
     // A- 88.5 - 91.5
     // B+ 84.5 - 88.5
     // B 81.5 - 84.5
