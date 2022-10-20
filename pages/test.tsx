@@ -60,60 +60,39 @@ export default function Test() {
     const finalGrade: number = (((score / total) * 100));
     // console.log(typeof finalGrade);
 
-    //switch statement
     useEffect(() => {
-        // if (finalGrade >= 91.5 && finalGrade <= 100.0) {
-        //     setLetterGrade('A');
-        // } else if (finalGrade >= 88.5 && finalGrade <= 91.5) {
-        //     setLetterGrade('A-');
-        // } else if (finalGrade >= 84.5 && finalGrade <= 88.5) {
-        //     setLetterGrade('B+');
-        // } else if (finalGrade >= 81.5 && finalGrade <= 84.5) {
-        //     setLetterGrade('B');
-        // } else if (finalGrade >= 77.5 && finalGrade <= 81.5) {
-        //     setLetterGrade('B-');
-        // } else if (finalGrade >= 74.5 && finalGrade <= 77.5) {
-        //     setLetterGrade('C+');
-        // } else if (finalGrade >= 70.5 && finalGrade <= 74.5) {
-        //     setLetterGrade('C');
-        // } else if (finalGrade >= 67.5 && finalGrade <= 70.5) {
-        //     setLetterGrade('C-');
-        // } else if (finalGrade >= 64.5 && finalGrade <= 67.5) {
-        //     setLetterGrade('D');
-        // } else if (finalGrade >= 0.0 && finalGrade <= 64.5) {
-        //     setLetterGrade('F');
-        // } else {
-        //     return;
-        // }
         switch(true) {
-            case (finalGrade >= 91.5 && finalGrade <= 100.0):
+            case (finalGrade >= 96.67 && finalGrade <= 100.0):
+              setLetterGrade('A+');
+              break;
+            case (finalGrade >= 93.33 && finalGrade <= 96.67):
               setLetterGrade('A');
               break;
-            case (finalGrade >= 88.5 && finalGrade <= 91.5):
+            case (finalGrade >= 90.0 && finalGrade <= 93.33):
               setLetterGrade('A-');
               break;
-            case (finalGrade >= 84.5 && finalGrade <= 88.5):
+            case (finalGrade >= 86.67 && finalGrade <= 90.0):
               setLetterGrade('B+');
               break;
-            case (finalGrade >= 81.5 && finalGrade <= 84.5):
+            case (finalGrade >= 83.33 && finalGrade <= 86.67):
               setLetterGrade('B');
               break;
-            case (finalGrade >= 77.5 && finalGrade <= 81.5):
+            case (finalGrade >= 80.0 && finalGrade <= 83.33):
               setLetterGrade('B-');
               break;
-            case (finalGrade >= 74.5 && finalGrade <= 77.5):
+            case (finalGrade >= 76.67 && finalGrade <= 80.0):
               setLetterGrade('C+');
               break;
-            case (finalGrade >= 70.5 && finalGrade <= 74.5):
+            case (finalGrade >= 73.33 && finalGrade <= 76.67):
               setLetterGrade('C');
               break;
-            case (finalGrade >= 67.5 && finalGrade <= 70.5):
+            case (finalGrade >= 70.0 && finalGrade <= 73.33):
               setLetterGrade('C-');
               break;
-            case (finalGrade >= 64.5 && finalGrade <= 67.5):
+            case (finalGrade >= 60.0 && finalGrade <= 70.0):
               setLetterGrade('D');
               break;
-            case (finalGrade >= 0.0 && finalGrade <= 64.5):
+            case (finalGrade >= 0.0 && finalGrade <= 60.0):
               setLetterGrade('F');
               break;
             default:
