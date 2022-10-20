@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button, Icon, Divider, Container } from 'semantic-ui-react';
 import TestList from '../components/TestList';
 import { v4 as uuidv4 } from 'uuid';    
+import FocusLock from 'react-focus-lock';
 
 export default function Test() {
     const [newQuestion, setNewQuestion] = useState<boolean>(true);
@@ -129,131 +130,16 @@ export default function Test() {
                 <title>Test Generator</title>
                 <meta name="description" content="test" />
             </Head>
-            <Container>
-                {!nameClicked ? (
-                <>
-                    <div style={{ transform: 'translateY(20px)', paddingBottom: '20px' }}>
-                        <h2 style={{ marginBottom: '5px' }}>
-                            Name
-                        </h2>
-                        <input 
-                            placeholder="Name"
-                            style={{ 
-                                padding: '9px 14px 9px 14px', 
-                                fontSize: '14px', 
-                                fontWeight: '400', 
-                                cursor: 'text', 
-                                width: '178.5px', 
-                                borderRadius: '4px', 
-                                border: '1px solid rgba(34, 36, 38, 0.15)',
-                                position: 'relative',
-                                zIndex: '1000'
-                            }}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                        {(name.length > 0) ? (
-                        <>
-                            <span style={{  display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-37px)' }}>
-                                <Button 
-                                    color="blue"
-                                    onClick= {() => setNameClicked(true)}
-                                >
-                                    Save
-                                </Button>
-                            </span>
-                        </>
-                        ): null}
-                    </div>
-                </>
-                ):(
-                <>
-                    <div style={{ transform: 'translateY(25px)' }}>
-                        <span style={{ fontSize: '24px' }}>
-                            <span style={{ fontWeight: '500' }}>
-                                Name:{' '} 
-                            </span>
-                            <span style={{ fontWeight: '300' }}>
-                                {name}
-                            </span>
-                        </span>
-                        <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-30px)' }}>
-                            <Button 
-                                color="blue"
-                                onClick={() => {setName(''), setNameClicked(false)}}
-                            >
-                                Edit
-                            </Button>
-                        </span>
-                    </div>
-                </>
-                )}
-                {!dateClicked ? (
-                <>
-                    <div>
-                        <h2 style={{ marginBottom: '5px', marginTop: '20px' }}>
-                            Date
-                        </h2>
-                        <input 
-                            type="date"
-                            placeholder="Date"
-                            style={{ 
-                                padding: '9px 14px 9px 14px', 
-                                fontSize: '14px', 
-                                fontWeight: '400', 
-                                cursor: 'text', 
-                                width: '178.5px', 
-                                borderRadius: '4px', 
-                                border: '1px solid rgba(34, 36, 38, 0.15)',
-                                position: 'relative',
-                                zIndex: '1000'
-                            }}
-                            onChange={(e) => setDate(e.target.value)}
-                        />
-                        {(date.length > 0) ? (
-                        <>
-                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-38px)' }}>
-                                <Button 
-                                    color="blue"
-                                    onClick={() => setDateClicked(true)}
-                                >
-                                    Save
-                                </Button>
-                            </span>
-                        </>
-                        ):null}
-                    </div>
-                </>
-                ):(
-                <>
-                    <div style={{ transform: 'translateY(20px)' }}>
-                        <span style={{ fontSize: '24px' }}>
-                            <span style={{ fontWeight: '500' }}>
-                                Date:{' '}
-                            </span>
-                            <span style={{ fontWeight: '300' }}>
-                                {date}
-                            </span>
-                        </span>
-                        <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-32px)' }}>
-                            <Button 
-                                color="blue"
-                                onClick={() => {setDate(''), setDateClicked(false)}}
-                            >
-                                Edit
-                            </Button>
-                        </span>
-                    </div>
-                </>
-                )}
-                {!titleClicked ? (
-                <>
-                    <div>
-                        <h2 style={{ display: 'flex', justifyContent: 'center', marginBottom: '5px', marginTop: '20px' }}>
-                            Assignment Title
-                        </h2>
-                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <FocusLock>
+                <Container>
+                    {!nameClicked ? (
+                    <>
+                        <div style={{ transform: 'translateY(20px)', paddingBottom: '20px' }}>
+                            <h2 style={{ marginBottom: '5px' }}>
+                                Name
+                            </h2>
                             <input 
-                                placeholder="Title"
+                                placeholder="Name"
                                 style={{ 
                                     padding: '9px 14px 9px 14px', 
                                     fontSize: '14px', 
@@ -265,124 +151,53 @@ export default function Test() {
                                     position: 'relative',
                                     zIndex: '1000'
                                 }}
-                                onChange={(e) => setTitle(e.target.value)}
+                                onChange={(e) => setName(e.target.value)}
                             />
+                            {(name.length > 0) ? (
+                            <>
+                                <span style={{  display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-37px)' }}>
+                                    <Button 
+                                        color="blue"
+                                        onClick= {() => setNameClicked(true)}
+                                    >
+                                        Save
+                                    </Button>
+                                </span>
+                            </>
+                            ): null}
                         </div>
-                        {(title.length > 0) ? (
-                        <>
-                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-37px)' }}>
+                    </>
+                    ):(
+                    <>
+                        <div style={{ transform: 'translateY(25px)' }}>
+                            <span style={{ fontSize: '24px' }}>
+                                <span style={{ fontWeight: '500' }}>
+                                    Name:{' '} 
+                                </span>
+                                <span style={{ fontWeight: '300' }}>
+                                    {name}
+                                </span>
+                            </span>
+                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-30px)' }}>
                                 <Button 
                                     color="blue"
-                                    onClick={() => setTitleClicked(true)}
+                                    onClick={() => {setName(''), setNameClicked(false)}}
                                 >
-                                    Save
+                                    Edit
                                 </Button>
                             </span>
-                        </>
-                        ): null}
-                    </div>
-                </>
-                ):(
-                <>
-                    <div style={{ transform: 'translateY(20px)' }}>
-                        <span style={{ fontSize: '35px' }}>
-                            <span style={{ fontWeight: '500', display: 'flex', justifyContent: 'center' }}>
-                                <b>
-                                    {title}
-                                </b>
-                            </span>
-                        </span>
-                        <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-32px)' }}>
-                            <Button 
-                                color="blue"
-                                onClick={() => {setTitle(''), setTitleClicked(false)}}
-                            >
-                                Edit
-                            </Button>
-                        </span>
-                    </div>
-                </>
-                )}
-                <Divider />
-                <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
-                <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
-                    Create New Questions
-                </h2>
-                {newQuestion ? (
-                <>
-                    <Button 
-                        color="blue"
-                        onClick={() => setNewQuestion(false)}
-                    >
-                        <Icon
-                            name="plus"
-                        />
-                        Add Question
-                    </Button>
-                </>
-                ):(
-                <>
-                    <div style={{ paddingBottom: '10px', display: 'flex', justifyContent: 'space-around' }}>
-                        <Button 
-                            color="blue"
-                            onClick={handleAddQuestion}
-                        >
-                            <Icon
-                                name="save"
-                            />
-                            Save Question
-                        </Button>
-                        <Button onClick={() => {setNewQuestion(true), setQuestion(''), setAnswer('')}} color="red">
-                            <Icon
-                                name="plus"
-                            />
-                            Delete Question
-                        </Button>
-                    </div>
-                </>
-                )}
-                {/* {(studentAnswer.length > 0 && answer.length > 0) ? (
-                <>
-                    <Button 
-                        color="blue" 
-                        onClick={() => grade()}
-                    >
-                            <Icon
-                                name="check"
-                            />
-                            Grade
-                    </Button>
-                </>
-                ): null} */}
-                <div>
-                    {!newQuestion ? (
-                    <>
-                        <div style={{ paddingBottom: '10px' }}>
-                            <h2 style={{ marginBottom: '5px' }}>
-                                Question
-                            </h2>
-                            <input
-                                ref={questionNameRef}
-                                placeholder="Question"
-                                style={{ 
-                                    padding: '9px 14px 9px 14px', 
-                                    fontSize: '14px', 
-                                    fontWeight: '400', 
-                                    cursor: 'text', 
-                                    width: '178.5px', 
-                                    borderRadius: '4px', 
-                                    border: '1px solid rgba(34, 36, 38, 0.15)' 
-                                }}
-                                onChange={(e) => setQuestion(e.target.value)}
-                            />
                         </div>
+                    </>
+                    )}
+                    {!dateClicked ? (
+                    <>
                         <div>
-                            <h2 style={{ marginBottom: '5px' }}>
-                                Answer
+                            <h2 style={{ marginBottom: '5px', marginTop: '20px' }}>
+                                Date
                             </h2>
                             <input 
-                                ref={answerNameRef}
-                                placeholder="Answer"
+                                type="date"
+                                placeholder="Date"
                                 style={{ 
                                     padding: '9px 14px 9px 14px', 
                                     fontSize: '14px', 
@@ -391,56 +206,244 @@ export default function Test() {
                                     width: '178.5px', 
                                     borderRadius: '4px', 
                                     border: '1px solid rgba(34, 36, 38, 0.15)',
-                                    marginBottom: '10px'
+                                    position: 'relative',
+                                    zIndex: '1000'
                                 }}
-                                onChange={(e) => setAnswer(e.target.value)}
+                                onChange={(e) => setDate(e.target.value)}
                             />
+                            {(date.length > 0) ? (
+                            <>
+                                <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-38px)' }}>
+                                    <Button 
+                                        color="blue"
+                                        onClick={() => setDateClicked(true)}
+                                    >
+                                        Save
+                                    </Button>
+                                </span>
+                            </>
+                            ):null}
                         </div>
                     </>
-                    ): null}
-                </div>
-                {/* <div>
-                    {question}
-                </div>
-                <div>
-                    {answer}
-                </div> */}
-                {/* <Divider /> */}
-                {/* <div>
-                    <h2 style={{ marginBottom: '5px' }}>
-                        Student Answer
+                    ):(
+                    <>
+                        <div style={{ transform: 'translateY(20px)' }}>
+                            <span style={{ fontSize: '24px' }}>
+                                <span style={{ fontWeight: '500' }}>
+                                    Date:{' '}
+                                </span>
+                                <span style={{ fontWeight: '300' }}>
+                                    {date}
+                                </span>
+                            </span>
+                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-32px)' }}>
+                                <Button 
+                                    color="blue"
+                                    onClick={() => {setDate(''), setDateClicked(false)}}
+                                >
+                                    Edit
+                                </Button>
+                            </span>
+                        </div>
+                    </>
+                    )}
+                    {!titleClicked ? (
+                    <>
+                        <div>
+                            <h2 style={{ display: 'flex', justifyContent: 'center', marginBottom: '5px', marginTop: '20px' }}>
+                                Assignment Title
+                            </h2>
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <input 
+                                    placeholder="Title"
+                                    style={{ 
+                                        padding: '9px 14px 9px 14px', 
+                                        fontSize: '14px', 
+                                        fontWeight: '400', 
+                                        cursor: 'text', 
+                                        width: '178.5px', 
+                                        borderRadius: '4px', 
+                                        border: '1px solid rgba(34, 36, 38, 0.15)',
+                                        position: 'relative',
+                                        zIndex: '1000'
+                                    }}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                />
+                            </div>
+                            {(title.length > 0) ? (
+                            <>
+                                <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-37px)' }}>
+                                    <Button 
+                                        color="blue"
+                                        onClick={() => setTitleClicked(true)}
+                                    >
+                                        Save
+                                    </Button>
+                                </span>
+                            </>
+                            ): null}
+                        </div>
+                    </>
+                    ):(
+                    <>
+                        <div style={{ transform: 'translateY(20px)' }}>
+                            <span style={{ fontSize: '35px' }}>
+                                <span style={{ fontWeight: '500', display: 'flex', justifyContent: 'center' }}>
+                                    <b>
+                                        {title}
+                                    </b>
+                                </span>
+                            </span>
+                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-32px)' }}>
+                                <Button 
+                                    color="blue"
+                                    onClick={() => {setTitle(''), setTitleClicked(false)}}
+                                >
+                                    Edit
+                                </Button>
+                            </span>
+                        </div>
+                    </>
+                    )}
+                    <Divider />
+                    <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
+                    <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
+                        Create New Questions
                     </h2>
-                    <input
-                        placeholder="Answer"
-                        style={{ 
-                            padding: '9px 14px 9px 14px', 
-                            fontSize: '14px', 
-                            fontWeight: '400', 
-                            cursor: 'text', 
-                            width: '178.5px', 
-                            borderRadius: '4px', 
-                            border: '1px solid rgba(34, 36, 38, 0.15)' 
-                        }}
-                        onChange={(e) => setStudentAnswer(e.target.value)}
-                    />
-                </div> */}
-                {/* <div>
-                    {studentAnswer}
-                </div> */}
-                {/* <h2>
-                    {correct}
-                </h2> */}
-                <Divider />
-                <h2 style={{ marginBottom: '5px' }}>
-                    Grade: {score}/{total}
-                </h2>
-                <h2>
-                    {(finalGrade).toFixed(2)}%
-                </h2>
-                <h2 style={{ color: `${color}` }}>
-                    {letterGrade}
-                </h2>
-           </Container>
+                    {newQuestion ? (
+                    <>
+                        <Button 
+                            color="blue"
+                            onClick={() => setNewQuestion(false)}
+                        >
+                            <Icon
+                                name="plus"
+                            />
+                            Add Question
+                        </Button>
+                    </>
+                    ):(
+                    <>
+                        <div style={{ paddingBottom: '10px', display: 'flex', justifyContent: 'space-around' }}>
+                            <Button 
+                                color="blue"
+                                onClick={handleAddQuestion}
+                            >
+                                <Icon
+                                    name="save"
+                                />
+                                Save Question
+                            </Button>
+                            <Button onClick={() => {setNewQuestion(true), setQuestion(''), setAnswer('')}} color="red">
+                                <Icon
+                                    name="plus"
+                                />
+                                Delete Question
+                            </Button>
+                        </div>
+                    </>
+                    )}
+                    {/* {(studentAnswer.length > 0 && answer.length > 0) ? (
+                    <>
+                        <Button 
+                            color="blue" 
+                            onClick={() => grade()}
+                        >
+                                <Icon
+                                    name="check"
+                                />
+                                Grade
+                        </Button>
+                    </>
+                    ): null} */}
+                    <div>
+                        {!newQuestion ? (
+                        <>
+                            <div style={{ paddingBottom: '10px' }}>
+                                <h2 style={{ marginBottom: '5px' }}>
+                                    Question
+                                </h2>
+                                <input
+                                    ref={questionNameRef}
+                                    placeholder="Question"
+                                    style={{ 
+                                        padding: '9px 14px 9px 14px', 
+                                        fontSize: '14px', 
+                                        fontWeight: '400', 
+                                        cursor: 'text', 
+                                        width: '178.5px', 
+                                        borderRadius: '4px', 
+                                        border: '1px solid rgba(34, 36, 38, 0.15)' 
+                                    }}
+                                    onChange={(e) => setQuestion(e.target.value)}
+                                />
+                            </div>
+                            <div>
+                                <h2 style={{ marginBottom: '5px' }}>
+                                    Answer
+                                </h2>
+                                <input 
+                                    ref={answerNameRef}
+                                    placeholder="Answer"
+                                    style={{ 
+                                        padding: '9px 14px 9px 14px', 
+                                        fontSize: '14px', 
+                                        fontWeight: '400', 
+                                        cursor: 'text', 
+                                        width: '178.5px', 
+                                        borderRadius: '4px', 
+                                        border: '1px solid rgba(34, 36, 38, 0.15)',
+                                        marginBottom: '10px'
+                                    }}
+                                    onChange={(e) => setAnswer(e.target.value)}
+                                />
+                            </div>
+                        </>
+                        ): null}
+                    </div>
+                    {/* <div>
+                        {question}
+                    </div>
+                    <div>
+                        {answer}
+                    </div> */}
+                    {/* <Divider /> */}
+                    {/* <div>
+                        <h2 style={{ marginBottom: '5px' }}>
+                            Student Answer
+                        </h2>
+                        <input
+                            placeholder="Answer"
+                            style={{ 
+                                padding: '9px 14px 9px 14px', 
+                                fontSize: '14px', 
+                                fontWeight: '400', 
+                                cursor: 'text', 
+                                width: '178.5px', 
+                                borderRadius: '4px', 
+                                border: '1px solid rgba(34, 36, 38, 0.15)' 
+                            }}
+                            onChange={(e) => setStudentAnswer(e.target.value)}
+                        />
+                    </div> */}
+                    {/* <div>
+                        {studentAnswer}
+                    </div> */}
+                    {/* <h2>
+                        {correct}
+                    </h2> */}
+                    <Divider />
+                    <h2 style={{ marginBottom: '5px' }}>
+                        Grade: {score}/{total}
+                    </h2>
+                    <h2>
+                        {(finalGrade).toFixed(2)}%
+                    </h2>
+                    <h2 style={{ color: `${color}` }}>
+                        {letterGrade}
+                    </h2>
+                </Container>
+           </FocusLock>
         </>
     );
 }
