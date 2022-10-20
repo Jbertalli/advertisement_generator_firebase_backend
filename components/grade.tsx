@@ -1,26 +1,59 @@
 import React, { useState } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 
-export default function Grade({ testQuestions, studentAnswer }) {
+export default function Grade({ testQuestions, studentAnswer, score, setScore }) {
     const [correct, setCorrect] = useState<boolean>(false);
+    const [submitted, setSubmitted] = useState<boolean>(false);
     const [graded, setGraded] = useState<boolean>(false);
+    const [gradeClicked, setGradeClicked] = useState<boolean>(false);
 
     const grade = function() {
         if (testQuestions.value == studentAnswer) {
             setCorrect(true);
+            setScore(score + 1)
         } else {
             setCorrect(false);
+            setScore(score);
         }
     }
 
+    // console.log(testQuestions.value);
+    // console.log(studentAnswer);
+    console.log(score);
+
     return (
         <>
-            <Button
-                color="green"
-                onClick={() => {grade(), setGraded(true)}}
-            >
-                Grade
-            </Button>
+            {submitted ? (
+            <>
+                <Button
+                    color="blue"
+                >
+                    Submit
+                </Button>
+            </>
+            ):(
+            <>
+                {gradeClicked ? (
+                <>
+                    <Button
+                        color="red"
+                        onClick={() => setGradeClicked(false)}
+                    >
+                        Redo Grade
+                    </Button>
+                </>
+                ):(
+                <>
+                    <Button
+                        color="green"
+                        onClick={() => {grade(), setGraded(true), setGradeClicked(true)}}
+                    >
+                        Grade
+                    </Button>
+                </>
+                )}
+            </>
+            )}
             <div style={{ marginTop: '10px' }}>
                 {graded ? (
                 <>

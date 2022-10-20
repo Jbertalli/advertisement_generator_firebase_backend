@@ -2,13 +2,47 @@ import React, { useState } from 'react';
 import { Divider, Button } from 'semantic-ui-react';
 import Grade from '../components/grade';
 
-export default function TestList({ testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer }) {
+export default function TestList({ testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
+
+    // let a = studentAnswer;
+    // console.log(a);
+
+    // const [goals, setGoals] = useState<any>([]);
+
+    // if (studentAnswer > 0) {
+    //     for (let i = 0; i < studentAnswer.length; i++) {
+            
+    //     }
+    //     console.log((studentAnswer.length <= 1) ? '1 goal' : `%c ${studentAnswer.length} studentAnswer`, 'color: green');
+    // } else {
+    //     console.log('%c no studentAnswer', 'color: red');
+    // }
+
+    // let counting = [];
+
+    // for (let i = 0; i < studentAnswer.length; i++) {
+    //     counting.push([studentAnswer]);
+    // }
+
+    // function addAll(e) {
+    //   const arr = counting.flat();
+    //   setGoals(prevGoals => {
+    //       return [...prevGoals, { arr: arr }]
+    //   })
+    // }
+
+    // console.log(goals);
 
     const questions = testQuestions.map(testQuestions => {
 
         return (
-            <>
+            <>  
+            {/* <Button
+                onClick={addAll}
+            >
+                Add all
+            </Button> */}
                 <div style={{ transform: 'translateY(20px)' }}>
                     <div style={{ fontSize: '30px', paddingBottom: '10px' }}>
                         <h2>
@@ -63,7 +97,7 @@ export default function TestList({ testQuestions, questionNumber, answerNumber, 
                     }}
                     onChange={(e) => setStudentAnswer(e.target.value)}
                 />
-                <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} />
+                <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} score={score} setScore={setScore} />
                 <Divider />
             </>
         )
