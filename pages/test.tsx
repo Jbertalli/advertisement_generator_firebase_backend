@@ -5,6 +5,9 @@ import TestList from '../components/TestList';
 import { v4 as uuidv4 } from 'uuid';    
 import FocusLock from 'react-focus-lock';
 
+const LOCAL_STORAGE_KEY_NAME = 'Name';
+const LOCAL_STORAGE_KEY_CLICKNAME = 'ClickName';
+
 export default function Test() {
     const [newQuestion, setNewQuestion] = useState<boolean>(true);
     const [question, setQuestion] = useState<string>('');
@@ -26,6 +29,28 @@ export default function Test() {
     const [color, setColor] = useState<string>('');
     const questionNameRef = useRef<any>();
     const answerNameRef = useRef<any>();
+
+    // Name
+    useEffect(() => {
+        const storedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NAME))
+        if (storedName) setName(storedName)
+      }, [])
+    
+      useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_NAME, 
+        JSON.stringify(name))
+      }, [name]);
+
+    // Name Clicked
+    useEffect(() => {
+        const storedClickedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CLICKNAME))
+        if (storedClickedName) setNameClicked(storedClickedName)
+      }, [])
+    
+      useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_CLICKNAME, 
+        JSON.stringify(nameClicked))
+      }, [nameClicked]);
 
     // const grade = function() {
     //     if (answer == studentAnswer) {
