@@ -116,22 +116,21 @@ export default function Authentication() {
   }, [])
 
    // access to window or document object 
-  if (typeof window !== "undefined") {
+  
     useEffect(() => {
-      console.log(document.cookie.length);
-      if (document.cookie.length > 6) {
-        console.log('Authenticated!')
-      } else if (document.cookie.length == 5) {
-        router.push('/');
+      if (typeof window !== "undefined") {
+        console.log(document.cookie.length);
+        if (document.cookie.length > 6) {
+          console.log('Authenticated!')
+        } else if (document.cookie.length == 5) {
+          router.push('/');
+        } else {
+          return null;
+        }
       } else {
-        return null;
+        console.log('window == undefined');
       }
     }, [])
-
-  // if (document.cookie.length == 5) {
-  //   return null;
-  // }
-}
 
 // console.log(document.cookie.length);
 
@@ -260,7 +259,7 @@ export default function Authentication() {
                       </div>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', color: '#808080' }}>
-                      Don't have an account?&nbsp;<a onClick={() => {setAccount(false), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Signup</a>
+                      {`Don't have an account?`}&nbsp;<a onClick={() => {setAccount(false), setEmail(""), setPassword("")}} style={{ cursor: 'pointer', color: '#125CA1' }}>Signup</a>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', padding: '20px 0px 30px' }}>
                       <input type="submit" value="Login" className={styles.buttons} />

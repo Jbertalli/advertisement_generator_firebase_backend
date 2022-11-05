@@ -71,8 +71,8 @@ export default function Home() {
 
   // console.log(router.pathname);
 
-  if (typeof window !== "undefined") {
-    useEffect(() => {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
       console.log(document.cookie.length);
       if (document.cookie.length > 6) {
         console.log('Authenticated!')
@@ -81,8 +81,10 @@ export default function Home() {
       } else {
         return null;
       }
-    }, [])
-  }
+    } else {
+      console.log('window == undefined');
+    }
+  }, [])
 
   return (
     <>
