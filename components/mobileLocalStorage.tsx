@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../store';
 
 const LOCAL_STORAGE_KEY_NAME_MOBILE = 'CompanyNameMobile';
 const LOCAL_STORAGE_KEY_DESCRIPTION_MOBILE = 'AdvertisementDescriptionMobile';
 
-export default function Local({ company, setCompany, description, setDescription }) {
-    
+export default function Local({ setCompany, description, setDescription }) {
+  
+    const companyName = useSelector((state: RootState) => state.company.value);
+
     // Company name
     useEffect(() => {
         const storedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NAME_MOBILE))
@@ -13,8 +17,8 @@ export default function Local({ company, setCompany, description, setDescription
     
       useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_NAME_MOBILE, 
-        JSON.stringify(company))
-      }, [company]);
+        JSON.stringify(companyName))
+      }, [companyName]);
 
     //Advertisement Description
     useEffect(() => {

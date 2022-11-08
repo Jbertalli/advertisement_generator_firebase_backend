@@ -7,13 +7,16 @@ import Local from '../components/mobileLocalStorage';
 // import firebase from '../firebase/clientApp';
 import { getFirestore, doc, getDocs, setDoc, collection, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
+import { useSelector, useDispatch } from 'react-redux';
+import { incrementCompany, deleteCompany } from '../slices/companySlice';
+// import type { RootState } from '../store';
 
 auth;
 const db = getFirestore();
 const LOCAL_STORAGE_KEY_MOBILE_IMAGE = 'MobileImage';
 
 export default function MobileAdvertisement () {
-    const [company, setCompany] = useState('');
+    // const [company, setCompany] = useState('');
     const [description, setDescription] = useState<string>('');
     const [mediaPreview, setMediaPreview] = useState<string>('');
     const [image, setImage] = useState({name: '', media: ''});
@@ -21,6 +24,10 @@ export default function MobileAdvertisement () {
     const [height, setHeight] = useState<any>(400);
     const [left, setLeft] = useState<any>(40);
     const [top, setTop] = useState<any>(20);
+
+    // const companyName = useSelector((state: RootState) => state.company.value);
+    const dispatch = useDispatch();
+    const [company, setCompany] = useState<string>('');
 
     function handleChange(event) {
         const { name, files } = event.target;
@@ -88,7 +95,7 @@ export default function MobileAdvertisement () {
                 <title>Earn and Trade Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
-            <Local company={company} setCompany={setCompany} description={description} setDescription={setDescription} />
+            <Local setCompany={setCompany} description={description} setDescription={setDescription} />
             <FocusLock>
                 <div>
                     <div style={{ color: '#125CA1', fontSize: '52px', fontWeight: '700', padding: '.5em 0em 0em 0em', lineHeight: '50px', textAlign: 'center' }}>
@@ -211,10 +218,10 @@ export default function MobileAdvertisement () {
                         {(company && description) ? (
                         <>
                             <div style={{ transform: 'translateX(13.5px)' }}>
-                                <Button onClick={() => addAdvertisement(company, description, width, height, left, top)} style={{ background: '#125CA1', color: 'white' }}>
+                                <Button onClick={() => {addAdvertisement(company, description, width, height, left, top), dispatch(incrementCompany(String(company)))}} style={{ background: '#125CA1', color: 'white' }}>
                                     Save
                                 </Button>
-                                <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top), setCompany(''), setDescription(''), setMediaPreview('')}} style={{ background: '#125CA1', color: 'white' }}>
+                                <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top), setCompany(''), setDescription(''), setMediaPreview(''), dispatch(deleteCompany())}} style={{ background: '#125CA1', color: 'white' }}>
                                     Delete
                                 </Button>
                             </div>

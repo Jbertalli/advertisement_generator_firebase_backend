@@ -6,7 +6,7 @@ import type { RootState } from '../store';
 export default function Counter() {
     const count = useSelector((state: RootState) => state.counter.value);
     const dispatch = useDispatch();
-    const [incrementAmount, setIncrementAmount] = useState<string>('2');
+    const [incrementAmount, setIncrementAmount] = useState<string>('0');
 
     return (
         <>
