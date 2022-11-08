@@ -5,7 +5,7 @@ import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/mobileLocalStorage';
 // import firebase from '../firebase/clientApp';
-import { getFirestore, doc, getDocs, setDoc, collection, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
+import { getFirestore, doc, getDocs, setDoc, collection, Timestamp, updateDoc, deleteField, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 import { useSelector, useDispatch } from 'react-redux';
 import { incrementCompany, deleteCompany } from '../slices/companySlice';
@@ -24,6 +24,7 @@ export default function MobileAdvertisement () {
     const [height, setHeight] = useState<any>(400);
     const [left, setLeft] = useState<any>(40);
     const [top, setTop] = useState<any>(20);
+    const [userData, setUserData] = useState([]);
 
     // const companyName = useSelector((state: RootState) => state.company.value);
     const dispatch = useDispatch();
@@ -59,7 +60,7 @@ export default function MobileAdvertisement () {
         const colRef = collection(db, "Advertisement");
         const docsSnap = await getDocs(colRef);
         docsSnap.forEach(doc => {
-            // console.log(doc.data());
+            console.log(doc.data());
         })
     }
 
@@ -67,7 +68,7 @@ export default function MobileAdvertisement () {
         logged();
     }, [])
 
-    const addAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
+    const addAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number, mediaPreview: string) => {
         await setDoc(doc(db, "Advertisement", "Company"), {
             company,
             description,
@@ -75,10 +76,38 @@ export default function MobileAdvertisement () {
             height,
             left,
             top,
+            mediaPreview,
+            created: Timestamp.now()
         });
     }
 
-    const deleteAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number) => {
+    useEffect(() => {
+        const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'));
+        onSnapshot(q, (querySnapshot) => {
+            setUserData(querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                company: doc.data().company,
+                created: doc.data().created,
+                description: doc.data().description,
+                height: doc.data().height,
+                left: doc.data().left,
+                top: doc.data().top,
+                width: doc.data().width,
+                mediaPreview: doc.data().mediaPreview
+            })))
+        })
+      }, []) 
+
+      let dbId = userData?.[0]?.id;
+      let dbCompany = userData?.[0]?.company;
+      let dbDescription = userData?.[0]?.description;
+      let dbHeight = userData?.[0]?.height;
+      let dbLeft = userData?.[0]?.left;
+      let dbTop = userData?.[0]?.top;
+      let dbWidth = userData?.[0]?.width;
+      let dbImage = userData?.[0]?.mediaPreview;
+
+    const deleteAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number, mediaPreview: string) => {
         await updateDoc(doc(db, "Advertisement", "Company"), {
             company: deleteField(),
             description: deleteField(),
@@ -86,6 +115,7 @@ export default function MobileAdvertisement () {
             height: deleteField(),
             left: deleteField(),
             top: deleteField(),
+            mediaPreview: deleteField(),
         })
     }
 
@@ -218,10 +248,10 @@ export default function MobileAdvertisement () {
                         {(company && description) ? (
                         <>
                             <div style={{ transform: 'translateX(13.5px)' }}>
-                                <Button onClick={() => {addAdvertisement(company, description, width, height, left, top), dispatch(incrementCompany(String(company)))}} style={{ background: '#125CA1', color: 'white' }}>
+                                <Button onClick={() => {addAdvertisement(company, description, width, height, left, top, mediaPreview), dispatch(incrementCompany(String(company)))}} style={{ background: '#125CA1', color: 'white' }}>
                                     Save
                                 </Button>
-                                <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top), setCompany(''), setDescription(''), setMediaPreview(''), dispatch(deleteCompany())}} style={{ background: '#125CA1', color: 'white' }}>
+                                <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top, mediaPreview), setCompany(''), setDescription(''), setMediaPreview(''), dispatch(deleteCompany())}} style={{ background: '#125CA1', color: 'white' }}>
                                     Delete
                                 </Button>
                             </div>
