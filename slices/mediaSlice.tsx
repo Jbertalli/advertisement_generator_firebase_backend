@@ -1,6 +1,7 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 export interface mediaPreviewState {
     value: any
@@ -15,7 +16,8 @@ export const mediaPreviewSlice = createSlice({
     initialState,
     reducers: {
         incrementMediaPreview: (state, action: PayloadAction<any>) => {
-            state.value += action.payload
+            // state.value += action.payload
+            state.value = action.payload
         },
         deleteMediaPreview: (state) => {
             state.value = ''
@@ -23,5 +25,9 @@ export const mediaPreviewSlice = createSlice({
     },
 })
 
-export const { incrementMediaPreview, deleteMediaPreview } = mediaPreviewSlice.actions
-export default mediaPreviewSlice.reducer
+export const { incrementMediaPreview, deleteMediaPreview } = mediaPreviewSlice.actions;
+
+//selector
+export const mediaPreviewValue = (state: RootState) => state.mediaPreview.value;
+
+export default mediaPreviewSlice.reducer;

@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import type { RootState } from '../store';
+// import type { RootState } from '../store';
 import { companyValue } from '../slices/companySlice';
 import { descriptionValue } from '../slices/descriptionSlice';
 import { widthValue } from '../slices/widthSlice';
 import { heightValue } from '../slices/heightSlice';
 import { leftValue } from '../slices/leftSlice';
 import { topValue } from '../slices/topSlice';
+import { mediaPreviewValue } from '../slices/mediaSlice';
 
 const LOCAL_STORAGE_KEY_NAME = 'CompanyName';
 const LOCAL_STORAGE_KEY_DESCRIPTION = 'AdvertisementDescription';
@@ -24,7 +25,7 @@ export default function Local({ setCompany, setDescription, setWidth, setHeight,
     const heightName = useSelector(heightValue);
     const leftName = useSelector(leftValue);
     const topName = useSelector(topValue);
-    const mediaPreviewName = useSelector((state: RootState) => state.mediaPreview.value);
+    const mediaPreviewName = useSelector(mediaPreviewValue);
 
     // Company name
     useEffect(() => {
