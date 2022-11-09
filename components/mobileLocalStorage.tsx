@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
+import { companyValue } from '../slices/companySlice';
 
 const LOCAL_STORAGE_KEY_NAME_MOBILE = 'CompanyNameMobile';
 const LOCAL_STORAGE_KEY_DESCRIPTION_MOBILE = 'AdvertisementDescriptionMobile';
@@ -12,7 +13,7 @@ const LOCAL_STORAGE_KEY_IMAGE_MOBILE = 'ImageMobile';
 
 export default function Local({ setCompany, setDescription, setWidth, setHeight, setLeft, setTop, setMediaPreview }) {
   
-    const companyName = useSelector((state: RootState) => state.company.value);
+    const companyName = useSelector(companyValue);
     const descriptionName = useSelector((state: RootState) => state.description.value);
     const widthName = useSelector((state: RootState) => state.width.value);
     const heightName = useSelector((state: RootState) => state.height.value);
