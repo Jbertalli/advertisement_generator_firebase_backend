@@ -5,6 +5,7 @@ import descriptionReducer from './slices/descriptionSlice';
 import widthReducer from './slices/widthSlice';
 import heightReducer from './slices/heightSlice';
 import leftReducer from './slices/leftSlice';
+import topReducer from './slices/topSlice';
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         width: widthReducer,
         height: heightReducer,
         left: leftReducer,
+        top: topReducer,
     },
 })
 
