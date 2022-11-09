@@ -180,6 +180,14 @@ export default function History() {
                                 </Table.Row>
                                 <Table.Row>
                                     <Table.Cell>
+                                        Image Width 
+                                    </Table.Cell>
+                                    <Table.Cell>
+                                        {dbWidth}
+                                    </Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>
                                         Image Height 
                                     </Table.Cell>
                                     <Table.Cell>
@@ -200,14 +208,6 @@ export default function History() {
                                     </Table.Cell>
                                     <Table.Cell>
                                         {dbTop}
-                                    </Table.Cell>
-                                </Table.Row>
-                                <Table.Row>
-                                    <Table.Cell>
-                                        Image Width 
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        {dbWidth}
                                     </Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
