@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { companyValue } from '../slices/companySlice';
+import { descriptionValue } from '../slices/descriptionSlice';
 
 const LOCAL_STORAGE_KEY_NAME = 'CompanyName';
 const LOCAL_STORAGE_KEY_DESCRIPTION = 'AdvertisementDescription';
@@ -14,7 +15,7 @@ const LOCAL_STORAGE_KEY_IMAGE = 'Image';
 export default function Local({ setCompany, setDescription, setWidth, setHeight, setLeft, setTop, setMediaPreview }) {
     
     const companyName = useSelector(companyValue);
-    const descriptionName = useSelector((state: RootState) => state.description.value);
+    const descriptionName = useSelector(descriptionValue);
     const widthName = useSelector((state: RootState) => state.width.value);
     const heightName = useSelector((state: RootState) => state.height.value);
     const leftName = useSelector((state: RootState) => state.left.value);

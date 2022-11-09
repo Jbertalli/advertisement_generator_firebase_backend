@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 export interface DescriptionState {
     value: string
@@ -14,7 +15,8 @@ export const descriptionSlice = createSlice({
     initialState,
     reducers: {
         incrementDescription: (state, action: PayloadAction<string>) => {
-            state.value += action.payload
+            // state.value += action.payload
+            state.value = action.payload
         },
         deleteDescription: (state) => {
             state.value = ''
@@ -22,5 +24,9 @@ export const descriptionSlice = createSlice({
     },
 })
 
-export const { incrementDescription, deleteDescription } =  descriptionSlice.actions
+export const { incrementDescription, deleteDescription } =  descriptionSlice.actions;
+
+//selector
+export const descriptionValue = (state: RootState) => state.description.value;
+
 export default descriptionSlice.reducer
