@@ -4,6 +4,7 @@ import companyReducer from './slices/companySlice';
 import descriptionReducer from './slices/descriptionSlice';
 import widthReducer from './slices/widthSlice';
 import heightReducer from './slices/heightSlice';
+import leftReducer from './slices/leftSlice';
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         description: descriptionReducer,
         width: widthReducer,
         height: heightReducer,
+        left: leftReducer,
     },
 })
 
