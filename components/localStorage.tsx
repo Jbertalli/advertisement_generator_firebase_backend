@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../store';
 
 const LOCAL_STORAGE_KEY_NAME = 'CompanyName';
 const LOCAL_STORAGE_KEY_DESCRIPTION = 'AdvertisementDescription';
@@ -8,8 +10,10 @@ const LOCAL_STORAGE_KEY_LEFT = 'ImageLeft';
 const LOCAL_STORAGE_KEY_TOP = 'ImageTop';
 const LOCAL_STORAGE_KEY_IMAGE = 'Image';
 
-export default function Local({ company, setCompany, description, setDescription, width, setWidth, height, setHeight, left, setLeft, top, setTop, mediaPreview, setMediaPreview }) {
+export default function Local({ setCompany, description, setDescription, width, setWidth, height, setHeight, left, setLeft, top, setTop, mediaPreview, setMediaPreview }) {
     
+    const companyName = useSelector((state: RootState) => state.company.value);
+
     // Company name
     useEffect(() => {
         const storedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NAME))
@@ -18,8 +22,8 @@ export default function Local({ company, setCompany, description, setDescription
     
       useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_NAME, 
-        JSON.stringify(company))
-      }, [company]);
+        JSON.stringify(companyName))
+      }, [companyName]);
 
     // Advertisement Description
     useEffect(() => {
