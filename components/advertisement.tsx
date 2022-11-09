@@ -14,6 +14,7 @@ import { incrementWidth, deleteWidth } from '../slices/widthSlice';
 import { incrementHeight, deleteHeight } from '../slices/heightSlice';
 import { incrementLeft, deleteLeft } from '../slices/leftSlice';
 import { incrementTop, deleteTop } from '../slices/topSlice';
+import { incrementMediaPreview, deleteMediaPreview } from '../slices/mediaSlice';
 
 auth;
 const db = getFirestore();
@@ -170,7 +171,7 @@ export default function Advertisement () {
                 <title>Earn and Trade Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
-            <Local setCompany={setCompany} setDescription={setDescription} setWidth={setWidth} setHeight={setHeight} setLeft={setLeft} setTop={setTop} mediaPreview={mediaPreview} setMediaPreview={setMediaPreview} />
+            <Local setCompany={setCompany} setDescription={setDescription} setWidth={setWidth} setHeight={setHeight} setLeft={setLeft} setTop={setTop} setMediaPreview={setMediaPreview} />
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
                     <Segment attached textAlign="center">
@@ -301,10 +302,10 @@ export default function Advertisement () {
                                     {(company && description) ? (
                                     <>
                                         <div style={{ transform: 'translateX(13.5px)' }}>
-                                            <Button onClick={() => {addAdvertisement(company, description, width, height, left, top, mediaPreview), dispatch(incrementCompany(String(company))), dispatch(incrementDescription(String(description))), dispatch(incrementWidth(String(width))), dispatch(incrementHeight(String(height))), dispatch(incrementLeft(String(left))), dispatch(incrementTop(String(top)))}} style={{ background: '#125CA1', color: 'white' }}>
+                                            <Button onClick={() => {addAdvertisement(company, description, width, height, left, top, mediaPreview), dispatch(incrementCompany(String(company))), dispatch(incrementDescription(String(description))), dispatch(incrementWidth(String(width))), dispatch(incrementHeight(String(height))), dispatch(incrementLeft(String(left))), dispatch(incrementTop(String(top))), dispatch(incrementMediaPreview(String(mediaPreview)))}} style={{ background: '#125CA1', color: 'white' }}>
                                                 Save
                                             </Button>
-                                            <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top, mediaPreview), setCompany(''), setDescription(''), setMediaPreview(''), dispatch(deleteCompany()), dispatch(deleteDescription()), dispatch(deleteWidth()), dispatch(deleteHeight()), dispatch(deleteLeft()), dispatch(deleteTop())}} style={{ background: '#125CA1', color: 'white' }}>
+                                            <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top, mediaPreview), setCompany(''), setDescription(''), setMediaPreview(''), dispatch(deleteCompany()), dispatch(deleteDescription()), dispatch(deleteWidth()), dispatch(deleteHeight()), dispatch(deleteLeft()), dispatch(deleteTop()), dispatch(deleteMediaPreview())}} style={{ background: '#125CA1', color: 'white' }}>
                                                 Delete
                                             </Button>
                                         </div>

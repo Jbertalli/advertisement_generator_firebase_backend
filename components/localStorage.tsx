@@ -10,14 +10,15 @@ const LOCAL_STORAGE_KEY_LEFT = 'ImageLeft';
 const LOCAL_STORAGE_KEY_TOP = 'ImageTop';
 const LOCAL_STORAGE_KEY_IMAGE = 'Image';
 
-export default function Local({ setCompany, setDescription, setWidth, setHeight, setLeft, setTop, mediaPreview, setMediaPreview }) {
+export default function Local({ setCompany, setDescription, setWidth, setHeight, setLeft, setTop, setMediaPreview }) {
     
     const companyName = useSelector((state: RootState) => state.company.value);
     const descriptionName = useSelector((state: RootState) => state.description.value);
     const widthName = useSelector((state: RootState) => state.width.value);
     const heightName = useSelector((state: RootState) => state.height.value);
     const leftName = useSelector((state: RootState) => state.left.value);
-    const leftTop = useSelector((state: RootState) => state.top.value);
+    const topName = useSelector((state: RootState) => state.top.value);
+    const mediaPreviewName = useSelector((state: RootState) => state.mediaPreview.value);
 
     // Company name
     useEffect(() => {
@@ -82,8 +83,8 @@ export default function Local({ setCompany, setDescription, setWidth, setHeight,
     
       useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_TOP, 
-        JSON.stringify(leftTop))
-      }, [leftTop]);
+        JSON.stringify(topName))
+      }, [topName]);
 
       // Image
       useEffect(() => {
@@ -93,8 +94,8 @@ export default function Local({ setCompany, setDescription, setWidth, setHeight,
     
       useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE, 
-        JSON.stringify(mediaPreview))
-      }, [mediaPreview]);
+        JSON.stringify(mediaPreviewName))
+      }, [mediaPreviewName]);
 
     return (
         <>
