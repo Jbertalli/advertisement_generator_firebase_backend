@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { companyValue } from '../slices/companySlice';
 import { descriptionValue } from '../slices/descriptionSlice';
+import { widthValue } from '../slices/widthSlice';
 
 const LOCAL_STORAGE_KEY_NAME_MOBILE = 'CompanyNameMobile';
 const LOCAL_STORAGE_KEY_DESCRIPTION_MOBILE = 'AdvertisementDescriptionMobile';
@@ -16,7 +17,7 @@ export default function Local({ setCompany, setDescription, setWidth, setHeight,
   
     const companyName = useSelector(companyValue);
     const descriptionName = useSelector(descriptionValue);
-    const widthName = useSelector((state: RootState) => state.width.value);
+    const widthName = useSelector(widthValue);
     const heightName = useSelector((state: RootState) => state.height.value);
     const leftName = useSelector((state: RootState) => state.left.value);
     const topName = useSelector((state: RootState) => state.top.value);

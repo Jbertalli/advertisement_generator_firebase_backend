@@ -29,4 +29,4 @@ export const { incrementDescription, deleteDescription } =  descriptionSlice.act
 //selector
 export const descriptionValue = (state: RootState) => state.description.value;
 
-export default descriptionSlice.reducer
+export default descriptionSlice.reducer;
