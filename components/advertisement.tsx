@@ -7,8 +7,9 @@ import Local from '../components/localStorage';
 // import firebase from '../firebase/clientApp';
 import { getFirestore, doc, getDocs, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { incrementCompany, deleteCompany } from '../slices/companySlice';
+import { incrementDescription, deleteDescription } from '../slices/descriptionSlice';
 
 auth;
 const db = getFirestore();
@@ -165,7 +166,7 @@ export default function Advertisement () {
                 <title>Earn and Trade Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
-            <Local setCompany={setCompany} description={description} setDescription={setDescription} width={width} setWidth={setWidth} height={height} setHeight={setHeight} left={left} setLeft={setLeft} top={top} setTop={setTop} mediaPreview={mediaPreview} setMediaPreview={setMediaPreview} />
+            <Local setCompany={setCompany} setDescription={setDescription} width={width} setWidth={setWidth} height={height} setHeight={setHeight} left={left} setLeft={setLeft} top={top} setTop={setTop} mediaPreview={mediaPreview} setMediaPreview={setMediaPreview} />
             <FocusLock>
                 <Container as="h1" size="massive" style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}>
                     <Segment attached textAlign="center">
@@ -296,10 +297,10 @@ export default function Advertisement () {
                                     {(company && description) ? (
                                     <>
                                         <div style={{ transform: 'translateX(13.5px)' }}>
-                                            <Button onClick={() => {addAdvertisement(company, description, width, height, left, top, mediaPreview), dispatch(incrementCompany(String(company)))}} style={{ background: '#125CA1', color: 'white' }}>
+                                            <Button onClick={() => {addAdvertisement(company, description, width, height, left, top, mediaPreview), dispatch(incrementCompany(String(company))), dispatch(incrementDescription(String(description)))}} style={{ background: '#125CA1', color: 'white' }}>
                                                 Save
                                             </Button>
-                                            <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top, mediaPreview), setCompany(''), setDescription(''), setMediaPreview(''), dispatch(deleteCompany())}} style={{ background: '#125CA1', color: 'white' }}>
+                                            <Button onClick={() => {deleteAdvertisement(company, description, width, height, left, top, mediaPreview), setCompany(''), setDescription(''), setMediaPreview(''), dispatch(deleteCompany()), dispatch(deleteDescription())}} style={{ background: '#125CA1', color: 'white' }}>
                                                 Delete
                                             </Button>
                                         </div>
