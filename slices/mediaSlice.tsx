@@ -23,5 +23,5 @@ export const mediaPreviewSlice = createSlice({
     },
 })
 
-export const { incrementMediaPreview, deleteMediaPreview } =  mediaPreviewSlice.actions
+export const { incrementMediaPreview, deleteMediaPreview } = mediaPreviewSlice.actions
 export default mediaPreviewSlice.reducer

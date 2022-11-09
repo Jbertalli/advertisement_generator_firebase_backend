@@ -6,6 +6,7 @@ import { descriptionValue } from '../slices/descriptionSlice';
 import { widthValue } from '../slices/widthSlice';
 import { heightValue } from '../slices/heightSlice';
 import { leftValue } from '../slices/leftSlice';
+import { topValue } from '../slices/topSlice';
 
 const LOCAL_STORAGE_KEY_NAME = 'CompanyName';
 const LOCAL_STORAGE_KEY_DESCRIPTION = 'AdvertisementDescription';
@@ -22,7 +23,7 @@ export default function Local({ setCompany, setDescription, setWidth, setHeight,
     const widthName = useSelector(widthValue);
     const heightName = useSelector(heightValue);
     const leftName = useSelector(leftValue);
-    const topName = useSelector((state: RootState) => state.top.value);
+    const topName = useSelector(topValue);
     const mediaPreviewName = useSelector((state: RootState) => state.mediaPreview.value);
 
     // Company name

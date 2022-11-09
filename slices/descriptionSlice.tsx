@@ -24,7 +24,7 @@ export const descriptionSlice = createSlice({
     },
 })
 
-export const { incrementDescription, deleteDescription } =  descriptionSlice.actions;
+export const { incrementDescription, deleteDescription } = descriptionSlice.actions;
 
 //selector
 export const descriptionValue = (state: RootState) => state.description.value;
