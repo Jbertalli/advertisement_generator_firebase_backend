@@ -77,19 +77,7 @@ export default function Advertisement () {
 
     console.log(mediaPreview);
 
-    // useEffect(() => {
-    //     document.body.style.overflow = "hidden";
-    // return () => {
-    //     document.body.style.overflow = "visible";
-    //     }
-    // }, []);
-
-    // const handleInput = () => {
-    //     console.log("advertisement", { company, header, description });
-    // }
-
     //console.log(description.length);
-
     // console.log(auth);
 
     // console.log data
@@ -195,17 +183,6 @@ export default function Advertisement () {
                                             value={company}
                                             onChange={e => setCompany(e.target.value)}
                                         />
-                                        {/* <Form.Input
-                                            fluid
-                                            //icon="chart bar"
-                                            // size="large"
-                                            // iconPosition="left"
-                                            label="Advertisement Header"
-                                            placeholder="header"
-                                            name="header"
-                                            value={header}
-                                            onChange={e => setHeader(e.target.value)}
-                                        /> */}
                                         <Form.Input
                                             fluid
                                             label="Advertisement Description"

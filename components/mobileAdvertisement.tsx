@@ -149,17 +149,6 @@ export default function MobileAdvertisement () {
                         style={{ padding: '0em .5em 0em .5em' }}
                         onChange={e => setCompany(e.target.value)}
                     />
-                    {/* <Form.Input
-                        fluid
-                        //icon="chart bar"
-                        // size="large"
-                        // iconPosition="left"
-                        label="Advertisement Header"
-                        placeholder="header"
-                        name="header"
-                        value={header}
-                        onChange={e => setHeader(e.target.value)}
-                    /> */}
                     <Form.Input
                         fluid
                         label="&nbsp;&nbsp;&nbsp;Advertisement Description"
