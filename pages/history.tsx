@@ -113,26 +113,6 @@ export default function History() {
             ):(
             <>
                 <div style={{ background: 'linear-gradient(to top, blue, #125CA180)', height: '100vh' }}>
-                    {/* <div style={{ transform: 'translateY(-15px)', padding: '70px', position: 'relative', zIndex: '10', maxWidth: '600px' }}>
-                        <div style={{ 
-                            display: 'flex', 
-                            justifyContent: 'center', 
-                            background: 'white', 
-                            color: '#125CA1',  
-                            height: '60px', 
-                            fontSize: '30px', 
-                            fontWeight: '300',
-                            marginBottom: '30px',
-                            marginTop: '-30px',
-                            borderRadius: '3px',
-                            boxShadow: '2px 2px 15px black',
-                            position: 'relative'
-                        }}>
-                            <div style={{ transform: 'translateY(20px)' }}>
-                                Saved Advertisements
-                            </div>
-                        </div>
-                    </div> */}
                     <div style={{ margin: `${tableMargin}`, transform: `${tableScale}`, position: 'relative', zIndex: '0', fontSize: '20px', display: 'flex', justifyContent: 'center' }}>
                         <Table 
                             striped 
