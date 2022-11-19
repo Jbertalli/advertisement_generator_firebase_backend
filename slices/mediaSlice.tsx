@@ -27,7 +27,6 @@ export const mediaPreviewSlice = createSlice({
 
 export const { incrementMediaPreview, deleteMediaPreview } = mediaPreviewSlice.actions;
 
-//selector
 export const mediaPreviewValue = (state: RootState) => state.mediaPreview.value;
 
 export default mediaPreviewSlice.reducer;

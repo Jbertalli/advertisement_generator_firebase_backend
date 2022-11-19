@@ -26,7 +26,6 @@ export const topSlice = createSlice({
 
 export const { incrementTop, deleteTop } = topSlice.actions;
 
-//selector
 export const topValue = (state: RootState) => state.top.value;
 
 export default topSlice.reducer;

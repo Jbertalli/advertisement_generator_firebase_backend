@@ -26,7 +26,6 @@ export const leftSlice = createSlice({
 
 export const { incrementLeft, deleteLeft } = leftSlice.actions;
 
-//selector
 export const leftValue = (state: RootState) => state.left.value;
 
 export default leftSlice.reducer;

@@ -26,7 +26,6 @@ export const widthSlice = createSlice({
 
 export const { incrementWidth, deleteWidth } =  widthSlice.actions;
 
-//selector
 export const widthValue = (state: RootState) => state.width.value;
 
 export default widthSlice.reducer;

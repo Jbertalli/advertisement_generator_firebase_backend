@@ -26,7 +26,6 @@ export const companySlice = createSlice({
 
 export const { incrementCompany, deleteCompany } = companySlice.actions;
 
-//selector
 export const companyValue = (state: RootState) => state.company.value;
 
 export default companySlice.reducer;

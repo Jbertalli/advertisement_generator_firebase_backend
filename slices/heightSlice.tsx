@@ -26,7 +26,7 @@ export const heightSlice = createSlice({
 
 export const { incrementHeight, deleteHeight } = heightSlice.actions;
 
-//selector
+
 export const heightValue = (state: RootState) => state.height.value;
 
 export default heightSlice.reducer;
