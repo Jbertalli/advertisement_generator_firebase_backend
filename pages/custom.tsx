@@ -82,6 +82,16 @@ export default function Custom() {
         JSON.stringify(companyFontWeight))
     }, [companyFontWeight]);
 
+    useEffect(() => {
+        const storedDescription = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_DESCRIPTION))
+        if (storedDescription) setDescription(storedDescription)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_DESCRIPTION, 
+        JSON.stringify(description))
+    }, [description]);
+
     return (
         <>
             <Head>
