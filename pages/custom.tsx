@@ -22,7 +22,7 @@ const LOCAL_STORAGE_KEY_IMAGE_ROTATION = 'Image_Rotation';
 export default function Custom() {
     const [company, setCompany] = useState<string>('');
     const [companyFontSize, setCompanyFontSize] = useState<string>('');
-    const [companyFontWeight, setCompanyFontWeight] = useState<string>('100');
+    const [companyFontWeight, setCompanyFontWeight] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [descriptionFontSize, setDescriptionFontSize] = useState<string>('40');
     const [descriptionFontWeight, setDescriptionFontWeight] = useState<string>('100');
@@ -71,6 +71,16 @@ export default function Custom() {
         localStorage.setItem(LOCAL_STORAGE_KEY_COMPANY_FONT, 
         JSON.stringify(companyFontSize))
     }, [companyFontSize]);
+
+    useEffect(() => {
+        const storedCompanyFontWeight = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_COMPANY_WEIGHT))
+        if (storedCompanyFontWeight) setCompanyFontWeight(storedCompanyFontWeight)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_COMPANY_WEIGHT, 
+        JSON.stringify(companyFontWeight))
+    }, [companyFontWeight]);
 
     return (
         <>
