@@ -92,6 +92,16 @@ export default function Custom() {
                     />
                 </div>
                 <div>
+                    Border Color
+                </div>
+                <div>
+                    <input
+                        type='color'
+                        value={borderColor}
+                        onChange={(e) => setBorderColor(e.target.value)}
+                    />
+                </div>
+                <div>
                     Select Text Color
                 </div>
                 <div>
@@ -130,7 +140,7 @@ export default function Custom() {
                 style={{ 
                     background: `${backgroundColor}`, 
                     color: `${color}`,
-                    border: `${borderWidth}px solid blue`,
+                    border: `${borderWidth}px solid ${borderColor}`,
                     fontWeight: '100',
                     height: '50vh',
                     width: '100vw'
