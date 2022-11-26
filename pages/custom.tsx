@@ -11,6 +11,8 @@ export default function Custom() {
     const [description, setDescription] = useState<string>('');
     const [descriptionFontSize, setDescriptionFontSize] = useState<string>('40');
     const [descriptionFontWeight, setDescriptionFontWeight] = useState<string>('');
+    const [borderWidth, setBorderWidth] = useState<string>('');
+    const [borderColor, setBorderColor] = useState<string>('');
     const [color, setColor] = useState<string>('');
     const [backgroundColor, setBackgroundColor] = useState<string>('');
     const [mediaPreview, setMediaPreview] = useState<string>('');
@@ -80,6 +82,16 @@ export default function Custom() {
                     />
                 </div>
                 <div>
+                    Border Width
+                </div>
+                <div>
+                    <input
+                        type='text'
+                        value={borderWidth}
+                        onChange={(e) => setBorderWidth(e.target.value)}
+                    />
+                </div>
+                <div>
                     Select Text Color
                 </div>
                 <div>
@@ -118,6 +130,7 @@ export default function Custom() {
                 style={{ 
                     background: `${backgroundColor}`, 
                     color: `${color}`,
+                    border: `${borderWidth}px solid blue`,
                     fontWeight: '100',
                     height: '50vh',
                     width: '100vw'
