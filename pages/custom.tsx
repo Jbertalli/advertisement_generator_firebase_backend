@@ -25,7 +25,7 @@ export default function Custom() {
     const [companyFontWeight, setCompanyFontWeight] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [descriptionFontSize, setDescriptionFontSize] = useState<string>('');
-    const [descriptionFontWeight, setDescriptionFontWeight] = useState<string>('100');
+    const [descriptionFontWeight, setDescriptionFontWeight] = useState<string>('');
     const [borderWidth, setBorderWidth] = useState<string>('');
     const [borderColor, setBorderColor] = useState<string>('');
     const [color, setColor] = useState<string>('');
@@ -101,6 +101,16 @@ export default function Custom() {
         localStorage.setItem(LOCAL_STORAGE_KEY_DESCRIPTION_FONT, 
         JSON.stringify(descriptionFontSize))
     }, [descriptionFontSize]);
+
+    useEffect(() => {
+        const storedDescriptionFontWeight = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_DESCRIPTION_WEIGHT))
+        if (storedDescriptionFontWeight) setDescriptionFontWeight(storedDescriptionFontWeight)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_DESCRIPTION_WEIGHT, 
+        JSON.stringify(descriptionFontWeight))
+    }, [descriptionFontWeight]);
 
     return (
         <>
