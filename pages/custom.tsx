@@ -10,7 +10,7 @@ export default function Custom() {
     const [companyFontWeight, setCompanyFontWeight] = useState<string>('100');
     const [description, setDescription] = useState<string>('');
     const [descriptionFontSize, setDescriptionFontSize] = useState<string>('40');
-    const [descriptionFontWeight, setDescriptionFontWeight] = useState<string>('');
+    const [descriptionFontWeight, setDescriptionFontWeight] = useState<string>('100');
     const [borderWidth, setBorderWidth] = useState<string>('');
     const [borderColor, setBorderColor] = useState<string>('');
     const [color, setColor] = useState<string>('');
@@ -95,6 +95,19 @@ export default function Custom() {
                     />
                 </div>
                 <div>
+                    Description Font Weight (Boldness)
+                </div>
+                <div>
+                    <input
+                        min='100'
+                        max='900'
+                        step='100'
+                        type='number'
+                        value={descriptionFontWeight}
+                        onChange={(e) => setDescriptionFontWeight(e.target.value)}
+                    />
+                </div>
+                <div>
                     Border Width
                 </div>
                 <div>
@@ -164,7 +177,7 @@ export default function Custom() {
                     </div>
                 </Draggable>
                 <Draggable>
-                    <div style={{ fontSize: `${descriptionFontSize}px`, display: 'flex', justifyContent: 'center', cursor: 'move', marginBottom: '30px' }}>
+                    <div style={{ fontSize: `${descriptionFontSize}px`, fontWeight: `${descriptionFontWeight}`, display: 'flex', justifyContent: 'center', cursor: 'move', marginBottom: '30px' }}>
                         {description}
                     </div>
                 </Draggable>
