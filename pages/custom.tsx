@@ -6,7 +6,11 @@ import Draggable from 'react-draggable';
 
 export default function Custom() {
     const [company, setCompany] = useState<string>('');
+    const [companyFontSize, setCompanyFontSize] = useState<string>('');
+    const [companyFontWeight, setCompanyFontWeight] = useState<string>('');
     const [description, setDescription] = useState<string>('');
+    const [descriptionFontSize, setDescriptionFontSize] = useState<string>('');
+    const [descriptionFontWeight, setDescriptionFontWeight] = useState<string>('');
     const [color, setColor] = useState<string>('');
     const [backgroundColor, setBackgroundColor] = useState<string>('');
     const [mediaPreview, setMediaPreview] = useState<string>('');
