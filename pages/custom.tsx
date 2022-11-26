@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/advertisement.module.css';
 import React, { useEffect, useState } from 'react';
-import { Divider } from 'semantic-ui-react';
+import { Divider, Container } from 'semantic-ui-react';
 
 export default function Custom() {
     const [company, setCompany] = useState<string>('');
@@ -89,7 +89,15 @@ export default function Custom() {
                 </div>
             </div>
             <Divider />
-            <div>
+            <Container 
+                style={{ 
+                    background: `${backgroundColor}`, 
+                    color: `${color}`,
+                    fontSize: '50px',
+                    fontWeight: '100',
+                    height: '50vh',
+                    width: '100vw'
+                }}>
                 <div>
                     {company}
                 </div>
@@ -99,9 +107,9 @@ export default function Custom() {
                 <div>
                     {color}
                 </div>
-                <div>
+                {/* <div>
                     {backgroundColor}
-                </div>
+                </div> */}
                 <div>
                     <input 
                         type="image" 
@@ -109,7 +117,7 @@ export default function Custom() {
                         style={{ width: '100px', height: '100px' }}
                     />    
                 </div>
-            </div>
+            </Container>
         </>
     );
 }
