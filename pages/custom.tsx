@@ -4,9 +4,24 @@ import React, { useEffect, useState } from 'react';
 import { Divider, Container, Segment } from 'semantic-ui-react';
 import Draggable from 'react-draggable';
 
+const LOCAL_STORAGE_KEY_COMPANY = 'Company';
+const LOCAL_STORAGE_KEY_COMPANY_FONT = 'Company_Font';
+const LOCAL_STORAGE_KEY_COMPANY_WEIGHT = 'Company_Weight';
+const LOCAL_STORAGE_KEY_DESCRIPTION = 'Description';
+const LOCAL_STORAGE_KEY_DESCRIPTION_FONT = 'Description_Font';
+const LOCAL_STORAGE_KEY_DESCRIPTION_WEIGHT = 'Description_Weight';
+const LOCAL_STORAGE_KEY_BORDER_WIDTH = 'Border_Width';
+const LOCAL_STORAGE_KEY_BORDER_COLOR = 'Border_Color';
+const LOCAL_STORAGE_KEY_COLOR = 'Color';
+const LOCAL_STORAGE_KEY_BACKGROUND = 'Background';
+const LOCAL_STORAGE_KEY_IMAGE = 'Image';
+const LOCAL_STORAGE_KEY_IMAGE_WIDTH = 'Image_Width';
+const LOCAL_STORAGE_KEY_IMAGE_HEIGHT = 'Image_Height';
+const LOCAL_STORAGE_KEY_IMAGE_ROTATION = 'Image_Rotation';
+
 export default function Custom() {
     const [company, setCompany] = useState<string>('');
-    const [companyFontSize, setCompanyFontSize] = useState<string>('60');
+    const [companyFontSize, setCompanyFontSize] = useState<string>('');
     const [companyFontWeight, setCompanyFontWeight] = useState<string>('100');
     const [description, setDescription] = useState<string>('');
     const [descriptionFontSize, setDescriptionFontSize] = useState<string>('40');
@@ -36,6 +51,26 @@ export default function Custom() {
     }
 
     console.log(mediaPreview);
+
+    useEffect(() => {
+        const storedCompany = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_COMPANY))
+        if (storedCompany) setCompany(storedCompany)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_COMPANY, 
+        JSON.stringify(company))
+    }, [company]);
+
+    useEffect(() => {
+        const storedCompanyFontSize = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_COMPANY_FONT))
+        if (storedCompanyFontSize) setCompanyFontSize(storedCompanyFontSize)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_COMPANY_FONT, 
+        JSON.stringify(companyFontSize))
+    }, [companyFontSize]);
 
     return (
         <>
