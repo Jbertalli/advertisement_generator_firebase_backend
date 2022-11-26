@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/advertisement.module.css';
 import React, { useEffect, useState } from 'react';
-import { Divider, Container } from 'semantic-ui-react';
+import { Divider, Container, Segment } from 'semantic-ui-react';
 import Draggable from 'react-draggable';
 
 export default function Custom() {
@@ -43,185 +43,220 @@ export default function Custom() {
                 <title>Custom Advertisement Generator</title>
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
-            <div>
-                <div>
-                    Company Name
+            <Container 
+                size="massive" 
+                style={{ 
+                    margin: '2em', 
+                    boxShadow: '2px 2px 10px black'
+                }}
+            >
+                <Segment attached textAlign="center">
+                    <div 
+                        style={{ 
+                            color: '#125CA1', 
+                            fontSize: '32px', 
+                            fontWeight: '700', 
+                            padding: '1em 0em .5em 0em', 
+                            lineHeight: '50px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        Custom Advertisement 
+                    </div>
+                    <div style={{ 
+                            fontSize: '18px', 
+                            fontWeight: '400px', 
+                            padding: '0em 0em 1em 0em',
+                            display: 'flex',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        Create a Custom Advertisement
+                    </div>
+                </Segment>
+                <div style={{ margin: '20px' }}>
+                    <div>
+                        Company Name
+                    </div>
+                    <div>
+                        <input
+                            type='text'
+                            placeholder='company'
+                            value={company}
+                            onChange={(e) => setCompany(e.target.value)}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div>
+                        Company Font Size
+                    </div>
+                    <div>
+                        <input
+                            type='text'
+                            value={companyFontSize}
+                            onChange={(e) => setCompanyFontSize(e.target.value)}
+                            style={{ width: '80px' }}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div>
+                        Company Font Weight (Boldness)
+                    </div>
+                    <div>
+                        <input
+                            min='100'
+                            max='900'
+                            step='100'
+                            type='number'
+                            value={companyFontWeight}
+                            onChange={(e) => setCompanyFontWeight(e.target.value)}
+                            style={{ width: '80px' }}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div>
+                        Advertisement Description
+                    </div>
+                    <div>
+                        <input
+                            type='text'
+                            placeholder='description'
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div>
+                        Description Font Size
+                    </div>
+                    <div>
+                        <input
+                            type='text'
+                            value={descriptionFontSize}
+                            onChange={(e) => setDescriptionFontSize(e.target.value)}
+                            style={{ width: '80px' }}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div>
+                        Description Font Weight (Boldness)
+                    </div>
+                    <div>
+                        <input
+                            min='100'
+                            max='900'
+                            step='100'
+                            type='number'
+                            value={descriptionFontWeight}
+                            onChange={(e) => setDescriptionFontWeight(e.target.value)}
+                            style={{ width: '80px' }}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div>
+                        Border Width
+                    </div>
+                    <div>
+                        <input
+                            type='text'
+                            value={borderWidth}
+                            onChange={(e) => setBorderWidth(e.target.value)}
+                            style={{ width: '80px' }}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div>
+                        Border Color
+                    </div>
+                    <div>
+                        <input
+                            type='color'
+                            value={borderColor}
+                            onChange={(e) => setBorderColor(e.target.value)}
+                            style={{ width: '100px', height: '100px' }}
+                        />
+                    </div>
+                    <div>
+                        Select Text Color
+                    </div>
+                    <div>
+                        <input 
+                            type='color'
+                            value={color}
+                            onChange={(e) => setColor(e.target.value)}
+                            style={{ width: '100px', height: '100px' }}
+                        />
+                    </div>
+                    <div>
+                        Select Background Color
+                    </div>
+                    <div>
+                        <input 
+                            type='color'
+                            value={backgroundColor}
+                            onChange={(e) => setBackgroundColor(e.target.value)}
+                            style={{ width: '100px', height: '100px' }}
+                        />
+                    </div>
+                    <div>
+                        <input
+                            name="media"
+                            type="file"
+                            accept="image/*"
+                            // content="Select Image"
+                            style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
+                            className={styles.file}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        Image Width (pixels)
+                    </div>
+                    <div>
+                        <input
+                            min='0'
+                            max='1000'
+                            step='10'
+                            type='number'
+                            value={imageWidth}
+                            onChange={(e) => setImageWidth(e.target.value)}
+                            style={{ width: '80px' }}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div>
+                        Image Height (pixels)
+                    </div>
+                    <div>
+                        <input
+                            min='0'
+                            max='1000'
+                            step='10'
+                            type='number'
+                            value={imageHeight}
+                            onChange={(e) => setImageHeight(e.target.value)}
+                            style={{ width: '80px' }}
+                            className={styles.input}
+                        />
+                    </div>
+                    <div>
+                        Image Rotation (degrees)
+                    </div>
+                    <div>
+                        <input
+                            min='0'
+                            max='360'
+                            step='5'
+                            type='number'
+                            value={imageRotation}
+                            onChange={(e) => setImageRotation(e.target.value)}
+                            style={{ width: '80px', marginBottom: '30px' }}
+                            className={styles.input}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <input
-                        type='text'
-                        value={company}
-                        onChange={(e) => setCompany(e.target.value)}
-                        className={styles.input}
-                    />
-                </div>
-                <div>
-                    Company Font Size
-                </div>
-                <div>
-                    <input
-                        type='text'
-                        value={companyFontSize}
-                        onChange={(e) => setCompanyFontSize(e.target.value)}
-                        style={{ width: '80px' }}
-                        className={styles.input}
-                    />
-                </div>
-                <div>
-                    Company Font Weight (Boldness)
-                </div>
-                <div>
-                    <input
-                        min='100'
-                        max='900'
-                        step='100'
-                        type='number'
-                        value={companyFontWeight}
-                        onChange={(e) => setCompanyFontWeight(e.target.value)}
-                        style={{ width: '80px' }}
-                        className={styles.input}
-                    />
-                </div>
-                <div>
-                    Advertisement Description
-                </div>
-                <div>
-                    <input
-                        type='text'
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        className={styles.input}
-                    />
-                </div>
-                <div>
-                    Description Font Size
-                </div>
-                <div>
-                    <input
-                        type='text'
-                        value={descriptionFontSize}
-                        onChange={(e) => setDescriptionFontSize(e.target.value)}
-                        style={{ width: '80px' }}
-                        className={styles.input}
-                    />
-                </div>
-                <div>
-                    Description Font Weight (Boldness)
-                </div>
-                <div>
-                    <input
-                        min='100'
-                        max='900'
-                        step='100'
-                        type='number'
-                        value={descriptionFontWeight}
-                        onChange={(e) => setDescriptionFontWeight(e.target.value)}
-                        style={{ width: '80px' }}
-                        className={styles.input}
-                    />
-                </div>
-                <div>
-                    Border Width
-                </div>
-                <div>
-                    <input
-                        type='text'
-                        value={borderWidth}
-                        onChange={(e) => setBorderWidth(e.target.value)}
-                        style={{ width: '80px' }}
-                        className={styles.input}
-                    />
-                </div>
-                <div>
-                    Border Color
-                </div>
-                <div>
-                    <input
-                        type='color'
-                        value={borderColor}
-                        onChange={(e) => setBorderColor(e.target.value)}
-                        style={{ width: '100px', height: '100px' }}
-                    />
-                </div>
-                <div>
-                    Select Text Color
-                </div>
-                <div>
-                    <input 
-                        type='color'
-                        value={color}
-                        onChange={(e) => setColor(e.target.value)}
-                        style={{ width: '100px', height: '100px' }}
-                    />
-                </div>
-                 <div>
-                    Select Background Color
-                </div>
-                <div>
-                    <input 
-                        type='color'
-                        value={backgroundColor}
-                        onChange={(e) => setBackgroundColor(e.target.value)}
-                        style={{ width: '100px', height: '100px' }}
-                    />
-                </div>
-                <div>
-                    <input
-                        name="media"
-                        type="file"
-                        accept="image/*"
-                        // content="Select Image"
-                        style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
-                        className={styles.file}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    Image Width (pixels)
-                </div>
-                <div>
-                    <input
-                        min='0'
-                        max='1000'
-                        step='10'
-                        type='number'
-                        value={imageWidth}
-                        onChange={(e) => setImageWidth(e.target.value)}
-                        style={{ width: '80px' }}
-                        className={styles.input}
-                    />
-                </div>
-                <div>
-                    Image Height (pixels)
-                </div>
-                <div>
-                    <input
-                        min='0'
-                        max='1000'
-                        step='10'
-                        type='number'
-                        value={imageHeight}
-                        onChange={(e) => setImageHeight(e.target.value)}
-                        style={{ width: '80px' }}
-                        className={styles.input}
-                    />
-                </div>
-                <div>
-                    Image Rotation (degrees)
-                </div>
-                <div>
-                    <input
-                        min='0'
-                        max='360'
-                        step='5'
-                        type='number'
-                        value={imageRotation}
-                        onChange={(e) => setImageRotation(e.target.value)}
-                        style={{ width: '80px' }}
-                        className={styles.input}
-                    />
-                </div>
-            </div>
+            </Container>
             <Divider />
             <Container 
                 style={{ 
@@ -230,15 +265,33 @@ export default function Custom() {
                     border: `${borderWidth}px solid ${borderColor}`,
                     fontWeight: '100',
                     height: '50vh',
-                    width: '100vw'
+                    width: '100vw', 
+                    marginTop: '30px'
                 }}>
                 <Draggable>
-                    <div style={{ fontSize: `${companyFontSize}px`, fontWeight: `${companyFontWeight}`, display: 'flex', justifyContent: 'center', cursor: 'move', marginBottom: '30px' }}>
+                    <div style={{ 
+                            fontSize: `${companyFontSize}px`, 
+                            fontWeight: `${companyFontWeight}`, 
+                            display: 'flex', 
+                            justifyContent: 'center', 
+                            cursor: 'move', 
+                            marginBottom: '30px',
+                            marginTop: '30px' 
+                        }}
+                    >
                         {company}
                     </div>
                 </Draggable>
                 <Draggable>
-                    <div style={{ fontSize: `${descriptionFontSize}px`, fontWeight: `${descriptionFontWeight}`, display: 'flex', justifyContent: 'center', cursor: 'move', marginBottom: '30px' }}>
+                    <div style={{ 
+                            fontSize: `${descriptionFontSize}px`, 
+                            fontWeight: `${descriptionFontWeight}`, 
+                            display: 'flex', 
+                            justifyContent: 'center', 
+                            cursor: 'move', 
+                            marginBottom: '30px' 
+                        }}
+                    >
                         {description}
                     </div>
                 </Draggable>
