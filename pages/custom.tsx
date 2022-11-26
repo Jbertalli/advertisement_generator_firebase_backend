@@ -17,8 +17,8 @@ export default function Custom() {
     const [backgroundColor, setBackgroundColor] = useState<string>('');
     const [mediaPreview, setMediaPreview] = useState<string>('');
     const [image, setImage] = useState({name: '', media: ''});
-    const [imageWidth, setImageWidth] = useState<string>('');
-    const [imageHeight, setImageHeight] = useState<string>('');
+    const [imageWidth, setImageWidth] = useState<string>('100');
+    const [imageHeight, setImageHeight] = useState<string>('100');
     const [imageRotation, setImageRotation] = useState<string>('');
 
     function handleChange(event) {
@@ -168,9 +168,25 @@ export default function Custom() {
                 </div>
                 <div>
                     <input
+                        min='0'
+                        max='1000'
+                        step='10'
                         type='number'
                         value={imageWidth}
                         onChange={(e) => setImageWidth(e.target.value)}
+                    />
+                </div>
+                <div>
+                    Image Height (pixels)
+                </div>
+                <div>
+                    <input
+                        min='0'
+                        max='1000'
+                        step='10'
+                        type='number'
+                        value={imageHeight}
+                        onChange={(e) => setImageHeight(e.target.value)}
                     />
                 </div>
             </div>
@@ -207,7 +223,7 @@ export default function Custom() {
                             src={mediaPreview}
                             style={{ 
                                 width: `${imageWidth}px`, 
-                                height: '100px',
+                                height: `${imageHeight}px`,
                                 cursor: 'move'
                             }}
                         />    
