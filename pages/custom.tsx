@@ -163,6 +163,16 @@ export default function Custom() {
                         onChange={handleChange}
                     />
                 </div>
+                <div>
+                    Image Width (pixels)
+                </div>
+                <div>
+                    <input
+                        type='number'
+                        value={imageWidth}
+                        onChange={(e) => setImageWidth(e.target.value)}
+                    />
+                </div>
             </div>
             <Divider />
             <Container 
@@ -196,7 +206,7 @@ export default function Custom() {
                             type="image" 
                             src={mediaPreview}
                             style={{ 
-                                width: '100px', 
+                                width: `${imageWidth}px`, 
                                 height: '100px',
                                 cursor: 'move'
                             }}
