@@ -2,6 +2,7 @@ import Head from 'next/head';
 import styles from '../styles/advertisement.module.css';
 import React, { useEffect, useState } from 'react';
 import { Divider, Container } from 'semantic-ui-react';
+import Draggable from 'react-draggable';
 
 export default function Custom() {
     const [company, setCompany] = useState<string>('');
@@ -98,25 +99,41 @@ export default function Custom() {
                     height: '50vh',
                     width: '100vw'
                 }}>
-                <div>
-                    {company}
-                </div>
-                <div>
-                    {description}
-                </div>
-                <div>
+                <Draggable>
+                    <div style={{ display: 'flex', justifyContent: 'center', cursor: 'move' }}>
+                        {company}
+                    </div>
+                </Draggable>
+                <Draggable>
+                    <div style={{ display: 'flex', justifyContent: 'center', cursor: 'move' }}>
+                        {description}
+                    </div>
+                </Draggable>
+                <Draggable>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            transform: 'translateY(50%)',
+                        }}
+                    >
+                        <input 
+                            type="image" 
+                            src={mediaPreview}
+                            style={{ 
+                                width: '100px', 
+                                height: '100px',
+                                cursor: 'move'
+                            }}
+                        />    
+                    </div>
+                </Draggable>
+                {/* <div>
                     {color}
                 </div>
-                {/* <div>
+                <div>
                     {backgroundColor}
                 </div> */}
-                <div>
-                    <input 
-                        type="image" 
-                        src={mediaPreview}
-                        style={{ width: '100px', height: '100px' }}
-                    />    
-                </div>
             </Container>
         </>
     );
