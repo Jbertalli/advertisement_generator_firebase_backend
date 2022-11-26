@@ -17,6 +17,9 @@ export default function Custom() {
     const [backgroundColor, setBackgroundColor] = useState<string>('');
     const [mediaPreview, setMediaPreview] = useState<string>('');
     const [image, setImage] = useState({name: '', media: ''});
+    const [imageWidth, setImageWidth] = useState<string>('');
+    const [imageHeight, setImageHeight] = useState<string>('');
+    const [imageRotation, setImageRotation] = useState<string>('');
 
     function handleChange(event) {
         const { name, files } = event.target;
