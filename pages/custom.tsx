@@ -6,7 +6,7 @@ import Draggable from 'react-draggable';
 
 export default function Custom() {
     const [company, setCompany] = useState<string>('');
-    const [companyFontSize, setCompanyFontSize] = useState<string>('');
+    const [companyFontSize, setCompanyFontSize] = useState<string>('60');
     const [companyFontWeight, setCompanyFontWeight] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [descriptionFontSize, setDescriptionFontSize] = useState<string>('');
@@ -47,6 +47,16 @@ export default function Custom() {
                         type='text'
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
+                    />
+                </div>
+                <div>
+                    Company Font Size
+                </div>
+                <div>
+                    <input
+                        type='text'
+                        value={companyFontSize}
+                        onChange={(e) => setCompanyFontSize(e.target.value)}
                     />
                 </div>
                 <div>
@@ -98,7 +108,7 @@ export default function Custom() {
                 style={{ 
                     background: `${backgroundColor}`, 
                     color: `${color}`,
-                    fontSize: '50px',
+                    fontSize: `${companyFontSize}px`,
                     fontWeight: '100',
                     height: '50vh',
                     width: '100vw'
