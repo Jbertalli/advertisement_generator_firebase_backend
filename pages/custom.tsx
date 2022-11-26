@@ -112,6 +112,16 @@ export default function Custom() {
         JSON.stringify(descriptionFontWeight))
     }, [descriptionFontWeight]);
 
+    useEffect(() => {
+        const storedBorderWidth = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_BORDER_WIDTH))
+        if (storedBorderWidth) setBorderWidth(storedBorderWidth)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_BORDER_WIDTH, 
+        JSON.stringify(borderWidth))
+    }, [borderWidth]);
+
     return (
         <>
             <Head>
