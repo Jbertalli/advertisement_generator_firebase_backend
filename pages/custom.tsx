@@ -9,7 +9,7 @@ export default function Custom() {
     const [companyFontSize, setCompanyFontSize] = useState<string>('60');
     const [companyFontWeight, setCompanyFontWeight] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-    const [descriptionFontSize, setDescriptionFontSize] = useState<string>('');
+    const [descriptionFontSize, setDescriptionFontSize] = useState<string>('40');
     const [descriptionFontWeight, setDescriptionFontWeight] = useState<string>('');
     const [color, setColor] = useState<string>('');
     const [backgroundColor, setBackgroundColor] = useState<string>('');
@@ -70,6 +70,16 @@ export default function Custom() {
                     />
                 </div>
                 <div>
+                    Description Font Size
+                </div>
+                <div>
+                    <input
+                        type='text'
+                        value={descriptionFontSize}
+                        onChange={(e) => setDescriptionFontSize(e.target.value)}
+                    />
+                </div>
+                <div>
                     Select Text Color
                 </div>
                 <div>
@@ -108,18 +118,17 @@ export default function Custom() {
                 style={{ 
                     background: `${backgroundColor}`, 
                     color: `${color}`,
-                    fontSize: `${companyFontSize}px`,
                     fontWeight: '100',
                     height: '50vh',
                     width: '100vw'
                 }}>
                 <Draggable>
-                    <div style={{ display: 'flex', justifyContent: 'center', cursor: 'move' }}>
+                    <div style={{ fontSize: `${companyFontSize}px`, display: 'flex', justifyContent: 'center', cursor: 'move', marginBottom: '30px' }}>
                         {company}
                     </div>
                 </Draggable>
                 <Draggable>
-                    <div style={{ display: 'flex', justifyContent: 'center', cursor: 'move' }}>
+                    <div style={{ fontSize: `${descriptionFontSize}px`, display: 'flex', justifyContent: 'center', cursor: 'move', marginBottom: '30px' }}>
                         {description}
                     </div>
                 </Draggable>
