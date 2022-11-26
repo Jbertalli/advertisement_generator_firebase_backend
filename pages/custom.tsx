@@ -14,7 +14,7 @@ const LOCAL_STORAGE_KEY_BORDER_WIDTH = 'Border_Width';
 const LOCAL_STORAGE_KEY_BORDER_COLOR = 'Border_Color';
 const LOCAL_STORAGE_KEY_COLOR = 'Color';
 const LOCAL_STORAGE_KEY_BACKGROUND = 'Background';
-const LOCAL_STORAGE_KEY_IMAGE = 'Image';
+const LOCAL_STORAGE_KEY_CUSTOM_IMAGE = 'Custom_Image';
 const LOCAL_STORAGE_KEY_IMAGE_WIDTH = 'Image_Width';
 const LOCAL_STORAGE_KEY_IMAGE_HEIGHT = 'Image_Height';
 const LOCAL_STORAGE_KEY_IMAGE_ROTATION = 'Image_Rotation';
@@ -151,6 +151,16 @@ export default function Custom() {
         localStorage.setItem(LOCAL_STORAGE_KEY_BACKGROUND, 
         JSON.stringify(backgroundColor))
     }, [backgroundColor]);
+
+    useEffect(() => {
+        const storedImage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CUSTOM_IMAGE))
+        if (storedImage) setMediaPreview(storedImage)
+      }, [])
+    
+      useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_CUSTOM_IMAGE, 
+        JSON.stringify(mediaPreview))
+      }, [mediaPreview]);
 
     return (
         <>
