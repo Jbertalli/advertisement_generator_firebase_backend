@@ -52,6 +52,7 @@ export default function Custom() {
                         type='text'
                         value={company}
                         onChange={(e) => setCompany(e.target.value)}
+                        className={styles.input}
                     />
                 </div>
                 <div>
@@ -62,6 +63,8 @@ export default function Custom() {
                         type='text'
                         value={companyFontSize}
                         onChange={(e) => setCompanyFontSize(e.target.value)}
+                        style={{ width: '80px' }}
+                        className={styles.input}
                     />
                 </div>
                 <div>
@@ -75,6 +78,8 @@ export default function Custom() {
                         type='number'
                         value={companyFontWeight}
                         onChange={(e) => setCompanyFontWeight(e.target.value)}
+                        style={{ width: '80px' }}
+                        className={styles.input}
                     />
                 </div>
                 <div>
@@ -85,6 +90,7 @@ export default function Custom() {
                         type='text'
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
+                        className={styles.input}
                     />
                 </div>
                 <div>
@@ -95,6 +101,8 @@ export default function Custom() {
                         type='text'
                         value={descriptionFontSize}
                         onChange={(e) => setDescriptionFontSize(e.target.value)}
+                        style={{ width: '80px' }}
+                        className={styles.input}
                     />
                 </div>
                 <div>
@@ -108,6 +116,8 @@ export default function Custom() {
                         type='number'
                         value={descriptionFontWeight}
                         onChange={(e) => setDescriptionFontWeight(e.target.value)}
+                        style={{ width: '80px' }}
+                        className={styles.input}
                     />
                 </div>
                 <div>
@@ -118,6 +128,8 @@ export default function Custom() {
                         type='text'
                         value={borderWidth}
                         onChange={(e) => setBorderWidth(e.target.value)}
+                        style={{ width: '80px' }}
+                        className={styles.input}
                     />
                 </div>
                 <div>
@@ -128,6 +140,7 @@ export default function Custom() {
                         type='color'
                         value={borderColor}
                         onChange={(e) => setBorderColor(e.target.value)}
+                        style={{ width: '100px', height: '100px' }}
                     />
                 </div>
                 <div>
@@ -174,6 +187,8 @@ export default function Custom() {
                         type='number'
                         value={imageWidth}
                         onChange={(e) => setImageWidth(e.target.value)}
+                        style={{ width: '80px' }}
+                        className={styles.input}
                     />
                 </div>
                 <div>
@@ -187,6 +202,8 @@ export default function Custom() {
                         type='number'
                         value={imageHeight}
                         onChange={(e) => setImageHeight(e.target.value)}
+                        style={{ width: '80px' }}
+                        className={styles.input}
                     />
                 </div>
                 <div>
@@ -200,6 +217,8 @@ export default function Custom() {
                         type='number'
                         value={imageRotation}
                         onChange={(e) => setImageRotation(e.target.value)}
+                        style={{ width: '80px' }}
+                        className={styles.input}
                     />
                 </div>
             </div>
