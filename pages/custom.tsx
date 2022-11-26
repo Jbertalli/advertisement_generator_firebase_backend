@@ -122,6 +122,16 @@ export default function Custom() {
         JSON.stringify(borderWidth))
     }, [borderWidth]);
 
+    useEffect(() => {
+        const storedBorderColor = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_BORDER_COLOR))
+        if (storedBorderColor) setBorderColor(storedBorderColor)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_BORDER_COLOR, 
+        JSON.stringify(borderColor))
+    }, [borderColor]);
+
     return (
         <>
             <Head>
