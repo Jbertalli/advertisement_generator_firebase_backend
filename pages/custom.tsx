@@ -19,7 +19,7 @@ export default function Custom() {
     const [image, setImage] = useState({name: '', media: ''});
     const [imageWidth, setImageWidth] = useState<string>('100');
     const [imageHeight, setImageHeight] = useState<string>('100');
-    const [imageRotation, setImageRotation] = useState<string>('');
+    const [imageRotation, setImageRotation] = useState<string>('0');
 
     function handleChange(event) {
         const { name, files } = event.target;
@@ -189,6 +189,19 @@ export default function Custom() {
                         onChange={(e) => setImageHeight(e.target.value)}
                     />
                 </div>
+                <div>
+                    Image Rotation (degrees)
+                </div>
+                <div>
+                    <input
+                        min='0'
+                        max='360'
+                        step='5'
+                        type='number'
+                        value={imageRotation}
+                        onChange={(e) => setImageRotation(e.target.value)}
+                    />
+                </div>
             </div>
             <Divider />
             <Container 
@@ -224,6 +237,7 @@ export default function Custom() {
                             style={{ 
                                 width: `${imageWidth}px`, 
                                 height: `${imageHeight}px`,
+                                transform: `rotate(${imageRotation}deg)`,
                                 cursor: 'move'
                             }}
                         />    
