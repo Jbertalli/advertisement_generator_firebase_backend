@@ -142,6 +142,16 @@ export default function Custom() {
         JSON.stringify(color))
     }, [color]);
 
+    useEffect(() => {
+        const storedBackgroundColor = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_BACKGROUND))
+        if (storedBackgroundColor) setBackgroundColor(storedBackgroundColor)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_BACKGROUND, 
+        JSON.stringify(backgroundColor))
+    }, [backgroundColor]);
+
     return (
         <>
             <Head>
