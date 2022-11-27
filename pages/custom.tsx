@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/advertisement.module.css';
 import React, { useState } from 'react';
-import { Divider, Container, Segment } from 'semantic-ui-react';
+import { Divider, Container, Segment, Icon } from 'semantic-ui-react';
 import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
 
@@ -21,6 +21,8 @@ export default function Custom() {
     const [imageWidth, setImageWidth] = useState<string>('');
     const [imageHeight, setImageHeight] = useState<string>('');
     const [imageRotation, setImageRotation] = useState<string>('');
+    const [editTitle, setEditTitle] = useState<boolean>(false);
+    const [editDescription, setEditDescription] = useState<boolean>(false);
 
     function handleChange(event) {
         const { name, files } = event.target;
@@ -77,8 +79,242 @@ export default function Custom() {
                         Create a Custom Advertisement
                     </div>
                 </Segment>
+                <div
+                    style={{
+                        fontSize: '18px', 
+                        fontWeight: '500',
+                        color: '#125CA1',
+                        cursor: 'pointer',
+                    }}
+                >
+                    {editTitle ? (
+                    <>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                marginTop: '15px',
+                                marginBottom: '20px',
+                                fontSize: '25px'
+                            }}
+                        >
+                            <span>
+                                Edit Title
+                            </span>
+                            <div
+                                style={{ 
+                                    transform: 'translate(32vw, -4px)',
+                                    color: 'red'
+                                 }}
+                                 onClick={() => setEditTitle(false)}
+                            >
+                                x
+                            </div>
+                        </div>
+                        <div style={{  color: 'black' }}>
+                            <div>
+                                Company Name
+                            </div>
+                            <div>
+                                <input
+                                    type='text'
+                                    placeholder='company'
+                                    value={company}
+                                    onChange={(e) => setCompany(e.target.value)}
+                                    className={styles.input}
+                                />
+                            </div>
+                            <div>
+                                Company Font Size
+                            </div>
+                            <div>
+                                <input
+                                    type='text'
+                                    value={companyFontSize}
+                                    onChange={(e) => setCompanyFontSize(e.target.value)}
+                                    style={{ width: '80px' }}
+                                    className={styles.input}
+                                />
+                            </div>
+                            <div>
+                                Company Font Weight (Boldness)
+                            </div>
+                            <div>
+                                <input
+                                    min='100'
+                                    max='900'
+                                    step='100'
+                                    type='number'
+                                    value={companyFontWeight}
+                                    onChange={(e) => setCompanyFontWeight(e.target.value)}
+                                    style={{ width: '80px' }}
+                                    className={styles.input}
+                                />
+                            </div>
+                        </div>
+                    </>
+                    ):(
+                    <>
+                        <div
+                            onClick={() => setEditTitle(true)}
+                        >
+                            <div 
+                                style={{ 
+                                    marginLeft: '-25px',
+                                    display: 'flex',
+                                    transform: 'translateY(100%) scale(0.8)'
+                                }}
+                            >
+                                <Icon
+                                    name='chevron down'
+                                />
+                            </div>
+                            <div
+                                style={{ 
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                Edit Title
+                            </div>
+                        </div>
+                    </>
+                    )}
+                </div>
+                <Divider />
+                <div
+                    style={{
+                        fontSize: '18px', 
+                        fontWeight: '500',
+                        color: '#125CA1',
+                        cursor: 'pointer',
+                    }}
+                >
+                    {editDescription ? (
+                    <>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                marginTop: '15px',
+                                marginBottom: '20px',
+                                fontSize: '25px'
+                            }}
+                        >
+                            <span>
+                                Edit Description
+                            </span>
+                            <div
+                                style={{ 
+                                    transform: 'translate(25vw, -4px)',
+                                    color: 'red'
+                                 }}
+                                 onClick={() => setEditDescription(false)}
+                            >
+                                x
+                            </div>
+                        </div>
+                        <div style={{  color: 'black' }}>
+                            <div>
+                                Advertisement Description
+                            </div>
+                            <div>
+                                <input
+                                    type='text'
+                                    placeholder='description'
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    className={styles.input}
+                                />
+                            </div>
+                            <div>
+                                Description Font Size
+                            </div>
+                            <div>
+                                <input
+                                    type='text'
+                                    value={descriptionFontSize}
+                                    onChange={(e) => setDescriptionFontSize(e.target.value)}
+                                    style={{ width: '80px' }}
+                                    className={styles.input}
+                                />
+                            </div>
+                            <div>
+                                Description Font Weight (Boldness)
+                            </div>
+                            <div>
+                                <input
+                                    min='100'
+                                    max='900'
+                                    step='100'
+                                    type='number'
+                                    value={descriptionFontWeight}
+                                    onChange={(e) => setDescriptionFontWeight(e.target.value)}
+                                    style={{ width: '80px' }}
+                                    className={styles.input}
+                                />
+                            </div>
+                        </div>
+                    </>
+                    ):(
+                    <>
+                        <div
+                            style={{ transform: 'translateY(-8px)' }}
+                            onClick={() => setEditDescription(true)}
+                        >
+                            <div 
+                                style={{ 
+                                    marginLeft: '-25px',
+                                    display: 'flex',
+                                    transform: 'translateY(100%) scale(0.8)'
+                                }}
+                            >
+                                <Icon
+                                    name='chevron down'
+                                />
+                            </div>
+                            <div
+                                style={{ 
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                Edit Description
+                            </div>
+                        </div>
+                    </>
+                    )}
+                </div>
+                <Divider />
+                <div
+                    style={{ 
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}
+                >
+                    Edit Border
+                </div>
+                <Divider />
+                <div
+                    style={{ 
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}
+                >
+                    Global Edits
+                </div>
+                <Divider />
+                <div
+                    style={{ 
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}
+                >
+                    Edit Image
+                </div>
+                <Divider />
                 <div style={{ margin: '20px' }}>
-                    <div>
+                    {/* <div>
                         Company Name
                     </div>
                     <div>
@@ -116,8 +352,8 @@ export default function Custom() {
                             style={{ width: '80px' }}
                             className={styles.input}
                         />
-                    </div>
-                    <div>
+                    </div> */}
+                    {/* <div>
                         Advertisement Description
                     </div>
                     <div>
@@ -155,7 +391,7 @@ export default function Custom() {
                             style={{ width: '80px' }}
                             className={styles.input}
                         />
-                    </div>
+                    </div> */}
                     <div>
                         Border Width
                     </div>
