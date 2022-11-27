@@ -23,6 +23,7 @@ export default function Custom() {
     const [imageRotation, setImageRotation] = useState<string>('');
     const [editTitle, setEditTitle] = useState<boolean>(false);
     const [editDescription, setEditDescription] = useState<boolean>(false);
+    const [editBorder, setEditBorder] = useState<boolean>(false);
 
     function handleChange(event) {
         const { name, files } = event.target;
@@ -287,12 +288,91 @@ export default function Custom() {
                 </div>
                 <Divider />
                 <div
-                    style={{ 
-                        display: 'flex',
-                        justifyContent: 'center'
+                    style={{
+                        fontSize: '18px', 
+                        fontWeight: '500',
+                        color: '#125CA1',
+                        cursor: 'pointer',
                     }}
                 >
-                    Edit Border
+                    {editBorder ? (
+                    <>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                marginTop: '15px',
+                                marginBottom: '20px',
+                                fontSize: '25px'
+                            }}
+                        >
+                            <span>
+                                Edit Border
+                            </span>
+                            <div
+                                style={{ 
+                                    transform: 'translate(25vw, -4px)',
+                                    color: 'red'
+                                 }}
+                                 onClick={() => setEditBorder(false)}
+                            >
+                                x
+                            </div>
+                        </div>
+                        <div style={{  color: 'black' }}>
+                            <div>
+                                Border Width
+                            </div>
+                            <div>
+                                <input
+                                    type='text'
+                                    value={borderWidth}
+                                    onChange={(e) => setBorderWidth(e.target.value)}
+                                    style={{ width: '80px' }}
+                                    className={styles.input}
+                                />
+                            </div>
+                            <div>
+                                Border Color
+                            </div>
+                        </div>
+                        <div>
+                            <input
+                                type='color'
+                                value={borderColor}
+                                onChange={(e) => setBorderColor(e.target.value)}
+                                style={{ width: '100px', height: '100px' }}
+                            />
+                        </div>
+                    </>
+                    ):(
+                    <>
+                        <div
+                            style={{ transform: 'translateY(-8px)' }}
+                            onClick={() => setEditBorder(true)}
+                        >
+                            <div 
+                                style={{ 
+                                    marginLeft: '-25px',
+                                    display: 'flex',
+                                    transform: 'translateY(100%) scale(0.8)'
+                                }}
+                            >
+                                <Icon
+                                    name='chevron down'
+                                />
+                            </div>
+                            <div
+                                style={{ 
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                Edit Border
+                            </div>
+                        </div>
+                    </>
+                    )}
                 </div>
                 <Divider />
                 <div
@@ -392,7 +472,7 @@ export default function Custom() {
                             className={styles.input}
                         />
                     </div> */}
-                    <div>
+                    {/* <div>
                         Border Width
                     </div>
                     <div>
@@ -414,7 +494,7 @@ export default function Custom() {
                             onChange={(e) => setBorderColor(e.target.value)}
                             style={{ width: '100px', height: '100px' }}
                         />
-                    </div>
+                    </div> */}
                     <div>
                         Select Text Color
                     </div>
