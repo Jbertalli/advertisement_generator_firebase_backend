@@ -32,7 +32,7 @@ export default function Custom() {
     const [backgroundColor, setBackgroundColor] = useState<string>('');
     const [mediaPreview, setMediaPreview] = useState<string>('');
     const [image, setImage] = useState({name: '', media: ''});
-    const [imageWidth, setImageWidth] = useState<string>('100');
+    const [imageWidth, setImageWidth] = useState<string>('');
     const [imageHeight, setImageHeight] = useState<string>('100');
     const [imageRotation, setImageRotation] = useState<string>('0');
 
@@ -157,10 +157,20 @@ export default function Custom() {
         if (storedImage) setMediaPreview(storedImage)
       }, [])
     
-      useEffect(() => {
+    useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_CUSTOM_IMAGE, 
         JSON.stringify(mediaPreview))
-      }, [mediaPreview]);
+    }, [mediaPreview]);
+
+    useEffect(() => {
+        const storedImageWidth = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE_WIDTH))
+        if (storedImageWidth) setImageWidth(storedImageWidth)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE_WIDTH, 
+        JSON.stringify(imageWidth))
+    }, [imageWidth]);
 
     return (
         <>
