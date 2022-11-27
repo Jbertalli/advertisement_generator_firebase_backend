@@ -24,6 +24,7 @@ export default function Custom() {
     const [editTitle, setEditTitle] = useState<boolean>(false);
     const [editDescription, setEditDescription] = useState<boolean>(false);
     const [editBorder, setEditBorder] = useState<boolean>(false);
+    const [editGlobal, setEditGlobal] = useState<boolean>(false);
 
     function handleChange(event) {
         const { name, files } = event.target;
@@ -207,7 +208,7 @@ export default function Custom() {
                             </span>
                             <div
                                 style={{ 
-                                    transform: 'translate(25vw, -4px)',
+                                    transform: 'translate(24vw, -4px)',
                                     color: 'red'
                                  }}
                                  onClick={() => setEditDescription(false)}
@@ -311,7 +312,7 @@ export default function Custom() {
                             </span>
                             <div
                                 style={{ 
-                                    transform: 'translate(25vw, -4px)',
+                                    transform: 'translate(29.2vw, -4px)',
                                     color: 'red'
                                  }}
                                  onClick={() => setEditBorder(false)}
@@ -376,12 +377,90 @@ export default function Custom() {
                 </div>
                 <Divider />
                 <div
-                    style={{ 
-                        display: 'flex',
-                        justifyContent: 'center'
+                    style={{
+                        fontSize: '18px', 
+                        fontWeight: '500',
+                        color: '#125CA1',
+                        cursor: 'pointer',
                     }}
                 >
-                    Global Edits
+                    {editGlobal ? (
+                    <>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                marginTop: '15px',
+                                marginBottom: '20px',
+                                fontSize: '25px'
+                            }}
+                        >
+                            <span>
+                                Edit Global
+                            </span>
+                            <div
+                                style={{ 
+                                    transform: 'translate(29.5vw, -4px)',
+                                    color: 'red'
+                                 }}
+                                 onClick={() => setEditGlobal(false)}
+                            >
+                                x
+                            </div>
+                        </div>
+                        <div style={{  color: 'black' }}>
+                            <div>
+                                Select Text Color
+                            </div>
+                            <div>
+                                <input 
+                                    type='color'
+                                    value={color}
+                                    onChange={(e) => setColor(e.target.value)}
+                                    style={{ width: '100px', height: '100px' }}
+                                />
+                            </div>
+                            <div>
+                                Select Background Color
+                            </div>
+                            <div>
+                                <input 
+                                    type='color'
+                                    value={backgroundColor}
+                                    onChange={(e) => setBackgroundColor(e.target.value)}
+                                    style={{ width: '100px', height: '100px' }}
+                                />
+                            </div>
+                        </div>
+                    </>
+                    ):(
+                    <>
+                        <div
+                            style={{ transform: 'translateY(-8px)' }}
+                            onClick={() => setEditGlobal(true)}
+                        >
+                            <div 
+                                style={{ 
+                                    marginLeft: '-25px',
+                                    display: 'flex',
+                                    transform: 'translateY(100%) scale(0.8)'
+                                }}
+                            >
+                                <Icon
+                                    name='chevron down'
+                                />
+                            </div>
+                            <div
+                                style={{ 
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                Edit Global
+                            </div>
+                        </div>
+                    </>
+                    )}
                 </div>
                 <Divider />
                 <div
@@ -495,7 +574,7 @@ export default function Custom() {
                             style={{ width: '100px', height: '100px' }}
                         />
                     </div> */}
-                    <div>
+                    {/* <div>
                         Select Text Color
                     </div>
                     <div>
@@ -516,7 +595,7 @@ export default function Custom() {
                             onChange={(e) => setBackgroundColor(e.target.value)}
                             style={{ width: '100px', height: '100px' }}
                         />
-                    </div>
+                    </div> */}
                     <div>
                         <input
                             name="media"
