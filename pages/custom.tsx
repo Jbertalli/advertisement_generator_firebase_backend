@@ -182,6 +182,15 @@ export default function Custom() {
         JSON.stringify(imageHeight))
     }, [imageHeight]);
 
+    useEffect(() => {
+        const storedImageRotation = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE_ROTATION))
+        if (storedImageRotation) setImageRotation(storedImageRotation)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE_ROTATION, 
+        JSON.stringify(imageRotation))
+    }, [imageRotation]);
 
     return (
         <>
