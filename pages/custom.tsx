@@ -159,7 +159,7 @@ export default function Custom() {
                     ):(
                     <>
                         <div
-                            onClick={() => setEditTitle(true)}
+                            onClick={() => {setEditTitle(true), setEditDescription(false), setEditBorder(false), setEditGlobal(false), setEditImage(false)}}
                         >
                             <div 
                                 style={{ 
@@ -263,7 +263,7 @@ export default function Custom() {
                     <>
                         <div
                             style={{ transform: 'translateY(-8px)' }}
-                            onClick={() => setEditDescription(true)}
+                            onClick={() => {setEditDescription(true), setEditTitle(false), setEditBorder(false), setEditGlobal(false), setEditImage(false)}}
                         >
                             <div 
                                 style={{ 
@@ -351,7 +351,7 @@ export default function Custom() {
                     <>
                         <div
                             style={{ transform: 'translateY(-8px)' }}
-                            onClick={() => setEditBorder(true)}
+                            onClick={() => {setEditBorder(true), setEditTitle(false), setEditDescription(false), setEditGlobal(false), setEditImage(false)}}
                         >
                             <div 
                                 style={{ 
@@ -438,7 +438,7 @@ export default function Custom() {
                     <>
                         <div
                             style={{ transform: 'translateY(-8px)' }}
-                            onClick={() => setEditGlobal(true)}
+                            onClick={() => {setEditGlobal(true), setEditTitle(false), setEditDescription(false), setEditBorder(false), setEditImage(false)}}
                         >
                             <div 
                                 style={{ 
@@ -559,7 +559,7 @@ export default function Custom() {
                     <>
                         <div
                             style={{ transform: 'translateY(-8px)' }}
-                            onClick={() => setEditImage(true)}
+                            onClick={() => {setEditImage(true), setEditTitle(false), setEditDescription(false), setEditBorder(false), setEditGlobal(false)}}
                         >
                             <div 
                                 style={{ 
@@ -585,187 +585,6 @@ export default function Custom() {
                     )}
                 </div>
                 <Divider />
-                <div style={{ margin: '20px' }}>
-                    {/* <div>
-                        Company Name
-                    </div>
-                    <div>
-                        <input
-                            type='text'
-                            placeholder='company'
-                            value={company}
-                            onChange={(e) => setCompany(e.target.value)}
-                            className={styles.input}
-                        />
-                    </div>
-                    <div>
-                        Company Font Size
-                    </div>
-                    <div>
-                        <input
-                            type='text'
-                            value={companyFontSize}
-                            onChange={(e) => setCompanyFontSize(e.target.value)}
-                            style={{ width: '80px' }}
-                            className={styles.input}
-                        />
-                    </div>
-                    <div>
-                        Company Font Weight (Boldness)
-                    </div>
-                    <div>
-                        <input
-                            min='100'
-                            max='900'
-                            step='100'
-                            type='number'
-                            value={companyFontWeight}
-                            onChange={(e) => setCompanyFontWeight(e.target.value)}
-                            style={{ width: '80px' }}
-                            className={styles.input}
-                        />
-                    </div> */}
-                    {/* <div>
-                        Advertisement Description
-                    </div>
-                    <div>
-                        <input
-                            type='text'
-                            placeholder='description'
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                            className={styles.input}
-                        />
-                    </div>
-                    <div>
-                        Description Font Size
-                    </div>
-                    <div>
-                        <input
-                            type='text'
-                            value={descriptionFontSize}
-                            onChange={(e) => setDescriptionFontSize(e.target.value)}
-                            style={{ width: '80px' }}
-                            className={styles.input}
-                        />
-                    </div>
-                    <div>
-                        Description Font Weight (Boldness)
-                    </div>
-                    <div>
-                        <input
-                            min='100'
-                            max='900'
-                            step='100'
-                            type='number'
-                            value={descriptionFontWeight}
-                            onChange={(e) => setDescriptionFontWeight(e.target.value)}
-                            style={{ width: '80px' }}
-                            className={styles.input}
-                        />
-                    </div> */}
-                    {/* <div>
-                        Border Width
-                    </div>
-                    <div>
-                        <input
-                            type='text'
-                            value={borderWidth}
-                            onChange={(e) => setBorderWidth(e.target.value)}
-                            style={{ width: '80px' }}
-                            className={styles.input}
-                        />
-                    </div>
-                    <div>
-                        Border Color
-                    </div>
-                    <div>
-                        <input
-                            type='color'
-                            value={borderColor}
-                            onChange={(e) => setBorderColor(e.target.value)}
-                            style={{ width: '100px', height: '100px' }}
-                        />
-                    </div> */}
-                    {/* <div>
-                        Select Text Color
-                    </div>
-                    <div>
-                        <input 
-                            type='color'
-                            value={color}
-                            onChange={(e) => setColor(e.target.value)}
-                            style={{ width: '100px', height: '100px' }}
-                        />
-                    </div>
-                    <div>
-                        Select Background Color
-                    </div>
-                    <div>
-                        <input 
-                            type='color'
-                            value={backgroundColor}
-                            onChange={(e) => setBackgroundColor(e.target.value)}
-                            style={{ width: '100px', height: '100px' }}
-                        />
-                    </div> */}
-                    {/* <div>
-                        <input
-                            name="media"
-                            type="file"
-                            accept="image/*"
-                            // content="Select Image"
-                            style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
-                            className={styles.file}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        Image Width (pixels)
-                    </div>
-                    <div>
-                        <input
-                            min='0'
-                            max='1000'
-                            step='10'
-                            type='number'
-                            value={imageWidth}
-                            onChange={(e) => setImageWidth(e.target.value)}
-                            style={{ width: '80px' }}
-                            className={styles.input}
-                        />
-                    </div>
-                    <div>
-                        Image Height (pixels)
-                    </div>
-                    <div>
-                        <input
-                            min='0'
-                            max='1000'
-                            step='10'
-                            type='number'
-                            value={imageHeight}
-                            onChange={(e) => setImageHeight(e.target.value)}
-                            style={{ width: '80px' }}
-                            className={styles.input}
-                        />
-                    </div>
-                    <div>
-                        Image Rotation (degrees)
-                    </div>
-                    <div>
-                        <input
-                            min='0'
-                            max='360'
-                            step='5'
-                            type='number'
-                            value={imageRotation}
-                            onChange={(e) => setImageRotation(e.target.value)}
-                            style={{ width: '80px', marginBottom: '30px' }}
-                            className={styles.input}
-                        />
-                    </div> */}
-                </div>
             </Container>
             <Divider />
             <Container 
