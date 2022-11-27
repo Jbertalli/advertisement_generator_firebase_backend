@@ -115,7 +115,7 @@ export default function Custom() {
                             </div>
                         </div>
                         <div style={{  color: 'black' }}>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Company Name
                             </div>
                             <div>
@@ -125,9 +125,10 @@ export default function Custom() {
                                     value={company}
                                     onChange={(e) => setCompany(e.target.value)}
                                     className={styles.input}
+                                    style={{ marginBottom: '25px' }}
                                 />
                             </div>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Company Font Size
                             </div>
                             <div>
@@ -135,11 +136,11 @@ export default function Custom() {
                                     type='text'
                                     value={companyFontSize}
                                     onChange={(e) => setCompanyFontSize(e.target.value)}
-                                    style={{ width: '80px' }}
+                                    style={{ width: '80px', marginBottom: '25px' }}
                                     className={styles.input}
                                 />
                             </div>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Company Font Weight (Boldness)
                             </div>
                             <div>
@@ -150,7 +151,7 @@ export default function Custom() {
                                     type='number'
                                     value={companyFontWeight}
                                     onChange={(e) => setCompanyFontWeight(e.target.value)}
-                                    style={{ width: '80px' }}
+                                    style={{ width: '80px', marginBottom: '15px' }}
                                     className={styles.input}
                                 />
                             </div>
@@ -218,7 +219,7 @@ export default function Custom() {
                             </div>
                         </div>
                         <div style={{  color: 'black' }}>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Advertisement Description
                             </div>
                             <div>
@@ -228,9 +229,10 @@ export default function Custom() {
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     className={styles.input}
+                                    style={{ marginBottom: '25px' }}
                                 />
                             </div>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Description Font Size
                             </div>
                             <div>
@@ -238,11 +240,11 @@ export default function Custom() {
                                     type='text'
                                     value={descriptionFontSize}
                                     onChange={(e) => setDescriptionFontSize(e.target.value)}
-                                    style={{ width: '80px' }}
+                                    style={{ width: '80px', marginBottom: '25px' }}
                                     className={styles.input}
                                 />
                             </div>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Description Font Weight (Boldness)
                             </div>
                             <div>
@@ -253,7 +255,7 @@ export default function Custom() {
                                     type='number'
                                     value={descriptionFontWeight}
                                     onChange={(e) => setDescriptionFontWeight(e.target.value)}
-                                    style={{ width: '80px' }}
+                                    style={{ width: '80px', marginBottom: '15px' }}
                                     className={styles.input}
                                 />
                             </div>
@@ -322,7 +324,7 @@ export default function Custom() {
                             </div>
                         </div>
                         <div style={{  color: 'black' }}>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Border Width
                             </div>
                             <div>
@@ -330,11 +332,11 @@ export default function Custom() {
                                     type='text'
                                     value={borderWidth}
                                     onChange={(e) => setBorderWidth(e.target.value)}
-                                    style={{ width: '80px' }}
+                                    style={{ width: '80px', marginBottom: '25px' }}
                                     className={styles.input}
                                 />
                             </div>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Border Color
                             </div>
                         </div>
@@ -343,7 +345,7 @@ export default function Custom() {
                                 type='color'
                                 value={borderColor}
                                 onChange={(e) => setBorderColor(e.target.value)}
-                                style={{ width: '100px', height: '100px' }}
+                                style={{ width: '100px', height: '100px', marginBottom: '15px' }}
                             />
                         </div>
                     </>
@@ -410,7 +412,7 @@ export default function Custom() {
                             </div>
                         </div>
                         <div style={{  color: 'black' }}>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Select Text Color
                             </div>
                             <div>
@@ -418,10 +420,10 @@ export default function Custom() {
                                     type='color'
                                     value={color}
                                     onChange={(e) => setColor(e.target.value)}
-                                    style={{ width: '100px', height: '100px' }}
+                                    style={{ width: '100px', height: '100px', marginBottom: '25px' }}
                                 />
                             </div>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Select Background Color
                             </div>
                             <div>
@@ -429,7 +431,7 @@ export default function Custom() {
                                     type='color'
                                     value={backgroundColor}
                                     onChange={(e) => setBackgroundColor(e.target.value)}
-                                    style={{ width: '100px', height: '100px' }}
+                                    style={{ width: '100px', height: '100px', marginBottom: '15px' }}
                                 />
                             </div>
                         </div>
@@ -503,12 +505,16 @@ export default function Custom() {
                                     type="file"
                                     accept="image/*"
                                     // content="Select Image"
-                                    style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
+                                    style={{ 
+                                        width: '30vw', 
+                                        transform: 'translateX(-.2vw)' ,
+                                        marginBottom: '25px'
+                                    }}
                                     className={styles.file}
                                     onChange={handleChange}
                                 />
                             </div>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Image Width (pixels)
                             </div>
                             <div>
@@ -519,11 +525,11 @@ export default function Custom() {
                                     type='number'
                                     value={imageWidth}
                                     onChange={(e) => setImageWidth(e.target.value)}
-                                    style={{ width: '80px' }}
+                                    style={{ width: '80px', marginBottom: '25px' }}
                                     className={styles.input}
                                 />
                             </div>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Image Height (pixels)
                             </div>
                             <div>
@@ -534,11 +540,11 @@ export default function Custom() {
                                     type='number'
                                     value={imageHeight}
                                     onChange={(e) => setImageHeight(e.target.value)}
-                                    style={{ width: '80px' }}
+                                    style={{ width: '80px', marginBottom: '25px' }}
                                     className={styles.input}
                                 />
                             </div>
-                            <div>
+                            <div style={{ marginBottom: '5px' }}>
                                 Image Rotation (degrees)
                             </div>
                             <div>
@@ -549,7 +555,7 @@ export default function Custom() {
                                     type='number'
                                     value={imageRotation}
                                     onChange={(e) => setImageRotation(e.target.value)}
-                                    style={{ width: '80px', marginBottom: '30px' }}
+                                    style={{ width: '80px', marginBottom: '15px' }}
                                     className={styles.input}
                                 />
                             </div>
