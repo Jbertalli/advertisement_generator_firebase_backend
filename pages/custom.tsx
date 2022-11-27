@@ -25,6 +25,7 @@ export default function Custom() {
     const [editDescription, setEditDescription] = useState<boolean>(false);
     const [editBorder, setEditBorder] = useState<boolean>(false);
     const [editGlobal, setEditGlobal] = useState<boolean>(false);
+    const [editImage, setEditImage] = useState<boolean>(false);
 
     function handleChange(event) {
         const { name, files } = event.target;
@@ -464,12 +465,124 @@ export default function Custom() {
                 </div>
                 <Divider />
                 <div
-                    style={{ 
-                        display: 'flex',
-                        justifyContent: 'center'
+                    style={{
+                        fontSize: '18px', 
+                        fontWeight: '500',
+                        color: '#125CA1',
+                        cursor: 'pointer',
                     }}
                 >
-                    Edit Image
+                    {editImage ? (
+                    <>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                marginTop: '15px',
+                                marginBottom: '20px',
+                                fontSize: '25px'
+                            }}
+                        >
+                            <span>
+                                Edit Border
+                            </span>
+                            <div
+                                style={{ 
+                                    transform: 'translate(29.2vw, -4px)',
+                                    color: 'red'
+                                 }}
+                                 onClick={() => setEditImage(false)}
+                            >
+                                x
+                            </div>
+                        </div>
+                        <div style={{  color: 'black' }}>
+                            <div>
+                                <input
+                                    name="media"
+                                    type="file"
+                                    accept="image/*"
+                                    // content="Select Image"
+                                    style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
+                                    className={styles.file}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div>
+                                Image Width (pixels)
+                            </div>
+                            <div>
+                                <input
+                                    min='0'
+                                    max='1000'
+                                    step='10'
+                                    type='number'
+                                    value={imageWidth}
+                                    onChange={(e) => setImageWidth(e.target.value)}
+                                    style={{ width: '80px' }}
+                                    className={styles.input}
+                                />
+                            </div>
+                            <div>
+                                Image Height (pixels)
+                            </div>
+                            <div>
+                                <input
+                                    min='0'
+                                    max='1000'
+                                    step='10'
+                                    type='number'
+                                    value={imageHeight}
+                                    onChange={(e) => setImageHeight(e.target.value)}
+                                    style={{ width: '80px' }}
+                                    className={styles.input}
+                                />
+                            </div>
+                            <div>
+                                Image Rotation (degrees)
+                            </div>
+                            <div>
+                                <input
+                                    min='0'
+                                    max='360'
+                                    step='5'
+                                    type='number'
+                                    value={imageRotation}
+                                    onChange={(e) => setImageRotation(e.target.value)}
+                                    style={{ width: '80px', marginBottom: '30px' }}
+                                    className={styles.input}
+                                />
+                            </div>
+                        </div>
+                    </>
+                    ):(
+                    <>
+                        <div
+                            style={{ transform: 'translateY(-8px)' }}
+                            onClick={() => setEditImage(true)}
+                        >
+                            <div 
+                                style={{ 
+                                    marginLeft: '-25px',
+                                    display: 'flex',
+                                    transform: 'translateY(100%) scale(0.8)'
+                                }}
+                            >
+                                <Icon
+                                    name='chevron down'
+                                />
+                            </div>
+                            <div
+                                style={{ 
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                Edit Image
+                            </div>
+                        </div>
+                    </>
+                    )}
                 </div>
                 <Divider />
                 <div style={{ margin: '20px' }}>
@@ -596,7 +709,7 @@ export default function Custom() {
                             style={{ width: '100px', height: '100px' }}
                         />
                     </div> */}
-                    <div>
+                    {/* <div>
                         <input
                             name="media"
                             type="file"
@@ -651,7 +764,7 @@ export default function Custom() {
                             style={{ width: '80px', marginBottom: '30px' }}
                             className={styles.input}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </Container>
             <Divider />
