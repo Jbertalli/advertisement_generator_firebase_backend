@@ -14,8 +14,9 @@ const LOCAL_STORAGE_KEY_CUSTOM_IMAGE = 'Custom_Image';
 const LOCAL_STORAGE_KEY_IMAGE_WIDTH = 'Image_Width';
 const LOCAL_STORAGE_KEY_IMAGE_HEIGHT = 'Image_Height';
 const LOCAL_STORAGE_KEY_IMAGE_ROTATION = 'Image_Rotation';
+const LOCAL_STORAGE_KEY_EDIT_TITLE = 'Edit_Title';
 
-export default function LocalCustom({ company, setCompany, companyFontSize, setCompanyFontSize, companyFontWeight, setCompanyFontWeight, description, setDescription, descriptionFontSize, setDescriptionFontSize, descriptionFontWeight, setDescriptionFontWeight, borderWidth, setBorderWidth, borderColor, setBorderColor, color, setColor, backgroundColor, setBackgroundColor, mediaPreview, setMediaPreview, image, setImage, imageWidth, setImageWidth, imageHeight, setImageHeight, imageRotation, setImageRotation }) {
+export default function LocalCustom({ company, setCompany, companyFontSize, setCompanyFontSize, companyFontWeight, setCompanyFontWeight, description, setDescription, descriptionFontSize, setDescriptionFontSize, descriptionFontWeight, setDescriptionFontWeight, borderWidth, setBorderWidth, borderColor, setBorderColor, color, setColor, backgroundColor, setBackgroundColor, mediaPreview, setMediaPreview, image, setImage, imageWidth, setImageWidth, imageHeight, setImageHeight, imageRotation, setImageRotation, editTitle, setEditTitle }) {
 
     useEffect(() => {
         const storedCompany = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_COMPANY))
@@ -156,6 +157,16 @@ export default function LocalCustom({ company, setCompany, companyFontSize, setC
         localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE_ROTATION, 
         JSON.stringify(imageRotation))
     }, [imageRotation]);
+
+    useEffect(() => {
+        const storedEditTitle = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_EDIT_TITLE))
+        if (storedEditTitle) setEditTitle(storedEditTitle)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_EDIT_TITLE, 
+        JSON.stringify(editTitle))
+    }, [editTitle]);
 
     return (
         <></>
