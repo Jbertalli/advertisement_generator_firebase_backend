@@ -121,7 +121,7 @@ export default function Custom() {
                                 x
                             </div>
                         </div>
-                        <div style={{  color: 'black' }}>
+                        <div style={{  color: 'black', marginLeft: '8vw' }}>
                             <div style={{ marginBottom: '5px' }}>
                                 Company Name
                             </div>
@@ -230,7 +230,7 @@ export default function Custom() {
                                 x
                             </div>
                         </div>
-                        <div style={{  color: 'black' }}>
+                        <div style={{  color: 'black', marginLeft: '8vw' }}>
                             <div style={{ marginBottom: '5px' }}>
                                 Advertisement Description
                             </div>
@@ -340,7 +340,7 @@ export default function Custom() {
                                 x
                             </div>
                         </div>
-                        <div style={{  color: 'black' }}>
+                        <div style={{  color: 'black', marginLeft: '8vw' }}>
                             <div style={{ marginBottom: '5px' }}>
                                 Border Width
                             </div>
@@ -357,7 +357,7 @@ export default function Custom() {
                                 Border Color
                             </div>
                         </div>
-                        <div>
+                        <div style={{ marginLeft: '8vw' }}>
                             <input
                                 type='color'
                                 value={borderColor}
@@ -433,7 +433,7 @@ export default function Custom() {
                                 x
                             </div>
                         </div>
-                        <div style={{  color: 'black' }}>
+                        <div style={{  color: 'black', marginLeft: '8vw' }}>
                             <div style={{ marginBottom: '5px' }}>
                                 Select Text Color
                             </div>
@@ -525,7 +525,7 @@ export default function Custom() {
                                 x
                             </div>
                         </div>
-                        <div style={{  color: 'black' }}>
+                        <div style={{  color: 'black', marginLeft: '8vw' }}>
                             <div>
                                 <input
                                     name="media"
