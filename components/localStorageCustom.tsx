@@ -17,8 +17,9 @@ const LOCAL_STORAGE_KEY_IMAGE_ROTATION = 'Image_Rotation';
 const LOCAL_STORAGE_KEY_EDIT_TITLE = 'Edit_Title';
 const LOCAL_STORAGE_KEY_EDIT_DESCRIPTION = 'Edit_Description';
 const LOCAL_STORAGE_KEY_EDIT_BORDER = 'Edit_Border';
+const LOCAL_STORAGE_KEY_EDIT_GLOBAL = 'Edit_Global';
 
-export default function LocalCustom({ company, setCompany, companyFontSize, setCompanyFontSize, companyFontWeight, setCompanyFontWeight, description, setDescription, descriptionFontSize, setDescriptionFontSize, descriptionFontWeight, setDescriptionFontWeight, borderWidth, setBorderWidth, borderColor, setBorderColor, color, setColor, backgroundColor, setBackgroundColor, mediaPreview, setMediaPreview, image, setImage, imageWidth, setImageWidth, imageHeight, setImageHeight, imageRotation, setImageRotation, editTitle, setEditTitle, editDescription, setEditDescription, editBorder, setEditBorder }) {
+export default function LocalCustom({ company, setCompany, companyFontSize, setCompanyFontSize, companyFontWeight, setCompanyFontWeight, description, setDescription, descriptionFontSize, setDescriptionFontSize, descriptionFontWeight, setDescriptionFontWeight, borderWidth, setBorderWidth, borderColor, setBorderColor, color, setColor, backgroundColor, setBackgroundColor, mediaPreview, setMediaPreview, image, setImage, imageWidth, setImageWidth, imageHeight, setImageHeight, imageRotation, setImageRotation, editTitle, setEditTitle, editDescription, setEditDescription, editBorder, setEditBorder, editGlobal, setEditGlobal }) {
 
     useEffect(() => {
         const storedCompany = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_COMPANY))
@@ -189,6 +190,16 @@ export default function LocalCustom({ company, setCompany, companyFontSize, setC
         localStorage.setItem(LOCAL_STORAGE_KEY_EDIT_BORDER, 
         JSON.stringify(editBorder))
     }, [editBorder]);
+
+    useEffect(() => {
+        const storedEditGlobal = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_EDIT_GLOBAL))
+        if (storedEditGlobal) setEditGlobal(storedEditGlobal)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_EDIT_GLOBAL, 
+        JSON.stringify(editGlobal))
+    }, [editGlobal]);
 
     return (
         <></>
