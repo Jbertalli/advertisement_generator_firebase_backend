@@ -18,8 +18,9 @@ const LOCAL_STORAGE_KEY_EDIT_TITLE = 'Edit_Title';
 const LOCAL_STORAGE_KEY_EDIT_DESCRIPTION = 'Edit_Description';
 const LOCAL_STORAGE_KEY_EDIT_BORDER = 'Edit_Border';
 const LOCAL_STORAGE_KEY_EDIT_GLOBAL = 'Edit_Global';
+const LOCAL_STORAGE_KEY_EDIT_IMAGE = 'Edit_Image';
 
-export default function LocalCustom({ company, setCompany, companyFontSize, setCompanyFontSize, companyFontWeight, setCompanyFontWeight, description, setDescription, descriptionFontSize, setDescriptionFontSize, descriptionFontWeight, setDescriptionFontWeight, borderWidth, setBorderWidth, borderColor, setBorderColor, color, setColor, backgroundColor, setBackgroundColor, mediaPreview, setMediaPreview, image, setImage, imageWidth, setImageWidth, imageHeight, setImageHeight, imageRotation, setImageRotation, editTitle, setEditTitle, editDescription, setEditDescription, editBorder, setEditBorder, editGlobal, setEditGlobal }) {
+export default function LocalCustom({ company, setCompany, companyFontSize, setCompanyFontSize, companyFontWeight, setCompanyFontWeight, description, setDescription, descriptionFontSize, setDescriptionFontSize, descriptionFontWeight, setDescriptionFontWeight, borderWidth, setBorderWidth, borderColor, setBorderColor, color, setColor, backgroundColor, setBackgroundColor, mediaPreview, setMediaPreview, image, setImage, imageWidth, setImageWidth, imageHeight, setImageHeight, imageRotation, setImageRotation, editTitle, setEditTitle, editDescription, setEditDescription, editBorder, setEditBorder, editGlobal, setEditGlobal, editImage, setEditImage }) {
 
     useEffect(() => {
         const storedCompany = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_COMPANY))
@@ -200,6 +201,16 @@ export default function LocalCustom({ company, setCompany, companyFontSize, setC
         localStorage.setItem(LOCAL_STORAGE_KEY_EDIT_GLOBAL, 
         JSON.stringify(editGlobal))
     }, [editGlobal]);
+
+    useEffect(() => {
+        const storedEditImage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_EDIT_IMAGE))
+        if (storedEditImage) setEditImage(storedEditImage)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_EDIT_IMAGE, 
+        JSON.stringify(editImage))
+    }, [editImage]);
 
     return (
         <></>
