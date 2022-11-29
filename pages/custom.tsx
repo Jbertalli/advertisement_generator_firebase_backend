@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import styles from '../styles/advertisement.module.css';
 import React, { useState } from 'react';
-import { Divider, Container, Segment, Icon } from 'semantic-ui-react';
+import Header from '../components/Header';
 import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
+import { Divider, Container, Segment, Icon } from 'semantic-ui-react';
 
 export default function Custom() {
     const [company, setCompany] = useState<string>('');
@@ -50,10 +51,11 @@ export default function Custom() {
                 <meta name="description" content="earnandtrade, advertisement" />
             </Head>
             <LocalCustom company={company} setCompany={setCompany} companyFontSize={companyFontSize} setCompanyFontSize={setCompanyFontSize} companyFontWeight={companyFontWeight} setCompanyFontWeight={setCompanyFontWeight} description={description} setDescription={setDescription} descriptionFontSize={descriptionFontSize} setDescriptionFontSize={setDescriptionFontSize} descriptionFontWeight={descriptionFontWeight} setDescriptionFontWeight={setDescriptionFontWeight} borderWidth={borderWidth} setBorderWidth={setBorderWidth} borderColor={borderColor} setBorderColor={setBorderColor} color={color} setColor={setColor} backgroundColor={backgroundColor} setBackgroundColor={setBackgroundColor} mediaPreview={mediaPreview} setMediaPreview={setMediaPreview} image={image} setImage={setImage} imageWidth={imageWidth} setImageWidth={setImageWidth} imageHeight={imageHeight} setImageHeight={setImageHeight} imageRotation={imageRotation} setImageRotation={setImageRotation} />
+            <Header />
             <Container 
                 size="massive" 
                 style={{ 
-                    margin: '2em', 
+                    margin: '0.5em', 
                     boxShadow: '2px 2px 10px black'
                 }}
             >
