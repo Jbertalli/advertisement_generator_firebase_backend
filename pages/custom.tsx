@@ -638,7 +638,8 @@ export default function Custom() {
                             justifyContent: 'center', 
                             cursor: 'move', 
                             marginBottom: '30px',
-                            marginTop: '30px' 
+                            marginTop: '30px',
+                            lineHeight: '1em'
                         }}
                     >
                         {company}
@@ -651,7 +652,8 @@ export default function Custom() {
                             display: 'flex', 
                             justifyContent: 'center', 
                             cursor: 'move', 
-                            marginBottom: '30px' 
+                            marginBottom: '30px',
+                            lineHeight: '1em'
                         }}
                     >
                         {description}
