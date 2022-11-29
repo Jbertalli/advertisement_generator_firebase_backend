@@ -15,8 +15,9 @@ const LOCAL_STORAGE_KEY_IMAGE_WIDTH = 'Image_Width';
 const LOCAL_STORAGE_KEY_IMAGE_HEIGHT = 'Image_Height';
 const LOCAL_STORAGE_KEY_IMAGE_ROTATION = 'Image_Rotation';
 const LOCAL_STORAGE_KEY_EDIT_TITLE = 'Edit_Title';
+const LOCAL_STORAGE_KEY_EDIT_DESCRIPTION = 'Edit_Description';
 
-export default function LocalCustom({ company, setCompany, companyFontSize, setCompanyFontSize, companyFontWeight, setCompanyFontWeight, description, setDescription, descriptionFontSize, setDescriptionFontSize, descriptionFontWeight, setDescriptionFontWeight, borderWidth, setBorderWidth, borderColor, setBorderColor, color, setColor, backgroundColor, setBackgroundColor, mediaPreview, setMediaPreview, image, setImage, imageWidth, setImageWidth, imageHeight, setImageHeight, imageRotation, setImageRotation, editTitle, setEditTitle }) {
+export default function LocalCustom({ company, setCompany, companyFontSize, setCompanyFontSize, companyFontWeight, setCompanyFontWeight, description, setDescription, descriptionFontSize, setDescriptionFontSize, descriptionFontWeight, setDescriptionFontWeight, borderWidth, setBorderWidth, borderColor, setBorderColor, color, setColor, backgroundColor, setBackgroundColor, mediaPreview, setMediaPreview, image, setImage, imageWidth, setImageWidth, imageHeight, setImageHeight, imageRotation, setImageRotation, editTitle, setEditTitle, editDescription, setEditDescription }) {
 
     useEffect(() => {
         const storedCompany = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_COMPANY))
@@ -167,6 +168,16 @@ export default function LocalCustom({ company, setCompany, companyFontSize, setC
         localStorage.setItem(LOCAL_STORAGE_KEY_EDIT_TITLE, 
         JSON.stringify(editTitle))
     }, [editTitle]);
+
+    useEffect(() => {
+        const storedEditDescription = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_EDIT_DESCRIPTION))
+        if (storedEditDescription) setEditDescription(storedEditDescription)
+      }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_EDIT_DESCRIPTION, 
+        JSON.stringify(editDescription))
+    }, [editDescription]);
 
     return (
         <></>
