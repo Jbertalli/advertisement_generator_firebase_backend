@@ -9,20 +9,26 @@ import styles from '../styles/advertisement.module.css';
 export default function Header() {
     const [adUnderline, setAdUnderline] = useState<string>('');
     const [historyUnderline, setHistoryUnderline] = useState<string>('');
+    const [customUnderline, setCustomUnderline] = useState<string>('');
     const [headerAspect, setHeaderAspect] = useState<string>("Saved Advertisements");
+    const [customAspect, setCustomAspect] = useState<string>("Custom Advertisements");
 
     useEffect(() => {
         if (window.innerWidth > 440) {
             setHeaderAspect("Saved Advertisements");
+            setCustomAspect('Custom Advertisements');
         } else {
             setHeaderAspect("Saved Ads");
+            setCustomAspect('Custom Ads');
         }
     
         const updateMedia = () => {
           if (window.innerWidth > 440) {
             setHeaderAspect("Saved Advertisements");
+            setCustomAspect('Custom Advertisements');
           } else {
             setHeaderAspect("Saved Ads");
+            setCustomAspect('Custom Ads');
           }
         };
           window.addEventListener('resize', updateMedia);
@@ -36,6 +42,8 @@ export default function Header() {
             setAdUnderline('underline');
         } else if (router.pathname === '/history') {
             setHistoryUnderline('underline');
+        } else if (router.pathname === '/custom') {
+            setCustomUnderline('underline');
         } else {
             return;
         }
@@ -56,21 +64,28 @@ export default function Header() {
     return (
         <>
             <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <div style={{ paddingRight: '2%', textDecoration: `underline` }}>
+                <div style={{ paddingRight: '0%', textDecoration: `underline` }}>
                     <Link href="/advertisement_generator">
                         <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${adUnderline}` }}>
                             Advertisement
                         </Button>
                     </Link>
                 </div>
-                <div style={{ paddingRight: '2%' }}>
+                {/* <div style={{ paddingRight: '0%' }}>
+                    <Link href="/custom">
+                        <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${customUnderline}` }}>
+                            {customAspect}
+                        </Button>
+                    </Link>
+                </div> */}
+                <div style={{ paddingRight: '0%' }}>
                     <Link href="/history">
                         <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${historyUnderline}` }}>
                             {headerAspect}
                         </Button>
                     </Link>
                 </div>
-                <div style={{ paddingRight: '2%' }}>
+                <div style={{ paddingRight: '0%' }}>
                     <Button onClick={handleLogOut} className={styles.hovering} style={{ background: 'white', color: 'red' }}>
                         Logout
                     </Button>

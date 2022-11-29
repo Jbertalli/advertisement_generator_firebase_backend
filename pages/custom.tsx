@@ -96,20 +96,25 @@ export default function Custom() {
                     <>
                         <div
                             style={{
-                                display: 'flex',
-                                justifyContent: 'center',
                                 marginTop: '15px',
                                 marginBottom: '20px',
                                 fontSize: '25px'
                             }}
                         >
-                            <span>
+                            <span
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
                                 Edit Title
                             </span>
                             <div
                                 style={{ 
-                                    transform: 'translate(32vw, -4px)',
-                                    color: 'red'
+                                    transform: 'translate(-20px, -20px)',
+                                    color: 'red',
+                                    display: 'flex',
+                                    justifyContent: 'flex-end'
                                  }}
                                  onClick={() => setEditTitle(false)}
                             >
@@ -200,20 +205,25 @@ export default function Custom() {
                     <>
                         <div
                             style={{
-                                display: 'flex',
-                                justifyContent: 'center',
                                 marginTop: '15px',
                                 marginBottom: '20px',
                                 fontSize: '25px'
                             }}
                         >
-                            <span>
+                            <span
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
                                 Edit Description
                             </span>
                             <div
                                 style={{ 
-                                    transform: 'translate(24vw, -4px)',
-                                    color: 'red'
+                                    transform: 'translate(-20px, -20px)',
+                                    color: 'red',
+                                    display: 'flex',
+                                    justifyContent: 'flex-end'
                                  }}
                                  onClick={() => setEditDescription(false)}
                             >
@@ -305,20 +315,25 @@ export default function Custom() {
                     <>
                         <div
                             style={{
-                                display: 'flex',
-                                justifyContent: 'center',
                                 marginTop: '15px',
                                 marginBottom: '20px',
                                 fontSize: '25px'
                             }}
                         >
-                            <span>
+                            <span
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
                                 Edit Border
                             </span>
                             <div
                                 style={{ 
-                                    transform: 'translate(29.2vw, -4px)',
-                                    color: 'red'
+                                    transform: 'translate(-20px, -20px)',
+                                    color: 'red',
+                                    display: 'flex',
+                                    justifyContent: 'flex-end'
                                  }}
                                  onClick={() => setEditBorder(false)}
                             >
@@ -393,20 +408,25 @@ export default function Custom() {
                     <>
                         <div
                             style={{
-                                display: 'flex',
-                                justifyContent: 'center',
                                 marginTop: '15px',
                                 marginBottom: '20px',
                                 fontSize: '25px'
                             }}
                         >
-                            <span>
+                            <span
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
                                 Edit Global
                             </span>
                             <div
                                 style={{ 
-                                    transform: 'translate(29.5vw, -4px)',
-                                    color: 'red'
+                                    transform: 'translate(-20px, -20px)',
+                                    color: 'red',
+                                    display: 'flex',
+                                    justifyContent: 'flex-end'
                                  }}
                                  onClick={() => setEditGlobal(false)}
                             >
@@ -480,20 +500,25 @@ export default function Custom() {
                     <>
                         <div
                             style={{
-                                display: 'flex',
-                                justifyContent: 'center',
                                 marginTop: '15px',
                                 marginBottom: '20px',
                                 fontSize: '25px'
                             }}
                         >
-                            <span>
+                            <span
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
                                 Edit Border
                             </span>
                             <div
                                 style={{ 
-                                    transform: 'translate(29.2vw, -4px)',
-                                    color: 'red'
+                                    transform: 'translate(-20px, -20px)',
+                                    color: 'red',
+                                    display: 'flex',
+                                    justifyContent: 'flex-end'
                                  }}
                                  onClick={() => setEditImage(false)}
                             >
