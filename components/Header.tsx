@@ -11,29 +11,24 @@ export default function Header() {
     const [historyUnderline, setHistoryUnderline] = useState<string>('');
     const [customUnderline, setCustomUnderline] = useState<string>('');
     const [menuAspect, setMenuAspect] = useState<string>('');
-    const [headerAspect, setHeaderAspect] = useState<string>("Saved Advertisements");
-    const [customAspect, setCustomAspect] = useState<string>("Custom Advertisement");
+    const [ads, setAds] = useState('Advertisements');
 
     useEffect(() => {
         if (window.innerWidth > 440) {
-            setHeaderAspect("Saved Advertisements");
-            setCustomAspect('Custom Advertisement');
             setMenuAspect('8vw');
+            setAds('Advertisements');
         } else {
-            setHeaderAspect("Saved Ads");
-            setCustomAspect('Custom Ads');
             setMenuAspect('8vw');
+            setAds('Ads');
         }
     
         const updateMedia = () => {
           if (window.innerWidth > 440) {
-            setHeaderAspect("Saved Advertisements");
-            setCustomAspect('Custom Advertisement');
             setMenuAspect('8vw');
+            setAds('Advertisements');
           } else {
-            setHeaderAspect("Saved Ads");
-            setCustomAspect('Custom Ads');
             setMenuAspect('8vw');
+            setAds('Ads');
           }
         };
           window.addEventListener('resize', updateMedia);
@@ -98,7 +93,7 @@ export default function Header() {
                                         background: 'transparent'
                                     }}
                                 >
-                                    Earn and Trade Advertisement
+                                    Earn and Trade {ads}
                                 </div>
                             </Dropdown.Item>
                         </Link>
@@ -113,7 +108,7 @@ export default function Header() {
                                         background: 'transparent'
                                     }}
                                 >
-                                    {customAspect}
+                                    Custom {ads}
                                 </div>
                             </Dropdown.Item>
                         </Link>
@@ -129,7 +124,7 @@ export default function Header() {
                             color: '#125CA1'
                         }}
                     >
-                        {headerAspect}
+                        Saved {ads}
                     </Menu.Item>
                 </Link>
                 <Menu.Item
