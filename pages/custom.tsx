@@ -342,7 +342,7 @@ export default function Custom() {
                         </div>
                         <div style={{  color: 'black', marginLeft: '8vw' }}>
                             <div style={{ marginBottom: '5px' }}>
-                                Border Width
+                                Border Width (pixels)
                             </div>
                             <div>
                                 <input
@@ -533,7 +533,7 @@ export default function Custom() {
                                     accept="image/*"
                                     // content="Select Image"
                                     style={{ 
-                                        width: '30vw', 
+                                        width: '40vw', 
                                         transform: 'translateX(-.2vw)' ,
                                         marginBottom: '25px'
                                     }}

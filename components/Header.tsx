@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 import { NextRouter, useRouter } from 'next/router';
 import { auth } from '../firebase/clientApp';
 import { signOut } from 'firebase/auth';
@@ -11,12 +11,13 @@ export default function Header() {
     const [historyUnderline, setHistoryUnderline] = useState<string>('');
     const [customUnderline, setCustomUnderline] = useState<string>('');
     const [headerAspect, setHeaderAspect] = useState<string>("Saved Advertisements");
-    const [customAspect, setCustomAspect] = useState<string>("Custom Advertisements");
+    const [customAspect, setCustomAspect] = useState<string>("Custom Advertisement");
+    const [dropdown, setDropdown] = useState<boolean>(false);
 
     useEffect(() => {
         if (window.innerWidth > 440) {
             setHeaderAspect("Saved Advertisements");
-            setCustomAspect('Custom Advertisements');
+            setCustomAspect('Custom Advertisement');
         } else {
             setHeaderAspect("Saved Ads");
             setCustomAspect('Custom Ads');
@@ -25,7 +26,7 @@ export default function Header() {
         const updateMedia = () => {
           if (window.innerWidth > 440) {
             setHeaderAspect("Saved Advertisements");
-            setCustomAspect('Custom Advertisements');
+            setCustomAspect('Custom Advertisement');
           } else {
             setHeaderAspect("Saved Ads");
             setCustomAspect('Custom Ads');
@@ -64,20 +65,62 @@ export default function Header() {
     return (
         <>
             <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <div style={{ paddingRight: '0%', textDecoration: `underline` }}>
-                    <Link href="/advertisement_generator">
-                        <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${adUnderline}` }}>
-                            Advertisement
-                        </Button>
-                    </Link>
+                <div
+                    onMouseOver={() => setDropdown(true)}
+                    onMouseLeave={() => setDropdown(false)}
+                    style={{ 
+                        cursor: 'pointer'
+                    }}
+                >
+                    {dropdown ? (
+                    <>
+                        <div
+                            style={{
+                                position: 'fixed',
+                                zIndex: '1000'
+                            }}
+                        >
+                            <table>
+                                <tr>
+                                    <div style={{ paddingRight: '0%', textDecoration: `underline` }}>
+                                        <Link href="/advertisement_generator">
+                                            <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${adUnderline}` }}>
+                                                Earn and Trade Advertisement
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                </tr>
+                                <tr>
+                                    <div style={{ paddingRight: '0%' }}>
+                                        <Link href="/custom">
+                                            <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${customUnderline}` }}>
+                                                {customAspect}
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                </tr>
+                            </table>
+                        </div>
+                    </>
+                    ):(
+                    <>
+                        <span>
+                            <Button style={{ background: 'white', color: '#125CA1' }}>
+                                Advertisements 
+                            </Button>
+                        </span>
+                        <span>
+                            <Icon
+                                name='chevron down'
+                                style={{ 
+                                    color: '#125CA1',
+                                    transform: 'translate(-20px)'
+                                }}
+                            />
+                        </span>
+                    </>
+                    )}
                 </div>
-                {/* <div style={{ paddingRight: '0%' }}>
-                    <Link href="/custom">
-                        <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${customUnderline}` }}>
-                            {customAspect}
-                        </Button>
-                    </Link>
-                </div> */}
                 <div style={{ paddingRight: '0%' }}>
                     <Link href="/history">
                         <Button style={{ background: 'white', color: '#125CA1', textDecoration: `${historyUnderline}` }}>
