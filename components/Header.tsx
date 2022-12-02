@@ -8,6 +8,7 @@ import styles from '../styles/advertisement.module.css';
 
 export default function Header() {
     const [underline, setUnderline] = useState<boolean>(false);
+    const [underlineAspect, setUnderlineAspect] = useState<string>('-99.2');
     const [adUnderline, setAdUnderline] = useState<string>('');
     const [historyUnderline, setHistoryUnderline] = useState<string>('');
     const [customUnderline, setCustomUnderline] = useState<string>('');
@@ -16,15 +17,19 @@ export default function Header() {
     useEffect(() => {
         if (window.innerWidth > 440) {
             setAds('Advertisements');
+            setUnderlineAspect('-99.2');
         } else {
             setAds('Ads');
+            setUnderlineAspect('-61.3');
         }
     
         const updateMedia = () => {
           if (window.innerWidth > 440) {
             setAds('Advertisements');
+            setUnderlineAspect('-99.2');
           } else {
             setAds('Ads');
+            setUnderlineAspect('-61.3');
           }
         };
           window.addEventListener('resize', updateMedia);
@@ -159,7 +164,7 @@ export default function Header() {
                             marginRight: '8vw',
                             // transform: 'translate(-89.8px)',
                             // width: '119px',
-                            transform: 'translate(-99.2px)',
+                            transform: `translate(${underlineAspect}px)`,
                             width: '100px',
                             background: '#125CA1'
                         }}
