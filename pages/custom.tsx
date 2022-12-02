@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
-import { Divider, Container, Segment, Icon } from 'semantic-ui-react';
+import { Divider, Container, Segment, Icon, Form } from 'semantic-ui-react';
 
 export default function Custom() {
     const [company, setCompany] = useState<string>('');
@@ -121,45 +121,56 @@ export default function Custom() {
                                 x
                             </div>
                         </div>
-                        <div style={{  color: 'black', marginLeft: '8vw' }}>
+                        <div style={{ color: 'black', marginLeft: '8vw' }}>
                             <div style={{ marginBottom: '5px' }}>
                                 Company Name
                             </div>
                             <div>
-                                <input
+                                <Form.Input
                                     type='text'
                                     placeholder='company'
                                     value={company}
                                     onChange={(e) => setCompany(e.target.value)}
-                                    className={styles.input}
-                                    style={{ marginBottom: '25px' }}
+                                    // className={styles.input}
+                                    style={{ 
+                                        width: '65%',
+                                        marginBottom: '25px' 
+                                    }}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
                                 Company Font Size
                             </div>
                             <div>
-                                <input
+                                <Form.Input
                                     type='text'
+                                    placeholder='font size'
                                     value={companyFontSize}
                                     onChange={(e) => setCompanyFontSize(e.target.value)}
-                                    style={{ width: '80px', marginBottom: '25px' }}
-                                    className={styles.input}
+                                    style={{ 
+                                        width: '50%', 
+                                        marginBottom: '25px' 
+                                    }}
+                                    // className={styles.input}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
                                 Company Font Weight (Boldness)
                             </div>
                             <div>
-                                <input
+                                <Form.Input
                                     min='100'
                                     max='900'
                                     step='100'
                                     type='number'
+                                    placeholder='font weight'
                                     value={companyFontWeight}
                                     onChange={(e) => setCompanyFontWeight(e.target.value)}
-                                    style={{ width: '80px', marginBottom: '15px' }}
-                                    className={styles.input}
+                                    style={{ 
+                                        width: '50%', 
+                                        marginBottom: '15px' 
+                                    }}
+                                    // className={styles.input}
                                 />
                             </div>
                         </div>
@@ -235,40 +246,51 @@ export default function Custom() {
                                 Advertisement Description
                             </div>
                             <div>
-                                <input
+                                <Form.Input
                                     type='text'
                                     placeholder='description'
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
-                                    className={styles.input}
-                                    style={{ marginBottom: '25px' }}
+                                    // className={styles.input}
+                                    style={{ 
+                                        width: '65%',
+                                        marginBottom: '25px' 
+                                    }}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
                                 Description Font Size
                             </div>
                             <div>
-                                <input
+                                <Form.Input
                                     type='text'
+                                    placeholder='font size'
                                     value={descriptionFontSize}
                                     onChange={(e) => setDescriptionFontSize(e.target.value)}
-                                    style={{ width: '80px', marginBottom: '25px' }}
-                                    className={styles.input}
+                                    style={{ 
+                                        width: '50%', 
+                                        marginBottom: '25px' 
+                                    }}
+                                    // className={styles.input}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
                                 Description Font Weight (Boldness)
                             </div>
                             <div>
-                                <input
+                                <Form.Input
                                     min='100'
                                     max='900'
                                     step='100'
                                     type='number'
+                                    placeholder='font weight'
                                     value={descriptionFontWeight}
                                     onChange={(e) => setDescriptionFontWeight(e.target.value)}
-                                    style={{ width: '80px', marginBottom: '15px' }}
-                                    className={styles.input}
+                                    style={{ 
+                                        width: '50%', 
+                                        marginBottom: '15px' 
+                                    }}
+                                    // className={styles.input}
                                 />
                             </div>
                         </div>
@@ -345,12 +367,16 @@ export default function Custom() {
                                 Border Width (pixels)
                             </div>
                             <div>
-                                <input
+                                <Form.Input
                                     type='text'
+                                    placeholder='width'
                                     value={borderWidth}
                                     onChange={(e) => setBorderWidth(e.target.value)}
-                                    style={{ width: '80px', marginBottom: '25px' }}
-                                    className={styles.input}
+                                    style={{ 
+                                        width: '50%', 
+                                        marginBottom: '25px' 
+                                    }}
+                                    // className={styles.input}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
@@ -362,7 +388,11 @@ export default function Custom() {
                                 type='color'
                                 value={borderColor}
                                 onChange={(e) => setBorderColor(e.target.value)}
-                                style={{ width: '100px', height: '100px', marginBottom: '15px' }}
+                                style={{ 
+                                    width: '100px', 
+                                    height: '100px', 
+                                    marginBottom: '15px' 
+                                }}
                             />
                         </div>
                     </>
@@ -545,45 +575,58 @@ export default function Custom() {
                                 Image Width (pixels)
                             </div>
                             <div>
-                                <input
+                                <Form.Input
                                     min='0'
                                     max='1000'
                                     step='10'
                                     type='number'
+                                    placeholder='width'
                                     value={imageWidth}
                                     onChange={(e) => setImageWidth(e.target.value)}
-                                    style={{ width: '80px', marginBottom: '25px' }}
-                                    className={styles.input}
+                                    style={{ 
+                                        width: '50%', 
+                                        marginBottom: '25px',
+
+                                    }}
+                                    // className={styles.input}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
                                 Image Height (pixels)
                             </div>
                             <div>
-                                <input
+                                <Form.Input
                                     min='0'
                                     max='1000'
                                     step='10'
                                     type='number'
+                                    placeholder='height'
                                     value={imageHeight}
                                     onChange={(e) => setImageHeight(e.target.value)}
-                                    style={{ width: '80px', marginBottom: '25px' }}
-                                    className={styles.input}
+                                    style={{ 
+                                        width: '50%', 
+                                        marginBottom: '25px' 
+                                    }}
+                                    // className={styles.input}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
                                 Image Rotation (degrees)
                             </div>
                             <div>
-                                <input
+                                <Form.Input
                                     min='0'
                                     max='360'
                                     step='5'
                                     type='number'
+                                    placeholder='rotation'
                                     value={imageRotation}
                                     onChange={(e) => setImageRotation(e.target.value)}
-                                    style={{ width: '80px', marginBottom: '15px' }}
-                                    className={styles.input}
+                                    style={{ 
+                                        width: '50%', 
+                                        marginBottom: '15px' 
+                                    }}
+                                    // className={styles.input}
                                 />
                             </div>
                         </div>
@@ -631,7 +674,8 @@ export default function Custom() {
                     marginTop: '30px'
                 }}>
                 <Draggable>
-                    <div style={{ 
+                    <div 
+                        style={{ 
                             fontSize: `${companyFontSize}px`, 
                             fontWeight: `${companyFontWeight}`, 
                             display: 'flex', 
@@ -646,7 +690,8 @@ export default function Custom() {
                     </div>
                 </Draggable>
                 <Draggable>
-                    <div style={{ 
+                    <div 
+                        style={{ 
                             fontSize: `${descriptionFontSize}px`, 
                             fontWeight: `${descriptionFontWeight}`, 
                             display: 'flex', 
