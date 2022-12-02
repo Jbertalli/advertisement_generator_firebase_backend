@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
-import { Divider, Container, Segment, Icon, Form } from 'semantic-ui-react';
+import { Divider, Container, Segment, Icon, Form, Button } from 'semantic-ui-react';
 
 export default function Custom() {
     const [company, setCompany] = useState<string>('');
@@ -541,7 +541,7 @@ export default function Custom() {
                                     justifyContent: 'center'
                                 }}
                             >
-                                Edit Border
+                                Edit Image
                             </span>
                             <div
                                 style={{ 
@@ -662,6 +662,36 @@ export default function Custom() {
                 </div>
                 <Divider />
             </Container>
+            <Button 
+                onClick={() => {
+                    setCompany(''), 
+                    setCompanyFontSize(''), 
+                    setCompanyFontWeight(''), 
+                    setDescription(''), 
+                    setDescriptionFontSize(''), 
+                    setDescriptionFontWeight(''), 
+                    setBorderWidth('0'), 
+                    setBorderColor(''), 
+                    setColor(''), 
+                    setBackgroundColor(''), 
+                    setMediaPreview(''), 
+                    setImageWidth('100'), 
+                    setImageHeight('100'), 
+                    setImageRotation('0'), 
+                    setEditTitle(false), 
+                    setEditDescription(false), 
+                    setEditBorder(false), 
+                    setEditGlobal(false), 
+                    setEditImage(false)
+                }}
+                style={{ 
+                    background: '#125CA1', 
+                    color: 'white',
+                    marginLeft: '3vw'
+                }}
+            >
+               Clear
+            </Button>
             <Divider />
             <Container 
                 style={{ 
@@ -680,7 +710,7 @@ export default function Custom() {
                             fontWeight: `${companyFontWeight}`, 
                             display: 'flex', 
                             justifyContent: 'center', 
-                            cursor: 'move', 
+                            cursor: 'grab', 
                             marginBottom: '30px',
                             marginTop: '30px',
                             lineHeight: '1em'
@@ -696,7 +726,7 @@ export default function Custom() {
                             fontWeight: `${descriptionFontWeight}`, 
                             display: 'flex', 
                             justifyContent: 'center', 
-                            cursor: 'move', 
+                            cursor: 'grab', 
                             marginBottom: '30px',
                             lineHeight: '1em'
                         }}
@@ -719,7 +749,7 @@ export default function Custom() {
                                 width: `${imageWidth}px`, 
                                 height: `${imageHeight}px`,
                                 transform: `rotate(${imageRotation}deg)`,
-                                cursor: 'move'
+                                cursor: 'grab'
                             }}
                         />    
                     </div>
