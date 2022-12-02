@@ -7,27 +7,23 @@ import { signOut } from 'firebase/auth';
 import styles from '../styles/advertisement.module.css';
 
 export default function Header() {
+    const [underline, setUnderline] = useState<boolean>(false);
     const [adUnderline, setAdUnderline] = useState<string>('');
     const [historyUnderline, setHistoryUnderline] = useState<string>('');
     const [customUnderline, setCustomUnderline] = useState<string>('');
-    const [menuAspect, setMenuAspect] = useState<string>('');
-    const [ads, setAds] = useState('Advertisements');
+    const [ads, setAds] = useState<string>('Advertisements');
 
     useEffect(() => {
         if (window.innerWidth > 440) {
-            setMenuAspect('8vw');
             setAds('Advertisements');
         } else {
-            setMenuAspect('8vw');
             setAds('Ads');
         }
     
         const updateMedia = () => {
           if (window.innerWidth > 440) {
-            setMenuAspect('8vw');
             setAds('Advertisements');
           } else {
-            setMenuAspect('8vw');
             setAds('Ads');
           }
         };
@@ -49,6 +45,14 @@ export default function Header() {
         }
     }, []);
 
+    useEffect(() => {
+        if (router.pathname === '/advertisement_generator' || router.pathname === '/custom') {
+            setUnderline(true)
+        } else {
+            return;
+        }
+    },[]);
+
     function handleLogOut(e) {
         e.preventDefault();
         signOut(auth)
@@ -67,14 +71,16 @@ export default function Header() {
                 secondary
                 style={{
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    marginTop: '15px',
+                    marginLeft: '10px'
                 }}
             >   
                 <Dropdown 
                     simple 
                     text='Advertisements'
                     style={{
-                        marginRight: `${menuAspect}`,
+                        marginRight: '8vw',
                         zIndex: '2',
                         fontWeight: '600',
                         color: '#125CA1',
@@ -118,7 +124,7 @@ export default function Header() {
                     <Menu.Item
                         style={{
                             textDecoration: `${historyUnderline}`,
-                            marginRight: `${menuAspect}`,
+                            marginRight: '8vw',
                             fontWeight: '600',
                             background: 'white',
                             color: '#125CA1'
@@ -138,6 +144,35 @@ export default function Header() {
                     }}
                 />
             </Menu>
+            {underline ? (
+            <>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        transform: 'translate(-23px, -27.5px)',
+                        height: '1px'
+                    }}
+                >
+                    <div
+                        style={{
+                            marginRight: '8vw',
+                            // transform: 'translate(-89.8px)',
+                            // width: '119px',
+                            transform: 'translate(-99.2px)',
+                            width: '100px',
+                            background: '#125CA1'
+                        }}
+                    />
+                    <div
+                        style={{
+                            marginRight: '8vw',
+                        }}
+                    />
+                    <div />
+                </div>
+            </>
+            ): null}
         </>
     );
 }
