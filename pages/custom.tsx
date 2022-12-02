@@ -685,74 +685,81 @@ export default function Custom() {
                Clear
             </Button>
             <Divider />
-            <Container 
-                style={{ 
-                    background: `${backgroundColor}`, 
-                    color: `${color}`,
-                    border: `${borderWidth}px solid ${borderColor}`,
-                    fontWeight: '100',
-                    height: '50vh',
-                    width: '100vw', 
-                    marginTop: '30px'
-                }}>
-                <Draggable>
-                    <div 
-                        style={{ 
-                            fontSize: `${companyFontSize}px`, 
-                            fontWeight: `${companyFontWeight}`, 
-                            display: 'flex', 
-                            justifyContent: 'center', 
-                            cursor: 'grab', 
-                            marginBottom: '30px',
-                            marginTop: '30px',
-                            lineHeight: '1em'
-                        }}
-                    >
-                        {company}
-                    </div>
-                </Draggable>
-                <Draggable>
-                    <div 
-                        style={{ 
-                            fontSize: `${descriptionFontSize}px`, 
-                            fontWeight: `${descriptionFontWeight}`, 
-                            display: 'flex', 
-                            justifyContent: 'center', 
-                            cursor: 'grab', 
-                            marginBottom: '30px',
-                            lineHeight: '1em'
-                        }}
-                    >
-                        {description}
-                    </div>
-                </Draggable>
-                <Draggable>
-                    <div
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            transform: 'translateY(50%)',
-                        }}
-                    >
-                        <input 
-                            type="image" 
-                            src={mediaPreview}
+            <div
+                style={{
+                    padding: '0px 3vw 1px 3vw'
+                }}
+            >
+                <Container 
+                    style={{ 
+                        background: `${backgroundColor}`, 
+                        color: `${color}`,
+                        border: `${borderWidth}px solid ${borderColor}`,
+                        fontWeight: '100',
+                        height: '50vh',
+                        width: '100vw', 
+                        margin: '30px'
+                    }}
+                >
+                    <Draggable>
+                        <div 
                             style={{ 
-                                width: `${imageWidth}px`, 
-                                height: `${imageHeight}px`,
-                                transform: `rotate(${imageRotation}deg)`,
-                                cursor: 'grab'
+                                fontSize: `${companyFontSize}px`, 
+                                fontWeight: `${companyFontWeight}`, 
+                                display: 'flex', 
+                                justifyContent: 'center', 
+                                cursor: 'grab', 
+                                marginBottom: '30px',
+                                marginTop: '30px',
+                                lineHeight: '1em'
                             }}
-                        />    
+                        >
+                            {company}
+                        </div>
+                    </Draggable>
+                    <Draggable>
+                        <div 
+                            style={{ 
+                                fontSize: `${descriptionFontSize}px`, 
+                                fontWeight: `${descriptionFontWeight}`, 
+                                display: 'flex', 
+                                justifyContent: 'center', 
+                                cursor: 'grab', 
+                                marginBottom: '30px',
+                                lineHeight: '1em'
+                            }}
+                        >
+                            {description}
+                        </div>
+                    </Draggable>
+                    <Draggable>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                transform: 'translateY(50%)',
+                            }}
+                        >
+                            <input 
+                                type="image" 
+                                src={mediaPreview}
+                                style={{ 
+                                    width: `${imageWidth}px`, 
+                                    height: `${imageHeight}px`,
+                                    transform: `rotate(${imageRotation}deg)`,
+                                    cursor: 'grab'
+                                }}
+                            />    
+                        </div>
+                    </Draggable>
+                    {/* <div>
+                        {color}
                     </div>
-                </Draggable>
-                {/* <div>
-                    {color}
-                </div>
-                <div>
-                    {backgroundColor}
-                </div> */}
-            </Container>
+                    <div>
+                        {backgroundColor}
+                    </div> */}
+                </Container>
+            </div>
         </>
     );
 }
