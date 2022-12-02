@@ -131,7 +131,6 @@ export default function Custom() {
                                     placeholder='company'
                                     value={company}
                                     onChange={(e) => setCompany(e.target.value)}
-                                    // className={styles.input}
                                     style={{ 
                                         width: '65%',
                                         marginBottom: '25px' 
@@ -151,26 +150,25 @@ export default function Custom() {
                                         width: '50%', 
                                         marginBottom: '25px' 
                                     }}
-                                    // className={styles.input}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
                                 Company Font Weight (Boldness)
                             </div>
                             <div>
-                                <Form.Input
+                                <input
                                     min='100'
                                     max='900'
                                     step='100'
-                                    type='number'
+                                    type='range'
                                     placeholder='font weight'
                                     value={companyFontWeight}
                                     onChange={(e) => setCompanyFontWeight(e.target.value)}
                                     style={{ 
                                         width: '50%', 
+                                        marginTop: '15px',
                                         marginBottom: '15px' 
                                     }}
-                                    // className={styles.input}
                                 />
                             </div>
                         </div>
@@ -251,7 +249,6 @@ export default function Custom() {
                                     placeholder='description'
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
-                                    // className={styles.input}
                                     style={{ 
                                         width: '65%',
                                         marginBottom: '25px' 
@@ -271,26 +268,25 @@ export default function Custom() {
                                         width: '50%', 
                                         marginBottom: '25px' 
                                     }}
-                                    // className={styles.input}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
                                 Description Font Weight (Boldness)
                             </div>
                             <div>
-                                <Form.Input
+                                <input
                                     min='100'
                                     max='900'
                                     step='100'
-                                    type='number'
+                                    type='range'
                                     placeholder='font weight'
                                     value={descriptionFontWeight}
                                     onChange={(e) => setDescriptionFontWeight(e.target.value)}
                                     style={{ 
                                         width: '50%', 
+                                        marginTop: '15px',
                                         marginBottom: '15px' 
                                     }}
-                                    // className={styles.input}
                                 />
                             </div>
                         </div>
@@ -376,7 +372,6 @@ export default function Custom() {
                                         width: '50%', 
                                         marginBottom: '25px' 
                                     }}
-                                    // className={styles.input}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
@@ -588,7 +583,6 @@ export default function Custom() {
                                         marginBottom: '25px',
 
                                     }}
-                                    // className={styles.input}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
@@ -607,7 +601,6 @@ export default function Custom() {
                                         width: '50%', 
                                         marginBottom: '25px' 
                                     }}
-                                    // className={styles.input}
                                 />
                             </div>
                             <div style={{ marginBottom: '5px' }}>
@@ -626,7 +619,6 @@ export default function Custom() {
                                         width: '50%', 
                                         marginBottom: '15px' 
                                     }}
-                                    // className={styles.input}
                                 />
                             </div>
                         </div>
