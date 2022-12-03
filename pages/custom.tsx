@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/advertisement.module.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
@@ -43,6 +44,23 @@ export default function Custom() {
     }
 
     console.log(mediaPreview);
+
+    const router = useRouter();
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+          console.log(document.cookie.length);
+          if (document.cookie.length > 6) {
+            console.log('Authenticated!')
+          } else if (document.cookie.length == 5) {
+            router.push('/');
+          } else {
+            return null;
+          }
+        } else {
+          console.log('window == undefined');
+        }
+    }, [])
 
     return (
         <>
