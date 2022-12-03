@@ -89,11 +89,17 @@ export default function Custom() {
                         fontSize: '18px', 
                         fontWeight: '500',
                         color: '#125CA1',
-                        cursor: 'pointer',
+                        cursor: 'pointer'
                     }}
                 >
                     {editTitle ? (
                     <>
+                        <div 
+                            id='editTitle'
+                            style={{
+                                transform: 'translateY(-16px)'
+                            }}
+                        />
                         <div
                             style={{
                                 marginTop: '15px',
@@ -115,8 +121,8 @@ export default function Custom() {
                                     color: 'red',
                                     display: 'flex',
                                     justifyContent: 'flex-end'
-                                 }}
-                                 onClick={() => setEditTitle(false)}
+                                }}
+                                onClick={() => setEditTitle(false)}
                             >
                                 x
                             </div>
@@ -167,37 +173,40 @@ export default function Custom() {
                                     style={{ 
                                         width: '50%', 
                                         marginTop: '15px',
-                                        marginBottom: '15px' 
+                                        marginBottom: '15px',
+                                        cursor: 'grab' 
                                     }}
                                 />
                             </div>
                         </div>
                     </>
                     ):(
-                    <>
-                        <div
-                            onClick={() => {setEditTitle(true), setEditDescription(false), setEditBorder(false), setEditGlobal(false), setEditImage(false)}}
-                        >
-                            <div 
-                                style={{ 
-                                    marginLeft: '-25px',
-                                    display: 'flex',
-                                    transform: 'translateY(100%) scale(0.8)'
-                                }}
-                            >
-                                <Icon
-                                    name='chevron down'
-                                />
-                            </div>
+                    <>  
+                        <a href='#editTitle'>
                             <div
-                                style={{ 
-                                    display: 'flex',
-                                    justifyContent: 'center'
-                                }}
+                                onClick={() => {setEditTitle(true), setEditDescription(false), setEditBorder(false), setEditGlobal(false), setEditImage(false)}}
                             >
-                                Edit Title
+                                <div 
+                                    style={{ 
+                                        marginLeft: '-25px',
+                                        display: 'flex',
+                                        transform: 'translateY(100%) scale(0.8)'
+                                    }}
+                                >
+                                    <Icon
+                                        name='chevron down'
+                                    />
+                                </div>
+                                <div
+                                    style={{ 
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    Edit Title
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </>
                     )}
                 </div>
@@ -212,6 +221,12 @@ export default function Custom() {
                 >
                     {editDescription ? (
                     <>
+                        <div 
+                            id='editDescription'
+                            style={{
+                                transform: 'translateY(-17px)'
+                            }}
+                        />
                         <div
                             style={{
                                 marginTop: '15px',
@@ -285,7 +300,8 @@ export default function Custom() {
                                     style={{ 
                                         width: '50%', 
                                         marginTop: '15px',
-                                        marginBottom: '15px' 
+                                        marginBottom: '15px',
+                                        cursor: 'grab'
                                     }}
                                 />
                             </div>
@@ -293,30 +309,32 @@ export default function Custom() {
                     </>
                     ):(
                     <>
-                        <div
-                            style={{ transform: 'translateY(-8px)' }}
-                            onClick={() => {setEditDescription(true), setEditTitle(false), setEditBorder(false), setEditGlobal(false), setEditImage(false)}}
-                        >
-                            <div 
-                                style={{ 
-                                    marginLeft: '-25px',
-                                    display: 'flex',
-                                    transform: 'translateY(100%) scale(0.8)'
-                                }}
-                            >
-                                <Icon
-                                    name='chevron down'
-                                />
-                            </div>
+                        <a href='#editDescription'>
                             <div
-                                style={{ 
-                                    display: 'flex',
-                                    justifyContent: 'center'
-                                }}
+                                style={{ transform: 'translateY(-8px)' }}
+                                onClick={() => {setEditDescription(true), setEditTitle(false), setEditBorder(false), setEditGlobal(false), setEditImage(false)}}
                             >
-                                Edit Description
+                                <div 
+                                    style={{ 
+                                        marginLeft: '-25px',
+                                        display: 'flex',
+                                        transform: 'translateY(100%) scale(0.8)'
+                                    }}
+                                >
+                                    <Icon
+                                        name='chevron down'
+                                    />
+                                </div>
+                                <div
+                                    style={{ 
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    Edit Description
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </>
                     )}
                 </div>
@@ -331,6 +349,12 @@ export default function Custom() {
                 >
                     {editBorder ? (
                     <>
+                        <div 
+                            id='editBorder'
+                            style={{
+                                transform: 'translateY(-17px)'
+                            }}
+                        />
                         <div
                             style={{
                                 marginTop: '15px',
@@ -393,30 +417,32 @@ export default function Custom() {
                     </>
                     ):(
                     <>
-                        <div
-                            style={{ transform: 'translateY(-8px)' }}
-                            onClick={() => {setEditBorder(true), setEditTitle(false), setEditDescription(false), setEditGlobal(false), setEditImage(false)}}
-                        >
-                            <div 
-                                style={{ 
-                                    marginLeft: '-25px',
-                                    display: 'flex',
-                                    transform: 'translateY(100%) scale(0.8)'
-                                }}
-                            >
-                                <Icon
-                                    name='chevron down'
-                                />
-                            </div>
+                        <a href='#editBorder'>
                             <div
-                                style={{ 
-                                    display: 'flex',
-                                    justifyContent: 'center'
-                                }}
+                                style={{ transform: 'translateY(-8px)' }}
+                                onClick={() => {setEditBorder(true), setEditTitle(false), setEditDescription(false), setEditGlobal(false), setEditImage(false)}}
                             >
-                                Edit Border
+                                <div 
+                                    style={{ 
+                                        marginLeft: '-25px',
+                                        display: 'flex',
+                                        transform: 'translateY(100%) scale(0.8)'
+                                    }}
+                                >
+                                    <Icon
+                                        name='chevron down'
+                                    />
+                                </div>
+                                <div
+                                    style={{ 
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    Edit Border
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </>
                     )}
                 </div>
@@ -431,6 +457,12 @@ export default function Custom() {
                 >
                     {editGlobal ? (
                     <>
+                        <div 
+                            id='editGlobal'
+                            style={{
+                                transform: 'translateY(-17px)'
+                            }}
+                        />
                         <div
                             style={{
                                 marginTop: '15px',
@@ -485,30 +517,32 @@ export default function Custom() {
                     </>
                     ):(
                     <>
-                        <div
-                            style={{ transform: 'translateY(-8px)' }}
-                            onClick={() => {setEditGlobal(true), setEditTitle(false), setEditDescription(false), setEditBorder(false), setEditImage(false)}}
-                        >
-                            <div 
-                                style={{ 
-                                    marginLeft: '-25px',
-                                    display: 'flex',
-                                    transform: 'translateY(100%) scale(0.8)'
-                                }}
-                            >
-                                <Icon
-                                    name='chevron down'
-                                />
-                            </div>
+                        <a href='#editGlobal'>
                             <div
-                                style={{ 
-                                    display: 'flex',
-                                    justifyContent: 'center'
-                                }}
+                                style={{ transform: 'translateY(-8px)' }}
+                                onClick={() => {setEditGlobal(true), setEditTitle(false), setEditDescription(false), setEditBorder(false), setEditImage(false)}}
                             >
-                                Edit Global
+                                <div 
+                                    style={{ 
+                                        marginLeft: '-25px',
+                                        display: 'flex',
+                                        transform: 'translateY(100%) scale(0.8)'
+                                    }}
+                                >
+                                    <Icon
+                                        name='chevron down'
+                                    />
+                                </div>
+                                <div
+                                    style={{ 
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    Edit Global
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </>
                     )}
                 </div>
@@ -523,6 +557,12 @@ export default function Custom() {
                 >
                     {editImage ? (
                     <>
+                        <div 
+                            id='editImage'
+                            style={{
+                                transform: 'translateY(-17px)'
+                            }}
+                        />
                         <div
                             style={{
                                 marginTop: '15px',
@@ -625,30 +665,32 @@ export default function Custom() {
                     </>
                     ):(
                     <>
-                        <div
-                            style={{ transform: 'translateY(-8px)' }}
-                            onClick={() => {setEditImage(true), setEditTitle(false), setEditDescription(false), setEditBorder(false), setEditGlobal(false)}}
-                        >
-                            <div 
-                                style={{ 
-                                    marginLeft: '-25px',
-                                    display: 'flex',
-                                    transform: 'translateY(100%) scale(0.8)'
-                                }}
-                            >
-                                <Icon
-                                    name='chevron down'
-                                />
-                            </div>
+                        <a href='#editImage'>
                             <div
-                                style={{ 
-                                    display: 'flex',
-                                    justifyContent: 'center'
-                                }}
+                                style={{ transform: 'translateY(-8px)' }}
+                                onClick={() => {setEditImage(true), setEditTitle(false), setEditDescription(false), setEditBorder(false), setEditGlobal(false)}}
                             >
-                                Edit Image
+                                <div 
+                                    style={{ 
+                                        marginLeft: '-25px',
+                                        display: 'flex',
+                                        transform: 'translateY(100%) scale(0.8)'
+                                    }}
+                                >
+                                    <Icon
+                                        name='chevron down'
+                                    />
+                                </div>
+                                <div
+                                    style={{ 
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    Edit Image
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </>
                     )}
                 </div>
