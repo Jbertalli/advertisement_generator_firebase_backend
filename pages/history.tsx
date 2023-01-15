@@ -22,6 +22,8 @@ export default function History() {
     const router: NextRouter = useRouter();
     // console.log(user.email);
 
+    console.log(user);
+
     useEffect(() => {
         if (window.innerWidth > 440) {
             setTableMargin('0px  40px 0px 40px');
@@ -57,7 +59,8 @@ export default function History() {
     }, []);
 
     useEffect(() => {
-        const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'));
+        // const q = query(collection(db, "users"), orderBy('lastSignInTime', 'asc'));
+        const q = query(collection(db, "users"), orderBy('created', 'desc'));
         onSnapshot(q, (querySnapshot) => {
             setUserData(querySnapshot.docs.map(doc => ({
                 id: doc.id,
@@ -73,6 +76,15 @@ export default function History() {
         })
       }, []) 
 
+    //   for (let i = 0; i < userData.length; i++) {
+    //       console.log(userData.length)
+    //   }
+
+    console.log(userData.length);
+    console.log(user);
+    console.log(user?.uid);
+    console.log(userData);
+
       let dbId = userData?.[0]?.id;
       let dbCompany = userData?.[0]?.company;
       let dbDescription = userData?.[0]?.description;
@@ -81,6 +93,7 @@ export default function History() {
       let dbTop = userData?.[0]?.top;
       let dbWidth = userData?.[0]?.width;
       let dbImage = userData?.[0]?.mediaPreview;
+    //   console.log(dbId);
 
       useEffect(() => {
         if (typeof window !== "undefined") {

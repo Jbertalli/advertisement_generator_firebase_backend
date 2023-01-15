@@ -20,7 +20,50 @@ const LOCAL_STORAGE_KEY_EDIT_BORDER = 'Edit_Border';
 const LOCAL_STORAGE_KEY_EDIT_GLOBAL = 'Edit_Global';
 const LOCAL_STORAGE_KEY_EDIT_IMAGE = 'Edit_Image';
 
-export default function LocalCustom({ company, setCompany, companyFontSize, setCompanyFontSize, companyFontWeight, setCompanyFontWeight, description, setDescription, descriptionFontSize, setDescriptionFontSize, descriptionFontWeight, setDescriptionFontWeight, borderWidth, setBorderWidth, borderColor, setBorderColor, color, setColor, backgroundColor, setBackgroundColor, mediaPreview, setMediaPreview, image, setImage, imageWidth, setImageWidth, imageHeight, setImageHeight, imageRotation, setImageRotation, editTitle, setEditTitle, editDescription, setEditDescription, editBorder, setEditBorder, editGlobal, setEditGlobal, editImage, setEditImage }) {
+export default function LocalCustom(values) {
+
+    const { 
+        company, 
+        setCompany, 
+        companyFontSize, 
+        setCompanyFontSize, 
+        companyFontWeight, 
+        setCompanyFontWeight, 
+        description, 
+        setDescription, 
+        descriptionFontSize, 
+        setDescriptionFontSize, 
+        descriptionFontWeight, 
+        setDescriptionFontWeight, 
+        borderWidth, 
+        setBorderWidth, 
+        borderColor, 
+        setBorderColor, 
+        color, 
+        setColor, 
+        backgroundColor, 
+        setBackgroundColor, 
+        mediaPreview, 
+        setMediaPreview, 
+        image, 
+        setImage, 
+        imageWidth, 
+        setImageWidth, 
+        imageHeight, 
+        setImageHeight, 
+        imageRotation, 
+        setImageRotation, 
+        editTitle, 
+        setEditTitle, 
+        editDescription, 
+        setEditDescription, 
+        editBorder, 
+        setEditBorder, 
+        editGlobal, 
+        setEditGlobal, 
+        editImage, 
+        setEditImage 
+    } = values;
 
     useEffect(() => {
         const storedCompany = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_COMPANY))

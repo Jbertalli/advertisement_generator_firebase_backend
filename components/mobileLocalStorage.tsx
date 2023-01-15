@@ -17,7 +17,17 @@ const LOCAL_STORAGE_KEY_LEFT_MOBILE = 'ImageLeftMobile';
 const LOCAL_STORAGE_KEY_TOP_MOBILE = 'ImageTopMobile';
 const LOCAL_STORAGE_KEY_IMAGE_MOBILE = 'ImageMobile';
 
-export default function Local({ setCompany, setDescription, setWidth, setHeight, setLeft, setTop, setMediaPreview }) {
+export default function Local(values) {
+
+    const { 
+      setCompany, 
+      setDescription, 
+      setWidth, 
+      setHeight, 
+      setLeft, 
+      setTop, 
+      setMediaPreview 
+    } = values;
   
     const companyName = useSelector(companyValue);
     const descriptionName = useSelector(descriptionValue);

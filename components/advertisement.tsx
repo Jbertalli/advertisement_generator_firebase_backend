@@ -15,6 +15,7 @@ import { incrementHeight, deleteHeight } from '../slices/heightSlice';
 import { incrementLeft, deleteLeft } from '../slices/leftSlice';
 import { incrementTop, deleteTop } from '../slices/topSlice';
 import { incrementMediaPreview, deleteMediaPreview } from '../slices/mediaSlice';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 auth;
 const db = getFirestore();
@@ -32,6 +33,13 @@ export default function Advertisement () {
     const [adWidth, setAdWidth] = useState<string>('56%');
     const [imageAspect, setImageAspect] = useState<string>('translate(0px)');
     const [userData, setUserData] = useState([]);
+    const [userInfo, setUserInfo] = useState<Object>({});
+
+    const currentUser = auth.currentUser?.uid;
+    console.log(currentUser);
+   
+    const [user] = useAuthState(auth);
+    console.log(user);
 
     const dispatch = useDispatch();
 
@@ -75,17 +83,17 @@ export default function Advertisement () {
         // console.log(mediaPreview);
     }
 
-    console.log(mediaPreview);
-
-    //console.log(description.length);
+    // console.log(mediaPreview);
+    // console.log(description.length);
     // console.log(auth);
 
     // console.log data
     const logged = async () => {
-        const colRef = collection(db, "Advertisement");
+        const colRef = collection(db, "users");
         const docsSnap = await getDocs(colRef);
         docsSnap.forEach(doc => {
-          console.log(doc.data());
+          setUserInfo(doc.data())
+          console.log(userInfo);
         })
       }
   
@@ -93,8 +101,12 @@ export default function Advertisement () {
         logged();
       }, []);
 
-      const addAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number, mediaPreview: string) => {
-        await setDoc(doc(db, "Advertisement", "Company"), {
+    //   console.log(userInfo);
+
+    //   const addAdvertisement = async (userInfo: Object, company: string, description: string, width: number, height: number, left: number, top: number, mediaPreview: string) => {
+    const addAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number, mediaPreview: string) => {
+        await setDoc(doc(db, "users", currentUser), {
+        //   userInfo,
           company,
           description,
           width,
@@ -107,7 +119,7 @@ export default function Advertisement () {
       }
 
       useEffect(() => {
-        const q = query(collection(db, "Advertisement"), orderBy('created', 'desc'));
+        const q = query(collection(db, "users"), orderBy('created', 'desc'));
         onSnapshot(q, (querySnapshot) => {
             setUserData(querySnapshot.docs.map(doc => ({
                 id: doc.id,
@@ -142,7 +154,7 @@ export default function Advertisement () {
     //   console.log(dbImage);
 
       const deleteAdvertisement = async (company: string, description: string, width: number, height: number, left: number, top: number, mediaPreview: string) => {
-          await updateDoc(doc(db, "Advertisement", "Company"), {
+          await updateDoc(doc(db, "users", currentUser), {
             company: deleteField(),
             description: deleteField(),
             width: deleteField(),
