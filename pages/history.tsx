@@ -13,11 +13,8 @@ const db = getFirestore();
 
 export default function History() {
   const [userData, setUserData] = useState([]);
-  const [tableMargin, setTableMargin] = useState<string>('0px  40px 0px 40px');
-  const [tableScale, setTableScale] = useState<string>('');
-  const [savedAd, setSavedAd] = useState<string>('Saved Advertisements');
   const [transform, setTransform] = useState<string>('0px');
-  const [top, setTop] = useState<string>('60px');
+  const [resize,  setResize] = useState<boolean>(false);
   const [user, loading] = useAuthState(auth);
   const router: NextRouter = useRouter();
   // console.log(user.email);
@@ -26,32 +23,16 @@ export default function History() {
 
   useEffect(() => {
     if (window.innerWidth > 440) {
-      setTableMargin('0px  40px 0px 40px');
-      setTableScale('');
-      setSavedAd('Saved Advertisements');
-      setTransform('0px');
-      setTop('60px');
+      setResize(true);
     } else {
-      setTableMargin('0px 10px 0px 0px');
-      setTableScale('translate(0.8vw) scale(0.8)');
-      setSavedAd('Saved Ads');
-      setTransform('40px');
-      setTop('30px');
+      setResize(false);
     }
 
     const updateMedia = () => {
       if (window.innerWidth > 440) {
-        setTableMargin('0px  40px 0px 40px');
-        setTableScale('');
-        setSavedAd('Saved Advertisements');
-        setTransform('0px');
-        setTop('60px');
+        setResize(true);
       } else {
-        setTableMargin('0px 10px 0px 0px');
-        setTableScale('translate(0.8vw) scale(0.8)');
-        setSavedAd('Saved Ads');
-        setTransform('40px');
-        setTop('30px');
+        setResize(false);
       }
     };
     window.addEventListener('resize', updateMedia);
@@ -135,8 +116,8 @@ export default function History() {
           >
             <div
               style={{
-                margin: `${tableMargin}`,
-                transform: `${tableScale}`,
+                margin: resize ? '0px  40px 0px 40px' : '0px 10px 0px 0px',
+                transform: resize ? '0' : 'translate(0.8vw) scale(0.8)',
                 position: 'relative',
                 zIndex: '0',
                 fontSize: '20px',
@@ -155,7 +136,7 @@ export default function History() {
                   color: '#125CA1',
                   boxShadow: '2px 2px 15px black',
                   background: 'rgb(255, 255, 255, 0.8',
-                  transform: `translateY(${top})`,
+                  transform: resize ?  'translateY(60px)' : 'translateY(0vh)',
                 }}
               >
                 <Table.Body>
@@ -166,10 +147,10 @@ export default function History() {
                       style={{
                         padding: '10px',
                         lineHeight: '30px',
-                        transform: `translate(${transform})`,
+                        transform: resize ? 'translate(0px)' : 'translate(40px)', 
                       }}
                     >
-                      {`${savedAd}`}
+                      {resize ? 'Saved Advertisements' : 'Saved Ads'}
                     </div>
                   </Table.Header>
                   <Table.Row>
