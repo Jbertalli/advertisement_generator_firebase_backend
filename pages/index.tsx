@@ -14,33 +14,26 @@ export default function Authentication() {
   const [password, setPassword] = useState<string>('');
   const [account, setAccount] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
-  const [width, setWidth] = useState<string>('55vw');
-  const [mobileHeight, setMobileHeight] = useState<string>('');
-  const [paddingTop, setPaddingTop] = useState<string>('20vh');
   const [toggle, setToggle] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<string>('password');
+  const [resize, setResize] = useState<boolean>(false);
 
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
     if (window.innerWidth > 440) {
-      setWidth('55vw');
-      setPaddingTop('20vh');
+      setResize(true);
     } else {
-      setWidth('75vw');
-      setMobileHeight('500px');
-      setPaddingTop('13vh');
+      setResize(false);
     }
 
     const updateMedia = () => {
       if (window.innerWidth > 440) {
-        setWidth('55vw');
-        setPaddingTop('20vh');
+        setResize(true);
+
       } else {
-        setWidth('75vw');
-        setMobileHeight('500px');
-        setPaddingTop('13vh');
+        setResize(false);
       }
     };
     window.addEventListener('resize', updateMedia);
@@ -150,7 +143,7 @@ export default function Authentication() {
           style={{
             display: 'flex',
             justifyContent: 'center',
-            paddingTop: `${paddingTop}`,
+            paddingTop: resize ? '20vh' : '13vh',
           }}
         >
           <Card
@@ -158,8 +151,8 @@ export default function Authentication() {
               display: 'flex',
               justifyContent: 'center',
               boxShadow: '-2px 2px 10px black',
-              width: `${width}`,
-              height: `${mobileHeight}`,
+              width: resize ? '55vw' : '75vw',
+              height: '500px',
               maxWidth: '500px',
               paddingTop: '30px',
             }}
