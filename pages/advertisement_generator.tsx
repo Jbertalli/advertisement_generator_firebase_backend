@@ -11,21 +11,21 @@ import Header from '../components/Header';
 auth;
 
 export default function Home() {
-  const [isDesktop, setDesktop] = useState<boolean>(false)
+  const [resize, setResize] = useState<boolean>(false)
   const router: NextRouter = useRouter();
 
   useEffect(() => {
     if (window.innerWidth > 440) {
-      setDesktop(true);
+      setResize(true);
     } else {
-      setDesktop(false);
+      setResize(false);
     }
 
     const updateMedia = () => {
       if (window.innerWidth > 440) {
-        setDesktop(true);
+        setResize(true);
       } else {
-        setDesktop(false);
+        setResize(false);
       }
     };
     window.addEventListener('resize', updateMedia);
@@ -100,7 +100,7 @@ export default function Home() {
         </Button>
       </div> */}
       <Header />
-      {isDesktop ? (
+      {resize ? (
         <>
           <div
             style={{
