@@ -11,26 +11,25 @@ import Header from '../components/Header';
 auth;
 
 export default function Home() {
-  const [isDesktop, setDesktop] = useState<boolean>(false);
-
+  const [isDesktop, setDesktop] = useState<boolean>(false)
   const router: NextRouter = useRouter();
 
   useEffect(() => {
     if (window.innerWidth > 440) {
-        setDesktop(true);
+      setDesktop(true);
     } else {
-        setDesktop(false);
+      setDesktop(false);
     }
 
     const updateMedia = () => {
-    if (window.innerWidth > 440) {
+      if (window.innerWidth > 440) {
         setDesktop(true);
-    } else {
+      } else {
         setDesktop(false);
-    }
+      }
     };
-      window.addEventListener('resize', updateMedia);
-      return () => window.removeEventListener('resize', updateMedia);
+    window.addEventListener('resize', updateMedia);
+    return () => window.removeEventListener('resize', updateMedia);
   }, []);
 
   // function handleLogOut(e) {
@@ -72,10 +71,10 @@ export default function Home() {
   // console.log(router.pathname);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       console.log(document.cookie.length);
       if (document.cookie.length > 6) {
-        console.log('Authenticated!')
+        console.log('Authenticated!');
       } else if (document.cookie.length == 5) {
         router.push('/');
       } else {
@@ -84,7 +83,7 @@ export default function Home() {
     } else {
       console.log('window == undefined');
     }
-  }, [])
+  }, []);
 
   return (
     <>
@@ -102,15 +101,20 @@ export default function Home() {
       </div> */}
       <Header />
       {isDesktop ? (
-      <>
-        <div style={{ marginTop: '-70px', paddingBottom: '30px' }}>
-           <Advertisement />
-        </div>
-      </>
-      ):(
-      <>
-        <MobileAdvertisement />
-      </>
+        <>
+          <div
+            style={{
+              marginTop: '-70px',
+              paddingBottom: '30px',
+            }}
+          >
+            <Advertisement />
+          </div>
+        </>
+      ) : (
+        <>
+          <MobileAdvertisement />
+        </>
       )}
     </>
   );
