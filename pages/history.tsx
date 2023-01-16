@@ -13,7 +13,6 @@ const db = getFirestore();
 
 export default function History() {
   const [userData, setUserData] = useState([]);
-  const [transform, setTransform] = useState<string>('0px');
   const [resize,  setResize] = useState<boolean>(false);
   const [user, loading] = useAuthState(auth);
   const router: NextRouter = useRouter();

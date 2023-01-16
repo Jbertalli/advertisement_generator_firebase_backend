@@ -8,28 +8,23 @@ import styles from '../styles/advertisement.module.css';
 
 export default function Header() {
   const [underline, setUnderline] = useState<boolean>(false);
-  const [underlineAspect, setUnderlineAspect] = useState<string>('-99.2');
   const [adUnderline, setAdUnderline] = useState<string>('');
   const [historyUnderline, setHistoryUnderline] = useState<string>('');
   const [customUnderline, setCustomUnderline] = useState<string>('');
-  const [ads, setAds] = useState<string>('Advertisements');
+  const [resize, setResize] = useState<boolean>(false);
 
   useEffect(() => {
     if (window.innerWidth > 440) {
-      setAds('Advertisements');
-      setUnderlineAspect('-99.2');
+      setResize(true);
     } else {
-      setAds('Ads');
-      setUnderlineAspect('-61.3');
+      setResize(false);
     }
 
     const updateMedia = () => {
       if (window.innerWidth > 440) {
-        setAds('Advertisements');
-        setUnderlineAspect('-99.2');
+        setResize(true);
       } else {
-        setAds('Ads');
-        setUnderlineAspect('-61.3');
+        setResize(false);
       }
     };
     window.addEventListener('resize', updateMedia);
@@ -107,7 +102,7 @@ export default function Header() {
                     background: 'transparent',
                   }}
                 >
-                  Earn and Trade {ads}
+                  Earn and Trade {resize ? 'Advertisements' : 'Ads'}
                 </div>
               </Dropdown.Item>
             </Link>
@@ -122,7 +117,7 @@ export default function Header() {
                     background: 'transparent',
                   }}
                 >
-                  Custom {ads}
+                  Custom {resize ? 'Advertisements' : 'Ads'}
                 </div>
               </Dropdown.Item>
             </Link>
@@ -138,7 +133,7 @@ export default function Header() {
               color: '#125CA1',
             }}
           >
-            Saved {ads}
+            Saved {resize ? 'Advertisements' : 'Ads'}
           </Menu.Item>
         </Link>
         <Menu.Item
@@ -167,7 +162,7 @@ export default function Header() {
                 marginRight: '8vw',
                 // transform: 'translate(-89.8px)',
                 // width: '119px',
-                transform: `translate(${underlineAspect}px)`,
+                transform: resize ? 'translate(-99.2px)' : 'translate(-61.3px)',
                 width: '100px',
                 background: '#125CA1',
               }}
