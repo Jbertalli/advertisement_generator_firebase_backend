@@ -121,10 +121,10 @@ export default function Custom() {
           <div
             style={{
               color: '#125CA1',
-              fontSize: '32px',
+              fontSize: '42px',
               fontWeight: '700',
-              padding: '1em 0em .5em 0em',
-              lineHeight: '50px',
+              padding: '0.8em 0em .5em 0em',
+              lineHeight: '40px',
               display: 'flex',
               justifyContent: 'center',
             }}

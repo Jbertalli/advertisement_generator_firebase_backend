@@ -116,7 +116,7 @@ export default function History() {
             <div
               style={{
                 margin: resize ? '0px  40px 0px 40px' : '0px 10px 0px 0px',
-                transform: resize ? '0' : 'translate(0.8vw) scale(0.8)',
+                transform: resize ? '0' : 'translate(0.8vw) scale(0.7)',
                 position: 'relative',
                 zIndex: '0',
                 fontSize: '20px',

@@ -29,11 +29,9 @@ export default function Advertisement() {
   const [height, setHeight] = useState<any>(350);
   const [left, setLeft] = useState<any>(40);
   const [top, setTop] = useState<any>(20);
-  const [imageWidth, setImageWidth] = useState<string>('44%');
-  const [adWidth, setAdWidth] = useState<string>('56%');
-  const [imageAspect, setImageAspect] = useState<string>('translate(0px)');
   const [userData, setUserData] = useState([]);
   const [userInfo, setUserInfo] = useState<Object>({});
+  const [resize, setResize] = useState<boolean>(false);
 
   const currentUser = auth.currentUser?.uid;
   console.log(currentUser);
@@ -45,24 +43,16 @@ export default function Advertisement() {
 
   useEffect(() => {
     if (window.innerWidth > 991) {
-      setImageWidth('44%');
-      setAdWidth('56%');
-      setImageAspect('translate(0px)');
+      setResize(true);
     } else {
-      setImageWidth('100%');
-      setAdWidth('100%');
-      setImageAspect('translate(-6%)');
+      setResize(false);
     }
 
     const updateMedia = () => {
       if (window.innerWidth > 991) {
-        setImageWidth('44%');
-        setAdWidth('56%');
-        setImageAspect('translate(0px)');
+        setResize(true);
       } else {
-        setImageWidth('100%');
-        setAdWidth('100%');
-        setImageAspect('translate(-6%)');
+        setResize(false);
       }
     };
     window.addEventListener('resize', updateMedia);
@@ -419,8 +409,8 @@ export default function Advertisement() {
               <Grid.Row>
                 <Grid.Column
                   style={{
-                    transform: `${imageAspect}`,
-                    width: `${imageWidth}`,
+                    transform: resize ? 'translate(0px)' : 'translate(-6%)',
+                    width: resize ? '44%' : '100%',
                     display: 'flex',
                     justifyContent: 'center',
                   }}
@@ -438,7 +428,7 @@ export default function Advertisement() {
                     src={mediaPreview}
                   />
                 </Grid.Column>
-                <Grid.Column style={{ width: `${adWidth}` }}>
+                <Grid.Column style={{ width: resize ? '56%' : '100%' }}>
                   <Item
                     style={{
                       fontSize: '1.5em',
