@@ -27,6 +27,13 @@ export default function Local(values) {
     setLeft,
     setTop,
     setMediaPreview,
+    company,
+    description,
+    width,
+    height,
+    left,
+    top,
+    mediaPreview
   } = values;
 
   const companyName = useSelector(companyValue);
@@ -37,89 +44,173 @@ export default function Local(values) {
   const topName = useSelector(topValue);
   const mediaPreviewName = useSelector(mediaPreviewValue);
 
-  // Company name
-  useEffect(() => {
-    const storedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NAME));
-    if (storedName) setCompany(storedName);
-  }, []);
+  // // Company name
+  // useEffect(() => {
+  //   const storedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NAME));
+  //   if (storedName) setCompany(storedName);
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_NAME, JSON.stringify(companyName));
-  }, [companyName]);
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY_NAME, JSON.stringify(companyName));
+  // }, [companyName]);
 
-  // Advertisement Description
-  useEffect(() => {
-    const storedDescription = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY_DESCRIPTION)
-    );
-    if (storedDescription) setDescription(storedDescription);
-  }, []);
+  // // Advertisement Description
+  // useEffect(() => {
+  //   const storedDescription = JSON.parse(
+  //     localStorage.getItem(LOCAL_STORAGE_KEY_DESCRIPTION)
+  //   );
+  //   if (storedDescription) setDescription(storedDescription);
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem(
-      LOCAL_STORAGE_KEY_DESCRIPTION,
-      JSON.stringify(descriptionName)
-    );
-  }, [descriptionName]);
+  // useEffect(() => {
+  //   localStorage.setItem(
+  //     LOCAL_STORAGE_KEY_DESCRIPTION,
+  //     JSON.stringify(descriptionName)
+  //   );
+  // }, [descriptionName]);
 
-  // width
-  useEffect(() => {
-    const storedWidth = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY_WIDTH)
-    );
-    if (storedWidth) setWidth(storedWidth);
-  }, []);
+  // // width
+  // useEffect(() => {
+  //   const storedWidth = JSON.parse(
+  //     localStorage.getItem(LOCAL_STORAGE_KEY_WIDTH)
+  //   );
+  //   if (storedWidth) setWidth(storedWidth);
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_WIDTH, JSON.stringify(widthName));
-  }, [widthName]);
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY_WIDTH, JSON.stringify(widthName));
+  // }, [widthName]);
 
-  // height
-  useEffect(() => {
-    const storedHeight = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY_HEIGHT)
-    );
-    if (storedHeight) setHeight(storedHeight);
-  }, []);
+  // // height
+  // useEffect(() => {
+  //   const storedHeight = JSON.parse(
+  //     localStorage.getItem(LOCAL_STORAGE_KEY_HEIGHT)
+  //   );
+  //   if (storedHeight) setHeight(storedHeight);
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_HEIGHT, JSON.stringify(heightName));
-  }, [heightName]);
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY_HEIGHT, JSON.stringify(heightName));
+  // }, [heightName]);
 
-  // left
-  useEffect(() => {
-    const storedLeft = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_LEFT));
-    if (storedLeft) setLeft(storedLeft);
-  }, []);
+  // // left
+  // useEffect(() => {
+  //   const storedLeft = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_LEFT));
+  //   if (storedLeft) setLeft(storedLeft);
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_LEFT, JSON.stringify(leftName));
-  }, [leftName]);
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY_LEFT, JSON.stringify(leftName));
+  // }, [leftName]);
 
-  // top
-  useEffect(() => {
-    const storedTop = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TOP));
-    if (storedTop) setTop(storedTop);
-  }, []);
+  // // top
+  // useEffect(() => {
+  //   const storedTop = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TOP));
+  //   if (storedTop) setTop(storedTop);
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_TOP, JSON.stringify(topName));
-  }, [topName]);
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY_TOP, JSON.stringify(topName));
+  // }, [topName]);
 
-  // Image
-  useEffect(() => {
-    const storedImage = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE)
-    );
-    if (storedImage) setMediaPreview(storedImage);
-  }, []);
+  // // Image
+  // useEffect(() => {
+  //   const storedImage = JSON.parse(
+  //     localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE)
+  //   );
+  //   if (storedImage) setMediaPreview(storedImage);
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem(
-      LOCAL_STORAGE_KEY_IMAGE,
-      JSON.stringify(mediaPreviewName)
-    );
-  }, [mediaPreviewName]);
+  // useEffect(() => {
+  //   localStorage.setItem(
+  //     LOCAL_STORAGE_KEY_IMAGE,
+  //     JSON.stringify(mediaPreviewName)
+  //   );
+  // }, [mediaPreviewName]);
+
+// Company name
+useEffect(() => {
+  const storedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NAME));
+  if (storedName) setCompany(storedName);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem(LOCAL_STORAGE_KEY_NAME, JSON.stringify(company));
+}, [company]);
+
+// Advertisement Description
+useEffect(() => {
+  const storedDescription = JSON.parse(
+    localStorage.getItem(LOCAL_STORAGE_KEY_DESCRIPTION)
+  );
+  if (storedDescription) setDescription(storedDescription);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem(
+    LOCAL_STORAGE_KEY_DESCRIPTION,
+    JSON.stringify(description)
+  );
+}, [description]);
+
+// width
+useEffect(() => {
+  const storedWidth = JSON.parse(
+    localStorage.getItem(LOCAL_STORAGE_KEY_WIDTH)
+  );
+  if (storedWidth) setWidth(storedWidth);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem(LOCAL_STORAGE_KEY_WIDTH, JSON.stringify(width));
+}, [width]);
+
+// height
+useEffect(() => {
+  const storedHeight = JSON.parse(
+    localStorage.getItem(LOCAL_STORAGE_KEY_HEIGHT)
+  );
+  if (storedHeight) setHeight(storedHeight);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem(LOCAL_STORAGE_KEY_HEIGHT, JSON.stringify(height));
+}, [height]);
+
+// left
+useEffect(() => {
+  const storedLeft = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_LEFT));
+  if (storedLeft) setLeft(storedLeft);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem(LOCAL_STORAGE_KEY_LEFT, JSON.stringify(left));
+}, [left]);
+
+// top
+useEffect(() => {
+  const storedTop = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TOP));
+  if (storedTop) setTop(storedTop);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem(LOCAL_STORAGE_KEY_TOP, JSON.stringify(top));
+}, [top]);
+
+// Image
+useEffect(() => {
+  const storedImage = JSON.parse(
+    localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE)
+  );
+  if (storedImage) setMediaPreview(storedImage);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem(
+    LOCAL_STORAGE_KEY_IMAGE,
+    JSON.stringify(mediaPreview)
+  );
+}, [mediaPreview]);
 
   return <>&nbsp;</>;
 }

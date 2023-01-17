@@ -161,6 +161,13 @@ export default function MobileAdvertisement() {
         setLeft={setLeft}
         setTop={setTop}
         setMediaPreview={setMediaPreview}
+        company={company}
+        description={description}
+        width={width}
+        height={height}
+        left={left}
+        top={top}
+        mediaPreview={mediaPreview}
       />
       <FocusLock>
         <div>
