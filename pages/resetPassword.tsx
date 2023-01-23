@@ -24,19 +24,19 @@ export default function password() {
     <>
       Hello world
       {/* <form onSubmit={handleReset}>
-                <div>
-                    Email
-                    <input
-                        onChange={(e) => setEmail(e.target.value)}
-                        value={email}
-                        type="email"
-                        placeholder="email"
-                    />
-                </div>
-                <input
-                    type="submit"
-                />
-            </form> */}
+          <div>
+              Email
+              <input
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  type="email"
+                  placeholder="email"
+              />
+          </div>
+          <input
+              type="submit"
+          />
+      </form> */}
     </>
   );
 }

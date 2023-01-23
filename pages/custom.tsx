@@ -864,12 +864,6 @@ export default function Custom() {
               />
             </div>
           </Draggable>
-          {/* <div>
-                        {color}
-                    </div>
-                    <div>
-                        {backgroundColor}
-                    </div> */}
         </Container>
       </div>
     </>
