@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getFirestore, collection, query, orderBy, onSnapshot  } from 'firebase/firestore';
+import { getFirestore, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { Table } from 'semantic-ui-react';
 import { NextRouter, useRouter } from 'next/router';
 import Header from '../components/Header';
