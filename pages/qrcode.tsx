@@ -133,7 +133,7 @@ export default function qrCode() {
             </div>
             <div>
                 <QRCode
-                    // value='https://'
+                    value='https://github.com/Jbertalli'
                     logoImage='/images/GitHub_logo.png'
                     // size={290}
                     // logoWidth={60}
