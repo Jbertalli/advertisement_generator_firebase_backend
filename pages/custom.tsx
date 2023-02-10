@@ -468,6 +468,7 @@ export default function Custom() {
                     width: '100px',
                     height: '100px',
                     marginBottom: '15px',
+                    cursor: 'pointer'
                   }}
                 />
               </div>
@@ -562,6 +563,7 @@ export default function Custom() {
                       width: '100px',
                       height: '100px',
                       marginBottom: '25px',
+                      cursor: 'pointer'
                     }}
                   />
                 </div>
@@ -577,6 +579,7 @@ export default function Custom() {
                       width: '100px',
                       height: '100px',
                       marginBottom: '15px',
+                      cursor: 'pointer'
                     }}
                   />
                 </div>
@@ -859,7 +862,7 @@ export default function Custom() {
                   width: `${imageWidth}px`,
                   height: `${imageHeight}px`,
                   transform: `rotate(${imageRotation}deg)`,
-                  cursor: 'grab',
+                  cursor: 'grab'
                 }}
               />
             </div>
