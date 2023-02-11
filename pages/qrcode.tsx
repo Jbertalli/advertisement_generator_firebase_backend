@@ -9,14 +9,21 @@ export default function qrCode() {
                     color: '#125CA1',
                     cursor: 'pointer',
                     fontSize: '30px',
-                    margin: '20px 0px 10px 0px'
+                    margin: '20px 0px 10px 0px',
+                    display: 'flex',
+                    justifyContent: 'center'
                 }}
             >
                 <a href='https://www.testandgrade.com'>
                     TestAndGrade.com
                 </a>
             </div>
-            <div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}
+            >
                 <QRCode 
                     value='https://www.testandgrade.com'
                     logoImage='/images/test1.png'
@@ -32,14 +39,21 @@ export default function qrCode() {
                     color: '#125CA1',
                     cursor: 'pointer',
                     fontSize: '30px',
-                    margin: '20px 0px 10px 0px'
+                    margin: '20px 0px 10px 0px',
+                    display: 'flex',
+                    justifyContent: 'center'
                 }}
             >
                 <a href='https://www.antinodelocation.com'>
                     AntinodeLocation.com
                 </a>
             </div>
-            <div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}
+            >
                 <QRCode
                     value='https://www.antinodelocation.com'
                     logoImage='/images/antinode_logo.png'
@@ -55,14 +69,21 @@ export default function qrCode() {
                     color: '#999999',
                     cursor: 'pointer',
                     fontSize: '30px',
-                    margin: '20px 0px 10px 0px'
+                    margin: '20px 0px 10px 0px',
+                    display: 'flex',
+                    justifyContent: 'center'
                 }}
             >
                 <a href='https://cssclone.com'>
                     cssClone.com
                 </a>
             </div>
-            <div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}
+            >
                 <QRCode
                     value='https://cssclone.com'
                     logoImage='/images/apple1.png'
@@ -78,14 +99,21 @@ export default function qrCode() {
                     color: '#13a557',
                     cursor: 'pointer',
                     fontSize: '30px',
-                    margin: '20px 0px 10px 0px'
+                    margin: '20px 0px 10px 0px',
+                    display: 'flex',
+                    justifyContent: 'center'
                 }}
             >
                 <a href='https://www.advertisementgenerator.com'>
                     AdvertisementGenerator.com
                 </a>
             </div>
-            <div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}
+            >
                 <QRCode
                     value='https://www.advertisementgenerator.com'
                     logoImage='/images/E&T_logo.png'
@@ -101,14 +129,21 @@ export default function qrCode() {
                     color: 'black',
                     cursor: 'pointer',
                     fontSize: '30px',
-                    margin: '20px 0px 10px 0px'
+                    margin: '20px 0px 10px 0px',
+                    display: 'flex',
+                    justifyContent: 'center'
                 }}
             >
                 <a href='https://www.'>
                     HealthStat.com
                 </a>
             </div>
-            <div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}
+            >
                 <QRCode
                     // value='https://'
                     logoImage='/images/healthstat.png'
@@ -124,14 +159,21 @@ export default function qrCode() {
                     color: 'black',
                     cursor: 'pointer',
                     fontSize: '30px',
-                    margin: '20px 0px 10px 0px'
+                    margin: '20px 0px 10px 0px',
+                    display: 'flex',
+                    justifyContent: 'center'
                 }}
             >
                 <a href='https://github.com/Jbertalli'>
                     Jbertalli GitHub
                 </a>
             </div>
-            <div>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}
+            >
                 <QRCode
                     value='https://github.com/Jbertalli'
                     logoImage='/images/GitHub_logo.png'
