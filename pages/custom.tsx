@@ -35,13 +35,27 @@ export default function Custom() {
   const [editGlobal, setEditGlobal] = useState<boolean>(false);
   const [editImage, setEditImage] = useState<boolean>(false);
   const [showCompany, setShowCompany] = useState<string>('');
+  const [showCompanyFontSize, setShowCompanyFontSize] = useState<string>('');
+  const [showCompanyFontWeight, setShowCompanyFontWeight] = useState<string>('');
+  const [showDescription, setShowDescription] = useState<string>('');
+  const [showDescriptionFontSize, setShowDescriptionFontSize] = useState<string>('');
+  const [showDescriptionFontWeight, setShowDescriptionFontWeight] = useState<string>('');
+  const [showBorderWidth, setShowBorderWidth] = useState<string>('');
+  const [showBorderColor, setShowBorderColor] = useState<string>('');
+  const [showColor, setShowColor] = useState<string>('');
+  const [showBackgroundColor, setShowBackgroundColor] = useState<string>('');
+  const [showMediaPreview, setShowMediaPreview] = useState<string>('');
+  const [showImage, setShowImage] = useState<string>('');
+  const [showImageWidth, setShowImageWidth] = useState<string>('');
+  const [showImageHeight, setShowImageHeight] = useState<string>('');
+  const [showImageRotation, setShowImageRotation] = useState<string>('');
   const [userData, setUserData] = useState([]);
 
   const currentUser = auth.currentUser?.uid;
-  console.log(currentUser);
+  // console.log(currentUser);
 
   const [user] = useAuthState(auth);
-  console.log(user);
+  // console.log(user);
 
   function handleChange(event) {
     const { name, files } = event.target;
@@ -92,38 +106,42 @@ export default function Custom() {
     imageRotation
   );
 
-  const addCustom = async (
-    // company: string,
-    // companyFontSize: string,
-    // companyFontWeight: string,
-    // description: string,
-    // descriptionFontSize: string,
-    // descriptionFontWeight: string,
-    // borderWidth: string,
-    // borderColor: string,
-    // color: string,
-    // backgroundColor: string,
-    // mediaPreview: string,
-    // imageWidth: string,
-    // imageHeight: string,
-    // imageRotation: string
-  ) => {
+  let hey  = 0;
+
+  console.log(currentUser);
+
+  async function addCustom(
+    company: string,
+    companyFontSize: string,
+    companyFontWeight: string,
+    description: string,
+    descriptionFontSize: string,
+    descriptionFontWeight: string,
+    borderWidth: string,
+    borderColor: string,
+    color: string,
+    backgroundColor: string,
+    mediaPreview: string,
+    imageWidth: string,
+    imageHeight: string,
+    imageRotation: string
+  ) {
     // await setDoc(doc(db, '/users/' + currentUser + 'Ads'), {
     await setDoc(doc(db, '/users/' + currentUser + 'Custom'), {
-      // company,
-      // companyFontSize,
-      // companyFontWeight,
-      // description,
-      // descriptionFontSize,
-      // descriptionFontWeight,
-      // borderWidth,
-      // borderColor,
-      // color,
-      // backgroundColor,
-      // mediaPreview,
-      // imageWidth,
-      // imageHeight,
-      // imageRotation,
+      company,
+      companyFontSize,
+      companyFontWeight,
+      description,
+      descriptionFontSize,
+      descriptionFontWeight,
+      borderWidth,
+      borderColor,
+      color,
+      backgroundColor,
+      mediaPreview,
+      imageWidth,
+      imageHeight,
+      imageRotation,
       created: Timestamp.now(),
     });
   };
@@ -155,11 +173,11 @@ export default function Custom() {
   console.log(userData);
 
   async function getData() {
-    const docRef = doc(db, 'users', currentUser);
+    // const docRef = doc(db, 'users', currentUser);
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
     const docSnap = await getDoc(docRef);
 
     if(docSnap.exists()) {
-      // setShowCompany(docSnap.data().company);
       console.log('Document Company:', docSnap.data().company);
       console.log('Document CompanyFontSize:', docSnap.data().companyFontSize);
       console.log('Document CompanyFontWeight:', docSnap.data().companyFontWeight);
@@ -174,6 +192,20 @@ export default function Custom() {
       console.log('Document ImageWidth:', docSnap.data().imageWidth);
       console.log('Document ImageHeight:', docSnap.data().imageHeight);
       console.log('Document ImageRotation:', docSnap.data().imageRotation);
+      setShowCompany(docSnap.data().company);
+      setShowCompanyFontSize(docSnap.data().companyFontSize);
+      setShowCompanyFontWeight(docSnap.data().companyFontWeight);
+      setShowDescription(docSnap.data().description);
+      setShowDescriptionFontSize(docSnap.data().descriptionFontSize);
+      setShowDescriptionFontWeight(docSnap.data().descriptionFontWeight);
+      setShowBorderWidth(docSnap.data().borderWidth);
+      setShowBorderColor(docSnap.data().borderColor);
+      setShowColor(docSnap.data().color);
+      setShowBackgroundColor(docSnap.data().backgroundColor);
+      setShowMediaPreview(docSnap.data().mediaPreview);
+      setShowImageWidth(docSnap.data().imageWidth);
+      setShowImageHeight(docSnap.data().imageHeight);
+      setShowImageRotation(docSnap.data().imageRotation);
     } else {
       console.log('No document data');
     }
@@ -186,15 +218,78 @@ export default function Custom() {
         <meta name='description' content='earnandtrade, advertisement' />
       </Head>
       <Button
-        onClick={addCustom}
+        onClick={() => addCustom(
+          company,
+          companyFontSize,
+          companyFontWeight,
+          description,
+          descriptionFontSize,
+          descriptionFontWeight,
+          borderWidth,
+          borderColor,
+          color,
+          backgroundColor,
+          mediaPreview,
+          imageWidth,
+          imageHeight,
+          imageRotation
+        )}
+        color='green'
         style={{
-          background: 'green',
           color: 'white',
           marginLeft: '3vw',
         }}
       >
-        Save 1st
+        Save Data
       </Button>
+      <Button
+        color='blue'
+        onClick={getData}
+      >
+        Get Data
+      </Button>
+      <div>
+        {showCompany}
+      </div>
+      <div>
+        {showCompanyFontSize}
+      </div>
+      <div>
+        {showCompanyFontWeight}
+      </div>
+      <div>
+        {showDescription}
+      </div>
+      <div>
+        {showDescriptionFontSize}
+      </div>
+      <div>
+        {showDescriptionFontWeight}
+      </div>
+      <div>
+        {showBorderWidth}
+      </div>
+      <div>
+        {showBorderColor}
+      </div>
+      <div>
+        {showColor}
+      </div>
+      <div>
+        {showBackgroundColor}
+      </div>
+      <div>
+        {showMediaPreview}
+      </div>
+      <div>
+        {showImageWidth}
+      </div>
+      <div>
+        {showImageHeight}
+      </div>
+      <div>
+        {showImageRotation}
+      </div>
       <LocalCustom
         company={company}
         setCompany={setCompany}
@@ -955,9 +1050,9 @@ export default function Custom() {
       >
         <Container
           style={{
-            background: `${backgroundColor}`,
-            color: `${color}`,
-            border: `${borderWidth}px solid ${borderColor}`,
+            background: `${showBackgroundColor}`,
+            color: `${showColor}`,
+            border: `${showBorderWidth}px solid ${showBorderColor}`,
             fontWeight: '100',
             height: '50vh',
             width: '100vw',
@@ -967,8 +1062,8 @@ export default function Custom() {
           <Draggable>
             <div
               style={{
-                fontSize: `${companyFontSize}px`,
-                fontWeight: `${companyFontWeight}`,
+                fontSize: `${showCompanyFontSize}px`,
+                fontWeight: `${showCompanyFontWeight}`,
                 display: 'flex',
                 justifyContent: 'center',
                 cursor: 'grab',
@@ -977,14 +1072,14 @@ export default function Custom() {
                 lineHeight: '1em',
               }}
             >
-              {company}
+              {showCompany}
             </div>
           </Draggable>
           <Draggable>
             <div
               style={{
-                fontSize: `${descriptionFontSize}px`,
-                fontWeight: `${descriptionFontWeight}`,
+                fontSize: `${showDescriptionFontSize}px`,
+                fontWeight: `${showDescriptionFontWeight}`,
                 display: 'flex',
                 justifyContent: 'center',
                 cursor: 'grab',
@@ -992,7 +1087,7 @@ export default function Custom() {
                 lineHeight: '1em',
               }}
             >
-              {description}
+              {showDescription}
             </div>
           </Draggable>
           <Draggable>
@@ -1007,9 +1102,9 @@ export default function Custom() {
                 type='image'
                 src={mediaPreview}
                 style={{
-                  width: `${imageWidth}px`,
-                  height: `${imageHeight}px`,
-                  transform: `rotate(${imageRotation}deg)`,
+                  width: `${showImageWidth}px`,
+                  height: `${showImageHeight}px`,
+                  transform: `rotate(${showImageRotation}deg)`,
                   cursor: 'grab'
                 }}
               />
