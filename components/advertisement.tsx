@@ -5,7 +5,7 @@ import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/localStorage';
 // import firebase from '../firebase/clientApp';
-import { getFirestore, doc, getDocs, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy,  onSnapshot } from 'firebase/firestore';
+import { getDoc, getFirestore, doc, getDocs, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy,  onSnapshot } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 import { useDispatch } from 'react-redux';
 import { incrementCompany, deleteCompany } from '../slices/companySlice';
@@ -32,12 +32,19 @@ export default function Advertisement() {
   const [userData, setUserData] = useState([]);
   const [userInfo, setUserInfo] = useState<Object>({});
   const [resize, setResize] = useState<boolean>(false);
+  const [showCompany, setShowCompany] = useState<string>('');
+  const [showDescription, setShowDescription] = useState<string>('');
+  const [showMediaPreview, setShowMediaPreview] = useState<string>('');
+  const [showWidth, setShowWidth] = useState<string>('');
+  const [showHeight, setShowHeight] = useState<string>('');
+  const [showLeft, setShowLeft] = useState<string>('');
+  const [showTop, setShowTop] = useState<string>('');
 
   const currentUser = auth.currentUser?.uid;
-  console.log(currentUser);
+  // console.log(currentUser);
 
   const [user] = useAuthState(auth);
-  console.log(user);
+  // console.log(user);
 
   const dispatch = useDispatch();
 
@@ -77,20 +84,20 @@ export default function Advertisement() {
   // console.log(auth);
 
   // console.log data
-  const logged = async () => {
-    const colRef = collection(db, 'users');
-    const docsSnap = await getDocs(colRef);
-    docsSnap.forEach((doc) => {
-      setUserInfo(doc.data());
-      console.log(userInfo);
-    });
-  };
+  // const logged = async () => {
+  //   const colRef = collection(db, 'users');
+  //   const docsSnap = await getDocs(colRef);
+  //   docsSnap.forEach((doc) => {
+  //     setUserInfo(doc.data());
+  //     console.log(userInfo);
+  //   });
+  // };
 
-  useEffect(() => {
-    logged();
-  }, []);
+  // useEffect(() => {
+  //   logged();
+  // }, []);
 
-  //   console.log(userInfo);
+  // console.log(userInfo);
 
   //   const addAdvertisement = async (userInfo: Object, company: string, description: string, width: number, height: number, left: number, top: number, mediaPreview: string) => {
   const addAdvertisement = async (
@@ -102,8 +109,8 @@ export default function Advertisement() {
     top: number,
     mediaPreview: string
   ) => {
-    await setDoc(doc(db, 'users', currentUser), {
-      //   userInfo,
+    // await setDoc(doc(db, '/users', currentUser), {
+    await setDoc(doc(db, '/users/' + currentUser + 'Ads'), {
       company,
       description,
       width,
@@ -116,7 +123,7 @@ export default function Advertisement() {
   };
 
   useEffect(() => {
-    const q = query(collection(db, 'users'), orderBy('created', 'desc'));
+    const q = query(collection(db, '/users'), orderBy('created', 'desc'));
     onSnapshot(q, (querySnapshot) => {
       setUserData(
         querySnapshot.docs.map((doc) => ({
@@ -134,17 +141,19 @@ export default function Advertisement() {
     });
   }, []);
 
-  let dbId = userData?.[0]?.id;
+  // console.log(userData);
+
+  // let dbId = userData?.[0]?.id;
   let dbCompany = userData?.[0]?.company;
-  let dbDescription = userData?.[0]?.description;
-  let dbHeight = userData?.[0]?.height;
-  let dbLeft = userData?.[0]?.left;
-  let dbTop = userData?.[0]?.top;
-  let dbWidth = userData?.[0]?.width;
-  let dbImage = userData?.[0]?.mediaPreview;
+  // let dbDescription = userData?.[0]?.description;
+  // let dbHeight = userData?.[0]?.height;
+  // let dbLeft = userData?.[0]?.left;
+  // let dbTop = userData?.[0]?.top;
+  // let dbWidth = userData?.[0]?.width;
+  // let dbImage = userData?.[0]?.mediaPreview;
 
   //   console.log(dbId);
-  //   console.log(dbCompany);
+    // console.log(dbCompany);
   //   console.log(dbDescription);
   //   console.log(dbHeight);
   //   console.log(dbLeft);
@@ -152,25 +161,117 @@ export default function Advertisement() {
   //   console.log(dbWidth);
   //   console.log(dbImage);
 
-  const deleteAdvertisement = async (
-    company: string,
-    description: string,
-    width: number,
-    height: number,
-    left: number,
-    top: number,
-    mediaPreview: string
-  ) => {
-    await updateDoc(doc(db, 'users', currentUser), {
+  // const deleteAdvertisement = async (
+  //   company: string,
+  //   description: string,
+  //   width: number,
+  //   height: number,
+  //   left: number,
+  //   top: number,
+  //   mediaPreview: string
+  // ) => {
+  //   await updateDoc(doc(db, 'users', currentUser), {
+  //     company: deleteField(),
+  //     description: deleteField(),
+  //     width: deleteField(),
+  //     height: deleteField(),
+  //     left: deleteField(),
+  //     top: deleteField(),
+  //     mediaPreview: deleteField(),
+  //   });
+  // };
+
+  async function getData() {
+    // const docRef = doc(db, 'users', currentUser);
+    const docRef = doc(db, '/users/' + currentUser + 'Ads');
+    const docSnap = await getDoc(docRef);
+
+    if(docSnap.exists()) {
+      // console.log('User:', docSnap.data().user);
+      console.log('Document company:', docSnap.data().company);
+      console.log('Document description:', docSnap.data().description);
+      console.log('Document height:', docSnap.data().height);
+      console.log('Document width:', docSnap.data().width);
+      console.log('Document top:', docSnap.data().top);
+      console.log('Document left:', docSnap.data().left);
+      console.log('Document mediaPreview:', docSnap.data().mediaPreview);
+      setShowCompany(docSnap.data().company);
+      setShowDescription(docSnap.data().description);
+      setShowMediaPreview(docSnap.data().height);
+      setShowWidth(docSnap.data().width);
+      setShowHeight(docSnap.data().top);
+      setShowLeft(docSnap.data().left);
+      setShowTop(docSnap.data().mediaPreview);
+    } else {
+      console.log('No document data');
+    }
+  }
+
+  async function deleteCompany() {
+    const docRef = doc(db, 'users', currentUser);
+    await updateDoc(docRef, {
+      company: deleteField()
+    });
+  }
+
+  async function deleteDescription() {
+    const docRef = doc(db, 'users', currentUser);
+    await updateDoc(docRef, {
+      description: deleteField()
+    });
+  }
+
+  async function deleteHeight() {
+    const docRef = doc(db, 'users', currentUser);
+    await updateDoc(docRef, {
+      height: deleteField()
+    });
+  }
+
+  async function deleteWidth() {
+    const docRef = doc(db, 'users', currentUser);
+    await updateDoc(docRef, {
+      width: deleteField()
+    });
+  }
+
+  async function deleteTop() {
+    const docRef = doc(db, 'users', currentUser);
+    await updateDoc(docRef, {
+      top: deleteField()
+    });
+  }
+
+  async function deleteLeft() {
+    const docRef = doc(db, 'users', currentUser);
+    await updateDoc(docRef, {
+      left: deleteField()
+    });
+  }
+
+  async function deleteMediaPreview() {
+    const docRef = doc(db, 'users', currentUser);
+    await updateDoc(docRef, {
+      mediaPreview: deleteField()
+    });
+  }
+
+  async function deleteAll() {
+    const docRef = doc(db, 'users', currentUser);
+    await updateDoc(docRef, {
       company: deleteField(),
       description: deleteField(),
-      width: deleteField(),
       height: deleteField(),
-      left: deleteField(),
+      width: deleteField(),
       top: deleteField(),
-      mediaPreview: deleteField(),
+      left: deleteField(),
+      mediaPreview: deleteField()
     });
-  };
+  }
+
+  // useEffect(() => {
+  //   getData();
+  // }, [])
 
   return (
     <>
@@ -178,7 +279,100 @@ export default function Advertisement() {
         <title>Earn and Trade Advertisement Generator</title>
         <meta name='description' content='earnandtrade, advertisement' />
       </Head>
-      <Local
+      {/* <div>
+        <Button
+          color='blue'
+          onClick={getData}
+        >
+          Save Advertisement
+        </Button>
+      </div> */}
+      {/* <div>
+        <Button
+          color='red'
+          onClick={deleteCompany}
+        >
+          Delete Company
+        </Button>
+      </div>
+      <div>
+        <Button
+          color='red'
+          onClick={deleteDescription}
+        >
+          Delete Description
+        </Button>
+      </div>
+      <div>
+        <Button
+          color='red'
+          onClick={deleteHeight}
+        >
+          Delete Height
+        </Button>
+      </div>
+      <div>
+        <Button
+          color='red'
+          onClick={deleteWidth}
+        >
+          Delete Width
+        </Button>
+      </div>
+      <div>
+        <Button
+          color='red'
+          onClick={deleteTop}
+        >
+          Delete Top
+        </Button>
+      </div>
+      <div>
+        <Button
+          color='red'
+          onClick={deleteLeft}
+        >
+          Delete Left
+        </Button>
+      </div>
+      <div>
+        <Button
+          color='red'
+          onClick={deleteMediaPreview}
+        >
+          Delete MediaPreview
+        </Button>
+      </div> */}
+      {/* <div>
+        <Button
+          color='red'
+          onClick={deleteAll}
+        >
+          Delete Advertisement
+        </Button>
+      </div> */}
+      <div>
+        {showCompany}
+      </div>
+      <div>
+        {showDescription}
+      </div>
+      <div>
+        {showMediaPreview}
+      </div>
+      <div>
+        {showWidth}
+      </div>
+      <div>
+        {showHeight}
+      </div>
+      <div>
+        {showLeft}
+      </div>
+      <div>
+        {showTop}
+      </div>
+      {/* <Local
         setCompany={setCompany}
         setDescription={setDescription}
         setWidth={setWidth}
@@ -193,12 +387,13 @@ export default function Advertisement() {
         left={left}
         top={top}
         mediaPreview={mediaPreview}
-      />
+      /> */}
       <FocusLock>
         <Container
           as='h1'
           size='massive'
-          style={{ margin: '2em', boxShadow: '2px 2px 10px black' }}
+          style={{ margin: '2.8em', boxShadow: '2px 2px 10px black' }}
+          // onMouseMove={getData}
         >
           <Segment attached textAlign='center'>
             <div
@@ -318,7 +513,7 @@ export default function Advertisement() {
                           placeholder='width (pixels)'
                           type='number'
                           style={{ width: '20vw' }}
-                          // value={width}
+                          value={width}
                           onChange={(e) => setWidth(e.target.value)}
                         />
                         <Form.Input
@@ -326,7 +521,7 @@ export default function Advertisement() {
                           placeholder='height (pixels)'
                           type='number'
                           style={{ width: '20vw' }}
-                          // value={height}
+                          value={height}
                           onChange={(e) => setHeight(e.target.value)}
                         />
                         <Form.Input
@@ -334,7 +529,7 @@ export default function Advertisement() {
                           placeholder='left (pixels)'
                           type='number'
                           style={{ width: '20vw' }}
-                          // value={left}
+                          value={left}
                           onChange={(e) => setLeft(e.target.value)}
                         />
                         <Form.Input
@@ -342,7 +537,7 @@ export default function Advertisement() {
                           placeholder='top (pixels)'
                           type='number'
                           style={{ width: '20vw' }}
-                          // value={top}
+                          value={top}
                           onChange={(e) => setTop(e.target.value)}
                         />
                       </Segment>
@@ -350,6 +545,22 @@ export default function Advertisement() {
                   )}
                 </Grid.Row>
                 <Grid.Row>
+                  <div>
+                    <Button
+                      color='blue'
+                      onClick={getData}
+                    >
+                      Save Advertisement
+                    </Button>
+                  </div>
+                  <div>
+                    <Button
+                      color='red'
+                      onClick={deleteAll}
+                    >
+                      Delete Advertisement
+                    </Button>
+                  </div>
                   {company && description ? (
                     <>
                       <div style={{ transform: 'translateX(13.5px)' }}>
@@ -377,27 +588,27 @@ export default function Advertisement() {
                           Save
                         </Button>
                         <Button
-                          onClick={() => {
-                            deleteAdvertisement(
-                              company,
-                              description,
-                              width,
-                              height,
-                              left,
-                              top,
-                              mediaPreview
-                            ),
-                              setCompany(''),
-                              setDescription(''),
-                              setMediaPreview(''),
-                              dispatch(deleteCompany()),
-                              dispatch(deleteDescription()),
-                              dispatch(deleteWidth()),
-                              dispatch(deleteHeight()),
-                              dispatch(deleteLeft()),
-                              dispatch(deleteTop()),
-                              dispatch(deleteMediaPreview());
-                          }}
+                          // onClick={() => {
+                          //   deleteAdvertisement(
+                          //     company,
+                          //     description,
+                          //     width,
+                          //     height,
+                          //     left,
+                          //     top,
+                          //     mediaPreview
+                          //   ),
+                          //     setCompany(''),
+                          //     setDescription(''),
+                          //     setMediaPreview(''),
+                          //     dispatch(deleteCompany()),
+                          //     dispatch(deleteDescription()),
+                          //     dispatch(deleteWidth()),
+                          //     dispatch(deleteHeight()),
+                          //     dispatch(deleteLeft()),
+                          //     dispatch(deleteTop()),
+                          //     dispatch(deleteMediaPreview());
+                          // }}
                           style={{ background: '#125CA1', color: 'white' }}
                         >
                           Delete
@@ -424,10 +635,10 @@ export default function Advertisement() {
                 >
                   <input
                     type='image'
-                    width={width}
-                    height={height}
+                    width={showWidth}
+                    height={showHeight}
                     style={{
-                      transform: `translate(${left}px, ${top}px) scale(.8)`,
+                      transform: `translate(${showLeft}px, ${showTop}px) scale(.8)`,
                       borderRadius: '5%',
                       maxWidth: '30em',
                       maxHeight: '30em',
@@ -444,18 +655,18 @@ export default function Advertisement() {
                     }}
                   >
                     <h1 style={{ display: 'flex', justifyContent: 'center' }}>
-                      {company} Video Advertisement
+                      {showCompany} Video Advertisement
                     </h1>
                     <div style={{ fontSize: '.91em', lineHeight: '30px' }}>
                       <div style={{ margin: '2em 0em 1em 0em' }}>
                         <Icon name='mouse pointer' />
                         Click the button below to be transported to watch and
-                        take the comprehensive quiz for {company}.
+                        take the comprehensive quiz for {showCompany}.
                       </div>
                       <div style={{ margin: '1em 0em 1em 0em' }}>
                         <Icon name='dollar' />
                         Earn 20 points after successfully watching and
-                        completing the comprehension quiz for {company}.
+                        completing the comprehension quiz for {showCompany}.
                       </div>
                       <div style={{ margin: '1em 0em 1em 0em' }}>
                         <Icon name='calendar' />
@@ -482,7 +693,7 @@ export default function Advertisement() {
               </Grid.Row>
             </Grid>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              {description}
+              {showDescription}
             </div>
           </Segment>
         </Container>

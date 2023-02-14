@@ -6,6 +6,12 @@ import Header from '../components/Header';
 import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
 import { Divider, Container, Segment, Icon, Form, Button } from 'semantic-ui-react';
+import { auth } from '../firebase/clientApp';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getDoc, getFirestore, doc, getDocs, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy,  onSnapshot } from 'firebase/firestore';
+
+auth;
+const db = getFirestore();
 
 export default function Custom() {
   const [company, setCompany] = useState<string>('');
@@ -28,6 +34,14 @@ export default function Custom() {
   const [editBorder, setEditBorder] = useState<boolean>(false);
   const [editGlobal, setEditGlobal] = useState<boolean>(false);
   const [editImage, setEditImage] = useState<boolean>(false);
+  const [showCompany, setShowCompany] = useState<string>('');
+  const [userData, setUserData] = useState([]);
+
+  const currentUser = auth.currentUser?.uid;
+  console.log(currentUser);
+
+  const [user] = useAuthState(auth);
+  console.log(user);
 
   function handleChange(event) {
     const { name, files } = event.target;
@@ -61,12 +75,126 @@ export default function Custom() {
     }
   }, []);
 
+  console.log(
+    company,
+    companyFontSize,
+    companyFontWeight,
+    description,
+    descriptionFontSize,
+    descriptionFontWeight,
+    borderWidth,
+    borderColor,
+    color,
+    backgroundColor,
+    mediaPreview,
+    imageWidth,
+    imageHeight,
+    imageRotation
+  );
+
+  const addCustom = async (
+    // company: string,
+    // companyFontSize: string,
+    // companyFontWeight: string,
+    // description: string,
+    // descriptionFontSize: string,
+    // descriptionFontWeight: string,
+    // borderWidth: string,
+    // borderColor: string,
+    // color: string,
+    // backgroundColor: string,
+    // mediaPreview: string,
+    // imageWidth: string,
+    // imageHeight: string,
+    // imageRotation: string
+  ) => {
+    // await setDoc(doc(db, '/users/' + currentUser + 'Ads'), {
+    await setDoc(doc(db, '/users/' + currentUser + 'Custom'), {
+      // company,
+      // companyFontSize,
+      // companyFontWeight,
+      // description,
+      // descriptionFontSize,
+      // descriptionFontWeight,
+      // borderWidth,
+      // borderColor,
+      // color,
+      // backgroundColor,
+      // mediaPreview,
+      // imageWidth,
+      // imageHeight,
+      // imageRotation,
+      created: Timestamp.now(),
+    });
+  };
+
+  useEffect(() => {
+    const q = query(collection(db, '/users'), orderBy('created', 'desc'));
+    onSnapshot(q, (querySnapshot) => {
+      setUserData(
+        querySnapshot.docs.map((doc) => ({
+          company: doc.data().company,
+          companyFontSize: doc.data().companyFontSize,
+          companyFontWeight: doc.data().companyFontWeight,
+          description: doc.data().description,
+          descriptionFontSize: doc.data().descriptionFontSize,
+          descriptionFontWeight: doc.data().descriptionFontWeight,
+          borderWidth: doc.data().borderWidth,
+          borderColor: doc.data().borderColor,
+          color: doc.data().color,
+          backgroundColor: doc.data().backgroundColor,
+          mediaPreview: doc.data().mediaPreview,
+          imageWidth: doc.data().imageWidth,
+          imageHeight: doc.data().imageHeight,
+          imageRotation: doc.data().imageRotation
+        }))
+      );
+    });
+  }, []);
+
+  console.log(userData);
+
+  async function getData() {
+    const docRef = doc(db, 'users', currentUser);
+    const docSnap = await getDoc(docRef);
+
+    if(docSnap.exists()) {
+      // setShowCompany(docSnap.data().company);
+      console.log('Document Company:', docSnap.data().company);
+      console.log('Document CompanyFontSize:', docSnap.data().companyFontSize);
+      console.log('Document CompanyFontWeight:', docSnap.data().companyFontWeight);
+      console.log('Document Description:', docSnap.data().description);
+      console.log('Document DescriptionFontSize:', docSnap.data().descriptionFontSize);
+      console.log('Document DescriptionFontWeight:', docSnap.data().descriptionFontWeight);
+      console.log('Document BorderWidth:', docSnap.data().borderWidth);
+      console.log('Document BorderColor:', docSnap.data().borderColor);
+      console.log('Document Color:', docSnap.data().color);
+      console.log('Document BackgroundColor:', docSnap.data().backgroundColor);
+      console.log('Document MediaPreview:', docSnap.data().mediaPreview);
+      console.log('Document ImageWidth:', docSnap.data().imageWidth);
+      console.log('Document ImageHeight:', docSnap.data().imageHeight);
+      console.log('Document ImageRotation:', docSnap.data().imageRotation);
+    } else {
+      console.log('No document data');
+    }
+  }
+
   return (
     <>
       <Head>
         <title>Custom Advertisement Generator</title>
         <meta name='description' content='earnandtrade, advertisement' />
       </Head>
+      <Button
+        onClick={addCustom}
+        style={{
+          background: 'green',
+          color: 'white',
+          marginLeft: '3vw',
+        }}
+      >
+        Save 1st
+      </Button>
       <LocalCustom
         company={company}
         setCompany={setCompany}
@@ -769,6 +897,26 @@ export default function Custom() {
         </div>
         <Divider />
       </Container>
+      {/* <Button
+        onClick={addCustom}
+        style={{
+          background: 'green',
+          color: 'white',
+          marginLeft: '3vw',
+        }}
+      >
+        Save 1st
+      </Button> */}
+      {/* <Button
+        style={{
+          background: 'green',
+          color: 'white',
+          marginLeft: '3vw',
+        }}
+        onClick={getData}
+      >
+        Save 2nd
+      </Button> */}
       <Button
         onClick={() => {
             setCompany(''),
