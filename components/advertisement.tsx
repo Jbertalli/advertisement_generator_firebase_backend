@@ -5,7 +5,7 @@ import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/localStorage';
 // import firebase from '../firebase/clientApp';
-import { getDoc, getFirestore, doc, getDocs, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy,  onSnapshot } from 'firebase/firestore';
+import { getDoc, getFirestore, doc, getDocs, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 import { useDispatch } from 'react-redux';
 import { incrementCompany, deleteCompany } from '../slices/companySlice';
@@ -144,7 +144,7 @@ export default function Advertisement() {
   // console.log(userData);
 
   // let dbId = userData?.[0]?.id;
-  let dbCompany = userData?.[0]?.company;
+  // let dbCompany = userData?.[0]?.company;
   // let dbDescription = userData?.[0]?.description;
   // let dbHeight = userData?.[0]?.height;
   // let dbLeft = userData?.[0]?.left;

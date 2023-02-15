@@ -15,12 +15,19 @@ export default function History() {
   const [userData, setUserData] = useState([]);
   const [resize,  setResize] = useState<boolean>(false);
   const [showCompany, setShowCompany] = useState<string>('');
+  const [showCompanyFontSize, setShowCompanyFontSize] = useState<string>('');
+  const [showCompanyFontWeight, setShowCompanyFontWeight] = useState<string>('');
   const [showDescription, setShowDescription] = useState<string>('');
+  const [showDescriptionFontSize, setShowDescriptionFontSize] = useState<string>('');
+  const [showDescriptionFontWeight, setShowDescriptionFontWeight] = useState<string>('');
+  const [showBorderWidth, setShowBorderWidth] = useState<string>('');
+  const [showBorderColor, setShowBorderColor] = useState<string>('');
+  const [showColor, setShowColor] = useState<string>('');
+  const [showBackgroundColor, setShowBackgroundColor] = useState<string>('');
   const [showMediaPreview, setShowMediaPreview] = useState<string>('');
-  const [showWidth, setShowWidth] = useState<string>('');
-  const [showHeight, setShowHeight] = useState<string>('');
-  const [showLeft, setShowLeft] = useState<string>('');
-  const [showTop, setShowTop] = useState<string>('');
+  const [showImageWidth, setShowImageWidth] = useState<string>('');
+  const [showImageHeight, setShowImageHeight] = useState<string>('');
+  const [showImageRotation, setShowImageRotation] = useState<string>('');
   const [user, loading] = useAuthState(auth);
   const router: NextRouter = useRouter();
   // console.log(user.email);
@@ -104,25 +111,38 @@ export default function History() {
 
   async function getData() {
     // const docRef = doc(db, 'users', currentUser);
-    const docRef = doc(db, '/users/' + currentUser + 'Ads');
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
     const docSnap = await getDoc(docRef);
 
     if(docSnap.exists()) {
-      // console.log('User:', docSnap.data().user);
-      console.log('Document company:', docSnap.data().company);
-      console.log('Document description:', docSnap.data().description);
-      console.log('Document height:', docSnap.data().height);
-      console.log('Document width:', docSnap.data().width);
-      console.log('Document top:', docSnap.data().top);
-      console.log('Document left:', docSnap.data().left);
-      console.log('Document mediaPreview:', docSnap.data().mediaPreview);
+      console.log('Document Company:', docSnap.data().company);
+      console.log('Document CompanyFontSize:', docSnap.data().companyFontSize);
+      console.log('Document CompanyFontWeight:', docSnap.data().companyFontWeight);
+      console.log('Document Description:', docSnap.data().description);
+      console.log('Document DescriptionFontSize:', docSnap.data().descriptionFontSize);
+      console.log('Document DescriptionFontWeight:', docSnap.data().descriptionFontWeight);
+      console.log('Document BorderWidth:', docSnap.data().borderWidth);
+      console.log('Document BorderColor:', docSnap.data().borderColor);
+      console.log('Document Color:', docSnap.data().color);
+      console.log('Document BackgroundColor:', docSnap.data().backgroundColor);
+      console.log('Document MediaPreview:', docSnap.data().mediaPreview);
+      console.log('Document ImageWidth:', docSnap.data().imageWidth);
+      console.log('Document ImageHeight:', docSnap.data().imageHeight);
+      console.log('Document ImageRotation:', docSnap.data().imageRotation);
       setShowCompany(docSnap.data().company);
+      setShowCompanyFontSize(docSnap.data().companyFontSize);
+      setShowCompanyFontWeight(docSnap.data().companyFontWeight);
       setShowDescription(docSnap.data().description);
-      setShowMediaPreview(docSnap.data().height);
-      setShowWidth(docSnap.data().width);
-      setShowHeight(docSnap.data().top);
-      setShowLeft(docSnap.data().left);
-      setShowTop(docSnap.data().mediaPreview);
+      setShowDescriptionFontSize(docSnap.data().descriptionFontSize);
+      setShowDescriptionFontWeight(docSnap.data().descriptionFontWeight);
+      setShowBorderWidth(docSnap.data().borderWidth);
+      setShowBorderColor(docSnap.data().borderColor);
+      setShowColor(docSnap.data().color);
+      setShowBackgroundColor(docSnap.data().backgroundColor);
+      setShowMediaPreview(docSnap.data().mediaPreview);
+      setShowImageWidth(docSnap.data().imageWidth);
+      setShowImageHeight(docSnap.data().imageHeight);
+      setShowImageRotation(docSnap.data().imageRotation);
     } else {
       console.log('No document data');
     }
@@ -155,18 +175,18 @@ export default function History() {
           <div
             style={{
               background: 'linear-gradient(to top, blue, #125CA180)',
-              height: '100vh',
+              height: '100vh'
             }}
           >
             <div
               style={{
                 margin: resize ? '0px  40px 0px 40px' : '0px 10px 0px 0px',
-                transform: resize ? '0' : 'translate(0.8vw) scale(0.7)',
+                transform: resize ? 'translateY(-60px) scale(0.8)' : 'translate(0.8vw, -60px) scale(0.7)',
                 position: 'relative',
                 zIndex: '0',
                 fontSize: '20px',
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'center'
               }}
             >
               <Table
@@ -181,7 +201,7 @@ export default function History() {
                   color: '#125CA1',
                   boxShadow: '2px 2px 15px black',
                   background: 'rgb(255, 255, 255, 0.8',
-                  transform: resize ?  'translateY(60px)' : 'translateY(0vh)',
+                  transform: resize ?  'translateY(60px)' : 'translateY(0vh)'
                 }}
               >
                 <Table.Body>
@@ -191,11 +211,10 @@ export default function History() {
                     <div
                       style={{
                         padding: '10px',
-                        lineHeight: '30px',
-                        transform: resize ? 'translate(0px)' : 'translate(40px)', 
+                        lineHeight: '30px'
                       }}
                     >
-                      {resize ? 'Saved Advertisements' : 'Saved Ads'}
+                      {resize ? 'Custom Advertisements' : 'Custom Ads'}
                     </div>
                   </Table.Header>
                   <Table.Row>
@@ -209,24 +228,52 @@ export default function History() {
                     <Table.Cell>{showCompany}</Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell>Company Description</Table.Cell>
+                    <Table.Cell>Company Font Size</Table.Cell>
+                    <Table.Cell>{showCompanyFontSize}</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Company Font Weight</Table.Cell>
+                    <Table.Cell>{showCompanyFontWeight}</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Description</Table.Cell>
                     <Table.Cell>{showDescription}</Table.Cell>
                   </Table.Row>
                   <Table.Row>
+                    <Table.Cell>Description Font Size</Table.Cell>
+                    <Table.Cell>{showDescriptionFontSize}</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Description Font Weight</Table.Cell>
+                    <Table.Cell>{showDescriptionFontWeight}</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Border Width</Table.Cell>
+                    <Table.Cell>{showBorderWidth}</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Border Color</Table.Cell>
+                    <Table.Cell>{showBorderColor}</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Color</Table.Cell>
+                    <Table.Cell>{showColor}</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
+                    <Table.Cell>Background Color</Table.Cell>
+                    <Table.Cell>{showBackgroundColor}</Table.Cell>
+                  </Table.Row>
+                  <Table.Row>
                     <Table.Cell>Image Width</Table.Cell>
-                    <Table.Cell>{showWidth}</Table.Cell>
+                    <Table.Cell>{showImageWidth}</Table.Cell>
                   </Table.Row>
                   <Table.Row>
                     <Table.Cell>Image Height</Table.Cell>
-                    <Table.Cell>{showHeight}</Table.Cell>
+                    <Table.Cell>{showImageHeight}</Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell>Image Left</Table.Cell>
-                    <Table.Cell>{showLeft}</Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>Image Top</Table.Cell>
-                    <Table.Cell>{showTop}</Table.Cell>
+                    <Table.Cell>Image Rotation</Table.Cell>
+                    <Table.Cell>{showImageRotation}</Table.Cell>
                   </Table.Row>
                   <Table.Row>
                     <Table.Cell>Image String</Table.Cell>

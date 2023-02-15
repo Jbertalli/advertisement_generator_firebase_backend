@@ -290,7 +290,7 @@ export default function Custom() {
       <div>
         {showImageRotation}
       </div>
-      <LocalCustom
+      {/* <LocalCustom
         company={company}
         setCompany={setCompany}
         companyFontSize={companyFontSize}
@@ -331,7 +331,7 @@ export default function Custom() {
         setEditGlobal={setEditGlobal}
         editImage={editImage}
         setEditImage={setEditImage}
-      />
+      /> */}
       <Header />
       <Container
         size='massive'

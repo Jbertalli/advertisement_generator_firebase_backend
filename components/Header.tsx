@@ -8,9 +8,11 @@ import styles from '../styles/advertisement.module.css';
 
 export default function Header() {
   const [underline, setUnderline] = useState<boolean>(false);
+  const [histUnderline, setHistUnderline] = useState<boolean>(false);
   const [adUnderline, setAdUnderline] = useState<string>('');
-  const [historyUnderline, setHistoryUnderline] = useState<string>('');
   const [customUnderline, setCustomUnderline] = useState<string>('');
+  const [historyUnderline, setHistoryUnderline] = useState<string>('');
+  const [customHistoryUnderline, setCustomHistoryUnderline] = useState<string>('');
   const [resize, setResize] = useState<boolean>(false);
 
   useEffect(() => {
@@ -36,21 +38,22 @@ export default function Header() {
   useEffect(() => {
     if (router.pathname === '/advertisement_generator') {
       setAdUnderline('underline');
-    } else if (router.pathname === '/history') {
-      setHistoryUnderline('underline');
     } else if (router.pathname === '/custom') {
       setCustomUnderline('underline');
+    } else if (router.pathname === '/history') {
+      setHistoryUnderline('underline');
+    } else if (router.pathname === '/customHistory') {
+      setCustomHistoryUnderline('underline');
     } else {
       return;
     }
   }, []);
 
   useEffect(() => {
-    if (
-      router.pathname === '/advertisement_generator' ||
-      router.pathname === '/custom'
-    ) {
+    if (router.pathname === '/advertisement_generator' || router.pathname === '/custom') {
       setUnderline(true);
+    } else if (router.pathname === '/history' || router.pathname === '/customHistory') {
+      setHistUnderline(true);
     } else {
       return;
     }
@@ -123,19 +126,50 @@ export default function Header() {
             </Link>
           </Dropdown.Menu>
         </Dropdown>
-        <Link href='/history' passHref>
-          <Menu.Item
-            style={{
-              textDecoration: `${historyUnderline}`,
-              marginRight: '8vw',
-              fontWeight: '600',
-              background: 'white',
-              color: '#125CA1',
-            }}
-          >
-            Saved {resize ? 'Advertisements' : 'Ads'}
-          </Menu.Item>
-        </Link>
+        <Dropdown
+          simple
+          text={resize ? 'Saved Advertisements' : 'Saved Ads'}
+          style={{
+            marginRight: '8vw',
+            zIndex: '2',
+            fontWeight: '600',
+            color: '#125CA1',
+            background: 'transparent',
+            transform: 'translate(5px, 10.5px)'
+          }}
+        >
+          <Dropdown.Menu>
+            <Link href='/history'>
+              <Dropdown.Item>
+                <div
+                  style={{
+                    textDecoration: `${historyUnderline}`,
+                    fontWeight: '600',
+                    color: '#125CA1',
+                    background: 'transparent'
+                  }}
+                >
+                  {resize ? 'Earn and Trade Advertisement History' : 'Earn and Trade Ad History'}
+                </div>
+              </Dropdown.Item>
+            </Link>
+            <Divider />
+            <Link href='/customHistory'>
+              <Dropdown.Item>
+                <div
+                  style={{
+                    textDecoration: `${customHistoryUnderline}`,
+                    fontWeight: '600',
+                    color: '#125CA1',
+                    background: 'transparent',
+                  }}
+                >
+                  Custom {resize ? 'Advertisement History' : 'Ad History'}
+                </div>
+              </Dropdown.Item>
+            </Link>
+          </Dropdown.Menu>
+        </Dropdown>
         <Menu.Item
           name='Logout'
           onClick={handleLogOut}
@@ -160,9 +194,7 @@ export default function Header() {
             <div
               style={{
                 marginRight: '8vw',
-                // transform: 'translate(-89.8px)',
-                // width: '119px',
-                transform: resize ? 'translate(-99.2px)' : 'translate(-61.3px)',
+                transform: resize ? 'translate(-93px)' : 'translate(-55.5px)',
                 width: '100px',
                 background: '#125CA1',
               }}
@@ -176,6 +208,33 @@ export default function Header() {
           </div>
         </>
       ) : null}
+      {histUnderline ? (
+      <>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            transform: 'translate(-23px, -27.5px)',
+            height: '1px',
+          }}
+        >
+          <div
+            style={{
+              marginRight: '8vw',
+              transform: resize ? 'translate(85.6px)' : 'translate(76.6px)',
+              width: resize ? '139.4px' : '63px',
+              background: '#125CA1',
+            }}
+          />
+          <div
+            style={{
+              marginRight: '8vw',
+            }}
+          />
+          <div />
+        </div>
+      </>
+      ): null}
     </>
   );
 }
