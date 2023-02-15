@@ -15,9 +15,14 @@ import { incrementLeft, deleteLeft } from '../slices/leftSlice';
 import { incrementTop, deleteTop } from '../slices/topSlice';
 import { incrementMediaPreview, deleteMediaPreview } from '../slices/mediaSlice';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { getStorage, ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
+import { app } from '../firebase/clientApp';
+import { v4 as uuidv4 } from 'uuid';
 
 auth;
 const db = getFirestore();
+const storage = getStorage(app);
+// console.log(app)
 
 export default function Advertisement() {
   const [company, setCompany] = useState<string>('');
@@ -245,12 +250,50 @@ export default function Advertisement() {
   //   getData();
   // }, [])
 
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageList, setImageList] = useState([]);
+
+  const imageListRef = ref(storage, 'images/');
+  const uploadImage = () => {
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `images/${imageUpload.name + uuidv4()}`);
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImageList((prev) => [...prev, url]);
+      });
+    });
+  }
+
+  useEffect(() => {
+    listAll(imageListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setImageList((prev) => [...prev, url]);
+        });
+      });
+    });
+  }, []);
+
   return (
     <>
       <Head>
         <title>Earn and Trade Advertisement Generator</title>
         <meta name='description' content='earnandtrade, advertisement' />
       </Head>
+      <div>
+        <input 
+          type='file'
+          onChange={(event) => setImageUpload(event.target.files[0])}
+        />
+        <button
+          onClick={uploadImage}
+        >
+          Upload Image
+        </button>
+      </div>
+      {imageList.map((url) => {
+        return <img src={url} />
+      })}
       {/* <div>
         <Button
           color='red'
