@@ -220,16 +220,12 @@ export default function Header() {
         >
           <div
             style={{
-              marginRight: '8vw',
-              transform: resize ? 'translate(85.6px)' : 'translate(76.6px)',
+              transform: resize ? 'translate(45.6px)' : 'translate(45.6px)',
               width: resize ? '139.4px' : '63px',
               background: '#125CA1',
             }}
           />
           <div
-            style={{
-              marginRight: '8vw',
-            }}
           />
           <div />
         </div>
