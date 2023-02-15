@@ -23,7 +23,6 @@ export default function History() {
   const [showTop, setShowTop] = useState<string>('');
   const [user, loading] = useAuthState(auth);
   const router: NextRouter = useRouter();
-  // console.log(user.email);
 
   const currentUser = auth.currentUser?.uid;
   console.log(currentUser);
@@ -49,7 +48,6 @@ export default function History() {
   }, []);
 
   useEffect(() => {
-    // const q = query(collection(db, "users"), orderBy('lastSignInTime', 'asc'));
     const q = query(collection(db, 'users'), orderBy('created', 'desc'));
     onSnapshot(q, (querySnapshot) => {
       setUserData(
@@ -67,10 +65,6 @@ export default function History() {
       );
     });
   }, []);
-
-  //   for (let i = 0; i < userData.length; i++) {
-  //       console.log(userData.length)
-  //   }
 
   console.log(userData.length);
   console.log(user);
@@ -103,7 +97,6 @@ export default function History() {
   }, []);
 
   async function getData() {
-    // const docRef = doc(db, 'users', currentUser);
     const docRef = doc(db, '/users/' + currentUser + 'Ads');
     const docSnap = await getDoc(docRef);
 

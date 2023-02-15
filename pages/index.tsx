@@ -51,7 +51,6 @@ export default function Authentication() {
 
   function handleLogin(e) {
     e.preventDefault();
-    // signInWithEmailAndPassword(auth, email, password)
     setPersistence(auth, browserSessionPersistence)
       .then(() => {
         return signInWithEmailAndPassword(auth, email, password);
@@ -109,7 +108,6 @@ export default function Authentication() {
   }, []);
 
   // access to window or document object
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       console.log(document.cookie.length);

@@ -4,8 +4,7 @@ import { Button, Form, Icon, Item, Card } from 'semantic-ui-react';
 import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/mobileLocalStorage';
-// import firebase from '../firebase/clientApp';
-import { getFirestore, doc, getDocs, setDoc, collection, Timestamp, updateDoc, deleteField, query, orderBy, onSnapshot  } from 'firebase/firestore';
+import { getFirestore, doc, getDocs, setDoc, collection, Timestamp, updateDoc, deleteField, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 import { useDispatch } from 'react-redux';
 import { incrementCompany, deleteCompany } from '../slices/companySlice';
@@ -30,8 +29,6 @@ export default function MobileAdvertisement() {
   const [left, setLeft] = useState<any>(40);
   const [top, setTop] = useState<any>(20);
   const [userData, setUserData] = useState([]);
-
-  // const companyName = useSelector((state: RootState) => state.company.value);
   const dispatch = useDispatch();
 
   function handleChange(event) {
@@ -218,14 +215,12 @@ export default function MobileAdvertisement() {
             name='media'
             type='file'
             accept='image/*'
-            // content="Select Image"
             style={{ width: '40vw', transform: 'translate(2vw)' }}
             className={styles.file}
             onChange={handleChange}
           />
           {company.length > 0 || description.length > 0 || mediaPreview ? (
             <>
-              {/* <strong style={{ fontSize: '1em', display: 'flex', justifyContent: 'center' }}>Advertisement</strong> */}
               <Card
                 fluid
                 style={{
@@ -239,12 +234,10 @@ export default function MobileAdvertisement() {
                 <div style={{ margin: '1em 0em 0em 0em' }}>
                   Company Name: {JSON.stringify(company, null, 2)}
                 </div>
-                {/* <div style={{ margin: '1em 0em 0em 0em' }}>{JSON.stringify(header, null, 2)}</div> */}
                 <div style={{ margin: '1em 0em 1em 0em' }}>
                   Advertisement Description:{' '}
                   {JSON.stringify(description, null, 2)}
                 </div>
-                {/* <input type="image" src={mediaPreview}/> */}
               </Card>
             </>
           ) : (

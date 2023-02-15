@@ -4,8 +4,7 @@ import { Container, Segment, Button, Form, Icon, Grid, Item, Card } from 'semant
 import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/localStorage';
-// import firebase from '../firebase/clientApp';
-import { getDoc, getFirestore, doc, getDocs, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { getDoc, getDocs, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 import { useDispatch } from 'react-redux';
 import { incrementCompany, deleteCompany } from '../slices/companySlice';
@@ -97,9 +96,6 @@ export default function Advertisement() {
   //   logged();
   // }, []);
 
-  // console.log(userInfo);
-
-  //   const addAdvertisement = async (userInfo: Object, company: string, description: string, width: number, height: number, left: number, top: number, mediaPreview: string) => {
   const addAdvertisement = async (
     company: string,
     description: string,
@@ -109,7 +105,6 @@ export default function Advertisement() {
     top: number,
     mediaPreview: string
   ) => {
-    // await setDoc(doc(db, '/users', currentUser), {
     await setDoc(doc(db, '/users/' + currentUser + 'Ads'), {
       company,
       description,
@@ -141,26 +136,6 @@ export default function Advertisement() {
     });
   }, []);
 
-  // console.log(userData);
-
-  // let dbId = userData?.[0]?.id;
-  // let dbCompany = userData?.[0]?.company;
-  // let dbDescription = userData?.[0]?.description;
-  // let dbHeight = userData?.[0]?.height;
-  // let dbLeft = userData?.[0]?.left;
-  // let dbTop = userData?.[0]?.top;
-  // let dbWidth = userData?.[0]?.width;
-  // let dbImage = userData?.[0]?.mediaPreview;
-
-  //   console.log(dbId);
-    // console.log(dbCompany);
-  //   console.log(dbDescription);
-  //   console.log(dbHeight);
-  //   console.log(dbLeft);
-  //   console.log(dbTop);
-  //   console.log(dbWidth);
-  //   console.log(dbImage);
-
   // const deleteAdvertisement = async (
   //   company: string,
   //   description: string,
@@ -182,12 +157,10 @@ export default function Advertisement() {
   // };
 
   async function getData() {
-    // const docRef = doc(db, 'users', currentUser);
     const docRef = doc(db, '/users/' + currentUser + 'Ads');
     const docSnap = await getDoc(docRef);
 
     if(docSnap.exists()) {
-      // console.log('User:', docSnap.data().user);
       console.log('Document company:', docSnap.data().company);
       console.log('Document description:', docSnap.data().description);
       console.log('Document height:', docSnap.data().height);
@@ -279,14 +252,6 @@ export default function Advertisement() {
         <title>Earn and Trade Advertisement Generator</title>
         <meta name='description' content='earnandtrade, advertisement' />
       </Head>
-      {/* <div>
-        <Button
-          color='blue'
-          onClick={getData}
-        >
-          Save Advertisement
-        </Button>
-      </div> */}
       {/* <div>
         <Button
           color='red'
@@ -443,7 +408,6 @@ export default function Advertisement() {
                       name='media'
                       type='file'
                       accept='image/*'
-                      // content="Select Image"
                       style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
                       className={styles.file}
                       onChange={handleChange}
@@ -454,7 +418,6 @@ export default function Advertisement() {
                     description.length > 0 ||
                     mediaPreview ? (
                       <>
-                        {/* <strong style={{ fontSize: '1em', display: 'flex', justifyContent: 'center' }}>Advertisement</strong> */}
                         <Card
                           fluid
                           style={{
@@ -467,12 +430,10 @@ export default function Advertisement() {
                           <div style={{ margin: '1em 0em 0em 0em' }}>
                             Company Name: {JSON.stringify(company, null, 2)}
                           </div>
-                          {/* <div style={{ margin: '1em 0em 0em 0em' }}>{JSON.stringify(header, null, 2)}</div> */}
                           <div style={{ margin: '1em 0em 1em 0em' }}>
                             Advertisement Description:{' '}
                             {JSON.stringify(description, null, 2)}
                           </div>
-                          {/* <input type="image" src={mediaPreview}/> */}
                         </Card>
                       </>
                     ) : (

@@ -126,7 +126,6 @@ export default function Custom() {
     imageHeight: string,
     imageRotation: string
   ) {
-    // await setDoc(doc(db, '/users/' + currentUser + 'Ads'), {
     await setDoc(doc(db, '/users/' + currentUser + 'Custom'), {
       company,
       companyFontSize,
@@ -173,7 +172,6 @@ export default function Custom() {
   console.log(userData);
 
   async function getData() {
-    // const docRef = doc(db, 'users', currentUser);
     const docRef = doc(db, '/users/' + currentUser + 'Custom');
     const docSnap = await getDoc(docRef);
 
@@ -893,7 +891,6 @@ export default function Custom() {
                     name='media'
                     type='file'
                     accept='image/*'
-                    // content="Select Image"
                     style={{
                       width: '40vw',
                       transform: 'translateX(-.2vw)',

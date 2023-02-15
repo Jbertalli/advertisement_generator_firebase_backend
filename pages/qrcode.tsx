@@ -57,8 +57,6 @@ export default function qrCode() {
                 <QRCode
                     value='https://www.antinodelocation.com'
                     logoImage='/images/antinode_logo.png'
-                    // size={290}
-                    // logoWidth={60}
                     eyeColor='#125CA1'
                     fgColor='#125CA1'
                     removeQrCodeBehindLogo={true}
@@ -87,8 +85,6 @@ export default function qrCode() {
                 <QRCode
                     value='https://cssclone.com'
                     logoImage='/images/apple1.png'
-                    // size={290}
-                    // logoWidth={60}
                     eyeColor='#999999'
                     fgColor='#999999'
                     removeQrCodeBehindLogo={true}
@@ -117,8 +113,6 @@ export default function qrCode() {
                 <QRCode
                     value='https://www.advertisementgenerator.com'
                     logoImage='/images/E&T_logo.png'
-                    // size={290}
-                    // logoWidth={60}
                     eyeColor='#13a557'
                     fgColor='#13a557'
                     removeQrCodeBehindLogo={true}
@@ -147,8 +141,6 @@ export default function qrCode() {
                 <QRCode
                     // value='https://'
                     logoImage='/images/healthstat.png'
-                    // size={290}
-                    // logoWidth={60}
                     eyeColor='black'
                     fgColor='black'
                     removeQrCodeBehindLogo={true}
@@ -177,8 +169,6 @@ export default function qrCode() {
                 <QRCode
                     value='https://github.com/Jbertalli'
                     logoImage='/images/GitHub_logo.png'
-                    // size={290}
-                    // logoWidth={60}
                     eyeColor='black'
                     fgColor='black'
                     removeQrCodeBehindLogo={true}
