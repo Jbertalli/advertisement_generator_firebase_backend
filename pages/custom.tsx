@@ -67,10 +67,9 @@ export default function Custom() {
     console.log(img);
     console.log(files[0].name);
     // console.log(image);
-    // console.log(mediaPreview);
   }
 
-  console.log(mediaPreview);
+  // console.log(mediaPreview);
 
   const router = useRouter();
 
@@ -169,7 +168,7 @@ export default function Custom() {
     });
   }, []);
 
-  console.log(userData);
+  // console.log(userData);
 
   async function getData() {
     const docRef = doc(db, '/users/' + currentUser + 'Custom');

@@ -75,7 +75,6 @@ export default function Advertisement() {
     console.log(img);
     console.log(files[0].name);
     // console.log(image);
-    // console.log(mediaPreview);
   }
 
   // console.log(mediaPreview);

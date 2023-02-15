@@ -34,8 +34,6 @@ export default function History() {
   const currentUser = auth.currentUser?.uid;
   console.log(currentUser);
 
-  console.log(user);
-
   useEffect(() => {
     if (window.innerWidth > 440) {
       setResize(true);
