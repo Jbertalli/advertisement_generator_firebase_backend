@@ -292,7 +292,7 @@ export default function Advertisement() {
         </button>
       </div>
       {imageList.map((url) => {
-        return <img src={url} />
+        return <img src={url} key={uuidv4()} />
       })}
       {/* <div>
         <Button
