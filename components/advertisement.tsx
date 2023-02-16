@@ -15,13 +15,14 @@ import { incrementLeft, deleteLeft } from '../slices/leftSlice';
 import { incrementTop, deleteTop } from '../slices/topSlice';
 import { incrementMediaPreview, deleteMediaPreview } from '../slices/mediaSlice';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getStorage, ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
+import { getStorage, ref, uploadBytes, listAll, list, getDownloadURL, deleteObject } from 'firebase/storage';
 import { app } from '../firebase/clientApp';
 import { v4 as uuidv4 } from 'uuid';
+import { storage } from '../firebase/clientApp';
 
 auth;
 const db = getFirestore();
-const storage = getStorage(app);
+// const storage = getStorage(app);
 // console.log(app)
 
 export default function Advertisement() {
@@ -43,6 +44,9 @@ export default function Advertisement() {
   const [showHeight, setShowHeight] = useState<string>('');
   const [showLeft, setShowLeft] = useState<string>('');
   const [showTop, setShowTop] = useState<string>('');
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageList, setImageList] = useState([]);
+  const [selected, setSelected] = useState<boolean>(false);
 
   const currentUser = auth.currentUser?.uid;
   // console.log(currentUser);
@@ -250,29 +254,63 @@ export default function Advertisement() {
   //   getData();
   // }, [])
 
-  const [imageUpload, setImageUpload] = useState(null);
-  const [imageList, setImageList] = useState([]);
+  // const imageListRef = ref(storage, 'images/');
 
-  const imageListRef = ref(storage, 'images/');
-  const uploadImage = () => {
-    if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/${imageUpload.name + uuidv4()}`);
-    uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        setImageList((prev) => [...prev, url]);
-      });
+  // const uploadImage = () => {
+  //   if (imageUpload == null) return;
+  //   const imageRef = ref(storage, `images/${imageUpload.name + uuidv4()}`);
+  //   uploadBytes(imageRef, imageUpload).then((snapshot) => {
+  //     getDownloadURL(snapshot.ref).then((url) => {
+  //       setImageList((prev) => [...prev, url]);
+  //     });
+  //   });
+  // }
+
+  // console.log(imageList);
+
+  // let arr = [];
+
+  // for(let i = 0; i < imageList.length; i++) {
+  //   arr.push(imageList[i])
+  // }
+
+  // console.log(arr);
+  // console.log(arr.pop());
+
+  // useEffect(() => {
+  //   listAll(imageListRef).then((response) => {
+  //     response.items.forEach((item) => {
+  //       getDownloadURL(item).then((url) => {
+  //         setImageList((prev) => [...prev, url]);
+  //       });
+  //     });
+  //   });
+  // }, [])
+
+  const [saveImage, setSaveImage] = useState(null);
+  const [url, setUrl] = useState(null);
+
+  const handleImageChange = (e) => {
+    if(e.target.files[0]) {
+      setSaveImage(e.target.files[0])
+    }
+  }
+
+  const handleSubmit = () => {
+    const imageRef = ref(storage, `image/${currentUser}`);
+    uploadBytes(imageRef, saveImage).then(() => {
+      getDownloadURL(imageRef).then((url) => {
+        setUrl(url);
+      }).catch((error) => {
+        console.log(error.message, 'error getting the image url');
+      })
+      setSaveImage(null);
+    }).catch((error) => {
+      console.log(error.message);
     });
   }
 
-  useEffect(() => {
-    listAll(imageListRef).then((response) => {
-      response.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
-          setImageList((prev) => [...prev, url]);
-        });
-      });
-    });
-  }, []);
+  console.log(url);
 
   return (
     <>
@@ -280,20 +318,6 @@ export default function Advertisement() {
         <title>Earn and Trade Advertisement Generator</title>
         <meta name='description' content='earnandtrade, advertisement' />
       </Head>
-      <div>
-        <input 
-          type='file'
-          onChange={(event) => setImageUpload(event.target.files[0])}
-        />
-        <button
-          onClick={uploadImage}
-        >
-          Upload Image
-        </button>
-      </div>
-      {imageList.map((url) => {
-        return <img src={url} key={uuidv4()} />
-      })}
       {/* <div>
         <Button
           color='red'
@@ -358,7 +382,7 @@ export default function Advertisement() {
           Delete Advertisement
         </Button>
       </div> */}
-      <div>
+      {/* <div>
         {showCompany}
       </div>
       <div>
@@ -378,7 +402,7 @@ export default function Advertisement() {
       </div>
       <div>
         {showTop}
-      </div>
+      </div> */}
       {/* <Local
         setCompany={setCompany}
         setDescription={setDescription}
@@ -437,23 +461,86 @@ export default function Advertisement() {
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
                     />
+                    <div
+                      style={{ 
+                        lineHeight: '23px', 
+                        marginBottom: '13px'
+                      }}
+                    >
+                      Advertisement Description
+                    </div>
                     <Form.Input
                       fluid
-                      label='Advertisement Description'
                       placeholder='description'
                       name='description'
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
                     />
                     <div>Upload Logo</div>
-                    <input
+                    {/* <input
                       name='media'
                       type='file'
                       accept='image/*'
                       style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
                       className={styles.file}
                       onChange={handleChange}
-                    />
+                    /> */}
+                    <div>
+                      <input
+                        name='media'
+                        type='file'
+                        accept='image/*'
+                        style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
+                        className={styles.file}
+                        onChange={handleImageChange}
+                        onClick={() => setSelected(true)}
+                      />
+                      {selected ? (
+                      <>
+                        <div
+                          style={{
+                            marginTop: '20px',
+                            marginBottom: '-50px',
+                            position: 'relative',
+                            zIndex: '100'
+                          }}
+                        >
+                          <Button
+                            onClick={handleSubmit}
+                            style={{
+                              border: '2px solid #125CA1',
+                              background: 'transparent',
+                              color: '#125CA1'
+                            }}
+                          >
+                            Submit
+                          </Button>
+                          <Button
+                            onClick={() => {setUrl(null), setSelected(false)}}
+                            style={{
+                              border: '2px solid red',
+                              background: 'transparent',
+                              color: 'red'
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      </>
+                      ): null}
+                    </div>
+                    {/* <div>
+                      <input 
+                        type='file'
+                        onChange={(event) => setImageUpload(event.target.files[0])}
+                      />
+                      <button
+                        onClick={uploadImage}
+                        onMouseOver={uploadImage}
+                      >
+                        Upload Image
+                      </button>
+                    </div> */}
                   </Grid.Column>
                   <Grid.Column width={8}>
                     {company.length > 0 ||
@@ -499,9 +586,7 @@ export default function Advertisement() {
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                  {!mediaPreview ? (
-                    <>&nbsp;</>
-                  ) : (
+                  {selected ? (
                     <>
                       <Segment
                         style={{
@@ -509,6 +594,7 @@ export default function Advertisement() {
                           justifyContent: 'space-between',
                           width: '100%',
                           fontSize: '20px',
+                          marginTop: '40px'
                         }}
                       >
                         <Form.Input
@@ -545,7 +631,7 @@ export default function Advertisement() {
                         />
                       </Segment>
                     </>
-                  )}
+                  ): null}
                 </Grid.Row>
                 <Grid.Row>
                   <div>
@@ -646,7 +732,9 @@ export default function Advertisement() {
                       maxWidth: '30em',
                       maxHeight: '30em',
                     }}
-                    src={mediaPreview}
+                    src={url}
+                    // src={mediaPreview}
+                    // src={arr.pop()}
                   />
                 </Grid.Column>
                 <Grid.Column style={{ width: resize ? '56%' : '100%' }}>
