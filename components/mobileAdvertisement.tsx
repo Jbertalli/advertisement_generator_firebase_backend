@@ -59,18 +59,18 @@ export default function MobileAdvertisement() {
     );
   }, [mediaPreview]);
 
-  // console.log data
-  const logged = async () => {
-    const colRef = collection(db, 'Advertisement');
-    const docsSnap = await getDocs(colRef);
-    docsSnap.forEach((doc) => {
-      console.log(doc.data());
-    });
-  };
+  // // console.log data
+  // const logged = async () => {
+  //   const colRef = collection(db, 'Advertisement');
+  //   const docsSnap = await getDocs(colRef);
+  //   docsSnap.forEach((doc) => {
+  //     console.log(doc.data());
+  //   });
+  // };
 
-  useEffect(() => {
-    logged();
-  }, []);
+  // useEffect(() => {
+  //   logged();
+  // }, []);
 
   const addAdvertisement = async (
     company: string,
