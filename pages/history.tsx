@@ -6,7 +6,7 @@ import { getFirestore, collection, query, orderBy, onSnapshot, doc, getDoc } fro
 import { Table } from 'semantic-ui-react';
 import { NextRouter, useRouter } from 'next/router';
 import Header from '../components/Header';
-import { Loader, Dimmer, Button } from 'semantic-ui-react';
+import { Loader, Dimmer } from 'semantic-ui-react';
 
 auth;
 const db = getFirestore();
@@ -69,14 +69,14 @@ export default function History() {
   console.log(user?.uid);
   console.log(userData);
 
-  let dbId = userData?.[0]?.id;
-  let dbCompany = userData?.[0]?.company;
-  let dbDescription = userData?.[0]?.description;
-  let dbHeight = userData?.[0]?.height;
-  let dbLeft = userData?.[0]?.left;
-  let dbTop = userData?.[0]?.top;
-  let dbWidth = userData?.[0]?.width;
-  let dbImage = userData?.[0]?.mediaPreview;
+  // let dbId = userData?.[0]?.id;
+  // let dbCompany = userData?.[0]?.company;
+  // let dbDescription = userData?.[0]?.description;
+  // let dbHeight = userData?.[0]?.height;
+  // let dbLeft = userData?.[0]?.left;
+  // let dbTop = userData?.[0]?.top;
+  // let dbWidth = userData?.[0]?.width;
+  // let dbImage = userData?.[0]?.mediaPreview;
   //   console.log(dbId);
 
   useEffect(() => {
@@ -109,15 +109,19 @@ export default function History() {
       console.log('Document mediaPreview:', docSnap.data().mediaPreview);
       setShowCompany(docSnap.data().company);
       setShowDescription(docSnap.data().description);
-      setShowMediaPreview(docSnap.data().height);
+      setShowHeight(docSnap.data().height);
       setShowWidth(docSnap.data().width);
-      setShowHeight(docSnap.data().top);
+      setShowTop(docSnap.data().top);
       setShowLeft(docSnap.data().left);
-      setShowTop(docSnap.data().mediaPreview);
+      setShowMediaPreview(docSnap.data().mediaPreview);
     } else {
       console.log('No document data');
     }
   }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
@@ -126,15 +130,6 @@ export default function History() {
         <meta name='description' content='information' />
       </Head>
       <Header />
-      <Button
-        color='purple'
-        onClick={getData}
-        style={{
-          position: 'absolute'
-        }}
-      >
-        Get User Data
-      </Button>
       {loading ? (
         <>
           <Dimmer active>
@@ -146,8 +141,9 @@ export default function History() {
           <div
             style={{
               background: 'linear-gradient(to top, blue, #125CA180)',
-              height: '100vh',
+              height: '100vh'
             }}
+            onMouseMove={getData}
           >
             <div
               style={{
@@ -157,7 +153,7 @@ export default function History() {
                 zIndex: '0',
                 fontSize: '20px',
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'center'
               }}
             >
               <Table
@@ -219,12 +215,12 @@ export default function History() {
                     <Table.Cell>Image Top</Table.Cell>
                     <Table.Cell>{showTop}</Table.Cell>
                   </Table.Row>
-                  <Table.Row>
+                  {/* <Table.Row>
                     <Table.Cell>Image String</Table.Cell>
                     <Table.Cell style={{ wordBreak: 'break-all' }}>
                       {showMediaPreview}
                     </Table.Cell>
-                  </Table.Row>
+                  </Table.Row> */}
                 </Table.Body>
               </Table>
             </div>

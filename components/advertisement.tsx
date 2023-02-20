@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { Container, Segment, Button, Form, Icon, Grid, Item, Card } from 'semantic-ui-react';
 import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
 import Local from '../components/localStorage';
-import { getDoc, getDocs, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { Container, Segment, Button, Form, Icon, Grid, Item, Card } from 'semantic-ui-react';
+import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 import { useDispatch } from 'react-redux';
 import { incrementCompany, deleteCompany } from '../slices/companySlice';
@@ -15,10 +15,10 @@ import { incrementLeft, deleteLeft } from '../slices/leftSlice';
 import { incrementTop, deleteTop } from '../slices/topSlice';
 import { incrementMediaPreview, deleteMediaPreview } from '../slices/mediaSlice';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getStorage, ref, uploadBytes, listAll, list, getDownloadURL, deleteObject } from 'firebase/storage';
-import { app } from '../firebase/clientApp';
-import { v4 as uuidv4 } from 'uuid';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../firebase/clientApp';
+
+const LOCAL_STORAGE_KEY_URL = 'URL';
 
 auth;
 const db = getFirestore();
@@ -28,31 +28,27 @@ const db = getFirestore();
 export default function Advertisement() {
   const [company, setCompany] = useState<string>('');
   const [description, setDescription] = useState<string>('');
-  const [mediaPreview, setMediaPreview] = useState<string>('');
-  const [image, setImage] = useState({ name: '', media: '' });
   const [width, setWidth] = useState<any>(350);
   const [height, setHeight] = useState<any>(350);
   const [left, setLeft] = useState<any>(40);
   const [top, setTop] = useState<any>(20);
-  const [userData, setUserData] = useState([]);
-  const [userInfo, setUserInfo] = useState<Object>({});
   const [resize, setResize] = useState<boolean>(false);
   const [showCompany, setShowCompany] = useState<string>('');
   const [showDescription, setShowDescription] = useState<string>('');
-  const [showMediaPreview, setShowMediaPreview] = useState<string>('');
-  const [showWidth, setShowWidth] = useState<string>('');
-  const [showHeight, setShowHeight] = useState<string>('');
-  const [showLeft, setShowLeft] = useState<string>('');
-  const [showTop, setShowTop] = useState<string>('');
-  const [imageUpload, setImageUpload] = useState(null);
-  const [imageList, setImageList] = useState([]);
+  const [showWidth, setShowWidth] = useState<any>(350);
+  const [showHeight, setShowHeight] = useState<any>(350);
+  const [showLeft, setShowLeft] = useState<any>(40);
+  const [showTop, setShowTop] = useState<any>(20);
   const [selected, setSelected] = useState<boolean>(false);
+  const [saveImage, setSaveImage] = useState(null);
+  const [url, setUrl] = useState(null);
 
   const currentUser = auth.currentUser?.uid;
   // console.log(currentUser);
 
   const [user] = useAuthState(auth);
   // console.log(user);
+  // console.log(auth);
 
   const dispatch = useDispatch();
 
@@ -74,44 +70,13 @@ export default function Advertisement() {
     return () => window.removeEventListener('resize', updateMedia);
   }, []);
 
-  function handleChange(event) {
-    const { name, files } = event.target;
-    if (name === 'media') {
-      setImage((prevState) => ({ ...prevState, media: files[0] }));
-      setMediaPreview(window.URL.createObjectURL(files[0]));
-    }
-    const img = files[0].name;
-    console.log(img);
-    console.log(files[0].name);
-    // console.log(image);
-  }
-
-  // console.log(mediaPreview);
-  // console.log(description.length);
-  // console.log(auth);
-
-  // console.log data
-  // const logged = async () => {
-  //   const colRef = collection(db, 'users');
-  //   const docsSnap = await getDocs(colRef);
-  //   docsSnap.forEach((doc) => {
-  //     setUserInfo(doc.data());
-  //     console.log(userInfo);
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   logged();
-  // }, []);
-
   const addAdvertisement = async (
     company: string,
     description: string,
     width: number,
     height: number,
     left: number,
-    top: number,
-    mediaPreview: string
+    top: number
   ) => {
     await setDoc(doc(db, '/users/' + currentUser + 'Ads'), {
       company,
@@ -120,29 +85,9 @@ export default function Advertisement() {
       height,
       left,
       top,
-      mediaPreview,
       created: Timestamp.now(),
     });
   };
-
-  useEffect(() => {
-    const q = query(collection(db, '/users'), orderBy('created', 'desc'));
-    onSnapshot(q, (querySnapshot) => {
-      setUserData(
-        querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          company: doc.data().company,
-          created: doc.data().created,
-          description: doc.data().description,
-          height: doc.data().height,
-          left: doc.data().left,
-          top: doc.data().top,
-          width: doc.data().width,
-          mediaPreview: doc.data().mediaPreview,
-        }))
-      );
-    });
-  }, []);
 
   // const deleteAdvertisement = async (
   //   company: string,
@@ -175,120 +120,70 @@ export default function Advertisement() {
       console.log('Document width:', docSnap.data().width);
       console.log('Document top:', docSnap.data().top);
       console.log('Document left:', docSnap.data().left);
-      console.log('Document mediaPreview:', docSnap.data().mediaPreview);
       setShowCompany(docSnap.data().company);
       setShowDescription(docSnap.data().description);
-      setShowMediaPreview(docSnap.data().height);
       setShowWidth(docSnap.data().width);
-      setShowHeight(docSnap.data().top);
+      setShowHeight(docSnap.data().height);
       setShowLeft(docSnap.data().left);
-      setShowTop(docSnap.data().mediaPreview);
+      setShowTop(docSnap.data().top);
     } else {
       console.log('No document data');
     }
   }
 
   async function deleteCompany() {
-    const docRef = doc(db, 'users', currentUser);
+    const docRef = doc(db, '/users/' + currentUser + 'Ads');
     await updateDoc(docRef, {
       company: deleteField()
     });
   }
 
   async function deleteDescription() {
-    const docRef = doc(db, 'users', currentUser);
+    const docRef = doc(db, '/users/' + currentUser + 'Ads');
     await updateDoc(docRef, {
       description: deleteField()
     });
   }
 
   async function deleteHeight() {
-    const docRef = doc(db, 'users', currentUser);
+    const docRef = doc(db, '/users/' + currentUser + 'Ads');
     await updateDoc(docRef, {
       height: deleteField()
     });
   }
 
   async function deleteWidth() {
-    const docRef = doc(db, 'users', currentUser);
+    const docRef = doc(db, '/users/' + currentUser + 'Ads');
     await updateDoc(docRef, {
       width: deleteField()
     });
   }
 
   async function deleteTop() {
-    const docRef = doc(db, 'users', currentUser);
+    const docRef = doc(db, '/users/' + currentUser + 'Ads');
     await updateDoc(docRef, {
       top: deleteField()
     });
   }
 
   async function deleteLeft() {
-    const docRef = doc(db, 'users', currentUser);
+    const docRef = doc(db, '/users/' + currentUser + 'Ads');
     await updateDoc(docRef, {
       left: deleteField()
     });
   }
 
-  async function deleteMediaPreview() {
-    const docRef = doc(db, 'users', currentUser);
-    await updateDoc(docRef, {
-      mediaPreview: deleteField()
-    });
-  }
-
   async function deleteAll() {
-    const docRef = doc(db, 'users', currentUser);
+    const docRef = doc(db, '/users/' + currentUser + 'Ads');
     await updateDoc(docRef, {
       company: deleteField(),
       description: deleteField(),
       height: deleteField(),
       width: deleteField(),
       top: deleteField(),
-      left: deleteField(),
-      mediaPreview: deleteField()
+      left: deleteField()
     });
   }
-
-  // useEffect(() => {
-  //   getData();
-  // }, [])
-
-  // const imageListRef = ref(storage, 'images/');
-
-  // const uploadImage = () => {
-  //   if (imageUpload == null) return;
-  //   const imageRef = ref(storage, `images/${imageUpload.name + uuidv4()}`);
-  //   uploadBytes(imageRef, imageUpload).then((snapshot) => {
-  //     getDownloadURL(snapshot.ref).then((url) => {
-  //       setImageList((prev) => [...prev, url]);
-  //     });
-  //   });
-  // }
-
-  // console.log(imageList);
-
-  // let arr = [];
-
-  // for(let i = 0; i < imageList.length; i++) {
-  //   arr.push(imageList[i])
-  // }
-
-  // console.log(arr);
-  // console.log(arr.pop());
-
-  // useEffect(() => {
-  //   listAll(imageListRef).then((response) => {
-  //     response.items.forEach((item) => {
-  //       getDownloadURL(item).then((url) => {
-  //         setImageList((prev) => [...prev, url]);
-  //       });
-  //     });
-  //   });
-  // }, [])
-
-  const [saveImage, setSaveImage] = useState(null);
-  const [url, setUrl] = useState(null);
 
   const handleImageChange = (e) => {
     if(e.target.files[0]) {
@@ -309,6 +204,16 @@ export default function Advertisement() {
       console.log(error.message);
     });
   }
+
+  // url localStorage
+  useEffect(() => {
+    const storedUrl = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_URL));
+    if (storedUrl) setUrl(storedUrl);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_URL, JSON.stringify(url));
+  }, [url]);
 
   console.log(url);
 
@@ -424,7 +329,7 @@ export default function Advertisement() {
           as='h1'
           size='massive'
           style={{ margin: '2.8em', boxShadow: '2px 2px 10px black' }}
-          // onMouseMove={getData}
+          onMouseMove={getData}
         >
           <Segment attached textAlign='center'>
             <div
@@ -433,7 +338,7 @@ export default function Advertisement() {
                 fontSize: '52px',
                 fontWeight: '700',
                 padding: '1em 0em .5em 0em',
-                lineHeight: '50px',
+                lineHeight: '50px'
               }}
             >
               Advertisement Generator
@@ -477,14 +382,6 @@ export default function Advertisement() {
                       onChange={(e) => setDescription(e.target.value)}
                     />
                     <div>Upload Logo</div>
-                    {/* <input
-                      name='media'
-                      type='file'
-                      accept='image/*'
-                      style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
-                      className={styles.file}
-                      onChange={handleChange}
-                    /> */}
                     <div>
                       <input
                         name='media'
@@ -505,17 +402,24 @@ export default function Advertisement() {
                             zIndex: '100'
                           }}
                         >
-                          <Button
+                          <button
                             onClick={handleSubmit}
                             style={{
                               border: '2px solid #125CA1',
                               background: 'transparent',
-                              color: '#125CA1'
+                              color: '#125CA1',
+                              fontSize: '14px',
+                              fontWeight: '700',
+                              height: '40px',
+                              width: '88.2px',
+                              borderRadius: '4px',
+                              marginRight: '5px'
                             }}
+                            className={selected ? styles.button : null}
                           >
                             Submit
-                          </Button>
-                          <Button
+                          </button>
+                          {/* <Button
                             onClick={() => {setUrl(null), setSelected(false)}}
                             style={{
                               border: '2px solid red',
@@ -524,28 +428,16 @@ export default function Advertisement() {
                             }}
                           >
                             Delete
-                          </Button>
+                          </Button> */}
                         </div>
                       </>
                       ): null}
                     </div>
-                    {/* <div>
-                      <input 
-                        type='file'
-                        onChange={(event) => setImageUpload(event.target.files[0])}
-                      />
-                      <button
-                        onClick={uploadImage}
-                        onMouseOver={uploadImage}
-                      >
-                        Upload Image
-                      </button>
-                    </div> */}
                   </Grid.Column>
                   <Grid.Column width={8}>
                     {company.length > 0 ||
                     description.length > 0 ||
-                    mediaPreview ? (
+                    url ? (
                       <>
                         <Card
                           fluid
@@ -634,23 +526,19 @@ export default function Advertisement() {
                   ): null}
                 </Grid.Row>
                 <Grid.Row>
-                  <div>
+                  {/* <div>
                     <Button
-                      color='blue'
+                      style={{
+                        border: '2px solid #125CA1',
+                        background: 'transparent',
+                        color: '#125CA1'
+                      }}
                       onClick={getData}
                     >
                       Save Advertisement
                     </Button>
-                  </div>
-                  <div>
-                    <Button
-                      color='red'
-                      onClick={deleteAll}
-                    >
-                      Delete Advertisement
-                    </Button>
-                  </div>
-                  {company && description ? (
+                  </div> */}
+                  {company || description || url ? (
                     <>
                       <div style={{ transform: 'translateX(13.5px)' }}>
                         <Button
@@ -661,22 +549,24 @@ export default function Advertisement() {
                               width,
                               height,
                               left,
-                              top,
-                              mediaPreview
+                              top
                             ),
                               dispatch(incrementCompany(String(company))),
                               dispatch(incrementDescription(String(description))),
                               dispatch(incrementWidth(String(width))),
                               dispatch(incrementHeight(String(height))),
                               dispatch(incrementLeft(String(left))),
-                              dispatch(incrementTop(String(top))),
-                              dispatch(incrementMediaPreview(String(mediaPreview)));
+                              dispatch(incrementTop(String(top)))
                           }}
-                          style={{ background: '#125CA1', color: 'white' }}
+                          style={{
+                            border: '2px solid #125CA1',
+                            background: 'transparent', 
+                            color: '#125CA1' 
+                          }}
                         >
-                          Save
+                          Save to Database
                         </Button>
-                        <Button
+                        {/* <Button
                           // onClick={() => {
                           //   deleteAdvertisement(
                           //     company,
@@ -701,6 +591,32 @@ export default function Advertisement() {
                           style={{ background: '#125CA1', color: 'white' }}
                         >
                           Delete
+                        </Button> */}
+                      </div>
+                      <div
+                        style={{
+                          transform: 'translate(20px)'
+                        }}
+                      >
+                        <Button
+                          style={{
+                            border: '2px solid red',
+                            background: 'transparent',
+                            color: 'red'
+                          }}
+                          onClick={() => {
+                            deleteAll(), 
+                            setUrl(null), 
+                            setSelected(false), 
+                            getData(), 
+                            setDescription(''), 
+                            setCompany(''), 
+                            setWidth(350), 
+                            setHeight(350), 
+                            setLeft(40), 
+                            setTop(20)}}
+                        >
+                          Delete Advertisement
                         </Button>
                       </div>
                     </>
@@ -724,17 +640,15 @@ export default function Advertisement() {
                 >
                   <input
                     type='image'
-                    width={showWidth}
-                    height={showHeight}
                     style={{
                       transform: `translate(${showLeft}px, ${showTop}px) scale(.8)`,
+                      width: `${showWidth}px`,
+                      height: `${showHeight}px`,
                       borderRadius: '5%',
                       maxWidth: '30em',
-                      maxHeight: '30em',
+                      maxHeight: '30em'
                     }}
                     src={url}
-                    // src={mediaPreview}
-                    // src={arr.pop()}
                   />
                 </Grid.Column>
                 <Grid.Column style={{ width: resize ? '56%' : '100%' }}>

@@ -9,6 +9,8 @@ import { Divider, Container, Segment, Icon, Form, Button } from 'semantic-ui-rea
 import { auth } from '../firebase/clientApp';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getDoc, getFirestore, doc, getDocs, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy,  onSnapshot } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../firebase/clientApp';
 
 auth;
 const db = getFirestore();
@@ -45,11 +47,15 @@ export default function Custom() {
   const [showColor, setShowColor] = useState<string>('');
   const [showBackgroundColor, setShowBackgroundColor] = useState<string>('');
   const [showMediaPreview, setShowMediaPreview] = useState<string>('');
-  const [showImage, setShowImage] = useState<string>('');
   const [showImageWidth, setShowImageWidth] = useState<string>('');
   const [showImageHeight, setShowImageHeight] = useState<string>('');
   const [showImageRotation, setShowImageRotation] = useState<string>('');
-  const [userData, setUserData] = useState([]);
+  // const [userData, setUserData] = useState([]);
+  const [showWidth, setShowWidth] = useState<any>(350);
+  const [showHeight, setShowHeight] = useState<any>(350);
+  const [selected, setSelected] = useState<boolean>(false);
+  const [saveImage, setSaveImage] = useState(null);
+  const [url, setUrl] = useState(null);
 
   const currentUser = auth.currentUser?.uid;
   // console.log(currentUser);
@@ -57,17 +63,17 @@ export default function Custom() {
   const [user] = useAuthState(auth);
   // console.log(user);
 
-  function handleChange(event) {
-    const { name, files } = event.target;
-    if (name === 'media') {
-      setImage((prevState) => ({ ...prevState, media: files[0] }));
-      setMediaPreview(window.URL.createObjectURL(files[0]));
-    }
-    const img = files[0].name;
-    console.log(img);
-    console.log(files[0].name);
-    // console.log(image);
-  }
+  // function handleChange(event) {
+  //   const { name, files } = event.target;
+  //   if (name === 'media') {
+  //     setImage((prevState) => ({ ...prevState, media: files[0] }));
+  //     setMediaPreview(window.URL.createObjectURL(files[0]));
+  //   }
+  //   const img = files[0].name;
+  //   console.log(img);
+  //   console.log(files[0].name);
+  //   // console.log(image);
+  // }
 
   // console.log(mediaPreview);
 
@@ -104,8 +110,6 @@ export default function Custom() {
     imageHeight,
     imageRotation
   );
-
-  let hey  = 0;
 
   console.log(currentUser);
 
@@ -144,29 +148,29 @@ export default function Custom() {
     });
   };
 
-  useEffect(() => {
-    const q = query(collection(db, '/users'), orderBy('created', 'desc'));
-    onSnapshot(q, (querySnapshot) => {
-      setUserData(
-        querySnapshot.docs.map((doc) => ({
-          company: doc.data().company,
-          companyFontSize: doc.data().companyFontSize,
-          companyFontWeight: doc.data().companyFontWeight,
-          description: doc.data().description,
-          descriptionFontSize: doc.data().descriptionFontSize,
-          descriptionFontWeight: doc.data().descriptionFontWeight,
-          borderWidth: doc.data().borderWidth,
-          borderColor: doc.data().borderColor,
-          color: doc.data().color,
-          backgroundColor: doc.data().backgroundColor,
-          mediaPreview: doc.data().mediaPreview,
-          imageWidth: doc.data().imageWidth,
-          imageHeight: doc.data().imageHeight,
-          imageRotation: doc.data().imageRotation
-        }))
-      );
-    });
-  }, []);
+  // useEffect(() => {
+  //   const q = query(collection(db, '/users'), orderBy('created', 'desc'));
+  //   onSnapshot(q, (querySnapshot) => {
+  //     setUserData(
+  //       querySnapshot.docs.map((doc) => ({
+  //         company: doc.data().company,
+  //         companyFontSize: doc.data().companyFontSize,
+  //         companyFontWeight: doc.data().companyFontWeight,
+  //         description: doc.data().description,
+  //         descriptionFontSize: doc.data().descriptionFontSize,
+  //         descriptionFontWeight: doc.data().descriptionFontWeight,
+  //         borderWidth: doc.data().borderWidth,
+  //         borderColor: doc.data().borderColor,
+  //         color: doc.data().color,
+  //         backgroundColor: doc.data().backgroundColor,
+  //         mediaPreview: doc.data().mediaPreview,
+  //         imageWidth: doc.data().imageWidth,
+  //         imageHeight: doc.data().imageHeight,
+  //         imageRotation: doc.data().imageRotation
+  //       }))
+  //     );
+  //   });
+  // }, []);
 
   // console.log(userData);
 
@@ -208,44 +212,157 @@ export default function Custom() {
     }
   }
 
+  async function deleteCompany() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      company: deleteField()
+    });
+  }
+
+  async function deleteCompanyFontSize() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      companyFontSize: deleteField()
+    });
+  }
+
+  async function deleteCompanyFontWeight() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      companyFontWeight: deleteField()
+    });
+  }
+
+  async function deleteDescription() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      description: deleteField()
+    });
+  }
+
+  async function deleteDescriptionFontSize() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      descriptionFontSize: deleteField()
+    });
+  }
+
+  async function deleteDescriptionFontWeight() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      descriptionFontWeight: deleteField()
+    });
+  }
+
+  async function deleteBorderWidth() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      borderWidth: deleteField()
+    });
+  }
+
+  async function deleteBorderColor() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      borderColor: deleteField()
+    });
+  }
+
+  async function deleteColor() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      color: deleteField()
+    });
+  }
+
+  async function deleteBackgroundColor() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      backgroundColor: deleteField()
+    });
+  }
+
+  async function deleteMediaPreview() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      mediaPreview: deleteField()
+    });
+  }
+
+  async function deleteImageWidth() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      imageWidth: deleteField()
+    });
+  }
+
+  async function deleteImageHeight() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      imageHeight: deleteField()
+    });
+  }
+
+  async function deleteImageRotation() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      imageRotation: deleteField()
+    });
+  }
+
+  // useEffect(() => {
+  //   getData()
+  // }, [])
+
+  // async function deleteAll() {
+  //   const docRef = doc(db, '/users/' + currentUser + 'Custom');
+  //   await updateDoc(docRef, {
+  //     showCompany: deleteField(),
+  //     companyFontSize: deleteField(),
+  //     companyFontWeight: deleteField(),
+  //     description: deleteField(),
+  //     descriptionFontSize: deleteField(),
+  //     descriptionFontWeight: deleteField(),
+  //     borderWidth: deleteField(),
+  //     borderColor: deleteField(),
+  //     color: deleteField(),
+  //     backgroundColor: deleteField(),
+  //     mediaPreview: deleteField(),
+  //     imageWidth: deleteField(),
+  //     imageHeight: deleteField(),
+  //     imageRotation: deleteField()
+  //   });
+  // }
+
+  const handleImageChange = (e) => {
+    if(e.target.files[0]) {
+      setSaveImage(e.target.files[0])
+    }
+  }
+
+  const handleSubmit = () => {
+    const imageRef = ref(storage, `image/${currentUser}`);
+    uploadBytes(imageRef, saveImage).then(() => {
+      getDownloadURL(imageRef).then((url) => {
+        setUrl(url);
+      }).catch((error) => {
+        console.log(error.message, 'error getting the image url');
+      })
+      setSaveImage(null);
+    }).catch((error) => {
+      console.log(error.message);
+    });
+  }
+
+  console.log(url);
+
   return (
     <>
       <Head>
         <title>Custom Advertisement Generator</title>
         <meta name='description' content='earnandtrade, advertisement' />
       </Head>
-      <Button
-        onClick={() => addCustom(
-          company,
-          companyFontSize,
-          companyFontWeight,
-          description,
-          descriptionFontSize,
-          descriptionFontWeight,
-          borderWidth,
-          borderColor,
-          color,
-          backgroundColor,
-          mediaPreview,
-          imageWidth,
-          imageHeight,
-          imageRotation
-        )}
-        color='green'
-        style={{
-          color: 'white',
-          marginLeft: '3vw',
-        }}
-      >
-        Save Data
-      </Button>
-      <Button
-        color='blue'
-        onClick={getData}
-      >
-        Get Data
-      </Button>
-      <div>
+      {/* <div>
         {showCompany}
       </div>
       <div>
@@ -286,7 +403,7 @@ export default function Custom() {
       </div>
       <div>
         {showImageRotation}
-      </div>
+      </div> */}
       {/* <LocalCustom
         company={company}
         setCompany={setCompany}
@@ -331,6 +448,23 @@ export default function Custom() {
       /> */}
       <Header />
       <Container
+        // onMouseOver={() => {addCustom(
+        //   company,
+        //   companyFontSize,
+        //   companyFontWeight,
+        //   description,
+        //   descriptionFontSize,
+        //   descriptionFontWeight,
+        //   borderWidth,
+        //   borderColor,
+        //   color,
+        //   backgroundColor,
+        //   mediaPreview,
+        //   imageWidth,
+        //   imageHeight,
+        //   imageRotation
+        // )}}
+        // onMouseMove={getData}
         size='massive'
         style={{
           margin: '0.5em',
@@ -383,13 +517,13 @@ export default function Custom() {
                 style={{
                   marginTop: '15px',
                   marginBottom: '20px',
-                  fontSize: '25px',
+                  fontSize: '25px'
                 }}
               >
                 <span
                   style={{
                     display: 'flex',
-                    justifyContent: 'center',
+                    justifyContent: 'center'
                   }}
                 >
                   Edit Title
@@ -472,6 +606,7 @@ export default function Custom() {
                       marginLeft: '-25px',
                       display: 'flex',
                       transform: 'translateY(100%) scale(0.8)',
+                      padding: '0px 0px 8px 0px'
                     }}
                   >
                     <Icon name='chevron down' />
@@ -480,6 +615,7 @@ export default function Custom() {
                     style={{
                       display: 'flex',
                       justifyContent: 'center',
+                      padding: '0px 0px 8px 0px'
                     }}
                   >
                     Edit Title
@@ -885,7 +1021,7 @@ export default function Custom() {
                 </div>
               </div>
               <div style={{ color: 'black', marginLeft: '8vw' }}>
-                <div>
+                {/* <div>
                   <input
                     name='media'
                     type='file'
@@ -898,6 +1034,57 @@ export default function Custom() {
                     className={styles.file}
                     onChange={handleChange}
                   />
+                </div> */}
+                <div>
+                  <input
+                    name='media'
+                    type='file'
+                    accept='image/*'
+                    style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
+                    className={styles.file}
+                    onChange={handleImageChange}
+                    onClick={() => setSelected(true)}
+                  />
+                  {selected ? (
+                  <>
+                    <div
+                      style={{
+                        marginTop: '20px',
+                        marginBottom: '30px',
+                        position: 'relative',
+                        zIndex: '100'
+                      }}
+                    >
+                      <button
+                        onClick={handleSubmit}
+                        style={{
+                          border: '2px solid #125CA1',
+                          background: 'transparent',
+                          color: '#125CA1',
+                          fontSize: '14px',
+                          fontWeight: '700',
+                          height: '40px',
+                          width: '88.2px',
+                          borderRadius: '4px',
+                          marginRight: '5px'
+                        }}
+                        className={selected ? styles.button : null}
+                      >
+                        Submit
+                      </button>
+                      <Button
+                        onClick={() => {setUrl(null), setSelected(false)}}
+                        style={{
+                          border: '2px solid red',
+                          background: 'transparent',
+                          color: 'red'
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </>
+                  ): null}
                 </div>
                 <div style={{ marginBottom: '5px' }}>Image Width (pixels)</div>
                 <div>
@@ -1008,7 +1195,7 @@ export default function Custom() {
       >
         Save 2nd
       </Button> */}
-      <Button
+      {/* <Button
         onClick={() => {
             setCompany(''),
             setCompanyFontSize(''),
@@ -1037,7 +1224,89 @@ export default function Custom() {
         }}
       >
         Clear
-      </Button>
+      </Button> */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          padding: '20px 0px 20px 0px'
+        }}
+      >
+        <Button
+          onClick={() => {addCustom(
+            company,
+            companyFontSize,
+            companyFontWeight,
+            description,
+            descriptionFontSize,
+            descriptionFontWeight,
+            borderWidth,
+            borderColor,
+            color,
+            backgroundColor,
+            mediaPreview,
+            imageWidth,
+            imageHeight,
+            imageRotation
+          )}}
+          style={{
+            border: '2px solid #125CA1',
+            background: 'transparent',
+            color: '#125CA1'
+          }}
+        >
+          Save Data
+        </Button>
+        <Button
+          onClick={getData}
+          style={{
+            border: '2px solid #125CA1',
+            background: 'transparent',
+            color: '#125CA1'
+          }}
+        >
+          Get Data
+        </Button>
+        <Button
+          style={{
+            border: '2px solid red',
+            background: 'transparent',
+            color: 'red'
+          }}
+          onClick={() => {
+            deleteCompany(), 
+            deleteCompanyFontSize(),
+            deleteCompanyFontWeight(),
+            deleteDescription(),
+            deleteDescriptionFontSize(),
+            deleteDescriptionFontWeight(),
+            deleteBorderWidth(),
+            deleteBorderColor(),
+            deleteColor(),
+            deleteBackgroundColor(),
+            deleteMediaPreview(),
+            deleteImageWidth(),
+            deleteImageHeight(),
+            deleteImageRotation(),
+            setShowCompany(''),
+            setShowCompanyFontSize(''),
+            setShowCompanyFontWeight(''),
+            setShowDescription(''),
+            setShowDescriptionFontSize(''),
+            setShowDescriptionFontWeight(''),
+            setShowBorderWidth('0'),
+            setShowBorderColor(''),
+            setShowColor(''),
+            setShowBackgroundColor(''),
+            setShowMediaPreview(''),
+            setShowImageWidth(''),
+            setShowImageHeight(''),
+            setShowImageRotation('')
+          }}
+        >
+          Delete Data
+        </Button>
+      </div>
       <Divider />
       <div
         style={{
@@ -1096,11 +1365,11 @@ export default function Custom() {
             >
               <input
                 type='image'
-                src={mediaPreview}
+                src={url}
                 style={{
-                  width: `${showImageWidth}px`,
-                  height: `${showImageHeight}px`,
-                  transform: `rotate(${showImageRotation}deg)`,
+                  width: `${showWidth}px`,
+                  height: `${showHeight}px`,
+                  // transform: `rotate(${showRotation}deg)`,
                   cursor: 'grab'
                 }}
               />

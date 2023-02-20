@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }) {
       console.log('Signed In');
     } else if (user === null && window.document.cookie.length === 17) {
       router.push('/');
-      console.log('Cannot access this page without logging in')
+      console.log('Cannot access this page without logging in');
     } else {
       console.log('done');
     }
