@@ -192,7 +192,7 @@ export default function Advertisement() {
   }
 
   const handleSubmit = () => {
-    const imageRef = ref(storage, `image/${currentUser}`);
+    const imageRef = ref(storage, `image/${currentUser}/advertisement`);
     uploadBytes(imageRef, saveImage).then(() => {
       getDownloadURL(imageRef).then((url) => {
         setUrl(url);

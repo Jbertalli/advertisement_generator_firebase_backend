@@ -7,13 +7,13 @@ import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
 import { Divider, Container, Segment, Icon, Form, Button } from 'semantic-ui-react';
 import { auth } from '../firebase/clientApp';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { getDoc, getFirestore, doc, getDocs, setDoc, Timestamp, updateDoc, deleteField, collection, query, orderBy,  onSnapshot } from 'firebase/firestore';
+import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../firebase/clientApp';
 
 auth;
 const db = getFirestore();
+const LOCAL_STORAGE_KEY_CUSTOM = 'URL';
 
 export default function Custom() {
   const [company, setCompany] = useState<string>('');
@@ -26,11 +26,11 @@ export default function Custom() {
   const [borderColor, setBorderColor] = useState<string>('');
   const [color, setColor] = useState<string>('');
   const [backgroundColor, setBackgroundColor] = useState<string>('');
-  const [mediaPreview, setMediaPreview] = useState<string>('');
-  const [image, setImage] = useState({ name: '', media: '' });
-  const [imageWidth, setImageWidth] = useState<string>('');
-  const [imageHeight, setImageHeight] = useState<string>('');
-  const [imageRotation, setImageRotation] = useState<string>('');
+  const [imageWidth, setImageWidth] = useState<string>('350');
+  const [imageHeight, setImageHeight] = useState<string>('350');
+  const [imageLeft, setImageLeft] = useState<string>('0');
+  const [imageTop, setImageTop] = useState<string>('0');
+  const [imageRotation, setImageRotation] = useState<string>('0');
   const [editTitle, setEditTitle] = useState<boolean>(false);
   const [editDescription, setEditDescription] = useState<boolean>(false);
   const [editBorder, setEditBorder] = useState<boolean>(false);
@@ -46,13 +46,11 @@ export default function Custom() {
   const [showBorderColor, setShowBorderColor] = useState<string>('');
   const [showColor, setShowColor] = useState<string>('');
   const [showBackgroundColor, setShowBackgroundColor] = useState<string>('');
-  const [showMediaPreview, setShowMediaPreview] = useState<string>('');
-  const [showImageWidth, setShowImageWidth] = useState<string>('');
-  const [showImageHeight, setShowImageHeight] = useState<string>('');
-  const [showImageRotation, setShowImageRotation] = useState<string>('');
-  // const [userData, setUserData] = useState([]);
-  const [showWidth, setShowWidth] = useState<any>(350);
-  const [showHeight, setShowHeight] = useState<any>(350);
+  const [showImageWidth, setShowImageWidth] = useState<any>(350);
+  const [showImageHeight, setShowImageHeight] = useState<any>(350);
+  const [showImageLeft, setShowImageLeft] = useState<any>(0);
+  const [showImageTop, setShowImageTop] = useState<any>(0);
+  const [showImageRotation, setShowImageRotation] = useState<any>(0);
   const [selected, setSelected] = useState<boolean>(false);
   const [saveImage, setSaveImage] = useState(null);
   const [url, setUrl] = useState(null);
@@ -60,24 +58,17 @@ export default function Custom() {
   const currentUser = auth.currentUser?.uid;
   // console.log(currentUser);
 
-  const [user] = useAuthState(auth);
-  // console.log(user);
-
-  // function handleChange(event) {
-  //   const { name, files } = event.target;
-  //   if (name === 'media') {
-  //     setImage((prevState) => ({ ...prevState, media: files[0] }));
-  //     setMediaPreview(window.URL.createObjectURL(files[0]));
-  //   }
-  //   const img = files[0].name;
-  //   console.log(img);
-  //   console.log(files[0].name);
-  //   // console.log(image);
-  // }
-
-  // console.log(mediaPreview);
-
   const router = useRouter();
+
+  // url localStorage
+  useEffect(() => {
+    const storedUrl = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CUSTOM));
+    if (storedUrl) setUrl(storedUrl);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_CUSTOM, JSON.stringify(url));
+  }, [url]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -105,9 +96,10 @@ export default function Custom() {
     borderColor,
     color,
     backgroundColor,
-    mediaPreview,
     imageWidth,
     imageHeight,
+    imageLeft,
+    imageTop,
     imageRotation
   );
 
@@ -124,9 +116,10 @@ export default function Custom() {
     borderColor: string,
     color: string,
     backgroundColor: string,
-    mediaPreview: string,
     imageWidth: string,
     imageHeight: string,
+    imageLeft: string,
+    imageTop: string,
     imageRotation: string
   ) {
     await setDoc(doc(db, '/users/' + currentUser + 'Custom'), {
@@ -140,39 +133,14 @@ export default function Custom() {
       borderColor,
       color,
       backgroundColor,
-      mediaPreview,
       imageWidth,
       imageHeight,
+      imageLeft,
+      imageTop,
       imageRotation,
       created: Timestamp.now(),
     });
   };
-
-  // useEffect(() => {
-  //   const q = query(collection(db, '/users'), orderBy('created', 'desc'));
-  //   onSnapshot(q, (querySnapshot) => {
-  //     setUserData(
-  //       querySnapshot.docs.map((doc) => ({
-  //         company: doc.data().company,
-  //         companyFontSize: doc.data().companyFontSize,
-  //         companyFontWeight: doc.data().companyFontWeight,
-  //         description: doc.data().description,
-  //         descriptionFontSize: doc.data().descriptionFontSize,
-  //         descriptionFontWeight: doc.data().descriptionFontWeight,
-  //         borderWidth: doc.data().borderWidth,
-  //         borderColor: doc.data().borderColor,
-  //         color: doc.data().color,
-  //         backgroundColor: doc.data().backgroundColor,
-  //         mediaPreview: doc.data().mediaPreview,
-  //         imageWidth: doc.data().imageWidth,
-  //         imageHeight: doc.data().imageHeight,
-  //         imageRotation: doc.data().imageRotation
-  //       }))
-  //     );
-  //   });
-  // }, []);
-
-  // console.log(userData);
 
   async function getData() {
     const docRef = doc(db, '/users/' + currentUser + 'Custom');
@@ -189,9 +157,10 @@ export default function Custom() {
       console.log('Document BorderColor:', docSnap.data().borderColor);
       console.log('Document Color:', docSnap.data().color);
       console.log('Document BackgroundColor:', docSnap.data().backgroundColor);
-      console.log('Document MediaPreview:', docSnap.data().mediaPreview);
       console.log('Document ImageWidth:', docSnap.data().imageWidth);
       console.log('Document ImageHeight:', docSnap.data().imageHeight);
+      console.log('Document ImageLeft:', docSnap.data().imageLeft);
+      console.log('Document ImageTop:', docSnap.data().imageTop);
       console.log('Document ImageRotation:', docSnap.data().imageRotation);
       setShowCompany(docSnap.data().company);
       setShowCompanyFontSize(docSnap.data().companyFontSize);
@@ -203,9 +172,10 @@ export default function Custom() {
       setShowBorderColor(docSnap.data().borderColor);
       setShowColor(docSnap.data().color);
       setShowBackgroundColor(docSnap.data().backgroundColor);
-      setShowMediaPreview(docSnap.data().mediaPreview);
       setShowImageWidth(docSnap.data().imageWidth);
       setShowImageHeight(docSnap.data().imageHeight);
+      setShowImageLeft(docSnap.data().imageLeft);
+      setShowImageTop(docSnap.data().imageTop);
       setShowImageRotation(docSnap.data().imageRotation);
     } else {
       console.log('No document data');
@@ -282,13 +252,6 @@ export default function Custom() {
     });
   }
 
-  async function deleteMediaPreview() {
-    const docRef = doc(db, '/users/' + currentUser + 'Custom');
-    await updateDoc(docRef, {
-      mediaPreview: deleteField()
-    });
-  }
-
   async function deleteImageWidth() {
     const docRef = doc(db, '/users/' + currentUser + 'Custom');
     await updateDoc(docRef, {
@@ -303,6 +266,20 @@ export default function Custom() {
     });
   }
 
+  async function deleteImageLeft() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      imageLeft: deleteField()
+    });
+  }
+
+  async function deleteImageTop() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      imageTop: deleteField()
+    });
+  }
+
   async function deleteImageRotation() {
     const docRef = doc(db, '/users/' + currentUser + 'Custom');
     await updateDoc(docRef, {
@@ -310,29 +287,34 @@ export default function Custom() {
     });
   }
 
-  // useEffect(() => {
-  //   getData()
-  // }, [])
+  function deleteLocal() {
+    localStorage.clear();
+  }
 
-  // async function deleteAll() {
-  //   const docRef = doc(db, '/users/' + currentUser + 'Custom');
-  //   await updateDoc(docRef, {
-  //     showCompany: deleteField(),
-  //     companyFontSize: deleteField(),
-  //     companyFontWeight: deleteField(),
-  //     description: deleteField(),
-  //     descriptionFontSize: deleteField(),
-  //     descriptionFontWeight: deleteField(),
-  //     borderWidth: deleteField(),
-  //     borderColor: deleteField(),
-  //     color: deleteField(),
-  //     backgroundColor: deleteField(),
-  //     mediaPreview: deleteField(),
-  //     imageWidth: deleteField(),
-  //     imageHeight: deleteField(),
-  //     imageRotation: deleteField()
-  //   });
-  // }
+  useEffect(() => {
+    getData()
+  }, [])
+
+  async function deleteAll() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      showCompany: deleteField(),
+      companyFontSize: deleteField(),
+      companyFontWeight: deleteField(),
+      description: deleteField(),
+      descriptionFontSize: deleteField(),
+      descriptionFontWeight: deleteField(),
+      borderWidth: deleteField(),
+      borderColor: deleteField(),
+      color: deleteField(),
+      backgroundColor: deleteField(),
+      imageWidth: deleteField(),
+      imageHeight: deleteField(),
+      imageLeft: deleteField(),
+      imageTop: deleteField(),
+      imageRotation: deleteField()
+    });
+  }
 
   const handleImageChange = (e) => {
     if(e.target.files[0]) {
@@ -341,7 +323,7 @@ export default function Custom() {
   }
 
   const handleSubmit = () => {
-    const imageRef = ref(storage, `image/${currentUser}`);
+    const imageRef = ref(storage, `image/${currentUser}/custom`);
     uploadBytes(imageRef, saveImage).then(() => {
       getDownloadURL(imageRef).then((url) => {
         setUrl(url);
@@ -362,48 +344,6 @@ export default function Custom() {
         <title>Custom Advertisement Generator</title>
         <meta name='description' content='earnandtrade, advertisement' />
       </Head>
-      {/* <div>
-        {showCompany}
-      </div>
-      <div>
-        {showCompanyFontSize}
-      </div>
-      <div>
-        {showCompanyFontWeight}
-      </div>
-      <div>
-        {showDescription}
-      </div>
-      <div>
-        {showDescriptionFontSize}
-      </div>
-      <div>
-        {showDescriptionFontWeight}
-      </div>
-      <div>
-        {showBorderWidth}
-      </div>
-      <div>
-        {showBorderColor}
-      </div>
-      <div>
-        {showColor}
-      </div>
-      <div>
-        {showBackgroundColor}
-      </div>
-      <div>
-        {showMediaPreview}
-      </div>
-      <div>
-        {showImageWidth}
-      </div>
-      <div>
-        {showImageHeight}
-      </div>
-      <div>
-        {showImageRotation}
-      </div> */}
       {/* <LocalCustom
         company={company}
         setCompany={setCompany}
@@ -425,8 +365,6 @@ export default function Custom() {
         setColor={setColor}
         backgroundColor={backgroundColor}
         setBackgroundColor={setBackgroundColor}
-        mediaPreview={mediaPreview}
-        setMediaPreview={setMediaPreview}
         image={image}
         setImage={setImage}
         imageWidth={imageWidth}
@@ -459,9 +397,10 @@ export default function Custom() {
         //   borderColor,
         //   color,
         //   backgroundColor,
-        //   mediaPreview,
         //   imageWidth,
         //   imageHeight,
+        //   imageLeft,
+        //   imageTop,
         //   imageRotation
         // )}}
         // onMouseMove={getData}
@@ -470,6 +409,7 @@ export default function Custom() {
           margin: '0.5em',
           boxShadow: '2px 2px 10px black',
         }}
+        onMouseMove={getData}
       >
         <Segment attached textAlign='center'>
           <div
@@ -726,7 +666,7 @@ export default function Custom() {
                 <div
                   style={{ transform: 'translateY(-8px)' }}
                   onClick={() => {
-                    setEditDescription(true),
+                      setEditDescription(true),
                       setEditTitle(false),
                       setEditBorder(false),
                       setEditGlobal(false),
@@ -1021,20 +961,6 @@ export default function Custom() {
                 </div>
               </div>
               <div style={{ color: 'black', marginLeft: '8vw' }}>
-                {/* <div>
-                  <input
-                    name='media'
-                    type='file'
-                    accept='image/*'
-                    style={{
-                      width: '40vw',
-                      transform: 'translateX(-.2vw)',
-                      marginBottom: '25px',
-                    }}
-                    className={styles.file}
-                    onChange={handleChange}
-                  />
-                </div> */}
                 <div>
                   <input
                     name='media'
@@ -1086,7 +1012,7 @@ export default function Custom() {
                   </>
                   ): null}
                 </div>
-                <div style={{ marginBottom: '5px' }}>Image Width (pixels)</div>
+                <div style={{ marginBottom: '5px', marginTop: '15px' }}>Image Width (pixels)</div>
                 <div>
                   <Form.Input
                     min='0'
@@ -1112,6 +1038,38 @@ export default function Custom() {
                     placeholder='height'
                     value={imageHeight}
                     onChange={(e) => setImageHeight(e.target.value)}
+                    style={{
+                      width: '50%',
+                      marginBottom: '25px',
+                    }}
+                  />
+                </div>
+                <div style={{ marginBottom: '5px' }}>Image Left (pixels)</div>
+                <div>
+                  <Form.Input
+                    min='-1000'
+                    max='1000'
+                    step='10'
+                    type='number'
+                    placeholder='left'
+                    value={imageLeft}
+                    onChange={(e) => setImageLeft(e.target.value)}
+                    style={{
+                      width: '50%',
+                      marginBottom: '25px',
+                    }}
+                  />
+                </div>
+                <div style={{ marginBottom: '5px' }}>Image Top (pixels)</div>
+                <div>
+                  <Form.Input
+                    min='-1000'
+                    max='1000'
+                    step='10'
+                    type='number'
+                    placeholder='top'
+                    value={imageTop}
+                    onChange={(e) => setImageTop(e.target.value)}
                     style={{
                       width: '50%',
                       marginBottom: '25px',
@@ -1207,7 +1165,6 @@ export default function Custom() {
             setBorderColor(''),
             setColor(''),
             setBackgroundColor(''),
-            setMediaPreview(''),
             setImageWidth('100'),
             setImageHeight('100'),
             setImageRotation('0'),
@@ -1227,6 +1184,13 @@ export default function Custom() {
       </Button> */}
       <div
         style={{
+          marginTop: '30px'
+        }}
+      >
+        <Divider />
+      </div>
+      <div
+        style={{
           display: 'flex',
           justifyContent: 'space-around',
           padding: '20px 0px 20px 0px'
@@ -1244,9 +1208,10 @@ export default function Custom() {
             borderColor,
             color,
             backgroundColor,
-            mediaPreview,
             imageWidth,
             imageHeight,
+            imageLeft,
+            imageTop,
             imageRotation
           )}}
           style={{
@@ -1274,6 +1239,7 @@ export default function Custom() {
             color: 'red'
           }}
           onClick={() => {
+            deleteLocal(),
             deleteCompany(), 
             deleteCompanyFontSize(),
             deleteCompanyFontWeight(),
@@ -1284,9 +1250,10 @@ export default function Custom() {
             deleteBorderColor(),
             deleteColor(),
             deleteBackgroundColor(),
-            deleteMediaPreview(),
             deleteImageWidth(),
             deleteImageHeight(),
+            deleteImageLeft(),
+            deleteImageTop(),
             deleteImageRotation(),
             setShowCompany(''),
             setShowCompanyFontSize(''),
@@ -1298,9 +1265,10 @@ export default function Custom() {
             setShowBorderColor(''),
             setShowColor(''),
             setShowBackgroundColor(''),
-            setShowMediaPreview(''),
             setShowImageWidth(''),
             setShowImageHeight(''),
+            setShowImageLeft(''),
+            setShowImageTop(''),
             setShowImageRotation('')
           }}
         >
@@ -1367,9 +1335,9 @@ export default function Custom() {
                 type='image'
                 src={url}
                 style={{
-                  width: `${showWidth}px`,
-                  height: `${showHeight}px`,
-                  // transform: `rotate(${showRotation}deg)`,
+                  width: `${showImageWidth}px`,
+                  height: `${showImageHeight}px`,
+                  transform: `translate(${showImageLeft}px, ${showImageTop}px) rotate(${showImageRotation}deg)`,
                   cursor: 'grab'
                 }}
               />
