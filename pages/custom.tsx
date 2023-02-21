@@ -30,6 +30,7 @@ export default function Custom() {
   const [imageHeight, setImageHeight] = useState<string>('350');
   const [imageLeft, setImageLeft] = useState<string>('0');
   const [imageTop, setImageTop] = useState<string>('0');
+  const [totalWidth, setTotalWidth] = useState<string>('500');
   const [imageRotation, setImageRotation] = useState<string>('0');
   const [editTitle, setEditTitle] = useState<boolean>(false);
   const [editDescription, setEditDescription] = useState<boolean>(false);
@@ -50,7 +51,9 @@ export default function Custom() {
   const [showImageHeight, setShowImageHeight] = useState<any>(350);
   const [showImageLeft, setShowImageLeft] = useState<any>(0);
   const [showImageTop, setShowImageTop] = useState<any>(0);
+  const [showTotalWidth, setShowTotalWidth] = useState<any>(500);
   const [showImageRotation, setShowImageRotation] = useState<any>(0);
+  const [resize, setResize] = useState<boolean>(false);
   const [selected, setSelected] = useState<boolean>(false);
   const [saveImage, setSaveImage] = useState(null);
   const [url, setUrl] = useState(null);
@@ -69,6 +72,24 @@ export default function Custom() {
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY_CUSTOM, JSON.stringify(url));
   }, [url]);
+
+  useEffect(() => {
+    if (window.innerWidth > 650) {
+      setResize(true);
+    } else {
+      setResize(false);
+    }
+
+    const updateMedia = () => {
+      if (window.innerWidth > 650) {
+        setResize(true);
+      } else {
+        setResize(false);
+      }
+    };
+    window.addEventListener('resize', updateMedia);
+    return () => window.removeEventListener('resize', updateMedia);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -100,6 +121,7 @@ export default function Custom() {
     imageHeight,
     imageLeft,
     imageTop,
+    totalWidth,
     imageRotation
   );
 
@@ -120,6 +142,7 @@ export default function Custom() {
     imageHeight: string,
     imageLeft: string,
     imageTop: string,
+    totalWidth: string,
     imageRotation: string
   ) {
     await setDoc(doc(db, '/users/' + currentUser + 'Custom'), {
@@ -137,6 +160,7 @@ export default function Custom() {
       imageHeight,
       imageLeft,
       imageTop,
+      totalWidth,
       imageRotation,
       created: Timestamp.now(),
     });
@@ -161,6 +185,7 @@ export default function Custom() {
       console.log('Document ImageHeight:', docSnap.data().imageHeight);
       console.log('Document ImageLeft:', docSnap.data().imageLeft);
       console.log('Document ImageTop:', docSnap.data().imageTop);
+      console.log('Document TotalWidth:', docSnap.data().totalWidth);
       console.log('Document ImageRotation:', docSnap.data().imageRotation);
       setShowCompany(docSnap.data().company);
       setShowCompanyFontSize(docSnap.data().companyFontSize);
@@ -176,6 +201,7 @@ export default function Custom() {
       setShowImageHeight(docSnap.data().imageHeight);
       setShowImageLeft(docSnap.data().imageLeft);
       setShowImageTop(docSnap.data().imageTop);
+      setShowTotalWidth(docSnap.data().totalWidth);
       setShowImageRotation(docSnap.data().imageRotation);
     } else {
       console.log('No document data');
@@ -287,6 +313,14 @@ export default function Custom() {
     });
   }
 
+  async function deleteTotalWidth() {
+    const docRef = doc(db, '/users/' + currentUser + 'Custom');
+    await updateDoc(docRef, {
+      totalWidth: deleteField()
+    });
+  }
+
+
   function deleteLocal() {
     localStorage.clear();
   }
@@ -312,6 +346,7 @@ export default function Custom() {
       imageHeight: deleteField(),
       imageLeft: deleteField(),
       imageTop: deleteField(),
+      totalWidth: deleteField(),
       imageRotation: deleteField()
     });
   }
@@ -401,6 +436,7 @@ export default function Custom() {
         //   imageHeight,
         //   imageLeft,
         //   imageTop,
+        //   totalWidth,
         //   imageRotation
         // )}}
         // onMouseMove={getData}
@@ -489,8 +525,8 @@ export default function Custom() {
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                     style={{
-                      width: '65%',
-                      marginBottom: '25px',
+                      width: resize ? '50%' : '92%',
+                      marginBottom: '25px'
                     }}
                   />
                 </div>
@@ -502,8 +538,8 @@ export default function Custom() {
                     value={companyFontSize}
                     onChange={(e) => setCompanyFontSize(e.target.value)}
                     style={{
-                      width: '50%',
-                      marginBottom: '25px',
+                      width: resize ? '50%' : '92%',
+                      marginBottom: '25px'
                     }}
                   />
                 </div>
@@ -520,7 +556,7 @@ export default function Custom() {
                     value={companyFontWeight}
                     onChange={(e) => setCompanyFontWeight(e.target.value)}
                     style={{
-                      width: '50%',
+                      width: resize ? '50%' : '92%',
                       marginTop: '15px',
                       marginBottom: '15px',
                       cursor: 'grab',
@@ -586,7 +622,7 @@ export default function Custom() {
                 style={{
                   marginTop: '15px',
                   marginBottom: '20px',
-                  fontSize: '25px',
+                  fontSize: '25px'
                 }}
               >
                 <span
@@ -620,8 +656,8 @@ export default function Custom() {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     style={{
-                      width: '65%',
-                      marginBottom: '25px',
+                      width: resize ? '50%' : '92%',
+                      marginBottom: '25px'
                     }}
                   />
                 </div>
@@ -633,8 +669,8 @@ export default function Custom() {
                     value={descriptionFontSize}
                     onChange={(e) => setDescriptionFontSize(e.target.value)}
                     style={{
-                      width: '50%',
-                      marginBottom: '25px',
+                      width: resize ? '50%' : '92%',
+                      marginBottom: '25px'
                     }}
                   />
                 </div>
@@ -651,10 +687,10 @@ export default function Custom() {
                     value={descriptionFontWeight}
                     onChange={(e) => setDescriptionFontWeight(e.target.value)}
                     style={{
-                      width: '50%',
+                      width: resize ? '50%' : '92%',
                       marginTop: '15px',
                       marginBottom: '15px',
-                      cursor: 'grab',
+                      cursor: 'grab'
                     }}
                   />
                 </div>
@@ -709,14 +745,14 @@ export default function Custom() {
               <div
                 id='editBorder'
                 style={{
-                  transform: 'translateY(-17px)',
+                  transform: 'translateY(-17px)'
                 }}
               />
               <div
                 style={{
                   marginTop: '15px',
                   marginBottom: '20px',
-                  fontSize: '25px',
+                  fontSize: '25px'
                 }}
               >
                 <span
@@ -732,7 +768,7 @@ export default function Custom() {
                     transform: 'translate(-20px, -20px)',
                     color: 'red',
                     display: 'flex',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'flex-end'
                   }}
                   onClick={() => setEditBorder(false)}
                 >
@@ -748,8 +784,8 @@ export default function Custom() {
                     value={borderWidth}
                     onChange={(e) => setBorderWidth(e.target.value)}
                     style={{
-                      width: '50%',
-                      marginBottom: '25px',
+                      width: resize ? '50%' : '92%',
+                      marginBottom: '25px'
                     }}
                   />
                 </div>
@@ -825,7 +861,7 @@ export default function Custom() {
                 style={{
                   marginTop: '15px',
                   marginBottom: '20px',
-                  fontSize: '25px',
+                  fontSize: '25px'
                 }}
               >
                 <span
@@ -849,6 +885,24 @@ export default function Custom() {
                 </div>
               </div>
               <div style={{ color: 'black', marginLeft: '8vw' }}>
+              <div style={{ marginBottom: '5px' }}>
+                  Advertisement Width (pixels)
+                </div>
+                <div>
+                  <Form.Input
+                    min='200'
+                    max='10000'
+                    step='20'
+                    type='number'
+                    placeholder='width'
+                    value={totalWidth}
+                    onChange={(e) => setTotalWidth(e.target.value)}
+                    style={{
+                      width: resize ? '50%' : '92%',
+                      marginBottom: '15px'
+                    }}
+                  />
+                </div>
                 <div style={{ marginBottom: '5px' }}>Select Text Color</div>
                 <div>
                   <input
@@ -937,7 +991,7 @@ export default function Custom() {
                 style={{
                   marginTop: '15px',
                   marginBottom: '20px',
-                  fontSize: '25px',
+                  fontSize: '25px'
                 }}
               >
                 <span
@@ -966,7 +1020,10 @@ export default function Custom() {
                     name='media'
                     type='file'
                     accept='image/*'
-                    style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
+                    style={{ 
+                      width: resize ? '30vw' : '50vw', 
+                      transform: 'translateX(-.2vw)' 
+                    }}
                     className={styles.file}
                     onChange={handleImageChange}
                     onClick={() => setSelected(true)}
@@ -1023,8 +1080,8 @@ export default function Custom() {
                     value={imageWidth}
                     onChange={(e) => setImageWidth(e.target.value)}
                     style={{
-                      width: '50%',
-                      marginBottom: '25px',
+                      width: resize ? '50%' : '92%',
+                      marginBottom: '25px'
                     }}
                   />
                 </div>
@@ -1039,8 +1096,8 @@ export default function Custom() {
                     value={imageHeight}
                     onChange={(e) => setImageHeight(e.target.value)}
                     style={{
-                      width: '50%',
-                      marginBottom: '25px',
+                      width: resize ? '50%' : '92%',
+                      marginBottom: '25px'
                     }}
                   />
                 </div>
@@ -1055,8 +1112,8 @@ export default function Custom() {
                     value={imageLeft}
                     onChange={(e) => setImageLeft(e.target.value)}
                     style={{
-                      width: '50%',
-                      marginBottom: '25px',
+                      width: resize ? '50%' : '92%',
+                      marginBottom: '25px'
                     }}
                   />
                 </div>
@@ -1071,8 +1128,8 @@ export default function Custom() {
                     value={imageTop}
                     onChange={(e) => setImageTop(e.target.value)}
                     style={{
-                      width: '50%',
-                      marginBottom: '25px',
+                      width: resize ? '50%' : '92%',
+                      marginBottom: '25px'
                     }}
                   />
                 </div>
@@ -1089,8 +1146,8 @@ export default function Custom() {
                     value={imageRotation}
                     onChange={(e) => setImageRotation(e.target.value)}
                     style={{
-                      width: '50%',
-                      marginBottom: '15px',
+                      width: resize ? '50%' : '92%',
+                      marginBottom: '15px'
                     }}
                   />
                 </div>
@@ -1212,6 +1269,7 @@ export default function Custom() {
             imageHeight,
             imageLeft,
             imageTop,
+            totalWidth,
             imageRotation
           )}}
           style={{
@@ -1254,6 +1312,7 @@ export default function Custom() {
             deleteImageHeight(),
             deleteImageLeft(),
             deleteImageTop(),
+            deleteTotalWidth(),
             deleteImageRotation(),
             setShowCompany(''),
             setShowCompanyFontSize(''),
@@ -1269,6 +1328,7 @@ export default function Custom() {
             setShowImageHeight(''),
             setShowImageLeft(''),
             setShowImageTop(''),
+            setShowTotalWidth(''),
             setShowImageRotation('')
           }}
         >
@@ -1278,7 +1338,7 @@ export default function Custom() {
       <Divider />
       <div
         style={{
-          padding: '0px 3vw 1px 3vw',
+          padding: '0px 3vw 1px 3vw'
         }}
       >
         <Container
@@ -1289,7 +1349,7 @@ export default function Custom() {
             fontWeight: '100',
             height: '50vh',
             width: '100vw',
-            margin: '30px',
+            margin: '30px'
           }}
         >
           <Draggable>
@@ -1302,7 +1362,7 @@ export default function Custom() {
                 cursor: 'grab',
                 marginBottom: '30px',
                 marginTop: '30px',
-                lineHeight: '1em',
+                lineHeight: '1em'
               }}
             >
               {showCompany}
@@ -1317,7 +1377,7 @@ export default function Custom() {
                 justifyContent: 'center',
                 cursor: 'grab',
                 marginBottom: '30px',
-                lineHeight: '1em',
+                lineHeight: '1em'
               }}
             >
               {showDescription}
@@ -1328,7 +1388,7 @@ export default function Custom() {
               style={{
                 display: 'flex',
                 justifyContent: 'center',
-                transform: 'translateY(50%)',
+                transform: 'translateY(50%)'
               }}
             >
               <input
