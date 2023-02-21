@@ -53,14 +53,14 @@ export default function Advertisement() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (window.innerWidth > 440) {
+    if (window.innerWidth > 650) {
       setResize(true);
     } else {
       setResize(false);
     }
 
     const updateMedia = () => {
-      if (window.innerWidth > 440) {
+      if (window.innerWidth > 650) {
         setResize(true);
       } else {
         setResize(false);
@@ -545,7 +545,8 @@ export default function Advertisement() {
                   {company || description || url ? (
                     <div
                       style={{
-                        display: resize ? 'flex' : 'block'
+                        display: resize ? 'flex' : 'block',
+                        marginLeft: resize ? null : '13px'
                       }}
                     >
                       <div style={{ transform: resize ? 'translate(13.5px)' : null }}>
