@@ -53,14 +53,14 @@ export default function Advertisement() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (window.innerWidth > 991) {
+    if (window.innerWidth > 440) {
       setResize(true);
     } else {
       setResize(false);
     }
 
     const updateMedia = () => {
-      if (window.innerWidth > 991) {
+      if (window.innerWidth > 440) {
         setResize(true);
       } else {
         setResize(false);
@@ -335,10 +335,10 @@ export default function Advertisement() {
             <div
               style={{
                 color: '#125CA1',
-                fontSize: '52px',
-                fontWeight: '700',
-                padding: '1em 0em .5em 0em',
-                lineHeight: '50px'
+                fontSize: resize ? '52px' : '40px',
+                padding: resize ? '1em 0em .5em 0em' : '0.5em 0em 0.3em 0em',
+                lineHeight: resize ? '50px' : '40px',
+                fontWeight: '700'
               }}
             >
               Advertisement Generator
@@ -347,7 +347,7 @@ export default function Advertisement() {
               style={{
                 fontSize: '18px',
                 fontWeight: '400px',
-                padding: '0em 0em 1em 0em',
+                padding: resize ? '0em 0em 1em 0em' : '0em 0em 0em 0em',
               }}
             >
               Create and Generate Dynamic Ads
@@ -357,7 +357,7 @@ export default function Advertisement() {
             <Segment size='huge' textAlign='left'>
               <Grid>
                 <Grid.Row>
-                  <Grid.Column width={8}>
+                  <Grid.Column width={resize ? 8 : 16}>
                     <Form.Input
                       fluid
                       label='Company Name'
@@ -387,7 +387,7 @@ export default function Advertisement() {
                         name='media'
                         type='file'
                         accept='image/*'
-                        style={{ width: '30vw', transform: 'translateX(-.2vw)' }}
+                        style={{ width: resize ? '30vw' : '40vw', transform: 'translateX(-.2vw)' }}
                         className={styles.file}
                         onChange={handleImageChange}
                         onClick={() => setSelected(true)}
@@ -434,55 +434,59 @@ export default function Advertisement() {
                       ): null}
                     </div>
                   </Grid.Column>
-                  <Grid.Column width={8}>
-                    {company.length > 0 ||
-                    description.length > 0 ||
-                    url ? (
-                      <>
-                        <Card
-                          fluid
-                          style={{
-                            textAlign: 'left',
-                            fontSize: '22px',
-                            margin: '1em 0em 0em 0em',
-                            padding: '1em',
-                          }}
-                        >
-                          <div style={{ margin: '1em 0em 0em 0em' }}>
-                            Company Name: {JSON.stringify(company, null, 2)}
-                          </div>
-                          <div style={{ margin: '1em 0em 1em 0em' }}>
-                            Advertisement Description:{' '}
-                            {JSON.stringify(description, null, 2)}
-                          </div>
-                        </Card>
-                      </>
-                    ) : (
-                      <>
-                        <Card fluid style={{ margin: '.5em 0em 0em 0em' }}>
-                          <Card.Content
-                            content='Create Advertisement'
+                  {resize ? (
+                  <>
+                    <Grid.Column width={8}>
+                      {company.length > 0 ||
+                      description.length > 0 ||
+                      url ? (
+                        <>
+                          <Card
+                            fluid
                             style={{
-                              textAlign: 'center',
-                              fontSize: '25px',
-                              fontWeight: '50',
-                              margin: '0em 0em 0em 0em',
-                              color: 'gray',
-                              padding: '4.5em 0em 4.5em 0em',
-                              boxShadow: '2px 2px 10px black',
+                              textAlign: 'left',
+                              fontSize: '22px',
+                              margin: '1em 0em 0em 0em',
+                              padding: '1em',
                             }}
-                          />
-                        </Card>
-                      </>
-                    )}
-                  </Grid.Column>
+                          >
+                            <div style={{ margin: '1em 0em 0em 0em' }}>
+                              Company Name: {JSON.stringify(company, null, 2)}
+                            </div>
+                            <div style={{ margin: '1em 0em 1em 0em' }}>
+                              Advertisement Description:{' '}
+                              {JSON.stringify(description, null, 2)}
+                            </div>
+                          </Card>
+                        </>
+                      ) : (
+                        <>
+                          <Card fluid style={{ margin: '.5em 0em 0em 0em' }}>
+                            <Card.Content
+                              content='Create Advertisement'
+                              style={{
+                                textAlign: 'center',
+                                fontSize: '25px',
+                                fontWeight: '50',
+                                margin: '0em 0em 0em 0em',
+                                color: 'gray',
+                                padding: '4.5em 0em 4.5em 0em',
+                                boxShadow: '2px 2px 10px black',
+                              }}
+                            />
+                          </Card>
+                        </>
+                      )}
+                    </Grid.Column>
+                  </>
+                  ): null}
                 </Grid.Row>
                 <Grid.Row>
                   {selected ? (
                     <>
                       <Segment
                         style={{
-                          display: 'flex',
+                          display: resize ? 'flex' : 'block',
                           justifyContent: 'space-between',
                           width: '100%',
                           fontSize: '20px',
@@ -493,7 +497,7 @@ export default function Advertisement() {
                           label='Logo Width'
                           placeholder='width (pixels)'
                           type='number'
-                          style={{ width: '20vw' }}
+                          style={{ width: resize ? '20vw' : '100%' }}
                           value={width}
                           onChange={(e) => setWidth(e.target.value)}
                         />
@@ -501,7 +505,7 @@ export default function Advertisement() {
                           label='Logo Height'
                           placeholder='height (pixels)'
                           type='number'
-                          style={{ width: '20vw' }}
+                          style={{ width: resize ? '20vw' : '100%' }}
                           value={height}
                           onChange={(e) => setHeight(e.target.value)}
                         />
@@ -509,7 +513,7 @@ export default function Advertisement() {
                           label='Left Margin'
                           placeholder='left (pixels)'
                           type='number'
-                          style={{ width: '20vw' }}
+                          style={{ width: resize ? '20vw' : '100%' }}
                           value={left}
                           onChange={(e) => setLeft(e.target.value)}
                         />
@@ -517,7 +521,7 @@ export default function Advertisement() {
                           label='Top Margin'
                           placeholder='top (pixels)'
                           type='number'
-                          style={{ width: '20vw' }}
+                          style={{ width: resize ? '20vw' : '100%' }}
                           value={top}
                           onChange={(e) => setTop(e.target.value)}
                         />
@@ -539,8 +543,12 @@ export default function Advertisement() {
                     </Button>
                   </div> */}
                   {company || description || url ? (
-                    <>
-                      <div style={{ transform: 'translateX(13.5px)' }}>
+                    <div
+                      style={{
+                        display: resize ? 'flex' : 'block'
+                      }}
+                    >
+                      <div style={{ transform: resize ? 'translate(13.5px)' : null }}>
                         <Button
                           onClick={() => {
                             addAdvertisement(
@@ -561,7 +569,9 @@ export default function Advertisement() {
                           style={{
                             border: '2px solid #125CA1',
                             background: 'transparent', 
-                            color: '#125CA1' 
+                            color: '#125CA1',
+                            padding: resize ? null : '10px 10px 10px 10px',
+                            marginBottom: resize ? null : '15px'
                           }}
                         >
                           Save to Database
@@ -595,14 +605,15 @@ export default function Advertisement() {
                       </div>
                       <div
                         style={{
-                          transform: 'translate(20px)'
+                          transform: resize ? 'translate(20px)' : null
                         }}
                       >
                         <Button
                           style={{
                             border: '2px solid red',
                             background: 'transparent',
-                            color: 'red'
+                            color: 'red',
+                            padding: resize ? null : '10px 10px 10px 10px'
                           }}
                           onClick={() => {
                             deleteAll(), 
@@ -619,10 +630,8 @@ export default function Advertisement() {
                           Delete Advertisement
                         </Button>
                       </div>
-                    </>
-                  ) : (
-                    <></>
-                  )}
+                    </div>
+                  ) : null}
                 </Grid.Row>
               </Grid>
             </Segment>
@@ -632,10 +641,10 @@ export default function Advertisement() {
               <Grid.Row>
                 <Grid.Column
                   style={{
-                    transform: resize ? 'translate(0px)' : 'translate(-6%)',
+                    transform: resize ? 'translate(0px)' : 'translate(-12%)',
                     width: resize ? '44%' : '100%',
                     display: 'flex',
-                    justifyContent: 'center',
+                    justifyContent: 'center'
                   }}
                 >
                   <input
@@ -656,13 +665,25 @@ export default function Advertisement() {
                     style={{
                       fontSize: '1.5em',
                       fontWeight: '900',
-                      padding: '1em 1em 1.5em 1em',
+                      padding: resize ? '1em 1em 1.5em 1em' : '0em 0em 0em 0em',
                     }}
                   >
-                    <h1 style={{ display: 'flex', justifyContent: 'center' }}>
-                      {showCompany} Video Advertisement
+                    <h1 
+                      style={{ 
+                        display: 'flex', 
+                        justifyContent: 'center', 
+                        fontSize: resize ? null : '25px', 
+                        marginBottom: resize ? null : '-20px' 
+                      }}
+                    >
+                      {showCompany} Advertisement
                     </h1>
-                    <div style={{ fontSize: '.91em', lineHeight: '30px' }}>
+                    <div 
+                      style={{ 
+                        fontSize: resize ? '.91em' : '18px', 
+                        lineHeight: resize ? '30px' : '20px' 
+                      }}
+                    >
                       <div style={{ margin: '2em 0em 1em 0em' }}>
                         <Icon name='mouse pointer' />
                         Click the button below to be transported to watch and
@@ -688,6 +709,7 @@ export default function Advertisement() {
                             background: '#125CA1',
                             borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%',
                             marginTop: '1em',
+                            marginBottom: resize ? null : '20px'
                           }}
                           href='/'
                         />

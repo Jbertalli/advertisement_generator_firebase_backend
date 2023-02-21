@@ -47,8 +47,8 @@ export default function Home() {
   return (
     <>
       <Header />
-      {resize ? (
-        <>
+      {/* {resize ? (
+        <> */}
           <div
             style={{
               marginTop: '-70px',
@@ -57,12 +57,12 @@ export default function Home() {
           >
             <Advertisement />
           </div>
-        </>
+        {/* </>
       ) : (
         <>
           <MobileAdvertisement />
         </>
-      )}
+      )} */}
     </>
   );
 }
