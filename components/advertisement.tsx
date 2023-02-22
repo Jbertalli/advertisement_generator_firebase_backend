@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
-import Local from '../components/localStorage';
+// import Local from '../components/localStorage';
 import { Container, Segment, Button, Form, Icon, Grid, Item, Card } from 'semantic-ui-react';
 import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
@@ -18,7 +18,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../firebase/clientApp';
 
-const LOCAL_STORAGE_KEY_URL = 'URL';
+// const LOCAL_STORAGE_KEY_URL = 'URL';
 
 auth;
 const db = getFirestore();
@@ -41,6 +41,7 @@ export default function Advertisement() {
   const [showTop, setShowTop] = useState<any>(20);
   const [selected, setSelected] = useState<boolean>(false);
   const [saveImage, setSaveImage] = useState(null);
+  const [clicked, setClicked] = useState<boolean>(false);
   const [url, setUrl] = useState(null);
 
   const currentUser = auth.currentUser?.uid;
@@ -205,15 +206,19 @@ export default function Advertisement() {
     });
   }
 
-  // url localStorage
   useEffect(() => {
-    const storedUrl = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_URL));
-    if (storedUrl) setUrl(storedUrl);
-  }, []);
+    setClicked(false);
+  }, [])
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_URL, JSON.stringify(url));
-  }, [url]);
+  // // url localStorage
+  // useEffect(() => {
+  //   const storedUrl = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_URL));
+  //   if (storedUrl) setUrl(storedUrl);
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY_URL, JSON.stringify(url));
+  // }, [url]);
 
   console.log(url);
 
@@ -390,7 +395,7 @@ export default function Advertisement() {
                         style={{ width: resize ? '30vw' : '40vw', transform: 'translateX(-.2vw)' }}
                         className={styles.file}
                         onChange={handleImageChange}
-                        onClick={() => setSelected(true)}
+                        onClick={() => {setSelected(true), setClicked(true)}}
                       />
                       {selected ? (
                       <>
@@ -658,7 +663,8 @@ export default function Advertisement() {
                       maxWidth: '30em',
                       maxHeight: '30em'
                     }}
-                    src={url}
+                    // src={url}
+                    src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
                   />
                 </Grid.Column>
                 <Grid.Column style={{ width: resize ? '56%' : '100%' }}>

@@ -71,6 +71,10 @@ export default function Header() {
       });
   }
 
+  function deleteLocal() {
+    localStorage.clear();
+  }
+
   return (
     <>
       <Menu
@@ -172,7 +176,7 @@ export default function Header() {
         </Dropdown>
         <Menu.Item
           name='Logout'
-          onClick={handleLogOut}
+          onClick={(e) => {handleLogOut(e), deleteLocal()}}
           className={styles.hovering}
           style={{
             fontWeight: '600',

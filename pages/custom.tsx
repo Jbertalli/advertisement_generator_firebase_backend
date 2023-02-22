@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Draggable from 'react-draggable';
-import LocalCustom from '../components/localStorageCustom';
+// import LocalCustom from '../components/localStorageCustom';
 import { Divider, Container, Segment, Icon, Form, Button } from 'semantic-ui-react';
 import { auth } from '../firebase/clientApp';
 import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
@@ -13,7 +13,7 @@ import { storage } from '../firebase/clientApp';
 
 auth;
 const db = getFirestore();
-const LOCAL_STORAGE_KEY_CUSTOM = 'URL';
+// const LOCAL_STORAGE_KEY_CUSTOM = 'URL';
 
 export default function Custom() {
   const [company, setCompany] = useState<string>('');
@@ -56,6 +56,7 @@ export default function Custom() {
   const [resize, setResize] = useState<boolean>(false);
   const [selected, setSelected] = useState<boolean>(false);
   const [saveImage, setSaveImage] = useState(null);
+  const [clicked, setClicked] = useState<boolean>(false);
   const [url, setUrl] = useState(null);
 
   const currentUser = auth.currentUser?.uid;
@@ -63,15 +64,15 @@ export default function Custom() {
 
   const router = useRouter();
 
-  // url localStorage
-  useEffect(() => {
-    const storedUrl = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CUSTOM));
-    if (storedUrl) setUrl(storedUrl);
-  }, []);
+  // // url localStorage
+  // useEffect(() => {
+  //   const storedUrl = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CUSTOM));
+  //   if (storedUrl) setUrl(storedUrl);
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_CUSTOM, JSON.stringify(url));
-  }, [url]);
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY_CUSTOM, JSON.stringify(url));
+  // }, [url]);
 
   useEffect(() => {
     if (window.innerWidth > 650) {
@@ -320,7 +321,6 @@ export default function Custom() {
     });
   }
 
-
   function deleteLocal() {
     localStorage.clear();
   }
@@ -329,27 +329,27 @@ export default function Custom() {
     getData()
   }, [])
 
-  async function deleteAll() {
-    const docRef = doc(db, '/users/' + currentUser + 'Custom');
-    await updateDoc(docRef, {
-      showCompany: deleteField(),
-      companyFontSize: deleteField(),
-      companyFontWeight: deleteField(),
-      description: deleteField(),
-      descriptionFontSize: deleteField(),
-      descriptionFontWeight: deleteField(),
-      borderWidth: deleteField(),
-      borderColor: deleteField(),
-      color: deleteField(),
-      backgroundColor: deleteField(),
-      imageWidth: deleteField(),
-      imageHeight: deleteField(),
-      imageLeft: deleteField(),
-      imageTop: deleteField(),
-      totalWidth: deleteField(),
-      imageRotation: deleteField()
-    });
-  }
+  // async function deleteAll() {
+  //   const docRef = doc(db, '/users/' + currentUser + 'Custom');
+  //   await updateDoc(docRef, {
+  //     showCompany: deleteField(),
+  //     companyFontSize: deleteField(),
+  //     companyFontWeight: deleteField(),
+  //     description: deleteField(),
+  //     descriptionFontSize: deleteField(),
+  //     descriptionFontWeight: deleteField(),
+  //     borderWidth: deleteField(),
+  //     borderColor: deleteField(),
+  //     color: deleteField(),
+  //     backgroundColor: deleteField(),
+  //     imageWidth: deleteField(),
+  //     imageHeight: deleteField(),
+  //     imageLeft: deleteField(),
+  //     imageTop: deleteField(),
+  //     totalWidth: deleteField(),
+  //     imageRotation: deleteField()
+  //   });
+  // }
 
   const handleImageChange = (e) => {
     if(e.target.files[0]) {
@@ -361,7 +361,7 @@ export default function Custom() {
     const imageRef = ref(storage, `image/${currentUser}/custom`);
     uploadBytes(imageRef, saveImage).then(() => {
       getDownloadURL(imageRef).then((url) => {
-        setUrl(url);
+        setUrl(url)
       }).catch((error) => {
         console.log(error.message, 'error getting the image url');
       })
@@ -372,6 +372,10 @@ export default function Custom() {
   }
 
   console.log(url);
+
+  useEffect(() => {
+    setClicked(false);
+  }, [])
 
   return (
     <>
@@ -1026,7 +1030,7 @@ export default function Custom() {
                     }}
                     className={styles.file}
                     onChange={handleImageChange}
-                    onClick={() => setSelected(true)}
+                    onClick={() => {setSelected(true), setClicked(true)}}
                   />
                   {selected ? (
                   <>
@@ -1393,7 +1397,8 @@ export default function Custom() {
             >
               <input
                 type='image'
-                src={url}
+                // src={url}
+                src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
                 style={{
                   width: `${showImageWidth}px`,
                   height: `${showImageHeight}px`,
