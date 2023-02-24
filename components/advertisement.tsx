@@ -448,19 +448,117 @@ export default function Advertisement() {
                         <>
                           <Card
                             fluid
-                            style={{
-                              textAlign: 'left',
-                              fontSize: '22px',
-                              margin: '1em 0em 0em 0em',
-                              padding: '1em',
-                            }}
+                            // style={{
+                            //   textAlign: 'left',
+                            //   fontSize: '22px',
+                            //   margin: '1em 0em 0em 0em',
+                            //   padding: '1em',
+                            // }}
                           >
-                            <div style={{ margin: '1em 0em 0em 0em' }}>
+                            {/* <div style={{ margin: '1em 0em 0em 0em' }}>
                               Company Name: {JSON.stringify(company, null, 2)}
                             </div>
                             <div style={{ margin: '1em 0em 1em 0em' }}>
                               Advertisement Description:{' '}
                               {JSON.stringify(description, null, 2)}
+                            </div> */}
+                            <div>
+                              <Grid>
+                                <Grid.Row>
+                                  <Grid.Column
+                                    style={{
+                                      width: '44%',
+                                      display: 'flex',
+                                      justifyContent: 'center',
+                                      position: 'relative'
+                                    }}
+                                  >
+                                    <input
+                                      type='image'
+                                      style={{
+                                        transform: `translate(${left-20}px, ${top+10}px)`,
+                                        width: `${width/3}px`,
+                                        height: `${height/3}px`,
+                                        borderRadius: '5%',
+                                        maxWidth: '18em',
+                                        maxHeight: '18em'
+                                      }}
+                                      src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
+                                    />
+                                  </Grid.Column>
+                                  <Grid.Column style={{ width: '56%' }}>
+                                    <Item
+                                      style={{
+                                        fontSize: '10px',
+                                        fontWeight: '900',
+                                        padding: '1em 1em 1.5em 1em'
+                                      }}
+                                    >
+                                      <h1 
+                                        style={{ 
+                                          display: 'flex', 
+                                          justifyContent: 'center',
+                                          fontSize: '20px'
+                                        }}
+                                      >
+                                        {company} Advertisement
+                                      </h1>
+                                      <div 
+                                        style={{ 
+                                          fontSize: '.91em', 
+                                          lineHeight: '30px' 
+                                        }}
+                                      >
+                                        <div 
+                                          style={{ 
+                                            margin: '2em 0em 1em 0em',
+                                            lineHeight: '10px'
+                                          }}
+                                        >
+                                          <Icon name='mouse pointer' />
+                                          Click the button below to be transported to watch and
+                                          take the comprehensive quiz for {company}.
+                                        </div>
+                                        <div 
+                                          style={{ 
+                                            margin: '1em 0em 1em 0em',
+                                            lineHeight: '10px'
+                                          }}
+                                        >
+                                          <Icon name='dollar' />
+                                          Earn 20 points after successfully watching and
+                                          completing the comprehension quiz for {company}.
+                                        </div>
+                                        <div 
+                                          style={{ 
+                                            margin: '1em 0em 1em 0em',
+                                            lineHeight: '10px' 
+                                          }}
+                                        >
+                                          <Icon name='calendar' />
+                                          {`Your account needs to settle, which can take more than 30 days (due to possible returns). In this time, Earn and Trade users are credited with "Pending Points".`}
+                                        </div>
+                                        <div
+                                          style={{ display: 'flex', justifyContent: 'center' }}
+                                        >
+                                          <Button
+                                            content='Earn 20 points'
+                                            size='large'
+                                            style={{
+                                              color: 'white',
+                                              background: '#125CA1',
+                                              borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%',
+                                              marginTop: '1em',
+                                              fontSize: '10px'
+                                            }}
+                                            href='/'
+                                          />
+                                        </div>
+                                      </div>
+                                    </Item>
+                                  </Grid.Column>
+                                </Grid.Row>
+                              </Grid>
                             </div>
                           </Card>
                         </>
@@ -663,7 +761,6 @@ export default function Advertisement() {
                       maxWidth: '30em',
                       maxHeight: '30em'
                     }}
-                    // src={url}
                     src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
                   />
                 </Grid.Column>
