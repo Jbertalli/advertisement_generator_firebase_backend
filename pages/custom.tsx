@@ -29,7 +29,7 @@ export default function Custom() {
   const [imageHeight, setImageHeight] = useState<any>(200);
   const [imageLeft, setImageLeft] = useState<any>(0);
   const [imageTop, setImageTop] = useState<any>(0);
-  const [totalWidth, setTotalWidth] = useState<string>('500');
+  const [totalWidth, setTotalWidth] = useState<any>(500);
   const [imageRotation, setImageRotation] = useState<any>(0);
   const [editTitle, setEditTitle] = useState<boolean>(false);
   const [editDescription, setEditDescription] = useState<boolean>(false);
@@ -364,7 +364,9 @@ export default function Custom() {
 
   useEffect(() => {
     setClicked(false);
-  }, [])
+  }, []);
+
+  console.log(totalWidth);
 
   return (
     <>
@@ -467,17 +469,17 @@ export default function Custom() {
             style={{
               display: 'flex',
               justifyContent: 'center',
-              marginTop: '-10px'
+              marginTop: '-20px'
             }}
           >
-            <Container
+            <div
               style={{
                 background: `${backgroundColor}`,
                 color: `${color}`,
                 border: `${borderWidth}px solid ${borderColor}`,
                 fontWeight: '100',
                 height: '50vh',
-                width: '100vw',
+                width: `${totalWidth}px`,
                 margin: '30px'
               }}
             >
@@ -491,7 +493,9 @@ export default function Custom() {
                     cursor: 'grab',
                     marginBottom: '30px',
                     marginTop: '30px',
-                    lineHeight: '1em'
+                    lineHeight: '1em',
+                    wordBreak: 'break-word',
+                    width: '100%',
                   }}
                 >
                   {company}
@@ -506,7 +510,9 @@ export default function Custom() {
                     justifyContent: 'center',
                     cursor: 'grab',
                     marginBottom: '30px',
-                    lineHeight: '1em'
+                    lineHeight: '1em',
+                    wordBreak: 'break-word',
+                    width: '100%'
                   }}
                 >
                   {description}
@@ -533,7 +539,7 @@ export default function Custom() {
                   />
                 </div>
               </Draggable>
-            </Container>
+            </div>
           </div>
         </Segment>
         <div
@@ -1401,17 +1407,19 @@ export default function Custom() {
       <Divider />
       <div
         style={{
-          padding: '0px 3vw 1px 3vw'
+          padding: '0px 3vw 1px 3vw',
+          display: 'flex',
+          justifyContent: 'center'
         }}
       >
-        <Container
+        <div
           style={{
             background: `${showBackgroundColor}`,
             color: `${showColor}`,
             border: `${showBorderWidth}px solid ${showBorderColor}`,
             fontWeight: '100',
             height: '50vh',
-            width: '100vw',
+            width: `${showTotalWidth}px`,
             margin: '30px'
           }}
         >
@@ -1467,7 +1475,7 @@ export default function Custom() {
               />
             </div>
           </Draggable>
-        </Container>
+        </div>
       </div>
     </>
   );

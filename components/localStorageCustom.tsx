@@ -43,10 +43,6 @@ export default function LocalCustom(values) {
     setColor,
     backgroundColor,
     setBackgroundColor,
-    mediaPreview,
-    setMediaPreview,
-    image,
-    setImage,
     imageWidth,
     setImageWidth,
     imageHeight,
@@ -200,20 +196,6 @@ export default function LocalCustom(values) {
       JSON.stringify(backgroundColor)
     );
   }, [backgroundColor]);
-
-  useEffect(() => {
-    const storedImage = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY_CUSTOM_IMAGE)
-    );
-    if (storedImage) setMediaPreview(storedImage);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(
-      LOCAL_STORAGE_KEY_CUSTOM_IMAGE,
-      JSON.stringify(mediaPreview)
-    );
-  }, [mediaPreview]);
 
   useEffect(() => {
     const storedImageWidth = JSON.parse(
