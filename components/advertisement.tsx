@@ -417,7 +417,7 @@ export default function Advertisement() {
                                   <input
                                     type='image'
                                     style={{
-                                      transform: `translate(${left-20}px, ${top+10}px)`,
+                                      transform: `translate(${left-20}px, ${top+0}px)`,
                                       width: resize ? `${width/2.8}px` : `${width/2.3}px`,
                                       height: resize ? `${height/2.8}px` : `${width/2.3}px`,
                                       borderRadius: '5%',
@@ -445,8 +445,8 @@ export default function Advertisement() {
                                         justifyContent: 'center',
                                         fontSize: resize ? '13px' : '20px',
                                         marginTop: resize ? null : '10px',
+                                        lineHeight: resize ? '14px' : '20px',
                                         marginBottom: '-10px',
-                                        lineHeight: '14px',
                                         wordBreak: 'break-word',
                                         width: '100%'
                                       }}
@@ -462,22 +462,26 @@ export default function Advertisement() {
                                       <div 
                                         style={{ 
                                           margin: '2em 0em 1em 0em',
-                                          lineHeight: '10px'
+                                          lineHeight: resize ? '10px' : '12px'
                                         }}
                                       >
-                                        <Icon name='mouse pointer' />
-                                        Click the button below to be transported to watch and
-                                        take the comprehensive quiz for {company}.
+                                        <div>
+                                          <Icon name='mouse pointer' />
+                                          Click the button below to be transported to watch and
+                                          take the comprehensive quiz for {company}.
+                                        </div>
                                       </div>
                                       <div 
                                         style={{ 
                                           margin: '1em 0em 1em 0em',
-                                          lineHeight: '10px'
+                                          lineHeight: resize ? '10px' : '12px'
                                         }}
                                       >
-                                        <Icon name='dollar' />
-                                        Earn 20 points after successfully watching and
-                                        completing the comprehension quiz for {company}.
+                                        <div>
+                                          <Icon name='dollar' />
+                                          Earn 20 points after successfully watching and
+                                          completing the comprehension quiz for {company}.
+                                        </div>
                                       </div>
                                       <div 
                                         style={{ 
@@ -485,8 +489,14 @@ export default function Advertisement() {
                                           lineHeight: '10px' 
                                         }}
                                       >
-                                        <Icon name='calendar' />
-                                        {`Your account needs to settle, which can take more than 30 days (due to possible returns). In this time, Earn and Trade users are credited with "Pending Points".`}
+                                        <div
+                                          style={{
+                                            lineHeight: resize ? null : '13px' 
+                                          }}
+                                        >
+                                          <Icon name='calendar' />
+                                          {`Your account needs to settle, which can take more than 30 days (due to possible returns). In this time, Earn and Trade users are credited with "Pending Points".`}
+                                        </div>
                                       </div>
                                       <div
                                         style={{ display: 'flex', justifyContent: 'center' }}
@@ -773,7 +783,13 @@ export default function Advertisement() {
                 </Grid.Column>
               </Grid.Row>
             </Grid>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div 
+              style={{ 
+                display: 'flex', 
+                justifyContent: 'center',
+                fontSize: '20px'
+              }}
+            >
               {showDescription}
             </div>
           </Segment>
