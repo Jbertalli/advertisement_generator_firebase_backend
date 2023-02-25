@@ -388,164 +388,161 @@ export default function Advertisement() {
                       ): null}
                     </div>
                   </Grid.Column>
-                  {resize ? (
-                  <>
-                    <Grid.Column width={8}>
-                      {company.length > 0 ||
-                      description.length > 0 ||
-                      url ? (
-                        <>
-                          <div
-                            style={{
-                              marginBottom: '-20px'
-                            }}
-                          >
-                            Live Advertisement
-                          </div>
-                          <Card
-                            fluid
-                          >
-                            <div>
-                              <Grid>
-                                <Grid.Row>
-                                  <Grid.Column
+                  <Grid.Column width={resize ? 8 : 16}>
+                    {company.length > 0 ||
+                    description.length > 0 ||
+                    url ? (
+                      <>
+                        <div
+                          style={{
+                            marginBottom: '-15px'
+                          }}
+                        >
+                          Live Advertisement
+                        </div>
+                        <Card
+                          fluid
+                        >
+                          <div>
+                            <Grid>
+                              <Grid.Row>
+                                <Grid.Column
+                                  style={{
+                                    width: '44%',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    position: 'relative'
+                                  }}
+                                >
+                                  <input
+                                    type='image'
                                     style={{
-                                      width: '44%',
-                                      display: 'flex',
-                                      justifyContent: 'center',
-                                      position: 'relative'
+                                      transform: `translate(${left-20}px, ${top+10}px)`,
+                                      width: resize ? `${width/2.8}px` : `${width/2.3}px`,
+                                      height: resize ? `${height/2.8}px` : `${width/2.3}px`,
+                                      borderRadius: '5%',
+                                      maxWidth: '18em',
+                                      maxHeight: '18em'
+                                    }}
+                                    src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
+                                  />
+                                </Grid.Column>
+                                <Grid.Column 
+                                  style={{ 
+                                    width: '56%' 
+                                  }}
+                                >
+                                  <Item
+                                    style={{
+                                      fontSize: '10px',
+                                      fontWeight: '900',
+                                      padding: '1em 1em 1.5em 1em'
                                     }}
                                   >
-                                    <input
-                                      type='image'
-                                      style={{
-                                        transform: `translate(${left-20}px, ${top+10}px)`,
-                                        width: `${width/2.8}px`,
-                                        height: `${height/2.8}px`,
-                                        borderRadius: '5%',
-                                        maxWidth: '18em',
-                                        maxHeight: '18em'
-                                      }}
-                                      src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
-                                    />
-                                  </Grid.Column>
-                                  <Grid.Column 
-                                    style={{ 
-                                      width: '56%' 
-                                    }}
-                                  >
-                                    <Item
-                                      style={{
-                                        fontSize: '10px',
-                                        fontWeight: '900',
-                                        padding: '1em 1em 1.5em 1em'
+                                    <h1 
+                                      style={{ 
+                                        display: 'flex', 
+                                        justifyContent: 'center',
+                                        fontSize: resize ? '13px' : '20px',
+                                        marginTop: resize ? null : '10px',
+                                        marginBottom: '-10px',
+                                        lineHeight: '14px',
+                                        wordBreak: 'break-word',
+                                        width: '100%'
                                       }}
                                     >
-                                      <h1 
-                                        style={{ 
-                                          display: 'flex', 
-                                          justifyContent: 'center',
-                                          fontSize: '13px',
-                                          marginBottom: '-10px',
-                                          lineHeight: '14px',
-                                          wordBreak: 'break-word',
-                                          width: '100%'
-                                        }}
-                                      >
-                                        {company} Advertisement
-                                      </h1>
+                                      {company} Advertisement
+                                    </h1>
+                                    <div 
+                                      style={{ 
+                                        fontSize: resize ? '8.5px' : '13px', 
+                                        lineHeight: '30px' 
+                                      }}
+                                    >
                                       <div 
                                         style={{ 
-                                          fontSize: '8.5px', 
-                                          lineHeight: '30px' 
+                                          margin: '2em 0em 1em 0em',
+                                          lineHeight: '10px'
                                         }}
                                       >
-                                        <div 
-                                          style={{ 
-                                            margin: '2em 0em 1em 0em',
-                                            lineHeight: '10px'
-                                          }}
-                                        >
-                                          <Icon name='mouse pointer' />
-                                          Click the button below to be transported to watch and
-                                          take the comprehensive quiz for {company}.
-                                        </div>
-                                        <div 
-                                          style={{ 
-                                            margin: '1em 0em 1em 0em',
-                                            lineHeight: '10px'
-                                          }}
-                                        >
-                                          <Icon name='dollar' />
-                                          Earn 20 points after successfully watching and
-                                          completing the comprehension quiz for {company}.
-                                        </div>
-                                        <div 
-                                          style={{ 
-                                            margin: '1em 0em 1em 0em',
-                                            lineHeight: '10px' 
-                                          }}
-                                        >
-                                          <Icon name='calendar' />
-                                          {`Your account needs to settle, which can take more than 30 days (due to possible returns). In this time, Earn and Trade users are credited with "Pending Points".`}
-                                        </div>
-                                        <div
-                                          style={{ display: 'flex', justifyContent: 'center' }}
-                                        >
-                                          <Button
-                                            content='Earn 20 points'
-                                            style={{
-                                              color: 'white',
-                                              background: '#125CA1',
-                                              borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%',
-                                              fontSize: '10px',
-                                              transform: 'scale(0.7)'
-                                            }}
-                                            href='/'
-                                          />
-                                        </div>
+                                        <Icon name='mouse pointer' />
+                                        Click the button below to be transported to watch and
+                                        take the comprehensive quiz for {company}.
                                       </div>
-                                    </Item>
-                                  </Grid.Column>
-                                </Grid.Row>
-                              </Grid>
-                            </div>
-                            <div 
-                              style={{ 
-                                display: 'flex', 
-                                justifyContent: 'center',
-                                fontSize: '8px',
-                                marginBottom: '10px',
-                                marginTop: '-10px',
-                                lineHeight: '10px',
-                                padding: '0px 20px 0px 20px'
-                              }}
-                            >
-                              {description}
-                            </div>
-                          </Card>
-                        </>
-                      ) : (
-                        <>
-                          <Card fluid style={{ margin: '.5em 0em 0em 0em' }}>
-                            <Card.Content
-                              content='Create Advertisement'
-                              style={{
-                                textAlign: 'center',
-                                fontSize: '25px',
-                                fontWeight: '50',
-                                margin: '0em 0em 0em 0em',
-                                color: 'gray',
-                                padding: '4.5em 0em 4.5em 0em',
-                                boxShadow: '2px 2px 10px black',
-                              }}
-                            />
-                          </Card>
-                        </>
-                      )}
-                    </Grid.Column>
-                  </>
-                  ): null}
+                                      <div 
+                                        style={{ 
+                                          margin: '1em 0em 1em 0em',
+                                          lineHeight: '10px'
+                                        }}
+                                      >
+                                        <Icon name='dollar' />
+                                        Earn 20 points after successfully watching and
+                                        completing the comprehension quiz for {company}.
+                                      </div>
+                                      <div 
+                                        style={{ 
+                                          margin: '1em 0em 1em 0em',
+                                          lineHeight: '10px' 
+                                        }}
+                                      >
+                                        <Icon name='calendar' />
+                                        {`Your account needs to settle, which can take more than 30 days (due to possible returns). In this time, Earn and Trade users are credited with "Pending Points".`}
+                                      </div>
+                                      <div
+                                        style={{ display: 'flex', justifyContent: 'center' }}
+                                      >
+                                        <Button
+                                          content='Earn 20 points'
+                                          style={{
+                                            color: 'white',
+                                            background: '#125CA1',
+                                            borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%',
+                                            fontSize: '10px',
+                                            transform: resize ? 'scale(0.7)' : 'scale(0.9)'
+                                          }}
+                                          href='/'
+                                        />
+                                      </div>
+                                    </div>
+                                  </Item>
+                                </Grid.Column>
+                              </Grid.Row>
+                            </Grid>
+                          </div>
+                          <div 
+                            style={{ 
+                              display: 'flex', 
+                              justifyContent: 'center',
+                              fontSize: resize ? '8px' : '12px',
+                              marginBottom: '10px',
+                              marginTop: '-10px',
+                              lineHeight: '10px',
+                              padding: '0px 20px 0px 20px'
+                            }}
+                          >
+                            {description}
+                          </div>
+                        </Card>
+                      </>
+                    ) : (
+                      <>
+                        <Card fluid style={{ margin: '.5em 0em 0em 0em' }}>
+                          <Card.Content
+                            content='Create Advertisement'
+                            style={{
+                              textAlign: 'center',
+                              fontSize: '25px',
+                              fontWeight: '50',
+                              margin: '0em 0em 0em 0em',
+                              color: 'gray',
+                              padding: '4.5em 0em 4.5em 0em',
+                              boxShadow: '2px 2px 10px black',
+                            }}
+                          />
+                        </Card>
+                      </>
+                    )}
+                  </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
                   {selected ? (
