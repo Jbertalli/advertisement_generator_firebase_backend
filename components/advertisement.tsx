@@ -395,7 +395,8 @@ export default function Advertisement() {
                       <>
                         <div
                           style={{
-                            marginBottom: '-15px'
+                            marginBottom: '-15px',
+                            marginTop: resize ? null : '60px'
                           }}
                         >
                           Live Advertisement

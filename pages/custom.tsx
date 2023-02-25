@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Draggable from 'react-draggable';
-// import LocalCustom from '../components/localStorageCustom';
-import { Divider, Container, Segment, Icon, Form, Button } from 'semantic-ui-react';
+import LocalCustom from '../components/localStorageCustom';
+import { Divider, Container, Segment, Icon, Form, Button, Card } from 'semantic-ui-react';
 import { auth } from '../firebase/clientApp';
 import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -13,7 +13,6 @@ import { storage } from '../firebase/clientApp';
 
 auth;
 const db = getFirestore();
-// const LOCAL_STORAGE_KEY_CUSTOM = 'URL';
 
 export default function Custom() {
   const [company, setCompany] = useState<string>('');
@@ -26,12 +25,12 @@ export default function Custom() {
   const [borderColor, setBorderColor] = useState<string>('');
   const [color, setColor] = useState<string>('');
   const [backgroundColor, setBackgroundColor] = useState<string>('');
-  const [imageWidth, setImageWidth] = useState<string>('350');
-  const [imageHeight, setImageHeight] = useState<string>('350');
-  const [imageLeft, setImageLeft] = useState<string>('0');
-  const [imageTop, setImageTop] = useState<string>('0');
+  const [imageWidth, setImageWidth] = useState<any>(200);
+  const [imageHeight, setImageHeight] = useState<any>(200);
+  const [imageLeft, setImageLeft] = useState<any>(0);
+  const [imageTop, setImageTop] = useState<any>(0);
   const [totalWidth, setTotalWidth] = useState<string>('500');
-  const [imageRotation, setImageRotation] = useState<string>('0');
+  const [imageRotation, setImageRotation] = useState<any>(0);
   const [editTitle, setEditTitle] = useState<boolean>(false);
   const [editDescription, setEditDescription] = useState<boolean>(false);
   const [editBorder, setEditBorder] = useState<boolean>(false);
@@ -47,8 +46,8 @@ export default function Custom() {
   const [showBorderColor, setShowBorderColor] = useState<string>('');
   const [showColor, setShowColor] = useState<string>('');
   const [showBackgroundColor, setShowBackgroundColor] = useState<string>('');
-  const [showImageWidth, setShowImageWidth] = useState<any>(350);
-  const [showImageHeight, setShowImageHeight] = useState<any>(350);
+  const [showImageWidth, setShowImageWidth] = useState<any>(200);
+  const [showImageHeight, setShowImageHeight] = useState<any>(200);
   const [showImageLeft, setShowImageLeft] = useState<any>(0);
   const [showImageTop, setShowImageTop] = useState<any>(0);
   const [showTotalWidth, setShowTotalWidth] = useState<any>(500);
@@ -63,16 +62,6 @@ export default function Custom() {
   // console.log(currentUser);
 
   const router = useRouter();
-
-  // // url localStorage
-  // useEffect(() => {
-  //   const storedUrl = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CUSTOM));
-  //   if (storedUrl) setUrl(storedUrl);
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem(LOCAL_STORAGE_KEY_CUSTOM, JSON.stringify(url));
-  // }, [url]);
 
   useEffect(() => {
     if (window.innerWidth > 650) {
@@ -383,7 +372,7 @@ export default function Custom() {
         <title>Custom Advertisement Generator</title>
         <meta name='description' content='earnandtrade, advertisement' />
       </Head>
-      {/* <LocalCustom
+      <LocalCustom
         company={company}
         setCompany={setCompany}
         companyFontSize={companyFontSize}
@@ -404,8 +393,6 @@ export default function Custom() {
         setColor={setColor}
         backgroundColor={backgroundColor}
         setBackgroundColor={setBackgroundColor}
-        image={image}
-        setImage={setImage}
         imageWidth={imageWidth}
         setImageWidth={setImageWidth}
         imageHeight={imageHeight}
@@ -422,7 +409,7 @@ export default function Custom() {
         setEditGlobal={setEditGlobal}
         editImage={editImage}
         setEditImage={setEditImage}
-      /> */}
+      />
       <Header />
       <Container
         // onMouseOver={() => {addCustom(
@@ -460,7 +447,7 @@ export default function Custom() {
               padding: '0.8em 0em .5em 0em',
               lineHeight: '40px',
               display: 'flex',
-              justifyContent: 'center',
+              justifyContent: 'center'
             }}
           >
             Custom Advertisement
@@ -471,10 +458,82 @@ export default function Custom() {
               fontWeight: '400px',
               padding: '0em 0em 1em 0em',
               display: 'flex',
-              justifyContent: 'center',
+              justifyContent: 'center'
             }}
           >
             Create a Custom Advertisement
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '-10px'
+            }}
+          >
+            <Container
+              style={{
+                background: `${backgroundColor}`,
+                color: `${color}`,
+                border: `${borderWidth}px solid ${borderColor}`,
+                fontWeight: '100',
+                height: '50vh',
+                width: '100vw',
+                margin: '30px'
+              }}
+            >
+              <Draggable>
+                <div
+                  style={{
+                    fontSize: `${companyFontSize}px`,
+                    fontWeight: `${companyFontWeight}`,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    cursor: 'grab',
+                    marginBottom: '30px',
+                    marginTop: '30px',
+                    lineHeight: '1em'
+                  }}
+                >
+                  {company}
+                </div>
+              </Draggable>
+              <Draggable>
+                <div
+                  style={{
+                    fontSize: `${descriptionFontSize}px`,
+                    fontWeight: `${descriptionFontWeight}`,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    cursor: 'grab',
+                    marginBottom: '30px',
+                    lineHeight: '1em'
+                  }}
+                >
+                  {description}
+                </div>
+              </Draggable>
+              <Draggable>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    transform: 'translateY(50%)'
+                  }}
+                >
+                  <input
+                    type='image'
+                    // src={url}
+                    src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
+                    style={{
+                      width: `${imageWidth/1.5}px`,
+                      height: `${imageHeight/1.5}px`,
+                      transform: `translate(${imageLeft}px, ${imageTop}px) rotate(${showImageRotation}deg)`,
+                      cursor: 'grab'
+                    }}
+                  />
+                </div>
+              </Draggable>
+            </Container>
           </div>
         </Segment>
         <div
@@ -482,7 +541,7 @@ export default function Custom() {
             fontSize: '18px',
             fontWeight: '500',
             color: '#125CA1',
-            cursor: 'pointer',
+            cursor: 'pointer'
           }}
         >
           {editTitle ? (
@@ -490,7 +549,7 @@ export default function Custom() {
               <div
                 id='editTitle'
                 style={{
-                  transform: 'translateY(-16px)',
+                  transform: 'translateY(-16px)'
                 }}
               />
               <div
@@ -513,7 +572,7 @@ export default function Custom() {
                     transform: 'translate(-20px, -20px)',
                     color: 'red',
                     display: 'flex',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'flex-end'
                   }}
                   onClick={() => setEditTitle(false)}
                 >
