@@ -18,8 +18,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../firebase/clientApp';
 
-// const LOCAL_STORAGE_KEY_URL = 'URL';
-
 auth;
 const db = getFirestore();
 // const storage = getStorage(app);
@@ -208,17 +206,7 @@ export default function Advertisement() {
 
   useEffect(() => {
     setClicked(false);
-  }, [])
-
-  // // url localStorage
-  // useEffect(() => {
-  //   const storedUrl = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_URL));
-  //   if (storedUrl) setUrl(storedUrl);
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem(LOCAL_STORAGE_KEY_URL, JSON.stringify(url));
-  // }, [url]);
+  }, []);
 
   console.log(url);
 
@@ -283,35 +271,6 @@ export default function Advertisement() {
         >
           Delete MediaPreview
         </Button>
-      </div> */}
-      {/* <div>
-        <Button
-          color='red'
-          onClick={deleteAll}
-        >
-          Delete Advertisement
-        </Button>
-      </div> */}
-      {/* <div>
-        {showCompany}
-      </div>
-      <div>
-        {showDescription}
-      </div>
-      <div>
-        {showMediaPreview}
-      </div>
-      <div>
-        {showWidth}
-      </div>
-      <div>
-        {showHeight}
-      </div>
-      <div>
-        {showLeft}
-      </div>
-      <div>
-        {showTop}
       </div> */}
       {/* <Local
         setCompany={setCompany}
@@ -424,16 +383,6 @@ export default function Advertisement() {
                           >
                             Submit
                           </button>
-                          {/* <Button
-                            onClick={() => {setUrl(null), setSelected(false)}}
-                            style={{
-                              border: '2px solid red',
-                              background: 'transparent',
-                              color: 'red'
-                            }}
-                          >
-                            Delete
-                          </Button> */}
                         </div>
                       </>
                       ): null}
@@ -446,22 +395,16 @@ export default function Advertisement() {
                       description.length > 0 ||
                       url ? (
                         <>
+                          <div
+                            style={{
+                              marginBottom: '-20px'
+                            }}
+                          >
+                            Live Advertisement
+                          </div>
                           <Card
                             fluid
-                            // style={{
-                            //   textAlign: 'left',
-                            //   fontSize: '22px',
-                            //   margin: '1em 0em 0em 0em',
-                            //   padding: '1em',
-                            // }}
                           >
-                            {/* <div style={{ margin: '1em 0em 0em 0em' }}>
-                              Company Name: {JSON.stringify(company, null, 2)}
-                            </div>
-                            <div style={{ margin: '1em 0em 1em 0em' }}>
-                              Advertisement Description:{' '}
-                              {JSON.stringify(description, null, 2)}
-                            </div> */}
                             <div>
                               <Grid>
                                 <Grid.Row>
@@ -477,8 +420,8 @@ export default function Advertisement() {
                                       type='image'
                                       style={{
                                         transform: `translate(${left-20}px, ${top+10}px)`,
-                                        width: `${width/3}px`,
-                                        height: `${height/3}px`,
+                                        width: `${width/2.8}px`,
+                                        height: `${height/2.8}px`,
                                         borderRadius: '5%',
                                         maxWidth: '18em',
                                         maxHeight: '18em'
@@ -486,7 +429,11 @@ export default function Advertisement() {
                                       src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
                                     />
                                   </Grid.Column>
-                                  <Grid.Column style={{ width: '56%' }}>
+                                  <Grid.Column 
+                                    style={{ 
+                                      width: '56%' 
+                                    }}
+                                  >
                                     <Item
                                       style={{
                                         fontSize: '10px',
@@ -498,14 +445,18 @@ export default function Advertisement() {
                                         style={{ 
                                           display: 'flex', 
                                           justifyContent: 'center',
-                                          fontSize: '20px'
+                                          fontSize: '13px',
+                                          marginBottom: '-10px',
+                                          lineHeight: '14px',
+                                          wordBreak: 'break-word',
+                                          width: '100%'
                                         }}
                                       >
                                         {company} Advertisement
                                       </h1>
                                       <div 
                                         style={{ 
-                                          fontSize: '.91em', 
+                                          fontSize: '8.5px', 
                                           lineHeight: '30px' 
                                         }}
                                       >
@@ -543,13 +494,12 @@ export default function Advertisement() {
                                         >
                                           <Button
                                             content='Earn 20 points'
-                                            size='large'
                                             style={{
                                               color: 'white',
                                               background: '#125CA1',
                                               borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%',
-                                              marginTop: '1em',
-                                              fontSize: '10px'
+                                              fontSize: '10px',
+                                              transform: 'scale(0.7)'
                                             }}
                                             href='/'
                                           />
@@ -559,6 +509,19 @@ export default function Advertisement() {
                                   </Grid.Column>
                                 </Grid.Row>
                               </Grid>
+                            </div>
+                            <div 
+                              style={{ 
+                                display: 'flex', 
+                                justifyContent: 'center',
+                                fontSize: '8px',
+                                marginBottom: '10px',
+                                marginTop: '-10px',
+                                lineHeight: '10px',
+                                padding: '0px 20px 0px 20px'
+                              }}
+                            >
+                              {description}
                             </div>
                           </Card>
                         </>
@@ -633,18 +596,6 @@ export default function Advertisement() {
                   ): null}
                 </Grid.Row>
                 <Grid.Row>
-                  {/* <div>
-                    <Button
-                      style={{
-                        border: '2px solid #125CA1',
-                        background: 'transparent',
-                        color: '#125CA1'
-                      }}
-                      onClick={getData}
-                    >
-                      Save Advertisement
-                    </Button>
-                  </div> */}
                   {company || description || url ? (
                     <div
                       style={{
@@ -777,7 +728,9 @@ export default function Advertisement() {
                         display: 'flex', 
                         justifyContent: 'center', 
                         fontSize: resize ? null : '25px', 
-                        marginBottom: resize ? null : '-20px' 
+                        marginBottom: resize ? null : '-20px',
+                        wordBreak: 'break-word',
+                        width: '100%'
                       }}
                     >
                       {showCompany} Advertisement
