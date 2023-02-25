@@ -5,11 +5,11 @@ import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
-import { Divider, Container, Segment, Icon, Form, Button, Card } from 'semantic-ui-react';
-import { auth } from '../firebase/clientApp';
+import { Divider, Container, Segment, Icon, Form, Button } from 'semantic-ui-react';
 import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../firebase/clientApp';
+import { auth } from '../firebase/clientApp';
 
 auth;
 const db = getFirestore();
@@ -315,30 +315,8 @@ export default function Custom() {
   }
 
   useEffect(() => {
-    getData()
-  }, [])
-
-  // async function deleteAll() {
-  //   const docRef = doc(db, '/users/' + currentUser + 'Custom');
-  //   await updateDoc(docRef, {
-  //     showCompany: deleteField(),
-  //     companyFontSize: deleteField(),
-  //     companyFontWeight: deleteField(),
-  //     description: deleteField(),
-  //     descriptionFontSize: deleteField(),
-  //     descriptionFontWeight: deleteField(),
-  //     borderWidth: deleteField(),
-  //     borderColor: deleteField(),
-  //     color: deleteField(),
-  //     backgroundColor: deleteField(),
-  //     imageWidth: deleteField(),
-  //     imageHeight: deleteField(),
-  //     imageLeft: deleteField(),
-  //     imageTop: deleteField(),
-  //     totalWidth: deleteField(),
-  //     imageRotation: deleteField()
-  //   });
-  // }
+    getData();
+  }, []);
 
   const handleImageChange = (e) => {
     if(e.target.files[0]) {
@@ -365,8 +343,6 @@ export default function Custom() {
   useEffect(() => {
     setClicked(false);
   }, []);
-
-  console.log(totalWidth);
 
   return (
     <>
@@ -414,25 +390,6 @@ export default function Custom() {
       />
       <Header />
       <Container
-        // onMouseOver={() => {addCustom(
-        //   company,
-        //   companyFontSize,
-        //   companyFontWeight,
-        //   description,
-        //   descriptionFontSize,
-        //   descriptionFontWeight,
-        //   borderWidth,
-        //   borderColor,
-        //   color,
-        //   backgroundColor,
-        //   imageWidth,
-        //   imageHeight,
-        //   imageLeft,
-        //   imageTop,
-        //   totalWidth,
-        //   imageRotation
-        // )}}
-        // onMouseMove={getData}
         size='massive'
         style={{
           margin: '0.5em',
@@ -528,7 +485,6 @@ export default function Custom() {
                 >
                   <input
                     type='image'
-                    // src={url}
                     src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
                     style={{
                       width: `${imageWidth/1.5}px`,
@@ -1259,55 +1215,6 @@ export default function Custom() {
         </div>
         <Divider />
       </Container>
-      {/* <Button
-        onClick={addCustom}
-        style={{
-          background: 'green',
-          color: 'white',
-          marginLeft: '3vw',
-        }}
-      >
-        Save 1st
-      </Button> */}
-      {/* <Button
-        style={{
-          background: 'green',
-          color: 'white',
-          marginLeft: '3vw',
-        }}
-        onClick={getData}
-      >
-        Save 2nd
-      </Button> */}
-      {/* <Button
-        onClick={() => {
-            setCompany(''),
-            setCompanyFontSize(''),
-            setCompanyFontWeight(''),
-            setDescription(''),
-            setDescriptionFontSize(''),
-            setDescriptionFontWeight(''),
-            setBorderWidth('0'),
-            setBorderColor(''),
-            setColor(''),
-            setBackgroundColor(''),
-            setImageWidth('100'),
-            setImageHeight('100'),
-            setImageRotation('0'),
-            setEditTitle(false),
-            setEditDescription(false),
-            setEditBorder(false),
-            setEditGlobal(false),
-            setEditImage(false);
-        }}
-        style={{
-          background: '#125CA1',
-          color: 'white',
-          marginLeft: '3vw',
-        }}
-      >
-        Clear
-      </Button> */}
       <div
         style={{
           marginTop: '30px'
@@ -1414,12 +1321,12 @@ export default function Custom() {
       >
         <div
           style={{
-            background: `${showBackgroundColor}`,
             color: `${showColor}`,
+            background: `${showBackgroundColor}`,
             border: `${showBorderWidth}px solid ${showBorderColor}`,
-            fontWeight: '100',
-            height: '50vh',
             width: `${showTotalWidth}px`,
+            height: '50vh',
+            fontWeight: '100',
             margin: '30px'
           }}
         >

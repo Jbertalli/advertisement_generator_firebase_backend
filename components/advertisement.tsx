@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import FocusLock from 'react-focus-lock';
 import styles from '../styles/advertisement.module.css';
-// import Local from '../components/localStorage';
+import Local from '../components/localStorage';
 import { Container, Segment, Button, Form, Icon, Grid, Item, Card } from 'semantic-ui-react';
 import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
@@ -13,7 +13,6 @@ import { incrementWidth, deleteWidth } from '../slices/widthSlice';
 import { incrementHeight, deleteHeight } from '../slices/heightSlice';
 import { incrementLeft, deleteLeft } from '../slices/leftSlice';
 import { incrementTop, deleteTop } from '../slices/topSlice';
-import { incrementMediaPreview, deleteMediaPreview } from '../slices/mediaSlice';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../firebase/clientApp';
@@ -87,26 +86,6 @@ export default function Advertisement() {
       created: Timestamp.now(),
     });
   };
-
-  // const deleteAdvertisement = async (
-  //   company: string,
-  //   description: string,
-  //   width: number,
-  //   height: number,
-  //   left: number,
-  //   top: number,
-  //   mediaPreview: string
-  // ) => {
-  //   await updateDoc(doc(db, 'users', currentUser), {
-  //     company: deleteField(),
-  //     description: deleteField(),
-  //     width: deleteField(),
-  //     height: deleteField(),
-  //     left: deleteField(),
-  //     top: deleteField(),
-  //     mediaPreview: deleteField(),
-  //   });
-  // };
 
   async function getData() {
     const docRef = doc(db, '/users/' + currentUser + 'Ads');
@@ -216,78 +195,20 @@ export default function Advertisement() {
         <title>Earn and Trade Advertisement Generator</title>
         <meta name='description' content='earnandtrade, advertisement' />
       </Head>
-      {/* <div>
-        <Button
-          color='red'
-          onClick={deleteCompany}
-        >
-          Delete Company
-        </Button>
-      </div>
-      <div>
-        <Button
-          color='red'
-          onClick={deleteDescription}
-        >
-          Delete Description
-        </Button>
-      </div>
-      <div>
-        <Button
-          color='red'
-          onClick={deleteHeight}
-        >
-          Delete Height
-        </Button>
-      </div>
-      <div>
-        <Button
-          color='red'
-          onClick={deleteWidth}
-        >
-          Delete Width
-        </Button>
-      </div>
-      <div>
-        <Button
-          color='red'
-          onClick={deleteTop}
-        >
-          Delete Top
-        </Button>
-      </div>
-      <div>
-        <Button
-          color='red'
-          onClick={deleteLeft}
-        >
-          Delete Left
-        </Button>
-      </div>
-      <div>
-        <Button
-          color='red'
-          onClick={deleteMediaPreview}
-        >
-          Delete MediaPreview
-        </Button>
-      </div> */}
-      {/* <Local
+      <Local
         setCompany={setCompany}
         setDescription={setDescription}
         setWidth={setWidth}
         setHeight={setHeight}
         setLeft={setLeft}
         setTop={setTop}
-        setMediaPreview={setMediaPreview}
         company={company}
         description={description}
         width={width}
         height={height}
         left={left}
         top={top}
-        mediaPreview={mediaPreview}
-      /> */}
+      />
       <FocusLock>
         <Container
           as='h1'
@@ -639,32 +560,6 @@ export default function Advertisement() {
                         >
                           Save to Database
                         </Button>
-                        {/* <Button
-                          // onClick={() => {
-                          //   deleteAdvertisement(
-                          //     company,
-                          //     description,
-                          //     width,
-                          //     height,
-                          //     left,
-                          //     top,
-                          //     mediaPreview
-                          //   ),
-                          //     setCompany(''),
-                          //     setDescription(''),
-                          //     setMediaPreview(''),
-                          //     dispatch(deleteCompany()),
-                          //     dispatch(deleteDescription()),
-                          //     dispatch(deleteWidth()),
-                          //     dispatch(deleteHeight()),
-                          //     dispatch(deleteLeft()),
-                          //     dispatch(deleteTop()),
-                          //     dispatch(deleteMediaPreview());
-                          // }}
-                          style={{ background: '#125CA1', color: 'white' }}
-                        >
-                          Delete
-                        </Button> */}
                       </div>
                       <div
                         style={{

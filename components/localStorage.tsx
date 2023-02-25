@@ -7,7 +7,6 @@ import { widthValue } from '../slices/widthSlice';
 import { heightValue } from '../slices/heightSlice';
 import { leftValue } from '../slices/leftSlice';
 import { topValue } from '../slices/topSlice';
-import { mediaPreviewValue } from '../slices/mediaSlice';
 
 const LOCAL_STORAGE_KEY_NAME = 'CompanyName';
 const LOCAL_STORAGE_KEY_DESCRIPTION = 'AdvertisementDescription';
@@ -15,7 +14,6 @@ const LOCAL_STORAGE_KEY_WIDTH = 'ImageWidth';
 const LOCAL_STORAGE_KEY_HEIGHT = 'ImageHeight';
 const LOCAL_STORAGE_KEY_LEFT = 'ImageLeft';
 const LOCAL_STORAGE_KEY_TOP = 'ImageTop';
-const LOCAL_STORAGE_KEY_IMAGE = 'Image';
 
 export default function Local(values) {
 
@@ -26,14 +24,12 @@ export default function Local(values) {
     setHeight,
     setLeft,
     setTop,
-    setMediaPreview,
     company,
     description,
     width,
     height,
     left,
     top,
-    mediaPreview
   } = values;
 
   const companyName = useSelector(companyValue);
@@ -42,7 +38,6 @@ export default function Local(values) {
   const heightName = useSelector(heightValue);
   const leftName = useSelector(leftValue);
   const topName = useSelector(topValue);
-  const mediaPreviewName = useSelector(mediaPreviewValue);
 
   // // Company name
   // useEffect(() => {
@@ -113,21 +108,6 @@ export default function Local(values) {
   //   localStorage.setItem(LOCAL_STORAGE_KEY_TOP, JSON.stringify(topName));
   // }, [topName]);
 
-  // // Image
-  // useEffect(() => {
-  //   const storedImage = JSON.parse(
-  //     localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE)
-  //   );
-  //   if (storedImage) setMediaPreview(storedImage);
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem(
-  //     LOCAL_STORAGE_KEY_IMAGE,
-  //     JSON.stringify(mediaPreviewName)
-  //   );
-  // }, [mediaPreviewName]);
-
 // Company name
 useEffect(() => {
   const storedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NAME));
@@ -196,21 +176,6 @@ useEffect(() => {
 useEffect(() => {
   localStorage.setItem(LOCAL_STORAGE_KEY_TOP, JSON.stringify(top));
 }, [top]);
-
-// Image
-useEffect(() => {
-  const storedImage = JSON.parse(
-    localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE)
-  );
-  if (storedImage) setMediaPreview(storedImage);
-}, []);
-
-useEffect(() => {
-  localStorage.setItem(
-    LOCAL_STORAGE_KEY_IMAGE,
-    JSON.stringify(mediaPreview)
-  );
-}, [mediaPreview]);
 
   return <>&nbsp;</>;
 }
