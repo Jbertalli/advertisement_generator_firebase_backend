@@ -22,11 +22,11 @@ export default function Custom() {
   const [descriptionFontSize, setDescriptionFontSize] = useState<string>('');
   const [descriptionFontWeight, setDescriptionFontWeight] = useState<string>('');
   const [borderWidth, setBorderWidth] = useState<string>('');
-  const [borderColor, setBorderColor] = useState<string>('');
+  const [borderColor, setBorderColor] = useState<string>('#FFFFFF');
   const [color, setColor] = useState<string>('');
   const [backgroundColor, setBackgroundColor] = useState<string>('');
-  const [imageWidth, setImageWidth] = useState<any>(200);
-  const [imageHeight, setImageHeight] = useState<any>(200);
+  const [imageWidth, setImageWidth] = useState<any>(150);
+  const [imageHeight, setImageHeight] = useState<any>(150);
   const [imageLeft, setImageLeft] = useState<any>(0);
   const [imageTop, setImageTop] = useState<any>(0);
   const [totalWidth, setTotalWidth] = useState<any>(500);
@@ -46,8 +46,8 @@ export default function Custom() {
   const [showBorderColor, setShowBorderColor] = useState<string>('');
   const [showColor, setShowColor] = useState<string>('');
   const [showBackgroundColor, setShowBackgroundColor] = useState<string>('');
-  const [showImageWidth, setShowImageWidth] = useState<any>(200);
-  const [showImageHeight, setShowImageHeight] = useState<any>(200);
+  const [showImageWidth, setShowImageWidth] = useState<any>(150);
+  const [showImageHeight, setShowImageHeight] = useState<any>(150);
   const [showImageLeft, setShowImageLeft] = useState<any>(0);
   const [showImageTop, setShowImageTop] = useState<any>(0);
   const [showTotalWidth, setShowTotalWidth] = useState<any>(500);
@@ -422,81 +422,90 @@ export default function Custom() {
           >
             Create a Custom Advertisement
           </div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: '-20px'
-            }}
-          >
+          {(company.length > 0 || 
+            Number(companyFontSize) > 0 || 
+            description.length ||
+            Number(descriptionFontSize) > 0 || 
+            Number(borderWidth) > 0
+            ) ? (
+          <>
             <div
               style={{
-                background: `${backgroundColor}`,
-                color: `${color}`,
-                border: `${borderWidth}px solid ${borderColor}`,
-                fontWeight: '100',
-                height: '50vh',
-                width: `${totalWidth}px`,
-                margin: '30px'
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '-20px'
               }}
             >
-              <Draggable>
-                <div
-                  style={{
-                    fontSize: `${companyFontSize}px`,
-                    fontWeight: `${companyFontWeight}`,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    cursor: 'grab',
-                    marginBottom: '30px',
-                    marginTop: '30px',
-                    lineHeight: '1em',
-                    wordBreak: 'break-word',
-                    width: '100%',
-                  }}
-                >
-                  {company}
-                </div>
-              </Draggable>
-              <Draggable>
-                <div
-                  style={{
-                    fontSize: `${descriptionFontSize}px`,
-                    fontWeight: `${descriptionFontWeight}`,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    cursor: 'grab',
-                    marginBottom: '30px',
-                    lineHeight: '1em',
-                    wordBreak: 'break-word',
-                    width: '100%'
-                  }}
-                >
-                  {description}
-                </div>
-              </Draggable>
-              <Draggable>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    transform: 'translateY(50%)'
-                  }}
-                >
-                  <input
-                    type='image'
-                    src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
+              <div
+                style={{
+                  background: `${backgroundColor}`,
+                  color: `${color}`,
+                  border: `${borderWidth}px solid ${borderColor}`,
+                  fontWeight: '100',
+                  height: '50vh',
+                  width: `${totalWidth}px`,
+                  margin: '30px'
+                }}
+              >
+                <Draggable>
+                  <div
                     style={{
-                      width: `${imageWidth/1.5}px`,
-                      height: `${imageHeight/1.5}px`,
-                      transform: `translate(${imageLeft}px, ${imageTop}px) rotate(${showImageRotation}deg)`,
-                      cursor: 'grab'
+                      fontSize: `${companyFontSize}px`,
+                      fontWeight: `${companyFontWeight}`,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      cursor: 'grab',
+                      marginBottom: '30px',
+                      marginTop: '30px',
+                      lineHeight: '1em',
+                      wordBreak: 'break-word',
+                      width: '100%',
                     }}
-                  />
-                </div>
-              </Draggable>
+                  >
+                    {company}
+                  </div>
+                </Draggable>
+                <Draggable>
+                  <div
+                    style={{
+                      fontSize: `${descriptionFontSize}px`,
+                      fontWeight: `${descriptionFontWeight}`,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      cursor: 'grab',
+                      marginBottom: '30px',
+                      lineHeight: '1em',
+                      wordBreak: 'break-word',
+                      width: '100%'
+                    }}
+                  >
+                    {description}
+                  </div>
+                </Draggable>
+                <Draggable>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      transform: 'translateY(50%)'
+                    }}
+                  >
+                    <input
+                      type='image'
+                      src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
+                      style={{
+                        width: `${imageWidth/1.1}px`,
+                        height: `${imageHeight/1.1}px`,
+                        transform: `translate(${imageLeft}px, ${imageTop}px) rotate(${showImageRotation}deg)`,
+                        cursor: 'grab'
+                      }}
+                    />
+                  </div>
+                </Draggable>
+              </div>
             </div>
-          </div>
+          </>
+          ): null}
         </Segment>
         <div
           style={{
@@ -595,7 +604,7 @@ export default function Custom() {
               <a href='#editTitle'>
                 <div
                   onClick={() => {
-                    setEditTitle(true),
+                      setEditTitle(true),
                       setEditDescription(false),
                       setEditBorder(false),
                       setEditGlobal(false),
@@ -1273,6 +1282,22 @@ export default function Custom() {
             color: 'red'
           }}
           onClick={() => {
+            setBackgroundColor(''),
+            setColor(''),
+            setBorderWidth(''),
+            setBorderColor('#FFFFFF'),
+            setTotalWidth(500),
+            setCompanyFontSize(''),
+            setCompanyFontWeight(''),
+            setCompany(''),
+            setDescriptionFontSize(''),
+            setDescriptionFontWeight(''),
+            setDescription(''),
+            setClicked(false),
+            setImageWidth(150),
+            setImageHeight(150),
+            setImageLeft(0),
+            setImageTop(0)
             deleteLocal(),
             deleteCompany(), 
             deleteCompanyFontSize(),
@@ -1305,7 +1330,8 @@ export default function Custom() {
             setShowImageLeft(''),
             setShowImageTop(''),
             setShowTotalWidth(''),
-            setShowImageRotation('')
+            setShowImageRotation(''),
+            setUrl(null)
           }}
         >
           Delete Data
@@ -1371,7 +1397,6 @@ export default function Custom() {
             >
               <input
                 type='image'
-                // src={url}
                 src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
                 style={{
                   width: `${showImageWidth}px`,

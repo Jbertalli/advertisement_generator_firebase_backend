@@ -583,7 +583,10 @@ export default function Advertisement() {
                             setWidth(350), 
                             setHeight(350), 
                             setLeft(40), 
-                            setTop(20)}}
+                            setTop(20),
+                            setUrl(null),
+                            setClicked(true)
+                          }}
                         >
                           Delete Advertisement
                         </Button>
