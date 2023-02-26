@@ -7,7 +7,7 @@ import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
 import { Divider, Container, Segment, Icon, Form, Button } from 'semantic-ui-react';
 import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL, getStorage, deleteObject } from 'firebase/storage';
 import { storage } from '../firebase/clientApp';
 import { auth } from '../firebase/clientApp';
 
@@ -56,6 +56,7 @@ export default function Custom() {
   const [selected, setSelected] = useState<boolean>(false);
   const [saveImage, setSaveImage] = useState(null);
   const [clicked, setClicked] = useState<boolean>(false);
+  const [saved, setSaved] = useState<number>(0);
   const [url, setUrl] = useState(null);
 
   const currentUser = auth.currentUser?.uid;
@@ -314,10 +315,6 @@ export default function Custom() {
     localStorage.clear();
   }
 
-  useEffect(() => {
-    getData();
-  }, []);
-
   const handleImageChange = (e) => {
     if(e.target.files[0]) {
       setSaveImage(e.target.files[0])
@@ -338,11 +335,25 @@ export default function Custom() {
     });
   }
 
-  console.log(url);
+  const deleteStoredImage = () => {
+    const storage = getStorage();
+    const imageRef = ref(storage, `image/${currentUser}/custom`);
+    deleteObject(imageRef).then(() => {
+      console.log('successfully deleted image');
+    }).catch((error) => {
+      console.log('unable to delete image');
+    })
+  }
 
   useEffect(() => {
     setClicked(false);
   }, []);
+
+  useEffect(() => {
+    getData();
+  }, [saved]);
+
+  console.log(url);
 
   return (
     <>
@@ -395,7 +406,6 @@ export default function Custom() {
           margin: '0.5em',
           boxShadow: '2px 2px 10px black',
         }}
-        onMouseMove={getData}
       >
         <Segment attached textAlign='center'>
           <div
@@ -415,7 +425,6 @@ export default function Custom() {
             style={{
               fontSize: '18px',
               fontWeight: '400px',
-              padding: '0em 0em 1em 0em',
               display: 'flex',
               justifyContent: 'center'
             }}
@@ -433,7 +442,9 @@ export default function Custom() {
               style={{
                 display: 'flex',
                 justifyContent: 'center',
-                marginTop: '-20px'
+                marginTop: '-20px',
+                marginBottom: '-20px',
+                transform: 'scale(0.7)'
               }}
             >
               <div
@@ -443,8 +454,7 @@ export default function Custom() {
                   border: `${borderWidth}px solid ${borderColor}`,
                   fontWeight: '100',
                   height: '50vh',
-                  width: `${totalWidth}px`,
-                  margin: '30px'
+                  width: `${totalWidth}px`
                 }}
               >
                 <Draggable>
@@ -845,7 +855,7 @@ export default function Custom() {
                 <div
                   style={{ transform: 'translateY(-8px)' }}
                   onClick={() => {
-                    setEditBorder(true),
+                      setEditBorder(true),
                       setEditTitle(false),
                       setEditDescription(false),
                       setEditGlobal(false),
@@ -1256,7 +1266,7 @@ export default function Custom() {
             imageTop,
             totalWidth,
             imageRotation
-          )}}
+          ), setSaved(saved + 1)}}
           style={{
             border: '2px solid #125CA1',
             background: 'transparent',
@@ -1264,16 +1274,6 @@ export default function Custom() {
           }}
         >
           Save Data
-        </Button>
-        <Button
-          onClick={getData}
-          style={{
-            border: '2px solid #125CA1',
-            background: 'transparent',
-            color: '#125CA1'
-          }}
-        >
-          Get Data
         </Button>
         <Button
           style={{
@@ -1331,84 +1331,92 @@ export default function Custom() {
             setShowImageTop(''),
             setShowTotalWidth(''),
             setShowImageRotation(''),
-            setUrl(null)
+            deleteStoredImage()
           }}
         >
           Delete Data
         </Button>
       </div>
-      <Divider />
-      <div
-        style={{
-          padding: '0px 3vw 1px 3vw',
-          display: 'flex',
-          justifyContent: 'center'
-        }}
-      >
+      {(company.length > 0 || 
+        Number(companyFontSize) > 0 || 
+        description.length ||
+        Number(descriptionFontSize) > 0 || 
+        Number(borderWidth) > 0) ? (
+      <>
+        <Divider />
         <div
           style={{
-            color: `${showColor}`,
-            background: `${showBackgroundColor}`,
-            border: `${showBorderWidth}px solid ${showBorderColor}`,
-            width: `${showTotalWidth}px`,
-            height: '50vh',
-            fontWeight: '100',
-            margin: '30px'
+            padding: '0px 3vw 1px 3vw',
+            display: 'flex',
+            justifyContent: 'center'
           }}
         >
-          <Draggable>
-            <div
-              style={{
-                fontSize: `${showCompanyFontSize}px`,
-                fontWeight: `${showCompanyFontWeight}`,
-                display: 'flex',
-                justifyContent: 'center',
-                cursor: 'grab',
-                marginBottom: '30px',
-                marginTop: '30px',
-                lineHeight: '1em'
-              }}
-            >
-              {showCompany}
-            </div>
-          </Draggable>
-          <Draggable>
-            <div
-              style={{
-                fontSize: `${showDescriptionFontSize}px`,
-                fontWeight: `${showDescriptionFontWeight}`,
-                display: 'flex',
-                justifyContent: 'center',
-                cursor: 'grab',
-                marginBottom: '30px',
-                lineHeight: '1em'
-              }}
-            >
-              {showDescription}
-            </div>
-          </Draggable>
-          <Draggable>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                transform: 'translateY(50%)'
-              }}
-            >
-              <input
-                type='image'
-                src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
+          <div
+            style={{
+              color: `${showColor}`,
+              background: `${showBackgroundColor}`,
+              border: `${showBorderWidth}px solid ${showBorderColor}`,
+              width: `${showTotalWidth}px`,
+              height: '50vh',
+              fontWeight: '100',
+              margin: '30px'
+            }}
+          >
+            <Draggable>
+              <div
                 style={{
-                  width: `${showImageWidth}px`,
-                  height: `${showImageHeight}px`,
-                  transform: `translate(${showImageLeft}px, ${showImageTop}px) rotate(${showImageRotation}deg)`,
-                  cursor: 'grab'
+                  fontSize: `${showCompanyFontSize}px`,
+                  fontWeight: `${showCompanyFontWeight}`,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  cursor: 'grab',
+                  marginBottom: '30px',
+                  marginTop: '30px',
+                  lineHeight: '1em'
                 }}
-              />
-            </div>
-          </Draggable>
+              >
+                {showCompany}
+              </div>
+            </Draggable>
+            <Draggable>
+              <div
+                style={{
+                  fontSize: `${showDescriptionFontSize}px`,
+                  fontWeight: `${showDescriptionFontWeight}`,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  cursor: 'grab',
+                  marginBottom: '30px',
+                  lineHeight: '1em'
+                }}
+              >
+                {showDescription}
+              </div>
+            </Draggable>
+            <Draggable>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  transform: 'translateY(50%)'
+                }}
+              >
+                <input
+                  type='image'
+                  src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
+                  style={{
+                    width: `${showImageWidth}px`,
+                    height: `${showImageHeight}px`,
+                    transform: `translate(${showImageLeft}px, ${showImageTop}px) rotate(${showImageRotation}deg)`,
+                    cursor: 'grab'
+                  }}
+                />
+              </div>
+            </Draggable>
+          </div>
         </div>
-      </div>
+      </>
+      ): null}
     </>
   );
 }

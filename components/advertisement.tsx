@@ -14,7 +14,7 @@ import { incrementHeight, deleteHeight } from '../slices/heightSlice';
 import { incrementLeft, deleteLeft } from '../slices/leftSlice';
 import { incrementTop, deleteTop } from '../slices/topSlice';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL, getStorage, deleteObject } from 'firebase/storage';
 import { storage } from '../firebase/clientApp';
 
 auth;
@@ -39,6 +39,7 @@ export default function Advertisement() {
   const [selected, setSelected] = useState<boolean>(false);
   const [saveImage, setSaveImage] = useState(null);
   const [clicked, setClicked] = useState<boolean>(false);
+  const [saved, setSaved] = useState<number>(0);
   const [url, setUrl] = useState(null);
 
   const currentUser = auth.currentUser?.uid;
@@ -183,11 +184,25 @@ export default function Advertisement() {
     });
   }
 
+  const deleteStoredImage = () => {
+    const storage = getStorage();
+    const imageRef = ref(storage, `image/${currentUser}/advertisement`);
+    deleteObject(imageRef).then(() => {
+      console.log('successfully deleted image');
+    }).catch((error) => {
+      console.log('unable to delete image');
+    })
+  }
+
   useEffect(() => {
     setClicked(false);
   }, []);
 
-  console.log(url);
+  useEffect(() => {
+    handleSubmit();
+  }, [saved]);
+
+  // console.log(url);
 
   return (
     <>
@@ -267,7 +282,11 @@ export default function Advertisement() {
                       onChange={(e) => setDescription(e.target.value)}
                     />
                     <div>Upload Logo</div>
-                    <div>
+                    <div
+                      style={{
+                        display: 'flex'
+                      }}
+                    >
                       <input
                         name='media'
                         type='file'
@@ -275,38 +294,100 @@ export default function Advertisement() {
                         style={{ width: resize ? '30vw' : '40vw', transform: 'translateX(-.2vw)' }}
                         className={styles.file}
                         onChange={handleImageChange}
-                        onClick={() => {setSelected(true), setClicked(true)}}
+                        onClick={() => {
+                          setSelected(true), 
+                          setClicked(true), 
+                          setSaved(saved + 1)
+                        }}
                       />
                       {selected ? (
                       <>
-                        <div
+                        <button
+                          onClick={handleSubmit}
                           style={{
-                            marginTop: '20px',
-                            marginBottom: '-50px',
-                            position: 'relative',
-                            zIndex: '100'
+                            border: '2px solid #125CA1',
+                            background: 'transparent',
+                            color: '#125CA1',
+                            fontSize: '14px',
+                            fontWeight: '700',
+                            height: '40px',
+                            width: '88.2px',
+                            borderRadius: '4px',
+                            marginRight: '5px',
+                            transform: 'translate(-60px, 1px)'
                           }}
                         >
-                          <button
-                            onClick={handleSubmit}
-                            style={{
-                              border: '2px solid #125CA1',
-                              background: 'transparent',
-                              color: '#125CA1',
-                              fontSize: '14px',
-                              fontWeight: '700',
-                              height: '40px',
-                              width: '88.2px',
-                              borderRadius: '4px',
-                              marginRight: '5px'
-                            }}
-                            className={selected ? styles.button : null}
-                          >
-                            Submit
-                          </button>
-                        </div>
+                          Upload
+                        </button>
                       </>
                       ): null}
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        marginTop: '20px'
+                      }}
+                    >
+                      <div>
+                        <Button
+                          disabled={!company && !description && !url}
+                          onClick={() => {
+                            addAdvertisement(
+                              company,
+                              description,
+                              width,
+                              height,
+                              left,
+                              top
+                            ),
+                              dispatch(incrementCompany(String(company))),
+                              dispatch(incrementDescription(String(description))),
+                              dispatch(incrementWidth(String(width))),
+                              dispatch(incrementHeight(String(height))),
+                              dispatch(incrementLeft(String(left))),
+                              dispatch(incrementTop(String(top)))
+                          }}
+                          style={{
+                            border: '2px solid #125CA1',
+                            background: 'transparent', 
+                            color: '#125CA1',
+                            padding: '10px 10px 10px 10px',
+                            marginBottom: resize ? '-60px' : '15px'
+                          }}
+                        >
+                          Save to Database
+                        </Button>
+                      </div>
+                      <div
+                        style={{
+                          transform: resize ? 'translate(20px)' : null
+                        }}
+                      >
+                        <Button
+                          disabled={!company && !description && !url}
+                          onClick={() => {
+                            deleteAll(), 
+                            setUrl(null), 
+                            setSelected(false), 
+                            getData(), 
+                            setDescription(''), 
+                            setCompany(''), 
+                            setWidth(350), 
+                            setHeight(350), 
+                            setLeft(40), 
+                            setTop(20),
+                            deleteStoredImage()
+                          }}
+                          style={{
+                            border: '2px solid red',
+                            background: 'transparent',
+                            color: 'red',
+                            padding: '10px 10px 10px 10px'
+                          }}
+                        >
+                          Delete Advertisement
+                        </Button>
+                      </div>
                     </div>
                   </Grid.Column>
                   <Grid.Column width={resize ? 8 : 16}>
@@ -316,8 +397,7 @@ export default function Advertisement() {
                       <>
                         <div
                           style={{
-                            marginBottom: '-15px',
-                            marginTop: resize ? null : '60px'
+                            marginBottom: '-15px'
                           }}
                         >
                           Live Advertisement
@@ -484,8 +564,7 @@ export default function Advertisement() {
                           display: resize ? 'flex' : 'block',
                           justifyContent: 'space-between',
                           width: '100%',
-                          fontSize: '20px',
-                          marginTop: '40px'
+                          fontSize: '20px'
                         }}
                       >
                         <Form.Input
@@ -523,76 +602,6 @@ export default function Advertisement() {
                       </Segment>
                     </>
                   ): null}
-                </Grid.Row>
-                <Grid.Row>
-                  {company || description || url ? (
-                    <div
-                      style={{
-                        display: resize ? 'flex' : 'block',
-                        marginLeft: resize ? null : '13px'
-                      }}
-                    >
-                      <div style={{ transform: resize ? 'translate(13.5px)' : null }}>
-                        <Button
-                          onClick={() => {
-                            addAdvertisement(
-                              company,
-                              description,
-                              width,
-                              height,
-                              left,
-                              top
-                            ),
-                              dispatch(incrementCompany(String(company))),
-                              dispatch(incrementDescription(String(description))),
-                              dispatch(incrementWidth(String(width))),
-                              dispatch(incrementHeight(String(height))),
-                              dispatch(incrementLeft(String(left))),
-                              dispatch(incrementTop(String(top)))
-                          }}
-                          style={{
-                            border: '2px solid #125CA1',
-                            background: 'transparent', 
-                            color: '#125CA1',
-                            padding: resize ? null : '10px 10px 10px 10px',
-                            marginBottom: resize ? null : '15px'
-                          }}
-                        >
-                          Save to Database
-                        </Button>
-                      </div>
-                      <div
-                        style={{
-                          transform: resize ? 'translate(20px)' : null
-                        }}
-                      >
-                        <Button
-                          style={{
-                            border: '2px solid red',
-                            background: 'transparent',
-                            color: 'red',
-                            padding: resize ? null : '10px 10px 10px 10px'
-                          }}
-                          onClick={() => {
-                            deleteAll(), 
-                            setUrl(null), 
-                            setSelected(false), 
-                            getData(), 
-                            setDescription(''), 
-                            setCompany(''), 
-                            setWidth(350), 
-                            setHeight(350), 
-                            setLeft(40), 
-                            setTop(20),
-                            setUrl(null),
-                            setClicked(true)
-                          }}
-                        >
-                          Delete Advertisement
-                        </Button>
-                      </div>
-                    </div>
-                  ) : null}
                 </Grid.Row>
               </Grid>
             </Segment>
