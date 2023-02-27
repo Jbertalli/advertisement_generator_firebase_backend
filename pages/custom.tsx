@@ -353,7 +353,17 @@ export default function Custom() {
     getData();
   }, [saved]);
 
+  useEffect(() => {
+    getData();
+  }, []);
+
   console.log(url);
+
+  const [imageSaved, setImageSaved] = useState<number>(0);
+
+  useEffect(() => {
+    handleSubmit();
+  }, [imageSaved]);
 
   return (
     <>
@@ -1069,7 +1079,8 @@ export default function Custom() {
                       transform: 'translateX(-.2vw)' 
                     }}
                     className={styles.file}
-                    onChange={handleImageChange}
+                    // onChange={handleImageChange}
+                    onChange={(e) => {handleImageChange(e), setImageSaved(imageSaved + 1)}}
                     onClick={() => {setSelected(true), setClicked(true)}}
                   />
                   {selected ? (
@@ -1095,7 +1106,7 @@ export default function Custom() {
                           borderRadius: '4px',
                           marginRight: '5px'
                         }}
-                        className={selected ? styles.button : null}
+                        // className={selected ? styles.button : null}
                       >
                         Submit
                       </button>
