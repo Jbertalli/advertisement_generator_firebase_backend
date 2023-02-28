@@ -361,9 +361,9 @@ export default function Custom() {
 
   const [imageSaved, setImageSaved] = useState<number>(0);
 
-  useEffect(() => {
-    handleSubmit();
-  }, [imageSaved]);
+  // useEffect(() => {
+  //   handleSubmit();
+  // }, [imageSaved]);
 
   return (
     <>
@@ -1075,26 +1075,24 @@ export default function Custom() {
                     type='file'
                     accept='image/*'
                     style={{ 
-                      width: resize ? '30vw' : '50vw', 
-                      transform: 'translateX(-.2vw)' 
+                      width: '150px', 
+                      transform: 'translateX(-.2vw)'
                     }}
                     className={styles.file}
                     // onChange={handleImageChange}
                     onChange={(e) => {handleImageChange(e), setImageSaved(imageSaved + 1)}}
                     onClick={() => {setSelected(true), setClicked(true)}}
                   />
-                  {selected ? (
-                  <>
-                    <div
-                      style={{
-                        marginTop: '20px',
-                        marginBottom: '30px',
-                        position: 'relative',
-                        zIndex: '100'
-                      }}
-                    >
+                  <div
+                    style={{
+                      display: 'inline',
+                      justifyContent: 'flex-start'
+                    }}
+                  >
+                    {selected ? (
+                    <>
                       <button
-                        onClick={handleSubmit}
+                        onClick={() => {handleSubmit(), setSelected(false)}}
                         style={{
                           border: '2px solid #125CA1',
                           background: 'transparent',
@@ -1110,6 +1108,9 @@ export default function Custom() {
                       >
                         Submit
                       </button>
+                    </>
+                    ):(
+                    <>
                       <Button
                         onClick={() => {setUrl(null), setSelected(false)}}
                         style={{
@@ -1119,10 +1120,10 @@ export default function Custom() {
                         }}
                       >
                         Delete
-                      </Button>
-                    </div>
-                  </>
-                  ): null}
+                      </Button>      
+                    </>
+                    )}
+                  </div>
                 </div>
                 <div style={{ marginBottom: '5px', marginTop: '15px' }}>Image Width (pixels)</div>
                 <div>
@@ -1284,7 +1285,7 @@ export default function Custom() {
             color: '#125CA1'
           }}
         >
-          Save Data
+          Save to Database
         </Button>
         <Button
           style={{
