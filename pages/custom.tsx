@@ -56,6 +56,7 @@ export default function Custom() {
   const [selected, setSelected] = useState<boolean>(false);
   const [saveImage, setSaveImage] = useState(null);
   const [clicked, setClicked] = useState<boolean>(false);
+  const [imageSaved, setImageSaved] = useState<number>(0);
   const [saved, setSaved] = useState<number>(0);
   const [url, setUrl] = useState(null);
 
@@ -358,8 +359,6 @@ export default function Custom() {
   }, []);
 
   console.log(url);
-
-  const [imageSaved, setImageSaved] = useState<number>(0);
 
   // useEffect(() => {
   //   handleSubmit();
@@ -1030,7 +1029,7 @@ export default function Custom() {
             fontSize: '18px',
             fontWeight: '500',
             color: '#125CA1',
-            cursor: 'pointer',
+            cursor: 'pointer'
           }}
         >
           {editImage ? (

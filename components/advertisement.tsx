@@ -198,9 +198,17 @@ export default function Advertisement() {
     setClicked(false);
   }, []);
 
-  useEffect(() => {
-    handleSubmit();
-  }, [saved]);
+  // useEffect(() => {
+  //   handleSubmit();
+  // }, [saved]);
+
+  // useEffect(() => {
+  //   getData();
+  // }, [saved]);
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   // console.log(url);
 
@@ -291,7 +299,10 @@ export default function Advertisement() {
                         name='media'
                         type='file'
                         accept='image/*'
-                        style={{ width: resize ? '30vw' : '40vw', transform: 'translateX(-.2vw)' }}
+                        style={{ 
+                          width: '150px', 
+                          transform: 'translateX(-.2vw)' 
+                        }}
                         className={styles.file}
                         onChange={handleImageChange}
                         onClick={() => {
@@ -314,7 +325,7 @@ export default function Advertisement() {
                             width: '88.2px',
                             borderRadius: '4px',
                             marginRight: '5px',
-                            transform: 'translate(-60px, 1px)'
+                            transform: 'translateY(1px)'
                           }}
                         >
                           Upload
@@ -360,7 +371,7 @@ export default function Advertisement() {
                       </div>
                       <div
                         style={{
-                          transform: resize ? 'translate(20px)' : null
+                          transform: 'translate(15.1px)'
                         }}
                       >
                         <Button
