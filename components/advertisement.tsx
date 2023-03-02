@@ -44,9 +44,6 @@ export default function Advertisement() {
 
   const currentUser = auth.currentUser?.uid;
   // console.log(currentUser);
-
-  const [user] = useAuthState(auth);
-  // console.log(user);
   // console.log(auth);
 
   const dispatch = useDispatch();
