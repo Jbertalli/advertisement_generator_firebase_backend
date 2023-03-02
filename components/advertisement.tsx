@@ -314,7 +314,7 @@ export default function Advertisement() {
                       {selected ? (
                       <>
                         <button
-                          onClick={handleSubmit}
+                          onClick={() => {handleSubmit(), setSelected(false)}}
                           style={{
                             border: '2px solid #125CA1',
                             background: 'transparent',
@@ -331,7 +331,20 @@ export default function Advertisement() {
                           Upload
                         </button>
                       </>
-                      ): null}
+                      ):(
+                      <>
+                        <Button
+                          onClick={() => {handleSubmit(), setSelected(false)}}
+                          style={{
+                            border: '2px solid red',
+                            background: 'transparent',
+                            color: 'red'
+                          }}
+                        >
+                          Delete
+                        </Button> 
+                      </>
+                      )}
                     </div>
                     <div
                       style={{
