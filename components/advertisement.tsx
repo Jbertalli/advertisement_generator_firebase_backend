@@ -13,7 +13,6 @@ import { incrementWidth, deleteWidth } from '../slices/widthSlice';
 import { incrementHeight, deleteHeight } from '../slices/heightSlice';
 import { incrementLeft, deleteLeft } from '../slices/leftSlice';
 import { incrementTop, deleteTop } from '../slices/topSlice';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { ref, uploadBytes, getDownloadURL, getStorage, deleteObject } from 'firebase/storage';
 import { storage } from '../firebase/clientApp';
 
