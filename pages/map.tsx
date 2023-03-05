@@ -47,9 +47,11 @@ export default function Map(values) {
   }, []);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: `AIzaSyBEQ-ARtxsdwKqfkMjCxo4RF4YN3k1xP5g`,
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY,
     libraries,
   });
+
+  console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY);
 
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
