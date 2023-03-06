@@ -51,6 +51,11 @@ export default function Map(values) {
     libraries,
   });
 
+  // 1) put env variable in next.config (not .env for next)
+  // 2) add NEXT_PUBLIC prefix to any variables that show up on browser
+  // 3) process.env.NEXT_PUBLIC...
+  // 4) console.log variable to make sure it shows on productions
+  // 5) add environmental variable to vercel 
   console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY);
 
   const [markers, setMarkers] = useState([]);
