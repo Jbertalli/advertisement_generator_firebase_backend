@@ -61,7 +61,6 @@ export default function Custom() {
   const [url, setUrl] = useState(null);
 
   const currentUser = auth.currentUser?.uid;
-  // console.log(currentUser);
 
   const router = useRouter();
 
@@ -357,12 +356,6 @@ export default function Custom() {
   useEffect(() => {
     getData();
   }, []);
-
-  console.log(url);
-
-  // useEffect(() => {
-  //   handleSubmit();
-  // }, [imageSaved]);
 
   return (
     <>
@@ -1103,7 +1096,6 @@ export default function Custom() {
                           borderRadius: '4px',
                           marginRight: '5px'
                         }}
-                        // className={selected ? styles.button : null}
                       >
                         Submit
                       </button>

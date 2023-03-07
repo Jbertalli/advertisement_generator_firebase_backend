@@ -15,7 +15,6 @@ export const companySlice = createSlice({
     initialState,
     reducers: {
         incrementCompany: (state, action: PayloadAction<string>) => {
-            // state.value += action.payload
             state.value = action.payload
         },
         deleteCompany: (state) => {

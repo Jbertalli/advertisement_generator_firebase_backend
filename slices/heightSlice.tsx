@@ -15,7 +15,6 @@ export const heightSlice = createSlice({
     initialState,
     reducers: {
         incrementHeight: (state, action: PayloadAction<any>) => {
-            // state.value += action.payload
             state.value = action.payload
         },
         deleteHeight: (state) => {

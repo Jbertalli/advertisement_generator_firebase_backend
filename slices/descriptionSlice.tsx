@@ -15,7 +15,6 @@ export const descriptionSlice = createSlice({
     initialState,
     reducers: {
         incrementDescription: (state, action: PayloadAction<string>) => {
-            // state.value += action.payload
             state.value = action.payload
         },
         deleteDescription: (state) => {

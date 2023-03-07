@@ -15,7 +15,6 @@ export const leftSlice = createSlice({
     initialState,
     reducers: {
         incrementLeft: (state, action: PayloadAction<any>) => {
-            // state.value += action.payload
             state.value = action.payload
         },
         deleteLeft: (state) => {

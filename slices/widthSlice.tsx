@@ -15,7 +15,6 @@ export const widthSlice = createSlice({
     initialState,
     reducers: {
         incrementWidth: (state, action: PayloadAction<any>) => {
-            // state.value += action.payload
             state.value = action.payload
         },
         deleteWidth: (state) => {

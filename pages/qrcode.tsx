@@ -27,8 +27,6 @@ export default function qrCode() {
                 <QRCode 
                     value='https://www.testandgrade.com'
                     logoImage='/images/test1.png'
-                    // size={290}
-                    // logoWidth={60}
                     eyeColor='#125CA1'
                     fgColor='#125CA1'
                     removeQrCodeBehindLogo={true}

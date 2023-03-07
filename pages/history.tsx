@@ -69,16 +69,6 @@ export default function History() {
   console.log(user?.uid);
   console.log(userData);
 
-  // let dbId = userData?.[0]?.id;
-  // let dbCompany = userData?.[0]?.company;
-  // let dbDescription = userData?.[0]?.description;
-  // let dbHeight = userData?.[0]?.height;
-  // let dbLeft = userData?.[0]?.left;
-  // let dbTop = userData?.[0]?.top;
-  // let dbWidth = userData?.[0]?.width;
-  // let dbImage = userData?.[0]?.mediaPreview;
-  //   console.log(dbId);
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       console.log(document.cookie.length);
@@ -99,7 +89,6 @@ export default function History() {
     const docSnap = await getDoc(docRef);
 
     if(docSnap.exists()) {
-      // console.log('User:', docSnap.data().user);
       console.log('Document company:', docSnap.data().company);
       console.log('Document description:', docSnap.data().description);
       console.log('Document height:', docSnap.data().height);
@@ -215,12 +204,6 @@ export default function History() {
                     <Table.Cell>Image Top</Table.Cell>
                     <Table.Cell>{showTop}</Table.Cell>
                   </Table.Row>
-                  {/* <Table.Row>
-                    <Table.Cell>Image String</Table.Cell>
-                    <Table.Cell style={{ wordBreak: 'break-all' }}>
-                      {showMediaPreview}
-                    </Table.Cell>
-                  </Table.Row> */}
                 </Table.Body>
               </Table>
             </div>

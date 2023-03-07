@@ -15,7 +15,6 @@ export const topSlice = createSlice({
     initialState,
     reducers: {
         incrementTop: (state, action: PayloadAction<any>) => {
-            // state.value += action.payload
             state.value = action.payload
         },
         deleteTop: (state) => {

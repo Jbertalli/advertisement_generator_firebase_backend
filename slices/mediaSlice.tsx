@@ -16,7 +16,6 @@ export const mediaPreviewSlice = createSlice({
     initialState,
     reducers: {
         incrementMediaPreview: (state, action: PayloadAction<any>) => {
-            // state.value += action.payload
             state.value = action.payload
         },
         deleteMediaPreview: (state) => {

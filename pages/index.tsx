@@ -107,7 +107,6 @@ export default function Authentication() {
       });
   }, []);
 
-  // access to window or document object
   useEffect(() => {
     if (typeof window !== 'undefined') {
       console.log(document.cookie.length);
@@ -122,8 +121,6 @@ export default function Authentication() {
       console.log('window == undefined');
     }
   }, []);
-
-  // console.log(document.cookie.length);
 
   return (
     <>
