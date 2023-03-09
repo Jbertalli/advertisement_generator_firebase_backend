@@ -134,7 +134,7 @@ export default function Authentication() {
       <div
         style={{
           background: 'linear-gradient(45deg, #0f0ade, #52b3d9)',
-          height: '120vh',
+          height: '100vh',
         }}
       >
         <Container
