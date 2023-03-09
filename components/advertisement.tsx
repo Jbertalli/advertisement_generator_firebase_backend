@@ -18,8 +18,8 @@ import { storage } from '../firebase/clientApp';
 
 auth;
 const db = getFirestore();
-// const storage = getStorage(app);
-// console.log(app)
+
+const LOCAL_STORAGE_KEY_SAVED = 'Saved';
 
 export default function Advertisement() {
   const [company, setCompany] = useState<string>('');
@@ -42,8 +42,6 @@ export default function Advertisement() {
   const [url, setUrl] = useState(null);
 
   const currentUser = auth.currentUser?.uid;
-  // console.log(currentUser);
-  // console.log(auth);
 
   const dispatch = useDispatch();
 
@@ -191,22 +189,27 @@ export default function Advertisement() {
   }
 
   useEffect(() => {
+    const storedSaved = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SAVED));
+    if (storedSaved) setSaved(storedSaved);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_SAVED, JSON.stringify(saved));
+  }, [saved]);
+
+  useEffect(() => {
     setClicked(false);
   }, []);
 
-  // useEffect(() => {
-  //   handleSubmit();
-  // }, [saved]);
+  useEffect(() => {
+    getData();
+  }, [saved]);
 
-  // useEffect(() => {
-  //   getData();
-  // }, [saved]);
+  useEffect(() => {
+    getData();
+  }, []);
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
-  // console.log(url);
+  console.log(saved);
 
   return (
     <>
@@ -233,7 +236,7 @@ export default function Advertisement() {
           as='h1'
           size='massive'
           style={{ margin: '2.8em', boxShadow: '2px 2px 10px black' }}
-          onMouseMove={getData}
+          // onMouseMove={getData}
         >
           <Segment attached textAlign='center'>
             <div
@@ -307,10 +310,10 @@ export default function Advertisement() {
                           setSaved(saved + 1)
                         }}
                       />
-                      {selected ? (
+                      {/* {selected && saved > 0 ? (
                       <>
                         <button
-                          onClick={() => {handleSubmit(), setSelected(false)}}
+                          onClick={() => handleSubmit()}
                           style={{
                             border: '2px solid #125CA1',
                             background: 'transparent',
@@ -330,7 +333,11 @@ export default function Advertisement() {
                       ):(
                       <>
                         <Button
-                          onClick={() => {handleSubmit(), setSelected(false)}}
+                          onClick={() => {
+                            handleSubmit(), 
+                            setSelected(false), 
+                            setSaved(0)
+                          }}
                           style={{
                             border: '2px solid red',
                             background: 'transparent',
@@ -340,7 +347,7 @@ export default function Advertisement() {
                           Delete
                         </Button> 
                       </>
-                      )}
+                      )} */}
                     </div>
                     <div
                       style={{
@@ -365,7 +372,10 @@ export default function Advertisement() {
                               dispatch(incrementWidth(String(width))),
                               dispatch(incrementHeight(String(height))),
                               dispatch(incrementLeft(String(left))),
-                              dispatch(incrementTop(String(top)))
+                              dispatch(incrementTop(String(top))),
+                              getData(),
+                              handleSubmit(),
+                              setSaved(0)
                           }}
                           style={{
                             border: '2px solid #125CA1',
@@ -396,7 +406,8 @@ export default function Advertisement() {
                             setHeight(350), 
                             setLeft(40), 
                             setTop(20),
-                            deleteStoredImage()
+                            deleteStoredImage(),
+                            setSaved(0)
                           }}
                           style={{
                             border: '2px solid red',
@@ -577,7 +588,7 @@ export default function Advertisement() {
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
-                  {selected ? (
+                  {(selected || saved > 0) ? (
                     <>
                       <Segment
                         style={{

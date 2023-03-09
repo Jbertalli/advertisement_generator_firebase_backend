@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import styles from '../styles/advertisement.module.css';
 import { Container, Icon, Card, Button, Loader, Checkbox } from 'semantic-ui-react';
+import disableScroll from 'disable-scroll';
 
 export default function Authentication() {
   const [email, setEmail] = useState<string>('');
@@ -121,6 +122,8 @@ export default function Authentication() {
       console.log('window == undefined');
     }
   }, []);
+
+  disableScroll.on();
 
   return (
     <>
@@ -369,11 +372,13 @@ export default function Authentication() {
                           padding: '20px 0px 30px',
                         }}
                       >
-                        <input
+                        <button
                           type='submit'
                           value='Login'
                           className={styles.buttons}
-                        />
+                        >
+                          Login
+                        </button>
                       </div>
                     </form>
                   </div>
@@ -583,11 +588,13 @@ export default function Authentication() {
                           padding: '20px 0px 30px',
                         }}
                       >
-                        <input
+                        <button
                           type='submit'
                           value='Signup'
                           className={styles.buttons}
-                        />
+                        >
+                          Signup
+                        </button>
                       </div>
                     </form>
                   </div>

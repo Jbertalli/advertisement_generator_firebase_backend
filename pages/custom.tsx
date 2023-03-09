@@ -14,6 +14,8 @@ import { auth } from '../firebase/clientApp';
 auth;
 const db = getFirestore();
 
+const LOCAL_STORAGE_KEY_SAVED_CUSTOM = 'SavedCustom';
+
 export default function Custom() {
   const [company, setCompany] = useState<string>('');
   const [companyFontSize, setCompanyFontSize] = useState<string>('');
@@ -346,6 +348,15 @@ export default function Custom() {
   }
 
   useEffect(() => {
+    const storedSaved = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SAVED_CUSTOM));
+    if (storedSaved) setSaved(storedSaved);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_SAVED_CUSTOM, JSON.stringify(saved));
+  }, [saved]);
+
+  useEffect(() => {
     setClicked(false);
   }, []);
 
@@ -356,6 +367,8 @@ export default function Custom() {
   useEffect(() => {
     getData();
   }, []);
+
+  console.log(saved);
 
   return (
     <>
@@ -1075,7 +1088,7 @@ export default function Custom() {
                     onChange={(e) => {handleImageChange(e), setImageSaved(imageSaved + 1)}}
                     onClick={() => {setSelected(true), setClicked(true)}}
                   />
-                  <div
+                  {/* <div
                     style={{
                       display: 'inline',
                       justifyContent: 'flex-start'
@@ -1114,7 +1127,7 @@ export default function Custom() {
                       </Button>      
                     </>
                     )}
-                  </div>
+                  </div> */}
                 </div>
                 <div style={{ marginBottom: '5px', marginTop: '15px' }}>Image Width (pixels)</div>
                 <div>
@@ -1269,7 +1282,10 @@ export default function Custom() {
             imageTop,
             totalWidth,
             imageRotation
-          ), setSaved(saved + 1)}}
+          ), getData(),
+             handleSubmit(),
+             setSaved(0)
+        }}
           style={{
             border: '2px solid #125CA1',
             background: 'transparent',
@@ -1334,10 +1350,11 @@ export default function Custom() {
             setShowImageTop(''),
             setShowTotalWidth(''),
             setShowImageRotation(''),
-            deleteStoredImage()
+            deleteStoredImage(),
+            setSaved(0)
           }}
         >
-          Delete Data
+          Delete Advertisement
         </Button>
       </div>
       {(company.length > 0 || 
