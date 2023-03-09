@@ -16,17 +16,6 @@
     z-index: 1;
   }
 
-  .buttons{
-    color: white;
-    background: #125CA1;
-    border: 0px solid #125CA1;
-    padding: 10px 40px 10px 40px;
-    border-radius: 50px;
-    font-size: 17px;
-    font-weight: 300;
-    box-shadow: 2px 2px 10px #125CA1;
-  }
-
   .google {
     position: relative;
     border-top: 70px solid #EA4335;

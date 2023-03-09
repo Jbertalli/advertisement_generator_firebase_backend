@@ -141,7 +141,7 @@ export default function Authentication() {
           style={{
             display: 'flex',
             justifyContent: 'center',
-            paddingTop: resize ? '20vh' : '13vh',
+            paddingTop: resize ? '15vh' : '12vh',
           }}
         >
           <Card
@@ -375,7 +375,6 @@ export default function Authentication() {
                         <button
                           type='submit'
                           value='Login'
-                          // className={styles.buttons}
                           style={{
                             color: 'white',
                             background: '#125CA1',
@@ -595,13 +594,12 @@ export default function Authentication() {
                         style={{
                           display: 'flex',
                           justifyContent: 'center',
-                          padding: '20px 0px 30px',
+                          padding: '20px 0px 30px'
                         }}
                       >
                         <button
                           type='submit'
                           value='Signup'
-                          // className={styles.buttons}
                           style={{
                             color: 'white',
                             background: '#125CA1',
