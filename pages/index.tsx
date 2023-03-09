@@ -592,6 +592,10 @@ export default function Authentication() {
                           type='submit'
                           value='Signup'
                           className={styles.buttons}
+                          style={{
+                            position: 'relative',
+                            zIndex: '100000'
+                          }}
                         >
                           Signup
                         </button>
