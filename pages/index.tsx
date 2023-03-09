@@ -123,7 +123,7 @@ export default function Authentication() {
     }
   }, []);
 
-  disableScroll.on();
+  disableScroll.off();
 
   return (
     <>
