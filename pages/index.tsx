@@ -375,7 +375,17 @@ export default function Authentication() {
                         <button
                           type='submit'
                           value='Login'
-                          className={styles.buttons}
+                          // className={styles.buttons}
+                          style={{
+                            color: 'white',
+                            background: '#125CA1',
+                            border: '0px solid #125CA1',
+                            padding: '10px 40px 10px 40px',
+                            borderRadius: '50px',
+                            fontSize: '17px',
+                            fontWeight: '300',
+                            boxShadow: '2px 2px 10px #125CA1'
+                          }}
                         >
                           Login
                         </button>
@@ -593,8 +603,14 @@ export default function Authentication() {
                           value='Signup'
                           // className={styles.buttons}
                           style={{
-                            position: 'relative',
-                            zIndex: '100000'
+                            color: 'white',
+                            background: '#125CA1',
+                            border: '0px solid #125CA1',
+                            padding: '10px 40px 10px 40px',
+                            borderRadius: '50px',
+                            fontSize: '17px',
+                            fontWeight: '300',
+                            boxShadow: '2px 2px 10px #125CA1'
                           }}
                         >
                           Signup
