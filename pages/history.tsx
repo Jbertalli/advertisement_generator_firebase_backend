@@ -180,7 +180,7 @@ export default function History() {
                       style={{
                         padding: '10px',
                         lineHeight: '30px',
-                        marginBottom: isDesktop ? '-30px' : null,
+                        marginBottom: isDesktop ? '-100px' : null,
                         transform: resize ? 'translate(0px)' : 'translate(40px)'
                       }}
                     >
