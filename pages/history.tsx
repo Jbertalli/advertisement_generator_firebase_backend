@@ -85,10 +85,6 @@ export default function History() {
     }
   }, []);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const isDesktop = useMediaQuery(
     { minWidth: 1450, maxWidth: 10000 }
   );
@@ -139,7 +135,7 @@ export default function History() {
           <div
             style={{
               background: 'linear-gradient(to top, blue, #125CA180)',
-              height: '100vh'
+              height: resize ? '100vh' : '95vh'
             }}
             onMouseMove={getData}
           >
