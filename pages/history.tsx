@@ -175,8 +175,9 @@ export default function History() {
                       style={{
                         padding: '10px',
                         lineHeight: '30px',
-                        maxHeight: '100px',
                         transform: resize ? 'translate(0px)' : 'translate(40px)', 
+                        display: 'flex',
+                        alignItems: 'center'
                       }}
                     >
                       {resize ? 'Saved Advertisements' : 'Saved Ads'}
