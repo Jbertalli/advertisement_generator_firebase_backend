@@ -90,7 +90,7 @@ export default function History() {
   }, []);
 
   const isDesktop = useMediaQuery(
-    { minWidth: 1350, maxWidth: 10000 }
+    { minWidth: 1450, maxWidth: 10000 }
   );
 
   async function getData() {
@@ -180,7 +180,7 @@ export default function History() {
                       style={{
                         padding: '10px',
                         lineHeight: '30px',
-                        marginBottom: isDesktop ? '-30px' : null,
+                        marginBottom: isDesktop ? '-35px' : null,
                         transform: resize ? 'translate(0px)' : 'translate(40px)'
                       }}
                     >
