@@ -165,19 +165,23 @@ export default function History() {
                 }}
               >
                 <Table.Body>
-                  <Table.Row
-                    style={{ fontSize: '30px', transform: 'translateX(50%)' }}
+                  <Table.Header
+                    style={{ 
+                      fontSize: '30px', 
+                      transform: 'translateX(50%)'
+                    }}
                   >
                     <div
                       style={{
                         padding: '10px',
                         lineHeight: '30px',
+                        maxHeight: '100px',
                         transform: resize ? 'translate(0px)' : 'translate(40px)', 
                       }}
                     >
                       {resize ? 'Saved Advertisements' : 'Saved Ads'}
                     </div>
-                  </Table.Row>
+                  </Table.Header>
                   <Table.Row>
                     <Table.Cell>Database ID</Table.Cell>
                     <Table.Cell>{currentUser}</Table.Cell>
