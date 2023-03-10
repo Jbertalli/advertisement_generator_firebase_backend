@@ -146,7 +146,8 @@ export default function History() {
                 zIndex: '0',
                 fontSize: '20px',
                 display: 'flex',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                maxHeight: '400px',
               }}
             >
               <Table
@@ -175,9 +176,7 @@ export default function History() {
                       style={{
                         padding: '10px',
                         lineHeight: '30px',
-                        transform: resize ? 'translate(0px)' : 'translate(40px)', 
-                        display: 'flex',
-                        alignItems: 'center'
+                        transform: resize ? 'translate(0px)' : 'translate(40px)'
                       }}
                     >
                       {resize ? 'Saved Advertisements' : 'Saved Ads'}
