@@ -90,7 +90,7 @@ export default function History() {
   }, []);
 
   const isDesktop = useMediaQuery(
-    { minWidth: '1450', maxWidth: '10000' }
+    { minWidth: 1450, maxWidth: 10000 }
   );
 
   async function getData() {
