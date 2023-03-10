@@ -175,7 +175,7 @@ export default function History() {
                       style={{
                         padding: '10px',
                         lineHeight: '30px',
-                        marginBottom: '0px',
+                        marginBottom: resize ? '-50px' : null,
                         transform: resize ? 'translate(0px)' : 'translate(40px)'
                       }}
                     >
