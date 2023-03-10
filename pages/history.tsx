@@ -84,6 +84,10 @@ export default function History() {
     }
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   async function getData() {
     const docRef = doc(db, '/users/' + currentUser + 'Ads');
     const docSnap = await getDoc(docRef);
@@ -162,7 +166,7 @@ export default function History() {
               >
                 <Table.Body>
                   <Table.Header
-                    style={{ fontSize: '30px', transform: 'translateX(50%)' }}
+                    style={{ fontSize: '30px' }}
                   >
                     <div
                       style={{
