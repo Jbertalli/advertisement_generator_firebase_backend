@@ -20,6 +20,7 @@ auth;
 const db = getFirestore();
 
 const LOCAL_STORAGE_KEY_SAVED = 'Saved';
+const LOCAL_STORAGE_KEY_SELECTED = 'Selected';
 
 export default function Advertisement() {
   const [company, setCompany] = useState<string>('');
@@ -198,6 +199,15 @@ export default function Advertisement() {
   }, [saved]);
 
   useEffect(() => {
+    const storedSelected = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SELECTED));
+    if (storedSelected) setSelected(storedSelected);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_SELECTED, JSON.stringify(selected));
+  }, [selected]);
+
+  useEffect(() => {
     setClicked(false);
   }, []);
 
@@ -210,6 +220,7 @@ export default function Advertisement() {
   }, []);
 
   console.log(saved);
+  console.log(selected);
 
   return (
     <>
@@ -327,167 +338,167 @@ export default function Advertisement() {
                             }}
                           />
                         </div>
-                        {resize ? (
+                        {(selected && saved > 0) ? (
                         <>
-                          <Grid.Row>
-                            {(selected || saved > 0) ? (
-                              <>
-                                <div
-                                  style={{
-                                    display: 'flex',
-                                    width: '200%',
-                                    fontSize: '15px'
-                                  }}
-                                >
-                                  <div>
-                                    Logo Width
-                                    <Form.Input
-                                      placeholder='width (pixels)'
-                                      type='number'
-                                      value={width}
-                                      onChange={(e) => setWidth(e.target.value)}
-                                      style={{ 
-                                        width: '18vw', 
-                                        marginRight: '20px', 
-                                        maxWidth: '145px', 
-                                        minWidth: '90px'  
-                                      }}
-                                    />
-                                  </div>
-                                  <div>
-                                    Logo Height
-                                    <Form.Input
-                                      placeholder='height (pixels)'
-                                      type='number'
-                                      value={height}
-                                      onChange={(e) => setHeight(e.target.value)}
-                                      style={{ 
-                                        width: '18vw', 
-                                        marginRight: '20px', 
-                                        maxWidth: '145px', 
-                                        minWidth: '90px'  
-                                      }}
-                                    />
-                                  </div>
-                                  <div>
-                                    Logo Margin
-                                    <Form.Input
-                                      placeholder='left (pixels)'
-                                      type='number'
-                                      value={left}
-                                      onChange={(e) => setLeft(e.target.value)}
-                                      style={{ 
-                                        width: '18vw', 
-                                        marginRight: '20px', 
-                                        maxWidth: '145px', 
-                                        minWidth: '90px'  
-                                      }}
-                                    />
-                                  </div>
-                                  <div>
-                                    Top Margin
-                                    <Form.Input
-                                      placeholder='top (pixels)'
-                                      type='number'
-                                      value={top}
-                                      onChange={(e) => setTop(e.target.value)}
-                                      style={{ 
-                                        width: '18vw', 
-                                        marginRight: '20px', 
-                                        maxWidth: '145px', 
-                                        minWidth: '90px'  
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                              </>
-                            ): null}
-                          </Grid.Row>
-                        </>
-                        ):(
-                        <>
-                          <Grid 
-                            columns='equal'
-                            style={{
-                              marginTop: '0px',
-                              fontSize: '15px'
-                            }}
-                          >
+                          {resize ? (
+                          <>
                             <Grid.Row>
-                              <Grid.Column>
-                                <div
-                                  style={{
-                                    marginBottom: '-2px'
-                                  }}
-                                >
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  width: '200%',
+                                  fontSize: '15px'
+                                }}
+                              >
+                                <div>
                                   Logo Width
+                                  <Form.Input
+                                    placeholder='width (pixels)'
+                                    type='number'
+                                    value={width}
+                                    onChange={(e) => setWidth(e.target.value)}
+                                    style={{ 
+                                      width: '18vw', 
+                                      marginRight: '20px', 
+                                      maxWidth: '145px', 
+                                      minWidth: '90px'  
+                                    }}
+                                  />
                                 </div>
-                                <Form.Input
-                                  placeholder='width (pixels)'
-                                  type='number'
-                                  style={{ width: resize ? '20vw' : '35vw' }}
-                                  value={width}
-                                  onChange={(e) => setWidth(e.target.value)}
-                                />
-                              </Grid.Column>
-                              <Grid.Column>
-                                <div
-                                  style={{
-                                    marginBottom: '-2px'
-                                  }}
-                                >
+                                <div>
                                   Logo Height
+                                  <Form.Input
+                                    placeholder='height (pixels)'
+                                    type='number'
+                                    value={height}
+                                    onChange={(e) => setHeight(e.target.value)}
+                                    style={{ 
+                                      width: '18vw', 
+                                      marginRight: '20px', 
+                                      maxWidth: '145px', 
+                                      minWidth: '90px'  
+                                    }}
+                                  />
                                 </div>
-                                <Form.Input
-                                  placeholder='height (pixels)'
-                                  type='number'
-                                  style={{ width: resize ? '20vw' : '35vw' }}
-                                  value={height}
-                                  onChange={(e) => setHeight(e.target.value)}
-                                />
-                              </Grid.Column>
+                                <div>
+                                  Logo Margin
+                                  <Form.Input
+                                    placeholder='left (pixels)'
+                                    type='number'
+                                    value={left}
+                                    onChange={(e) => setLeft(e.target.value)}
+                                    style={{ 
+                                      width: '18vw', 
+                                      marginRight: '20px', 
+                                      maxWidth: '145px', 
+                                      minWidth: '90px'  
+                                    }}
+                                  />
+                                </div>
+                                <div>
+                                  Top Margin
+                                  <Form.Input
+                                    placeholder='top (pixels)'
+                                    type='number'
+                                    value={top}
+                                    onChange={(e) => setTop(e.target.value)}
+                                    style={{ 
+                                      width: '18vw', 
+                                      marginRight: '20px', 
+                                      maxWidth: '145px', 
+                                      minWidth: '90px'  
+                                    }}
+                                  />
+                                </div>
+                              </div>
                             </Grid.Row>
-                            <Grid.Row
+                          </>
+                          ):(
+                          <>
+                            <Grid 
+                              columns='equal'
                               style={{
-                                marginTop: '-20px'
+                                marginTop: '0px',
+                                fontSize: '15px'
                               }}
                             >
-                              <Grid.Column>
-                                <div
-                                  style={{
-                                    marginBottom: '-2px'
-                                  }}
-                                >
-                                  Left Margin
-                                </div>
-                                <Form.Input
-                                  placeholder='left (pixels)'
-                                  type='number'
-                                  style={{ width: resize ? '20vw' : '35vw' }}
-                                  value={left}
-                                  onChange={(e) => setLeft(e.target.value)}
-                                />
-                              </Grid.Column>
-                              <Grid.Column>
-                                <div
-                                  style={{
-                                    marginBottom: '-2px'
-                                  }}
-                                >
-                                  Top Margin
-                                </div>
-                                <Form.Input
-                                  placeholder='top (pixels)'
-                                  type='number'
-                                  style={{ width: resize ? '20vw' : '35vw' }}
-                                  value={top}
-                                  onChange={(e) => setTop(e.target.value)}
-                                />
-                              </Grid.Column>
-                            </Grid.Row>
-                          </Grid>
+                              <Grid.Row>
+                                <Grid.Column>
+                                  <div
+                                    style={{
+                                      marginBottom: '-2px'
+                                    }}
+                                  >
+                                    Logo Width
+                                  </div>
+                                  <Form.Input
+                                    placeholder='width (pixels)'
+                                    type='number'
+                                    style={{ width: resize ? '20vw' : '35vw' }}
+                                    value={width}
+                                    onChange={(e) => setWidth(e.target.value)}
+                                  />
+                                </Grid.Column>
+                                <Grid.Column>
+                                  <div
+                                    style={{
+                                      marginBottom: '-2px'
+                                    }}
+                                  >
+                                    Logo Height
+                                  </div>
+                                  <Form.Input
+                                    placeholder='height (pixels)'
+                                    type='number'
+                                    style={{ width: resize ? '20vw' : '35vw' }}
+                                    value={height}
+                                    onChange={(e) => setHeight(e.target.value)}
+                                  />
+                                </Grid.Column>
+                              </Grid.Row>
+                              <Grid.Row
+                                style={{
+                                  marginTop: '-20px'
+                                }}
+                              >
+                                <Grid.Column>
+                                  <div
+                                    style={{
+                                      marginBottom: '-2px'
+                                    }}
+                                  >
+                                    Left Margin
+                                  </div>
+                                  <Form.Input
+                                    placeholder='left (pixels)'
+                                    type='number'
+                                    style={{ width: resize ? '20vw' : '35vw' }}
+                                    value={left}
+                                    onChange={(e) => setLeft(e.target.value)}
+                                  />
+                                </Grid.Column>
+                                <Grid.Column>
+                                  <div
+                                    style={{
+                                      marginBottom: '-2px'
+                                    }}
+                                  >
+                                    Top Margin
+                                  </div>
+                                  <Form.Input
+                                    placeholder='top (pixels)'
+                                    type='number'
+                                    style={{ width: resize ? '20vw' : '35vw' }}
+                                    value={top}
+                                    onChange={(e) => setTop(e.target.value)}
+                                  />
+                                </Grid.Column>
+                              </Grid.Row>
+                            </Grid>
+                          </>
+                          )}
                         </>
-                        )}
+                        ): null}
                         <div
                           style={{
                             display: 'flex',
@@ -496,7 +507,7 @@ export default function Advertisement() {
                         >
                           <div>
                             <Button
-                              disabled={!company && !description && !url}
+                              disabled={!company && !description && !url && !selected && saved == 0}
                               onClick={() => {
                                 addAdvertisement(
                                   company,
@@ -513,8 +524,7 @@ export default function Advertisement() {
                                   dispatch(incrementLeft(String(left))),
                                   dispatch(incrementTop(String(top))),
                                   getData(),
-                                  handleSubmit(),
-                                  setSaved(0)
+                                  handleSubmit()
                               }}
                               style={{
                                 border: '2px solid #125CA1',
@@ -533,7 +543,7 @@ export default function Advertisement() {
                             }}
                           >
                             <Button
-                              disabled={!company && !description && !url}
+                              disabled={!company && !description && !url && !selected && saved == 0}
                               onClick={() => {
                                 deleteAll(), 
                                 setUrl(null), 
@@ -563,7 +573,9 @@ export default function Advertisement() {
                       <Grid.Column width={resize ? 8 : 16}>
                         {company.length > 0 ||
                         description.length > 0 ||
-                        url ? (
+                        url ||
+                        selected ||
+                        saved > 0 ? (
                           <>
                             <div
                               style={{
