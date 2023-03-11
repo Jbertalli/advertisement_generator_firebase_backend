@@ -158,7 +158,7 @@ export default function History() {
                 unstackable
                 style={{
                   maxWidth: '600px',
-                  height: '40vh',
+                  height: '40vh', 
                   color: '#125CA1',
                   boxShadow: '2px 2px 15px black',
                   background: 'rgb(255, 255, 255, 0.8',
