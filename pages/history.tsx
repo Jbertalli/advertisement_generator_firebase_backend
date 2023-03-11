@@ -113,7 +113,7 @@ export default function History() {
   }, []);
 
   useEffect(() => {
-    window.scrollTo(0, -100);
+    window.scrollTo(0, -10);
   }, []);
 
   return (
