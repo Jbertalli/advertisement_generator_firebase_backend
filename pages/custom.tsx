@@ -415,841 +415,820 @@ export default function Custom() {
         setEditImage={setEditImage}
       />
       <Header />
-      <Container
-        size='massive'
+      <div
         style={{
-          margin: '0.5em',
-          boxShadow: '2px 2px 10px black',
+          display: 'flex',
+          justifyContent: 'center'
         }}
       >
-        <Segment attached textAlign='center'>
-          <div
+        <div
+          style={{
+            width: '95vw',
+            maxWidth: '700px'
+          }}
+        >
+          <Container
+            size='massive'
             style={{
-              color: '#125CA1',
-              fontSize: '42px',
-              fontWeight: '700',
-              padding: '0.8em 0em .5em 0em',
-              lineHeight: '40px',
-              display: 'flex',
-              justifyContent: 'center'
+              margin: '0.5em',
+              boxShadow: '2px 2px 10px black'
             }}
           >
-            Custom Advertisement
-          </div>
-          <div
-            style={{
-              fontSize: '18px',
-              fontWeight: '400px',
-              display: 'flex',
-              justifyContent: 'center'
-            }}
-          >
-            Create a Custom Advertisement
-          </div>
-          {(company.length > 0 || 
-            Number(companyFontSize) > 0 || 
-            description.length ||
-            Number(descriptionFontSize) > 0 || 
-            Number(borderWidth) > 0
-            ) ? (
-          <>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '-20px',
-                marginBottom: '-20px',
-                transform: 'scale(0.7)'
-              }}
+            <Segment 
+              attached 
+              textAlign='center'
             >
               <div
                 style={{
-                  background: `${backgroundColor}`,
-                  color: `${color}`,
-                  border: `${borderWidth}px solid ${borderColor}`,
-                  fontWeight: '100',
-                  height: '50vh',
-                  width: `${totalWidth}px`
+                  color: '#125CA1',
+                  fontSize: '42px',
+                  fontWeight: '700',
+                  padding: '.5em 0em 0em 0em',
+                  lineHeight: '40px',
+                  display: 'flex',
+                  justifyContent: 'center'
                 }}
               >
-                <Draggable>
+                Custom Advertisement
+              </div>
+              <h1
+                style={{
+                  fontSize: '18px',
+                  fontWeight: '400px',
+                  display: 'flex',
+                  justifyContent: 'center', 
+                  marginBottom: '0px',
+                  transform: 'translateY(-7px)'
+                }}
+              >
+                Create a Custom Advertisement
+              </h1>
+              {(company.length > 0 || 
+                Number(companyFontSize) > 0 || 
+                description.length ||
+                Number(descriptionFontSize) > 0 || 
+                Number(borderWidth) > 0
+                ) ? (
+              <>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '-20px',
+                    marginBottom: '-20px',
+                    transform: 'scale(0.7)'
+                  }}
+                >
                   <div
                     style={{
-                      fontSize: `${companyFontSize}px`,
-                      fontWeight: `${companyFontWeight}`,
-                      display: 'flex',
-                      justifyContent: 'center',
-                      cursor: 'grab',
-                      marginBottom: '30px',
-                      marginTop: '30px',
-                      lineHeight: '1em',
-                      wordBreak: 'break-word',
-                      width: '100%',
+                      background: `${backgroundColor}`,
+                      color: `${color}`,
+                      border: `${borderWidth}px solid ${borderColor}`,
+                      fontWeight: '100',
+                      height: '50vh',
+                      width: `${totalWidth}px`
                     }}
                   >
-                    {company}
+                    <Draggable>
+                      <div
+                        style={{
+                          fontSize: `${companyFontSize}px`,
+                          fontWeight: `${companyFontWeight}`,
+                          display: 'flex',
+                          justifyContent: 'center',
+                          cursor: 'grab',
+                          marginBottom: '30px',
+                          marginTop: '30px',
+                          lineHeight: '1em',
+                          wordBreak: 'break-word',
+                          width: '100%',
+                        }}
+                      >
+                        {company}
+                      </div>
+                    </Draggable>
+                    <Draggable>
+                      <div
+                        style={{
+                          fontSize: `${descriptionFontSize}px`,
+                          fontWeight: `${descriptionFontWeight}`,
+                          display: 'flex',
+                          justifyContent: 'center',
+                          cursor: 'grab',
+                          marginBottom: '30px',
+                          lineHeight: '1em',
+                          wordBreak: 'break-word',
+                          width: '100%'
+                        }}
+                      >
+                        {description}
+                      </div>
+                    </Draggable>
+                    <Draggable>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          transform: 'translateY(50%)'
+                        }}
+                      >
+                        <input
+                          type='image'
+                          src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
+                          style={{
+                            width: `${imageWidth/1.1}px`,
+                            height: `${imageHeight/1.1}px`,
+                            transform: `translate(${imageLeft}px, ${imageTop}px) rotate(${showImageRotation}deg)`,
+                            cursor: 'grab'
+                          }}
+                        />
+                      </div>
+                    </Draggable>
                   </div>
-                </Draggable>
-                <Draggable>
+                </div>
+              </>
+              ): null}
+            </Segment>
+            <div
+              style={{
+                fontSize: '18px',
+                fontWeight: '500',
+                color: '#125CA1',
+                cursor: 'pointer'
+              }}
+            >
+              {editTitle ? (
+                <>
+                  <div
+                    id='editTitle'
+                    style={{
+                      transform: 'translateY(-16px)'
+                    }}
+                  />
                   <div
                     style={{
-                      fontSize: `${descriptionFontSize}px`,
-                      fontWeight: `${descriptionFontWeight}`,
-                      display: 'flex',
-                      justifyContent: 'center',
-                      cursor: 'grab',
-                      marginBottom: '30px',
-                      lineHeight: '1em',
-                      wordBreak: 'break-word',
-                      width: '100%'
+                      marginTop: '15px',
+                      marginBottom: '20px',
+                      fontSize: '25px'
                     }}
                   >
-                    {description}
-                  </div>
-                </Draggable>
-                <Draggable>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      transform: 'translateY(50%)'
-                    }}
-                  >
-                    <input
-                      type='image'
-                      src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
+                    <span
                       style={{
-                        width: `${imageWidth/1.1}px`,
-                        height: `${imageHeight/1.1}px`,
-                        transform: `translate(${imageLeft}px, ${imageTop}px) rotate(${showImageRotation}deg)`,
-                        cursor: 'grab'
+                        display: 'flex',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      Edit Title
+                    </span>
+                    <div
+                      style={{
+                        transform: 'translate(-20px, -20px)',
+                        color: 'red',
+                        display: 'flex',
+                        justifyContent: 'flex-end'
+                      }}
+                      onClick={() => setEditTitle(false)}
+                    >
+                      x
+                    </div>
+                  </div>
+                  <div style={{ color: 'black', marginLeft: '8vw' }}>
+                    <div style={{ marginBottom: '5px' }}>Company Name</div>
+                    <div>
+                      <Form.Input
+                        type='text'
+                        placeholder='company'
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginBottom: '25px'
+                        }}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px' }}>Company Font Size</div>
+                    <div>
+                      <Form.Input
+                        type='text'
+                        placeholder='font size'
+                        value={companyFontSize}
+                        onChange={(e) => setCompanyFontSize(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginBottom: '25px'
+                        }}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px' }}>
+                      Company Font Weight (Boldness)
+                    </div>
+                    <div>
+                      <input
+                        min='100'
+                        max='900'
+                        step='100'
+                        type='range'
+                        placeholder='font weight'
+                        value={companyFontWeight}
+                        onChange={(e) => setCompanyFontWeight(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginTop: '15px',
+                          marginBottom: '15px',
+                          cursor: 'grab',
+                        }}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <a href='#editTitle'>
+                    <div
+                      onClick={() => {
+                          setEditTitle(true),
+                          setEditDescription(false),
+                          setEditBorder(false),
+                          setEditGlobal(false),
+                          setEditImage(false);
+                      }}
+                    >
+                      <div
+                        style={{
+                          marginLeft: '-25px',
+                          display: 'flex',
+                          transform: 'translateY(100%) scale(0.8)',
+                          padding: '0px 0px 8px 0px'
+                        }}
+                      >
+                        <Icon name='chevron down' />
+                      </div>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          padding: '0px 0px 8px 0px'
+                        }}
+                      >
+                        Edit Title
+                      </div>
+                    </div>
+                  </a>
+                </>
+              )}
+            </div>
+            <Divider />
+            <div
+              style={{
+                fontSize: '18px',
+                fontWeight: '500',
+                color: '#125CA1',
+                cursor: 'pointer',
+              }}
+            >
+              {editDescription ? (
+                <>
+                  <div
+                    id='editDescription'
+                    style={{
+                      transform: 'translateY(-17px)',
+                    }}
+                  />
+                  <div
+                    style={{
+                      marginTop: '15px',
+                      marginBottom: '20px',
+                      fontSize: '25px'
+                    }}
+                  >
+                    <span
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      Edit Description
+                    </span>
+                    <div
+                      style={{
+                        transform: 'translate(-20px, -20px)',
+                        color: 'red',
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                      }}
+                      onClick={() => setEditDescription(false)}
+                    >
+                      x
+                    </div>
+                  </div>
+                  <div style={{ color: 'black', marginLeft: '8vw' }}>
+                    <div style={{ marginBottom: '5px' }}>
+                      Advertisement Description
+                    </div>
+                    <div>
+                      <Form.Input
+                        type='text'
+                        placeholder='description'
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginBottom: '25px'
+                        }}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px' }}>Description Font Size</div>
+                    <div>
+                      <Form.Input
+                        type='text'
+                        placeholder='font size'
+                        value={descriptionFontSize}
+                        onChange={(e) => setDescriptionFontSize(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginBottom: '25px'
+                        }}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px' }}>
+                      Description Font Weight (Boldness)
+                    </div>
+                    <div>
+                      <input
+                        min='100'
+                        max='900'
+                        step='100'
+                        type='range'
+                        placeholder='font weight'
+                        value={descriptionFontWeight}
+                        onChange={(e) => setDescriptionFontWeight(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginTop: '15px',
+                          marginBottom: '15px',
+                          cursor: 'grab'
+                        }}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <a href='#editDescription'>
+                    <div
+                      style={{ transform: 'translateY(-8px)' }}
+                      onClick={() => {
+                          setEditDescription(true),
+                          setEditTitle(false),
+                          setEditBorder(false),
+                          setEditGlobal(false),
+                          setEditImage(false);
+                      }}
+                    >
+                      <div
+                        style={{
+                          marginLeft: '-25px',
+                          display: 'flex',
+                          transform: 'translateY(100%) scale(0.8)',
+                        }}
+                      >
+                        <Icon name='chevron down' />
+                      </div>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        Edit Description
+                      </div>
+                    </div>
+                  </a>
+                </>
+              )}
+            </div>
+            <Divider />
+            <div
+              style={{
+                fontSize: '18px',
+                fontWeight: '500',
+                color: '#125CA1',
+                cursor: 'pointer',
+              }}
+            >
+              {editBorder ? (
+                <>
+                  <div
+                    id='editBorder'
+                    style={{
+                      transform: 'translateY(-17px)'
+                    }}
+                  />
+                  <div
+                    style={{
+                      marginTop: '15px',
+                      marginBottom: '20px',
+                      fontSize: '25px'
+                    }}
+                  >
+                    <span
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      Edit Border
+                    </span>
+                    <div
+                      style={{
+                        transform: 'translate(-20px, -20px)',
+                        color: 'red',
+                        display: 'flex',
+                        justifyContent: 'flex-end'
+                      }}
+                      onClick={() => setEditBorder(false)}
+                    >
+                      x
+                    </div>
+                  </div>
+                  <div style={{ color: 'black', marginLeft: '8vw' }}>
+                    <div style={{ marginBottom: '5px' }}>Border Width (pixels)</div>
+                    <div>
+                      <Form.Input
+                        type='text'
+                        placeholder='width'
+                        value={borderWidth}
+                        onChange={(e) => setBorderWidth(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginBottom: '25px'
+                        }}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px' }}>Border Color</div>
+                  </div>
+                  <div style={{ marginLeft: '8vw' }}>
+                    <input
+                      type='color'
+                      value={borderColor}
+                      onChange={(e) => setBorderColor(e.target.value)}
+                      style={{
+                        width: '100px',
+                        height: '100px',
+                        marginBottom: '15px',
+                        cursor: 'pointer'
                       }}
                     />
                   </div>
-                </Draggable>
-              </div>
+                </>
+              ) : (
+                <>
+                  <a href='#editBorder'>
+                    <div
+                      style={{ transform: 'translateY(-8px)' }}
+                      onClick={() => {
+                          setEditBorder(true),
+                          setEditTitle(false),
+                          setEditDescription(false),
+                          setEditGlobal(false),
+                          setEditImage(false);
+                      }}
+                    >
+                      <div
+                        style={{
+                          marginLeft: '-25px',
+                          display: 'flex',
+                          transform: 'translateY(100%) scale(0.8)',
+                        }}
+                      >
+                        <Icon name='chevron down' />
+                      </div>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        Edit Border
+                      </div>
+                    </div>
+                  </a>
+                </>
+              )}
             </div>
-          </>
-          ): null}
-        </Segment>
-        <div
-          style={{
-            fontSize: '18px',
-            fontWeight: '500',
-            color: '#125CA1',
-            cursor: 'pointer'
-          }}
-        >
-          {editTitle ? (
-            <>
-              <div
-                id='editTitle'
-                style={{
-                  transform: 'translateY(-16px)'
-                }}
-              />
-              <div
-                style={{
-                  marginTop: '15px',
-                  marginBottom: '20px',
-                  fontSize: '25px'
-                }}
-              >
-                <span
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center'
-                  }}
-                >
-                  Edit Title
-                </span>
-                <div
-                  style={{
-                    transform: 'translate(-20px, -20px)',
-                    color: 'red',
-                    display: 'flex',
-                    justifyContent: 'flex-end'
-                  }}
-                  onClick={() => setEditTitle(false)}
-                >
-                  x
-                </div>
-              </div>
-              <div style={{ color: 'black', marginLeft: '8vw' }}>
-                <div style={{ marginBottom: '5px' }}>Company Name</div>
-                <div>
-                  <Form.Input
-                    type='text'
-                    placeholder='company'
-                    value={company}
-                    onChange={(e) => setCompany(e.target.value)}
+            <Divider />
+            <div
+              style={{
+                fontSize: '18px',
+                fontWeight: '500',
+                color: '#125CA1',
+                cursor: 'pointer',
+              }}
+            >
+              {editGlobal ? (
+                <>
+                  <div
+                    id='editGlobal'
                     style={{
-                      width: resize ? '50%' : '92%',
-                      marginBottom: '25px'
+                      transform: 'translateY(-17px)',
                     }}
                   />
-                </div>
-                <div style={{ marginBottom: '5px' }}>Company Font Size</div>
-                <div>
-                  <Form.Input
-                    type='text'
-                    placeholder='font size'
-                    value={companyFontSize}
-                    onChange={(e) => setCompanyFontSize(e.target.value)}
+                  <div
                     style={{
-                      width: resize ? '50%' : '92%',
-                      marginBottom: '25px'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '5px' }}>
-                  Company Font Weight (Boldness)
-                </div>
-                <div>
-                  <input
-                    min='100'
-                    max='900'
-                    step='100'
-                    type='range'
-                    placeholder='font weight'
-                    value={companyFontWeight}
-                    onChange={(e) => setCompanyFontWeight(e.target.value)}
-                    style={{
-                      width: resize ? '50%' : '92%',
                       marginTop: '15px',
-                      marginBottom: '15px',
-                      cursor: 'grab',
-                    }}
-                  />
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <a href='#editTitle'>
-                <div
-                  onClick={() => {
-                      setEditTitle(true),
-                      setEditDescription(false),
-                      setEditBorder(false),
-                      setEditGlobal(false),
-                      setEditImage(false);
-                  }}
-                >
-                  <div
-                    style={{
-                      marginLeft: '-25px',
-                      display: 'flex',
-                      transform: 'translateY(100%) scale(0.8)',
-                      padding: '0px 0px 8px 0px'
+                      marginBottom: '20px',
+                      fontSize: '25px'
                     }}
                   >
-                    <Icon name='chevron down' />
+                    <span
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      Edit Global
+                    </span>
+                    <div
+                      style={{
+                        transform: 'translate(-20px, -20px)',
+                        color: 'red',
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                      }}
+                      onClick={() => setEditGlobal(false)}
+                    >
+                      x
+                    </div>
                   </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      padding: '0px 0px 8px 0px'
-                    }}
-                  >
-                    Edit Title
-                  </div>
-                </div>
-              </a>
-            </>
-          )}
-        </div>
-        <Divider />
-        <div
-          style={{
-            fontSize: '18px',
-            fontWeight: '500',
-            color: '#125CA1',
-            cursor: 'pointer',
-          }}
-        >
-          {editDescription ? (
-            <>
-              <div
-                id='editDescription'
-                style={{
-                  transform: 'translateY(-17px)',
-                }}
-              />
-              <div
-                style={{
-                  marginTop: '15px',
-                  marginBottom: '20px',
-                  fontSize: '25px'
-                }}
-              >
-                <span
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                  }}
-                >
-                  Edit Description
-                </span>
-                <div
-                  style={{
-                    transform: 'translate(-20px, -20px)',
-                    color: 'red',
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                  }}
-                  onClick={() => setEditDescription(false)}
-                >
-                  x
-                </div>
-              </div>
-              <div style={{ color: 'black', marginLeft: '8vw' }}>
-                <div style={{ marginBottom: '5px' }}>
-                  Advertisement Description
-                </div>
-                <div>
-                  <Form.Input
-                    type='text'
-                    placeholder='description'
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    style={{
-                      width: resize ? '50%' : '92%',
-                      marginBottom: '25px'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '5px' }}>Description Font Size</div>
-                <div>
-                  <Form.Input
-                    type='text'
-                    placeholder='font size'
-                    value={descriptionFontSize}
-                    onChange={(e) => setDescriptionFontSize(e.target.value)}
-                    style={{
-                      width: resize ? '50%' : '92%',
-                      marginBottom: '25px'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '5px' }}>
-                  Description Font Weight (Boldness)
-                </div>
-                <div>
-                  <input
-                    min='100'
-                    max='900'
-                    step='100'
-                    type='range'
-                    placeholder='font weight'
-                    value={descriptionFontWeight}
-                    onChange={(e) => setDescriptionFontWeight(e.target.value)}
-                    style={{
-                      width: resize ? '50%' : '92%',
-                      marginTop: '15px',
-                      marginBottom: '15px',
-                      cursor: 'grab'
-                    }}
-                  />
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <a href='#editDescription'>
-                <div
-                  style={{ transform: 'translateY(-8px)' }}
-                  onClick={() => {
-                      setEditDescription(true),
-                      setEditTitle(false),
-                      setEditBorder(false),
-                      setEditGlobal(false),
-                      setEditImage(false);
-                  }}
-                >
-                  <div
-                    style={{
-                      marginLeft: '-25px',
-                      display: 'flex',
-                      transform: 'translateY(100%) scale(0.8)',
-                    }}
-                  >
-                    <Icon name='chevron down' />
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    Edit Description
-                  </div>
-                </div>
-              </a>
-            </>
-          )}
-        </div>
-        <Divider />
-        <div
-          style={{
-            fontSize: '18px',
-            fontWeight: '500',
-            color: '#125CA1',
-            cursor: 'pointer',
-          }}
-        >
-          {editBorder ? (
-            <>
-              <div
-                id='editBorder'
-                style={{
-                  transform: 'translateY(-17px)'
-                }}
-              />
-              <div
-                style={{
-                  marginTop: '15px',
-                  marginBottom: '20px',
-                  fontSize: '25px'
-                }}
-              >
-                <span
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                  }}
-                >
-                  Edit Border
-                </span>
-                <div
-                  style={{
-                    transform: 'translate(-20px, -20px)',
-                    color: 'red',
-                    display: 'flex',
-                    justifyContent: 'flex-end'
-                  }}
-                  onClick={() => setEditBorder(false)}
-                >
-                  x
-                </div>
-              </div>
-              <div style={{ color: 'black', marginLeft: '8vw' }}>
-                <div style={{ marginBottom: '5px' }}>Border Width (pixels)</div>
-                <div>
-                  <Form.Input
-                    type='text'
-                    placeholder='width'
-                    value={borderWidth}
-                    onChange={(e) => setBorderWidth(e.target.value)}
-                    style={{
-                      width: resize ? '50%' : '92%',
-                      marginBottom: '25px'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '5px' }}>Border Color</div>
-              </div>
-              <div style={{ marginLeft: '8vw' }}>
-                <input
-                  type='color'
-                  value={borderColor}
-                  onChange={(e) => setBorderColor(e.target.value)}
-                  style={{
-                    width: '100px',
-                    height: '100px',
-                    marginBottom: '15px',
-                    cursor: 'pointer'
-                  }}
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <a href='#editBorder'>
-                <div
-                  style={{ transform: 'translateY(-8px)' }}
-                  onClick={() => {
-                      setEditBorder(true),
-                      setEditTitle(false),
-                      setEditDescription(false),
-                      setEditGlobal(false),
-                      setEditImage(false);
-                  }}
-                >
-                  <div
-                    style={{
-                      marginLeft: '-25px',
-                      display: 'flex',
-                      transform: 'translateY(100%) scale(0.8)',
-                    }}
-                  >
-                    <Icon name='chevron down' />
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    Edit Border
-                  </div>
-                </div>
-              </a>
-            </>
-          )}
-        </div>
-        <Divider />
-        <div
-          style={{
-            fontSize: '18px',
-            fontWeight: '500',
-            color: '#125CA1',
-            cursor: 'pointer',
-          }}
-        >
-          {editGlobal ? (
-            <>
-              <div
-                id='editGlobal'
-                style={{
-                  transform: 'translateY(-17px)',
-                }}
-              />
-              <div
-                style={{
-                  marginTop: '15px',
-                  marginBottom: '20px',
-                  fontSize: '25px'
-                }}
-              >
-                <span
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                  }}
-                >
-                  Edit Global
-                </span>
-                <div
-                  style={{
-                    transform: 'translate(-20px, -20px)',
-                    color: 'red',
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                  }}
-                  onClick={() => setEditGlobal(false)}
-                >
-                  x
-                </div>
-              </div>
-              <div style={{ color: 'black', marginLeft: '8vw' }}>
-              <div style={{ marginBottom: '5px' }}>
-                  Advertisement Width (pixels)
-                </div>
-                <div>
-                  <Form.Input
-                    min='200'
-                    max='10000'
-                    step='20'
-                    type='number'
-                    placeholder='width'
-                    value={totalWidth}
-                    onChange={(e) => setTotalWidth(e.target.value)}
-                    style={{
-                      width: resize ? '50%' : '92%',
-                      marginBottom: '15px'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '5px' }}>Select Text Color</div>
-                <div>
-                  <input
-                    type='color'
-                    value={color}
-                    onChange={(e) => setColor(e.target.value)}
-                    style={{
-                      width: '100px',
-                      height: '100px',
-                      marginBottom: '25px',
-                      cursor: 'pointer'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '5px' }}>
-                  Select Background Color
-                </div>
-                <div>
-                  <input
-                    type='color'
-                    value={backgroundColor}
-                    onChange={(e) => setBackgroundColor(e.target.value)}
-                    style={{
-                      width: '100px',
-                      height: '100px',
-                      marginBottom: '15px',
-                      cursor: 'pointer'
-                    }}
-                  />
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <a href='#editGlobal'>
-                <div
-                  style={{ transform: 'translateY(-8px)' }}
-                  onClick={() => {
-                    setEditGlobal(true),
-                      setEditTitle(false),
-                      setEditDescription(false),
-                      setEditBorder(false),
-                      setEditImage(false);
-                  }}
-                >
-                  <div
-                    style={{
-                      marginLeft: '-25px',
-                      display: 'flex',
-                      transform: 'translateY(100%) scale(0.8)',
-                    }}
-                  >
-                    <Icon name='chevron down' />
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    Edit Global
-                  </div>
-                </div>
-              </a>
-            </>
-          )}
-        </div>
-        <Divider />
-        <div
-          style={{
-            fontSize: '18px',
-            fontWeight: '500',
-            color: '#125CA1',
-            cursor: 'pointer'
-          }}
-        >
-          {editImage ? (
-            <>
-              <div
-                id='editImage'
-                style={{
-                  transform: 'translateY(-17px)',
-                }}
-              />
-              <div
-                style={{
-                  marginTop: '15px',
-                  marginBottom: '20px',
-                  fontSize: '25px'
-                }}
-              >
-                <span
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                  }}
-                >
-                  Edit Image
-                </span>
-                <div
-                  style={{
-                    transform: 'translate(-20px, -20px)',
-                    color: 'red',
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                  }}
-                  onClick={() => setEditImage(false)}
-                >
-                  x
-                </div>
-              </div>
-              <div style={{ color: 'black', marginLeft: '8vw' }}>
-                <div>
-                  <input
-                    name='media'
-                    type='file'
-                    accept='image/*'
-                    style={{ 
-                      width: '150px', 
-                      transform: 'translateX(-.2vw)'
-                    }}
-                    className={styles.file}
-                    // onChange={handleImageChange}
-                    onChange={(e) => {handleImageChange(e), setImageSaved(imageSaved + 1)}}
-                    onClick={() => {setSelected(true), setClicked(true)}}
-                  />
-                  {/* <div
-                    style={{
-                      display: 'inline',
-                      justifyContent: 'flex-start'
-                    }}
-                  >
-                    {selected ? (
-                    <>
-                      <button
-                        onClick={() => {handleSubmit(), setSelected(false)}}
+                  <div style={{ color: 'black', marginLeft: '8vw' }}>
+                  <div style={{ marginBottom: '5px' }}>
+                      Advertisement Width (pixels)
+                    </div>
+                    <div>
+                      <Form.Input
+                        min='200'
+                        max='10000'
+                        step='20'
+                        type='number'
+                        placeholder='width'
+                        value={totalWidth}
+                        onChange={(e) => setTotalWidth(e.target.value)}
                         style={{
-                          border: '2px solid #125CA1',
-                          background: 'transparent',
-                          color: '#125CA1',
-                          fontSize: '14px',
-                          fontWeight: '700',
-                          height: '40px',
-                          width: '88.2px',
-                          borderRadius: '4px',
-                          marginRight: '5px'
+                          width: resize ? '50%' : '92%',
+                          marginBottom: '15px'
+                        }}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px' }}>Select Text Color</div>
+                    <div>
+                      <input
+                        type='color'
+                        value={color}
+                        onChange={(e) => setColor(e.target.value)}
+                        style={{
+                          width: '100px',
+                          height: '100px',
+                          marginBottom: '25px',
+                          cursor: 'pointer'
+                        }}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px' }}>
+                      Select Background Color
+                    </div>
+                    <div>
+                      <input
+                        type='color'
+                        value={backgroundColor}
+                        onChange={(e) => setBackgroundColor(e.target.value)}
+                        style={{
+                          width: '100px',
+                          height: '100px',
+                          marginBottom: '15px',
+                          cursor: 'pointer'
+                        }}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <a href='#editGlobal'>
+                    <div
+                      style={{ transform: 'translateY(-8px)' }}
+                      onClick={() => {
+                        setEditGlobal(true),
+                          setEditTitle(false),
+                          setEditDescription(false),
+                          setEditBorder(false),
+                          setEditImage(false);
+                      }}
+                    >
+                      <div
+                        style={{
+                          marginLeft: '-25px',
+                          display: 'flex',
+                          transform: 'translateY(100%) scale(0.8)',
                         }}
                       >
-                        Submit
-                      </button>
-                    </>
-                    ):(
-                    <>
-                      <Button
-                        onClick={() => {setUrl(null), setSelected(false)}}
+                        <Icon name='chevron down' />
+                      </div>
+                      <div
                         style={{
-                          border: '2px solid red',
-                          background: 'transparent',
-                          color: 'red'
+                          display: 'flex',
+                          justifyContent: 'center',
                         }}
                       >
-                        Delete
-                      </Button>      
-                    </>
-                    )}
-                  </div> */}
-                </div>
-                <div style={{ marginBottom: '5px', marginTop: '15px' }}>Image Width (pixels)</div>
-                <div>
-                  <Form.Input
-                    min='0'
-                    max='1000'
-                    step='10'
-                    type='number'
-                    placeholder='width'
-                    value={imageWidth}
-                    onChange={(e) => setImageWidth(e.target.value)}
+                        Edit Global
+                      </div>
+                    </div>
+                  </a>
+                </>
+              )}
+            </div>
+            <Divider />
+            <div
+              style={{
+                fontSize: '18px',
+                fontWeight: '500',
+                color: '#125CA1',
+                cursor: 'pointer'
+              }}
+            >
+              {editImage ? (
+                <>
+                  <div
+                    id='editImage'
                     style={{
-                      width: resize ? '50%' : '92%',
-                      marginBottom: '25px'
+                      transform: 'translateY(-17px)',
                     }}
                   />
-                </div>
-                <div style={{ marginBottom: '5px' }}>Image Height (pixels)</div>
-                <div>
-                  <Form.Input
-                    min='0'
-                    max='1000'
-                    step='10'
-                    type='number'
-                    placeholder='height'
-                    value={imageHeight}
-                    onChange={(e) => setImageHeight(e.target.value)}
-                    style={{
-                      width: resize ? '50%' : '92%',
-                      marginBottom: '25px'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '5px' }}>Image Left (pixels)</div>
-                <div>
-                  <Form.Input
-                    min='-1000'
-                    max='1000'
-                    step='10'
-                    type='number'
-                    placeholder='left'
-                    value={imageLeft}
-                    onChange={(e) => setImageLeft(e.target.value)}
-                    style={{
-                      width: resize ? '50%' : '92%',
-                      marginBottom: '25px'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '5px' }}>Image Top (pixels)</div>
-                <div>
-                  <Form.Input
-                    min='-1000'
-                    max='1000'
-                    step='10'
-                    type='number'
-                    placeholder='top'
-                    value={imageTop}
-                    onChange={(e) => setImageTop(e.target.value)}
-                    style={{
-                      width: resize ? '50%' : '92%',
-                      marginBottom: '25px'
-                    }}
-                  />
-                </div>
-                <div style={{ marginBottom: '5px' }}>
-                  Image Rotation (degrees)
-                </div>
-                <div>
-                  <Form.Input
-                    min='0'
-                    max='360'
-                    step='5'
-                    type='number'
-                    placeholder='rotation'
-                    value={imageRotation}
-                    onChange={(e) => setImageRotation(e.target.value)}
-                    style={{
-                      width: resize ? '50%' : '92%',
-                      marginBottom: '15px'
-                    }}
-                  />
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <a href='#editImage'>
-                <div
-                  style={{ transform: 'translateY(-8px)' }}
-                  onClick={() => {
-                    setEditImage(true),
-                      setEditTitle(false),
-                      setEditDescription(false),
-                      setEditBorder(false),
-                      setEditGlobal(false);
-                  }}
-                >
                   <div
                     style={{
-                      marginLeft: '-25px',
-                      display: 'flex',
-                      transform: 'translateY(100%) scale(0.8)',
+                      marginTop: '15px',
+                      marginBottom: '20px',
+                      fontSize: '25px'
                     }}
                   >
-                    <Icon name='chevron down' />
+                    <span
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      Edit Image
+                    </span>
+                    <div
+                      style={{
+                        transform: 'translate(-20px, -20px)',
+                        color: 'red',
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                      }}
+                      onClick={() => setEditImage(false)}
+                    >
+                      x
+                    </div>
                   </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    Edit Image
+                  <div style={{ color: 'black', marginLeft: '8vw' }}>
+                    <div>
+                      <input
+                        name='media'
+                        type='file'
+                        accept='image/*'
+                        style={{ 
+                          width: '150px', 
+                          transform: 'translateX(-.2vw)'
+                        }}
+                        className={styles.file}
+                        // onChange={handleImageChange}
+                        onChange={(e) => {handleImageChange(e), setImageSaved(imageSaved + 1)}}
+                        onClick={() => {setSelected(true), setClicked(true)}}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px', marginTop: '15px' }}>Image Width (pixels)</div>
+                    <div>
+                      <Form.Input
+                        min='0'
+                        max='1000'
+                        step='10'
+                        type='number'
+                        placeholder='width'
+                        value={imageWidth}
+                        onChange={(e) => setImageWidth(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginBottom: '25px'
+                        }}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px' }}>Image Height (pixels)</div>
+                    <div>
+                      <Form.Input
+                        min='0'
+                        max='1000'
+                        step='10'
+                        type='number'
+                        placeholder='height'
+                        value={imageHeight}
+                        onChange={(e) => setImageHeight(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginBottom: '25px'
+                        }}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px' }}>Image Left (pixels)</div>
+                    <div>
+                      <Form.Input
+                        min='-1000'
+                        max='1000'
+                        step='10'
+                        type='number'
+                        placeholder='left'
+                        value={imageLeft}
+                        onChange={(e) => setImageLeft(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginBottom: '25px'
+                        }}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px' }}>Image Top (pixels)</div>
+                    <div>
+                      <Form.Input
+                        min='-1000'
+                        max='1000'
+                        step='10'
+                        type='number'
+                        placeholder='top'
+                        value={imageTop}
+                        onChange={(e) => setImageTop(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginBottom: '25px'
+                        }}
+                      />
+                    </div>
+                    <div style={{ marginBottom: '5px' }}>
+                      Image Rotation (degrees)
+                    </div>
+                    <div>
+                      <Form.Input
+                        min='0'
+                        max='360'
+                        step='5'
+                        type='number'
+                        placeholder='rotation'
+                        value={imageRotation}
+                        onChange={(e) => setImageRotation(e.target.value)}
+                        style={{
+                          width: resize ? '50%' : '92%',
+                          marginBottom: '15px'
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              </a>
-            </>
-          )}
+                </>
+              ) : (
+                <>
+                  <a href='#editImage'>
+                    <div
+                      style={{ transform: 'translateY(-8px)' }}
+                      onClick={() => {
+                        setEditImage(true),
+                          setEditTitle(false),
+                          setEditDescription(false),
+                          setEditBorder(false),
+                          setEditGlobal(false);
+                      }}
+                    >
+                      <div
+                        style={{
+                          marginLeft: '-25px',
+                          display: 'flex',
+                          transform: 'translateY(100%) scale(0.8)',
+                        }}
+                      >
+                        <Icon name='chevron down' />
+                      </div>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        Edit Image
+                      </div>
+                    </div>
+                  </a>
+                </>
+              )}
+            </div>
+            <Divider />
+          </Container>
         </div>
-        <Divider />
-      </Container>
+      </div>
       <div
         style={{
           marginTop: '30px'
