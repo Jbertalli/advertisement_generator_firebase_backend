@@ -130,6 +130,10 @@ export default function History() {
     getData();
   }, [])
 
+  useEffect(() => {
+    window.scrollTo(0, -10);
+  }, []);
+
   return (
     <>
       <Head>
