@@ -174,7 +174,8 @@ export default function History() {
                     <div
                       style={{
                         padding: '10px',
-                        lineHeight: '30px'
+                        lineHeight: '30px',
+                        transform: resize ? null : 'translate(20px)'
                       }}
                     >
                       {resize ? 'Saved Advertisements' : 'Saved Ads'}
