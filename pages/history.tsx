@@ -142,7 +142,7 @@ export default function History() {
             <div
               style={{
                 margin: resize ? '0px  40px 0px 40px' : '0px 10px 0px 0px',
-                transform: resize ? '0' : 'translate(0.8vw) scale(0.9)',
+                transform: resize ? 'translateY(-60px) scale(0.8)' : 'translate(0.8vw, -60px) scale(0.7)',
                 position: 'relative',
                 zIndex: '0',
                 fontSize: '20px',
@@ -162,7 +162,7 @@ export default function History() {
                   color: '#125CA1',
                   boxShadow: '2px 2px 15px black',
                   background: 'rgb(255, 255, 255, 0.8',
-                  transform: resize ?  'translateY(60px)' : 'translateY(0vh)',
+                  transform: resize ?  'translateY(60px)' : 'translateY(0vh)'
                 }}
               >
                 <Table.Body>
