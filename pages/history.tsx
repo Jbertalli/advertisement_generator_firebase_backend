@@ -135,7 +135,7 @@ export default function History() {
           <div
             style={{
               background: 'linear-gradient(to top, blue, #125CA180)',
-              height: resize ? '100vh' : '95vh'
+              height: '100vh'
             }}
             onMouseMove={getData}
           >
@@ -169,6 +169,21 @@ export default function History() {
                   <Table.Header
                     style={{ 
                       fontSize: '30px', 
+                      transform: 'translateX(50%)' 
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: '10px',
+                        lineHeight: '30px'
+                      }}
+                    >
+                      {resize ? 'Saved Advertisements' : 'Saved Ads'}
+                    </div>
+                  </Table.Header>
+                  {/* <Table.Header
+                    style={{ 
+                      fontSize: '30px', 
                       transform: 'translateX(50%)'
                     }}
                   >
@@ -182,7 +197,7 @@ export default function History() {
                     >
                       {resize ? 'Saved Advertisements' : 'Saved Ads'}
                     </div>
-                  </Table.Header>
+                  </Table.Header> */}
                   <Table.Row>
                     <Table.Cell>Database ID</Table.Cell>
                     <Table.Cell>{currentUser}</Table.Cell>
