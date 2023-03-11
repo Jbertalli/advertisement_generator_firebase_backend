@@ -7,7 +7,6 @@ import { Table } from 'semantic-ui-react';
 import { NextRouter, useRouter } from 'next/router';
 import Header from '../components/Header';
 import { Loader, Dimmer } from 'semantic-ui-react';
-import { useMediaQuery } from 'react-responsive';
 
 auth;
 const db = getFirestore();
@@ -85,10 +84,6 @@ export default function History() {
     }
   }, []);
 
-  const isDesktop = useMediaQuery(
-    { minWidth: 1450, maxWidth: 10000 }
-  );
-
   async function getData() {
     const docRef = doc(db, '/users/' + currentUser + 'Ads');
     const docSnap = await getDoc(docRef);
@@ -115,6 +110,10 @@ export default function History() {
 
   useEffect(() => {
     getData();
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   return (
