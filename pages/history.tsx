@@ -162,7 +162,7 @@ export default function History() {
                   color: '#125CA1',
                   boxShadow: '2px 2px 15px black',
                   background: 'rgb(255, 255, 255, 0.8',
-                  transform: resize ?  'translateY(130px) scale(1.2)' : 'translateY(10vh)'
+                  transform: resize ?  'translateY(140px) scale(1.2)' : 'translateY(10vh)'
                 }}
               >
                 <Table.Body>
