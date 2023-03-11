@@ -162,7 +162,7 @@ export default function History() {
                   color: '#125CA1',
                   boxShadow: '2px 2px 15px black',
                   background: 'rgb(255, 255, 255, 0.8',
-                  transform: resize ?  'translateY(130px) scale(1.2)' : 'translateY(0vh)'
+                  transform: resize ?  'translateY(130px) scale(1.2)' : 'translateY(10vh)'
                 }}
               >
                 <Table.Body>
@@ -181,23 +181,6 @@ export default function History() {
                       {resize ? 'Saved Advertisements' : 'Saved Ads'}
                     </div>
                   </Table.Header>
-                  {/* <Table.Header
-                    style={{ 
-                      fontSize: '30px', 
-                      transform: 'translateX(50%)'
-                    }}
-                  >
-                    <div
-                      style={{
-                        padding: '10px',
-                        lineHeight: '30px',
-                        marginBottom: isDesktop ? '-35px' : null,
-                        transform: resize ? 'translate(0px)' : 'translate(40px)'
-                      }}
-                    >
-                      {resize ? 'Saved Advertisements' : 'Saved Ads'}
-                    </div>
-                  </Table.Header> */}
                   <Table.Row>
                     <Table.Cell>Database ID</Table.Cell>
                     <Table.Cell>{currentUser}</Table.Cell>
