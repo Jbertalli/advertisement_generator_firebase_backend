@@ -281,7 +281,8 @@ export default function Advertisement() {
                   style={{
                     fontSize: '18px',
                     fontWeight: '400px',
-                    padding: resize ? '0em 0em 1em 0em' : '0em 0em 0em 0em'
+                    padding: resize ? '0em 0em 1em 0em' : '0em 0em 0em 0em',
+                    lineHeight: '20px'
                   }}
                 >
                   Create and Generate Dynamic Ads
@@ -579,20 +580,27 @@ export default function Advertisement() {
                           <>
                             <div
                               style={{
-                                marginBottom: '-15px'
+                                marginBottom: '-15px',
+                                display: resize ? null : 'flex',
+                                justifyContent: resize ? null : 'center'
                               }}
                             >
                               Live Advertisement
                             </div>
                             <Card
                               fluid
+                              style={{
+                                transform: resize ? null : 'scale(0.7)',
+                                marginBottom: resize ? null : '-50px',
+                                marginTop: resize ? null : '-80px'
+                              }}
                             >
                               <div>
                                 <Grid>
                                   <Grid.Row>
                                     <Grid.Column
                                       style={{
-                                        width: '44%',
+                                        width: resize ? '44%' : '100%',
                                         display: 'flex',
                                         justifyContent: 'center',
                                         position: 'relative'
@@ -601,21 +609,18 @@ export default function Advertisement() {
                                       <input
                                         type='image'
                                         style={{
-                                          transform: `translate(${left-20}px, ${top+0}px)`,
-                                          width: resize ? `${width/2.8}px` : `${width/2.3}px`,
-                                          height: resize ? `${height/2.8}px` : `${width/2.3}px`,
+                                          transform: resize ? `translate(${left-20}px, ${top+0}px)` : `translate(${left-40}px, ${top+0}px)`,
+                                          width: resize ? `${width/2.8}px` : `${width/1.3}px`,
+                                          height: resize ? `${height/2.8}px` : `${width/1.3}px`,
                                           borderRadius: '5%',
                                           maxWidth: '18em',
-                                          maxHeight: '18em'
+                                          maxHeight: '18em',
+                                          marginBottom: '10px'
                                         }}
                                         src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
                                       />
                                     </Grid.Column>
-                                    <Grid.Column 
-                                      style={{ 
-                                        width: '56%' 
-                                      }}
-                                    >
+                                    <Grid.Column style={{ width: resize ? '56%' : '100%' }}>
                                       <Item
                                         style={{
                                           fontSize: '10px',
@@ -639,7 +644,7 @@ export default function Advertisement() {
                                         </h1>
                                         <div 
                                           style={{ 
-                                            fontSize: resize ? '8.5px' : '13px', 
+                                            fontSize: resize ? '8.5px' : '16px', 
                                             lineHeight: '30px' 
                                           }}
                                         >
@@ -675,7 +680,7 @@ export default function Advertisement() {
                                           >
                                             <div
                                               style={{
-                                                lineHeight: resize ? null : '13px' 
+                                                lineHeight: resize ? null : '18px' 
                                               }}
                                             >
                                               <Icon name='calendar' />
