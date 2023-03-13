@@ -14,6 +14,7 @@ auth;
 const db = getFirestore();
 
 const LOCAL_STORAGE_KEY_SAVED_CUSTOM = 'SavedCustom';
+const LOCAL_STORAGE_KEY_SELECTED = 'CustomSelected';
 
 export default function Custom() {
   const [company, setCompany] = useState<string>('');
@@ -356,6 +357,15 @@ export default function Custom() {
   }, [saved]);
 
   useEffect(() => {
+    const storedSelected = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SELECTED));
+    if (storedSelected) setSelected(storedSelected);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_SELECTED, JSON.stringify(selected));
+  }, [selected]);
+
+  useEffect(() => {
     setClicked(false);
   }, []);
 
@@ -367,7 +377,8 @@ export default function Custom() {
     getData();
   }, []);
 
-  console.log(saved);
+  // console.log(saved);
+  // console.log(selected);
 
   return (
     <>
@@ -466,7 +477,9 @@ export default function Custom() {
                 Number(companyFontSize) > 0 || 
                 description.length ||
                 Number(descriptionFontSize) > 0 || 
-                Number(borderWidth) > 0
+                Number(borderWidth) > 0 ||
+                selected ||
+                saved > 0
                 ) ? (
               <>
                 <div
@@ -1102,7 +1115,11 @@ export default function Custom() {
                       }}
                       // onChange={handleImageChange}
                       onChange={(e) => {handleImageChange(e), setImageSaved(imageSaved + 1)}}
-                      onClick={() => {setSelected(true), setClicked(true)}}
+                      onClick={() => {
+                        setSelected(true), 
+                        setClicked(true),
+                        setSaved(saved + 1)
+                      }}
                     />
                     <label 
                       htmlFor="actual-btn" 
@@ -1307,6 +1324,7 @@ export default function Custom() {
             setDescriptionFontWeight(''),
             setDescription(''),
             setClicked(false),
+            setSelected(false),
             setImageWidth(150),
             setImageHeight(150),
             setImageLeft(0),
@@ -1355,7 +1373,9 @@ export default function Custom() {
         Number(companyFontSize) > 0 || 
         description.length ||
         Number(descriptionFontSize) > 0 || 
-        Number(borderWidth) > 0) ? (
+        Number(borderWidth) > 0) ||
+        selected ||
+        saved > 0 ? (
       <>
         <Divider />
         <div

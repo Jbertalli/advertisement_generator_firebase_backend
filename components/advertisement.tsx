@@ -218,8 +218,8 @@ export default function Advertisement() {
     getData();
   }, []);
 
-  console.log(saved);
-  console.log(selected);
+  // console.log(saved);
+  // console.log(selected);
 
   return (
     <>
@@ -662,7 +662,8 @@ export default function Advertisement() {
                                         <div 
                                           style={{ 
                                             fontSize: resize ? '8.5px' : '16px', 
-                                            lineHeight: '30px' 
+                                            lineHeight: '30px',
+                                            wordBreak: 'break-word'
                                           }}
                                         >
                                           <div 
