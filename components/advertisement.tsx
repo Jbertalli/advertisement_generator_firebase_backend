@@ -325,12 +325,13 @@ export default function Advertisement() {
                           <input
                             name='media'
                             type='file'
+                            id='actual-btn'
+                            hidden
                             accept='image/*'
                             style={{ 
                               width: '150px', 
-                              transform: 'translateX(-.2vw)' 
+                              transform: 'translateX(-.2vw)'
                             }}
-                            className={styles.file}
                             onChange={handleImageChange}
                             onClick={() => {
                               setSelected(true), 
@@ -339,6 +340,23 @@ export default function Advertisement() {
                             }}
                           />
                         </div>
+                        <label 
+                          htmlFor="actual-btn" 
+                          style={{ 
+                            background: '#125CA1',
+                            color: '#FFF',
+                            cursor: 'pointer',
+                            padding: '0.2em 1.5em',
+                            display: 'inline-block',
+                            fontWeight: '700',
+                            fontSize: '14px',
+                            borderRadius: '6px',
+                            position: 'relative',
+                            zIndex: '1'
+                          }}
+                        >
+                          Choose File
+                        </label>
                         {(selected && saved > 0) ? (
                         <>
                           {resize ? (
@@ -609,9 +627,9 @@ export default function Advertisement() {
                                       <input
                                         type='image'
                                         style={{
-                                          transform: resize ? `translate(${left-20}px, ${top+0}px)` : `translate(${left-40}px, ${top+0}px)`,
+                                          transform: resize ? `translate(${(left/2.8)-20}px, ${(top/2.8)+0}px)` : `translate(${(left/1.3)-40}px, ${(top/1.3)+0}px)`,
                                           width: resize ? `${width/2.8}px` : `${width/1.3}px`,
-                                          height: resize ? `${height/2.8}px` : `${width/1.3}px`,
+                                          height: resize ? `${height/2.8}px` : `${height/1.3}px`,
                                           borderRadius: '5%',
                                           maxWidth: '18em',
                                           maxHeight: '18em',
