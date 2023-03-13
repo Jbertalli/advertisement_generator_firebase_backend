@@ -626,9 +626,9 @@ export default function Advertisement() {
                                       <input
                                         type='image'
                                         style={{
-                                          transform: resize ? `translate(${(left/2.8)-20}px, ${(top/2.8)+0}px)` : `translate(${(left/1.3)-40}px, ${(top/1.3)+0}px)`,
-                                          width: resize ? `${width/2.8}px` : `${width/1.3}px`,
-                                          height: resize ? `${height/2.8}px` : `${height/1.3}px`,
+                                          transform: resize ? `translate(${(left/2.8)}px, ${(top/2.8)+15}px)` : `translate(${(left/1.3)-30}px, ${(top/1.3)+0}px)`,
+                                          width: resize ? `${width/2.8}px` : `${width/1.5}px`,
+                                          height: resize ? `${height/2.8}px` : `${height/1.5}px`,
                                           borderRadius: '5%',
                                           maxWidth: '18em',
                                           maxHeight: '18em',
