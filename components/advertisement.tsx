@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import FocusLock from 'react-focus-lock';
-import styles from '../styles/advertisement.module.css';
 import Local from '../components/localStorage';
 import { Container, Segment, Button, Form, Icon, Grid, Item, Card, Table } from 'semantic-ui-react';
 import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';

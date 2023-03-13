@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import styles from '../styles/advertisement.module.css';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
@@ -1091,21 +1090,37 @@ export default function Custom() {
                     </div>
                   </div>
                   <div style={{ color: 'black', marginLeft: '8vw' }}>
-                    <div>
-                      <input
-                        name='media'
-                        type='file'
-                        accept='image/*'
-                        style={{ 
-                          width: '150px', 
-                          transform: 'translateX(-.2vw)'
-                        }}
-                        className={styles.file}
-                        // onChange={handleImageChange}
-                        onChange={(e) => {handleImageChange(e), setImageSaved(imageSaved + 1)}}
-                        onClick={() => {setSelected(true), setClicked(true)}}
-                      />
-                    </div>
+                    <input
+                      name='media'
+                      type='file'
+                      id='actual-btn'
+                      hidden
+                      accept='image/*'
+                      style={{ 
+                        width: '150px', 
+                        transform: 'translateX(-.2vw)'
+                      }}
+                      // onChange={handleImageChange}
+                      onChange={(e) => {handleImageChange(e), setImageSaved(imageSaved + 1)}}
+                      onClick={() => {setSelected(true), setClicked(true)}}
+                    />
+                    <label 
+                      htmlFor="actual-btn" 
+                      style={{ 
+                        background: '#125CA1',
+                        color: '#FFF',
+                        cursor: 'pointer',
+                        padding: '11px 19.5px 11px 19.5px',
+                        display: 'inline-block',
+                        fontWeight: '700',
+                        fontSize: '14px',
+                        borderRadius: '6px',
+                        position: 'relative',
+                        zIndex: '1'
+                      }}
+                    >
+                      Choose File
+                    </label>
                     <div style={{ marginBottom: '5px', marginTop: '15px' }}>Image Width (pixels)</div>
                     <div>
                       <Form.Input
