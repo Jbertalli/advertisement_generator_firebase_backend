@@ -218,8 +218,8 @@ export default function Advertisement() {
     getData();
   }, []);
 
-  // console.log(saved);
-  // console.log(selected);
+  console.log(saved);
+  console.log(selected);
 
   return (
     <>
@@ -608,8 +608,8 @@ export default function Advertisement() {
                               fluid
                               style={{
                                 transform: resize ? null : 'scale(0.7)',
-                                marginBottom: resize ? null : '-50px',
-                                marginTop: resize ? null : '-80px'
+                                marginBottom: resize ? null : (height < 300 ? '-80px' : '-130px'),
+                                top: resize ? null : '-15%'
                               }}
                             >
                               <div>
@@ -626,13 +626,12 @@ export default function Advertisement() {
                                       <input
                                         type='image'
                                         style={{
-                                          transform: resize ? `translate(${(left/2.8)}px, ${(top/2.8)+15}px)` : `translate(${(left/1.3)-30}px, ${(top/1.3)+0}px)`,
+                                          transform: resize ? `translate(${(left/2.8)}px, ${(top/2.8)+15}px)` : `translate(${(left/1.3)-30}px, ${(top/1.3)}px)`,
                                           width: resize ? `${width/2.8}px` : `${width/1.5}px`,
                                           height: resize ? `${height/2.8}px` : `${height/1.5}px`,
                                           borderRadius: '5%',
                                           maxWidth: '18em',
-                                          maxHeight: '18em',
-                                          marginBottom: '10px'
+                                          maxHeight: '18em'
                                         }}
                                         src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
                                       />

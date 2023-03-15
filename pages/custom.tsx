@@ -14,7 +14,7 @@ auth;
 const db = getFirestore();
 
 const LOCAL_STORAGE_KEY_SAVED_CUSTOM = 'SavedCustom';
-const LOCAL_STORAGE_KEY_SELECTED = 'CustomSelected';
+const LOCAL_STORAGE_KEY_SELECTED_CUSTOM = 'CustomSelected';
 
 export default function Custom() {
   const [company, setCompany] = useState<string>('');
@@ -357,12 +357,12 @@ export default function Custom() {
   }, [saved]);
 
   useEffect(() => {
-    const storedSelected = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SELECTED));
+    const storedSelected = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SELECTED_CUSTOM));
     if (storedSelected) setSelected(storedSelected);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_SELECTED, JSON.stringify(selected));
+    localStorage.setItem(LOCAL_STORAGE_KEY_SELECTED_CUSTOM, JSON.stringify(selected));
   }, [selected]);
 
   useEffect(() => {
