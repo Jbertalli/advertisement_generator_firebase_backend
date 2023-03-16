@@ -84,21 +84,6 @@ export default function Custom() {
     return () => window.removeEventListener('resize', updateMedia);
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      console.log(document.cookie.length);
-      if (document.cookie.length > 6) {
-        console.log('Authenticated!');
-      } else if (document.cookie.length == 5) {
-        router.push('/');
-      } else {
-        return null;
-      }
-    } else {
-      console.log('window == undefined');
-    }
-  }, []);
-
   console.log(
     company,
     companyFontSize,
