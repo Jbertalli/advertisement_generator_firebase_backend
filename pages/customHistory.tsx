@@ -5,7 +5,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { getFirestore, collection, query, orderBy, onSnapshot, doc, getDoc } from 'firebase/firestore';
 import { Table } from 'semantic-ui-react';
 import { NextRouter, useRouter } from 'next/router';
-import Header from '../components/Header';
 import { Loader, Dimmer } from 'semantic-ui-react';
 
 auth;
@@ -140,7 +139,6 @@ export default function History() {
         <title>User History</title>
         <meta name='description' content='information' />
       </Head>
-      <Header />
       {loading ? (
         <>
           <Dimmer active>

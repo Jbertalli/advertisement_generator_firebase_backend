@@ -13,13 +13,13 @@ auth;
 function MyApp({ Component, pageProps }) {
   const [user] = useAuthState(auth);
   const router = useRouter();
-  console.log(user);
+  console.log(user)
 
   useEffect(() => {
     console.log(window.document.cookie.length);
-    if (user || window.document.cookie.length > 17) {
-      console.log('Signed In');
-    } else if (user === null && window.document.cookie.length === 17) {
+    if (user || window.document.cookie.length > 17 || router.pathname === '/advertisement_generator' || router.pathname === '/custom') {
+      console.log('Signed In or Public Page');
+    } else if (user === null && window.document.cookie.length === 17 && (router.pathname === '/history' || router.pathname === '/customHistory')) {
       router.push('/');
       console.log('Cannot access this page without logging in');
     } else {
@@ -27,9 +27,13 @@ function MyApp({ Component, pageProps }) {
     }
   }, [user]);
 
-  if (user === null && router.pathname !== '/') {
+  if (user === null && (router.pathname === '/history' || router.pathname === '/customHistory')) {
     return null;
   }
+
+  // if (user === null && router.pathname !== '/') {
+  //   return null;
+  // }
 
   return (
     <>

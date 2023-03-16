@@ -1,7 +1,7 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Header from '../components/Header';
 import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
 import { Divider, Container, Segment, Icon, Form, Button } from 'semantic-ui-react';
@@ -370,15 +370,23 @@ export default function Custom() {
   }, []);
 
   useEffect(() => {
-    getData();
+    if (currentUser !== undefined) {
+      getData();
+    } else {
+      console.log('Login to get data');
+    }
   }, [saved]);
 
   useEffect(() => {
-    getData();
+    if (currentUser !== undefined) {
+      getData();
+    } else {
+      console.log('Login to get data');
+    }
   }, []);
 
-  // console.log(saved);
-  // console.log(selected);
+  console.log(saved);
+  console.log(selected);
 
   return (
     <>
@@ -424,7 +432,6 @@ export default function Custom() {
         editImage={editImage}
         setEditImage={setEditImage}
       />
-      <Header />
       <div
         style={{
           display: 'flex',
@@ -1257,200 +1264,238 @@ export default function Custom() {
                 </>
               )}
             </div>
-            <Divider />
+            {currentUser === undefined ? (
+            <>
+              <Segment
+                attached
+                style={{
+                  fontSize: resize ? '18px' : '14px',
+                  fontWeight: '600',
+                  marginTop: '15px',
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <Link 
+                  href='/'
+                >
+                  <span
+                    style={{
+                      textDecoration: 'underline',
+                      color: '#125CA1',
+                      cursor: 'pointer'                    
+                    }}
+                  >
+                    Login
+                  </span>
+                </Link>
+                <span>
+                  &nbsp;to Save Custom Advertisement
+                </span>
+              </Segment>
+            </>
+            ):(
+            <>
+              <Divider />
+            </>
+            )}
           </Container>
         </div>
       </div>
-      <div
-        style={{
-          marginTop: '30px'
-        }}
-      >
-        <Divider />
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          padding: '20px 0px 20px 0px'
-        }}
-      >
-        <Button
-          onClick={() => {addCustom(
-            company,
-            companyFontSize,
-            companyFontWeight,
-            description,
-            descriptionFontSize,
-            descriptionFontWeight,
-            borderWidth,
-            borderColor,
-            color,
-            backgroundColor,
-            imageWidth,
-            imageHeight,
-            imageLeft,
-            imageTop,
-            totalWidth,
-            imageRotation
-          ), getData(),
-             handleSubmit(),
-             setSaved(0)
-        }}
-          style={{
-            border: '2px solid #125CA1',
-            background: 'transparent',
-            color: '#125CA1'
-          }}
-        >
-          Save to Database
-        </Button>
-        <Button
-          style={{
-            border: '2px solid red',
-            background: 'transparent',
-            color: 'red'
-          }}
-          onClick={() => {
-            setBackgroundColor(''),
-            setColor(''),
-            setBorderWidth(''),
-            setBorderColor('#FFFFFF'),
-            setTotalWidth(500),
-            setCompanyFontSize(''),
-            setCompanyFontWeight(''),
-            setCompany(''),
-            setDescriptionFontSize(''),
-            setDescriptionFontWeight(''),
-            setDescription(''),
-            setClicked(false),
-            setSelected(false),
-            setImageWidth(150),
-            setImageHeight(150),
-            setImageLeft(0),
-            setImageTop(0)
-            deleteLocal(),
-            deleteCompany(), 
-            deleteCompanyFontSize(),
-            deleteCompanyFontWeight(),
-            deleteDescription(),
-            deleteDescriptionFontSize(),
-            deleteDescriptionFontWeight(),
-            deleteBorderWidth(),
-            deleteBorderColor(),
-            deleteColor(),
-            deleteBackgroundColor(),
-            deleteImageWidth(),
-            deleteImageHeight(),
-            deleteImageLeft(),
-            deleteImageTop(),
-            deleteTotalWidth(),
-            deleteImageRotation(),
-            setShowCompany(''),
-            setShowCompanyFontSize(''),
-            setShowCompanyFontWeight(''),
-            setShowDescription(''),
-            setShowDescriptionFontSize(''),
-            setShowDescriptionFontWeight(''),
-            setShowBorderWidth('0'),
-            setShowBorderColor(''),
-            setShowColor(''),
-            setShowBackgroundColor(''),
-            setShowImageWidth(''),
-            setShowImageHeight(''),
-            setShowImageLeft(''),
-            setShowImageTop(''),
-            setShowTotalWidth(''),
-            setShowImageRotation(''),
-            deleteStoredImage(),
-            setSaved(0)
-          }}
-        >
-          Delete Advertisement
-        </Button>
-      </div>
-      {(company.length > 0 || 
-        Number(companyFontSize) > 0 || 
-        description.length ||
-        Number(descriptionFontSize) > 0 || 
-        Number(borderWidth) > 0) ||
-        selected ||
-        saved > 0 ? (
+      {currentUser === undefined ? null : (
       <>
-        <Divider />
         <div
           style={{
-            padding: '0px 3vw 1px 3vw',
-            display: 'flex',
-            justifyContent: 'center'
+            marginTop: '30px'
           }}
         >
-          <div
+          <Divider />
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            padding: '20px 0px 20px 0px'
+          }}
+        >
+          <Button
+            onClick={() => {addCustom(
+              company,
+              companyFontSize,
+              companyFontWeight,
+              description,
+              descriptionFontSize,
+              descriptionFontWeight,
+              borderWidth,
+              borderColor,
+              color,
+              backgroundColor,
+              imageWidth,
+              imageHeight,
+              imageLeft,
+              imageTop,
+              totalWidth,
+              imageRotation
+            ), getData(),
+              handleSubmit(),
+              setSaved(0)
+          }}
             style={{
-              color: `${showColor}`,
-              background: `${showBackgroundColor}`,
-              border: `${showBorderWidth}px solid ${showBorderColor}`,
-              width: `${showTotalWidth}px`,
-              height: '50vh',
-              fontWeight: '100',
-              margin: '30px'
+              border: '2px solid #125CA1',
+              background: 'transparent',
+              color: '#125CA1'
             }}
           >
-            <Draggable>
-              <div
-                style={{
-                  fontSize: `${showCompanyFontSize}px`,
-                  fontWeight: `${showCompanyFontWeight}`,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  cursor: 'grab',
-                  marginBottom: '30px',
-                  marginTop: '30px',
-                  lineHeight: '1em'
-                }}
-              >
-                {showCompany}
-              </div>
-            </Draggable>
-            <Draggable>
-              <div
-                style={{
-                  fontSize: `${showDescriptionFontSize}px`,
-                  fontWeight: `${showDescriptionFontWeight}`,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  cursor: 'grab',
-                  marginBottom: '30px',
-                  lineHeight: '1em'
-                }}
-              >
-                {showDescription}
-              </div>
-            </Draggable>
-            <Draggable>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  transform: 'translateY(50%)'
-                }}
-              >
-                <input
-                  type='image'
-                  src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
-                  style={{
-                    width: `${showImageWidth}px`,
-                    height: `${showImageHeight}px`,
-                    transform: `translate(${showImageLeft}px, ${showImageTop}px) rotate(${showImageRotation}deg)`,
-                    cursor: 'grab'
-                  }}
-                />
-              </div>
-            </Draggable>
-          </div>
+            Save to Database
+          </Button>
+          <Button
+            style={{
+              border: '2px solid red',
+              background: 'transparent',
+              color: 'red'
+            }}
+            onClick={() => {
+              setBackgroundColor(''),
+              setColor(''),
+              setBorderWidth(''),
+              setBorderColor('#FFFFFF'),
+              setTotalWidth(500),
+              setCompanyFontSize(''),
+              setCompanyFontWeight(''),
+              setCompany(''),
+              setDescriptionFontSize(''),
+              setDescriptionFontWeight(''),
+              setDescription(''),
+              setClicked(false),
+              setSelected(false),
+              setImageWidth(150),
+              setImageHeight(150),
+              setImageLeft(0),
+              setImageTop(0)
+              deleteLocal(),
+              deleteCompany(), 
+              deleteCompanyFontSize(),
+              deleteCompanyFontWeight(),
+              deleteDescription(),
+              deleteDescriptionFontSize(),
+              deleteDescriptionFontWeight(),
+              deleteBorderWidth(),
+              deleteBorderColor(),
+              deleteColor(),
+              deleteBackgroundColor(),
+              deleteImageWidth(),
+              deleteImageHeight(),
+              deleteImageLeft(),
+              deleteImageTop(),
+              deleteTotalWidth(),
+              deleteImageRotation(),
+              setShowCompany(''),
+              setShowCompanyFontSize(''),
+              setShowCompanyFontWeight(''),
+              setShowDescription(''),
+              setShowDescriptionFontSize(''),
+              setShowDescriptionFontWeight(''),
+              setShowBorderWidth('0'),
+              setShowBorderColor(''),
+              setShowColor(''),
+              setShowBackgroundColor(''),
+              setShowImageWidth(''),
+              setShowImageHeight(''),
+              setShowImageLeft(''),
+              setShowImageTop(''),
+              setShowTotalWidth(''),
+              setShowImageRotation(''),
+              deleteStoredImage(),
+              setSaved(0)
+            }}
+          >
+            Delete Advertisement
+          </Button>
         </div>
+        {(company.length > 0 || 
+          Number(companyFontSize) > 0 || 
+          description.length ||
+          Number(descriptionFontSize) > 0 || 
+          Number(borderWidth) > 0) ||
+          selected ||
+          saved > 0 ? (
+        <>
+          <Divider />
+          <div
+            style={{
+              padding: '0px 3vw 1px 3vw',
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
+            <div
+              style={{
+                color: `${showColor}`,
+                background: `${showBackgroundColor}`,
+                border: `${showBorderWidth}px solid ${showBorderColor}`,
+                width: `${showTotalWidth}px`,
+                height: '50vh',
+                fontWeight: '100',
+                margin: '30px'
+              }}
+            >
+              <Draggable>
+                <div
+                  style={{
+                    fontSize: `${showCompanyFontSize}px`,
+                    fontWeight: `${showCompanyFontWeight}`,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    cursor: 'grab',
+                    marginBottom: '30px',
+                    marginTop: '30px',
+                    lineHeight: '1em'
+                  }}
+                >
+                  {showCompany}
+                </div>
+              </Draggable>
+              <Draggable>
+                <div
+                  style={{
+                    fontSize: `${showDescriptionFontSize}px`,
+                    fontWeight: `${showDescriptionFontWeight}`,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    cursor: 'grab',
+                    marginBottom: '30px',
+                    lineHeight: '1em'
+                  }}
+                >
+                  {showDescription}
+                </div>
+              </Draggable>
+              <Draggable>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    transform: 'translateY(50%)'
+                  }}
+                >
+                  <input
+                    type='image'
+                    src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
+                    style={{
+                      width: `${showImageWidth}px`,
+                      height: `${showImageHeight}px`,
+                      transform: `translate(${showImageLeft}px, ${showImageTop}px) rotate(${showImageRotation}deg)`,
+                      cursor: 'grab'
+                    }}
+                  />
+                </div>
+              </Draggable>
+            </div>
+          </div>
+        </>
+        ): null}
       </>
-      ): null}
+      )}
     </>
   );
 }

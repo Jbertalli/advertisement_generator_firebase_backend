@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import FocusLock from 'react-focus-lock';
 import Local from '../components/localStorage';
-import { Container, Segment, Button, Form, Icon, Grid, Item, Card, Table } from 'semantic-ui-react';
+import { Container, Segment, Button, Form, Icon, Grid, Item, Card, Table, Divider } from 'semantic-ui-react';
 import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 import { useDispatch } from 'react-redux';
@@ -104,47 +105,47 @@ export default function Advertisement() {
     }
   }
 
-  async function deleteCompany() {
-    const docRef = doc(db, '/users/' + currentUser + 'Ads');
-    await updateDoc(docRef, {
-      company: deleteField()
-    });
-  }
+  // async function deleteCompany() {
+  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
+  //   await updateDoc(docRef, {
+  //     company: deleteField()
+  //   });
+  // }
 
-  async function deleteDescription() {
-    const docRef = doc(db, '/users/' + currentUser + 'Ads');
-    await updateDoc(docRef, {
-      description: deleteField()
-    });
-  }
+  // async function deleteDescription() {
+  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
+  //   await updateDoc(docRef, {
+  //     description: deleteField()
+  //   });
+  // }
 
-  async function deleteHeight() {
-    const docRef = doc(db, '/users/' + currentUser + 'Ads');
-    await updateDoc(docRef, {
-      height: deleteField()
-    });
-  }
+  // async function deleteHeight() {
+  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
+  //   await updateDoc(docRef, {
+  //     height: deleteField()
+  //   });
+  // }
 
-  async function deleteWidth() {
-    const docRef = doc(db, '/users/' + currentUser + 'Ads');
-    await updateDoc(docRef, {
-      width: deleteField()
-    });
-  }
+  // async function deleteWidth() {
+  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
+  //   await updateDoc(docRef, {
+  //     width: deleteField()
+  //   });
+  // }
 
-  async function deleteTop() {
-    const docRef = doc(db, '/users/' + currentUser + 'Ads');
-    await updateDoc(docRef, {
-      top: deleteField()
-    });
-  }
+  // async function deleteTop() {
+  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
+  //   await updateDoc(docRef, {
+  //     top: deleteField()
+  //   });
+  // }
 
-  async function deleteLeft() {
-    const docRef = doc(db, '/users/' + currentUser + 'Ads');
-    await updateDoc(docRef, {
-      left: deleteField()
-    });
-  }
+  // async function deleteLeft() {
+  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
+  //   await updateDoc(docRef, {
+  //     left: deleteField()
+  //   });
+  // }
 
   async function deleteAll() {
     const docRef = doc(db, '/users/' + currentUser + 'Ads');
@@ -172,7 +173,7 @@ export default function Advertisement() {
       }).catch((error) => {
         console.log(error.message, 'error getting the image url');
       })
-      setSaveImage(null);
+      // setSaveImage(null);
     }).catch((error) => {
       console.log(error.message);
     });
@@ -211,11 +212,19 @@ export default function Advertisement() {
   }, []);
 
   useEffect(() => {
-    getData();
+    if (currentUser !== undefined) {
+      getData();
+    } else {
+      console.log('Login to get data');
+    }
   }, [saved]);
 
   useEffect(() => {
-    getData();
+    if (currentUser !== undefined) {
+      getData();
+    } else {
+      console.log('Login to get data');
+    }
   }, []);
 
   console.log(saved);
@@ -517,76 +526,80 @@ export default function Advertisement() {
                           )}
                         </>
                         ): null}
-                        <div
-                          style={{
-                            display: 'flex',
-                            marginTop: '20px'
-                          }}
-                        >
-                          <div>
-                            <Button
-                              disabled={!company && !description && !url && !selected && saved == 0}
-                              onClick={() => {
-                                addAdvertisement(
-                                  company,
-                                  description,
-                                  width,
-                                  height,
-                                  left,
-                                  top
-                                ),
-                                  dispatch(incrementCompany(String(company))),
-                                  dispatch(incrementDescription(String(description))),
-                                  dispatch(incrementWidth(String(width))),
-                                  dispatch(incrementHeight(String(height))),
-                                  dispatch(incrementLeft(String(left))),
-                                  dispatch(incrementTop(String(top))),
-                                  getData(),
-                                  handleSubmit()
-                              }}
-                              style={{
-                                border: '2px solid #125CA1',
-                                background: 'transparent', 
-                                color: '#125CA1',
-                                padding: '10px 10px 10px 10px',
-                                marginBottom: resize ? '-60px' : '15px'
-                              }}
-                            >
-                              Save to Database
-                            </Button>
-                          </div>
+                        {currentUser === undefined ? null : (
+                        <>
                           <div
                             style={{
-                              transform: 'translate(15.1px)'
+                              display: 'flex',
+                              marginTop: '20px'
                             }}
                           >
-                            <Button
-                              disabled={!company && !description && !url && !selected && saved == 0}
-                              onClick={() => {
-                                deleteAll(), 
-                                setUrl(null), 
-                                setSelected(false), 
-                                getData(), 
-                                setDescription(''), 
-                                setCompany(''), 
-                                setWidth(350), 
-                                setHeight(350), 
-                                setLeft(40), 
-                                setTop(20),
-                                deleteStoredImage(),
-                                setSaved(0)
-                              }}
+                            <div>
+                              <Button
+                                disabled={!company && !description && !url && !selected && saved == 0}
+                                onClick={() => {
+                                  addAdvertisement(
+                                    company,
+                                    description,
+                                    width,
+                                    height,
+                                    left,
+                                    top
+                                  ),
+                                    dispatch(incrementCompany(String(company))),
+                                    dispatch(incrementDescription(String(description))),
+                                    dispatch(incrementWidth(String(width))),
+                                    dispatch(incrementHeight(String(height))),
+                                    dispatch(incrementLeft(String(left))),
+                                    dispatch(incrementTop(String(top))),
+                                    getData(),
+                                    handleSubmit()
+                                }}
+                                style={{
+                                  border: '2px solid #125CA1',
+                                  background: 'transparent', 
+                                  color: '#125CA1',
+                                  padding: '10px 10px 10px 10px',
+                                  marginBottom: resize ? '-60px' : '15px'
+                                }}
+                              >
+                                Save to Database
+                              </Button>
+                            </div>
+                            <div
                               style={{
-                                border: '2px solid red',
-                                background: 'transparent',
-                                color: 'red',
-                                padding: '10px 10px 10px 10px'
+                                transform: 'translate(15.1px)'
                               }}
                             >
-                              Delete Advertisement
-                            </Button>
+                              <Button
+                                disabled={!company && !description && !url && !selected && saved == 0}
+                                onClick={() => {
+                                  deleteAll(), 
+                                  setUrl(null), 
+                                  setSelected(false), 
+                                  getData(), 
+                                  setDescription(''), 
+                                  setCompany(''), 
+                                  setWidth(350), 
+                                  setHeight(350), 
+                                  setLeft(40), 
+                                  setTop(20),
+                                  deleteStoredImage(),
+                                  setSaved(0)
+                                }}
+                                style={{
+                                  border: '2px solid red',
+                                  background: 'transparent',
+                                  color: 'red',
+                                  padding: '10px 10px 10px 10px'
+                                }}
+                              >
+                                Delete Advertisement
+                              </Button>
+                            </div>
                           </div>
-                        </div>
+                        </>
+                        )}
                       </Grid.Column>
                       <Grid.Column width={resize ? 8 : 16}>
                         {company.length > 0 ||
@@ -595,6 +608,17 @@ export default function Advertisement() {
                         selected ||
                         saved > 0 ? (
                           <>
+                            {currentUser === undefined ? (
+                            <>
+                              <div
+                                style={{
+                                  marginTop: '30px'
+                                }}
+                              >
+                                <Divider />
+                              </div>
+                            </>
+                            ): null}
                             <div
                               style={{
                                 marginBottom: '-15px',
@@ -763,101 +787,134 @@ export default function Advertisement() {
                   </Grid>
                 </Segment>
               </Form>
-              <Segment attached>
-                <Grid>
-                  <Grid.Row>
-                    <Grid.Column
-                      style={{
-                        transform: resize ? 'translate(0px)' : 'translate(-12%)',
-                        width: resize ? '44%' : '100%',
-                        display: 'flex',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      <input
-                        type='image'
-                        style={{
-                          transform: `translate(${showLeft}px, ${showTop}px) scale(.8)`,
-                          width: `${showWidth}px`,
-                          height: `${showHeight}px`,
-                          borderRadius: '5%',
-                          maxWidth: '30em',
-                          maxHeight: '30em'
-                        }}
-                        src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
-                      />
-                    </Grid.Column>
-                    <Grid.Column style={{ width: resize ? '56%' : '100%' }}>
-                      <Item
-                        style={{
-                          fontSize: '1.5em',
-                          fontWeight: '900',
-                          padding: resize ? '1em 1em 1.5em 1em' : '0em 0em 0em 0em',
-                        }}
-                      >
-                        <h1 
-                          style={{ 
-                            display: 'flex', 
-                            justifyContent: 'center', 
-                            fontSize: resize ? null : '25px', 
-                            marginBottom: resize ? null : '-20px',
-                            wordBreak: 'break-word',
-                            width: '100%'
-                          }}
-                        >
-                          {showCompany} Advertisement
-                        </h1>
-                        <div 
-                          style={{ 
-                            fontSize: resize ? '.91em' : '18px', 
-                            lineHeight: resize ? '30px' : '20px' 
-                          }}
-                        >
-                          <div style={{ margin: '2em 0em 1em 0em' }}>
-                            <Icon name='mouse pointer' />
-                            Click the button below to be transported to watch and
-                            take the comprehensive quiz for {showCompany}.
-                          </div>
-                          <div style={{ margin: '1em 0em 1em 0em' }}>
-                            <Icon name='dollar' />
-                            Earn 20 points after successfully watching and
-                            completing the comprehension quiz for {showCompany}.
-                          </div>
-                          <div style={{ margin: '1em 0em 1em 0em' }}>
-                            <Icon name='calendar' />
-                            {`Your account needs to settle, which can take more than 30 days (due to possible returns). In this time, Earn and Trade users are credited with "Pending Points".`}
-                          </div>
-                          <div
-                            style={{ display: 'flex', justifyContent: 'center' }}
-                          >
-                            <Button
-                              content='Earn 20 points'
-                              size='large'
-                              style={{
-                                color: 'white',
-                                background: '#125CA1',
-                                borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%',
-                                marginTop: '1em',
-                                marginBottom: resize ? null : '20px'
-                              }}
-                              href='/'
-                            />
-                          </div>
-                        </div>
-                      </Item>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-                <div 
-                  style={{ 
-                    display: 'flex', 
-                    justifyContent: 'center',
-                    fontSize: '20px'
+              {currentUser === undefined ? (
+              <>
+                <Segment
+                  attached
+                  style={{
+                    fontSize: resize ? '18px' : '14px',
+                    fontWeight: '600',
+                    display: 'flex',
+                    justifyContent: 'center'
                   }}
                 >
-                  {showDescription}
-                </div>
-              </Segment>
+                  <Link 
+                    href='/'
+                  >
+                    <span
+                      style={{
+                        textDecoration: 'underline',
+                        color: '#125CA1',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Login
+                    </span>
+                  </Link>
+                  <span>
+                    &nbsp;to Save Advertisement
+                  </span>
+                </Segment>
+              </>
+              ) : (
+              <>
+                <Segment attached>
+                  <Grid>
+                    <Grid.Row>
+                      <Grid.Column
+                        style={{
+                          transform: resize ? 'translate(0px)' : 'translate(-12%)',
+                          width: resize ? '44%' : '100%',
+                          display: 'flex',
+                          justifyContent: 'center'
+                        }}
+                      >
+                        <input
+                          type='image'
+                          style={{
+                            transform: `translate(${showLeft}px, ${showTop}px) scale(.8)`,
+                            width: `${showWidth}px`,
+                            height: `${showHeight}px`,
+                            borderRadius: '5%',
+                            maxWidth: '30em',
+                            maxHeight: '30em'
+                          }}
+                          src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
+                        />
+                      </Grid.Column>
+                      <Grid.Column style={{ width: resize ? '56%' : '100%' }}>
+                        <Item
+                          style={{
+                            fontSize: '1.5em',
+                            fontWeight: '900',
+                            padding: resize ? '1em 1em 1.5em 1em' : '0em 0em 0em 0em',
+                          }}
+                        >
+                          <h1 
+                            style={{ 
+                              display: 'flex', 
+                              justifyContent: 'center', 
+                              fontSize: resize ? null : '25px', 
+                              marginBottom: resize ? null : '-20px',
+                              wordBreak: 'break-word',
+                              width: '100%'
+                            }}
+                          >
+                            {showCompany} Advertisement
+                          </h1>
+                          <div 
+                            style={{ 
+                              fontSize: resize ? '.91em' : '18px', 
+                              lineHeight: resize ? '30px' : '20px' 
+                            }}
+                          >
+                            <div style={{ margin: '2em 0em 1em 0em' }}>
+                              <Icon name='mouse pointer' />
+                              Click the button below to be transported to watch and
+                              take the comprehensive quiz for {showCompany}.
+                            </div>
+                            <div style={{ margin: '1em 0em 1em 0em' }}>
+                              <Icon name='dollar' />
+                              Earn 20 points after successfully watching and
+                              completing the comprehension quiz for {showCompany}.
+                            </div>
+                            <div style={{ margin: '1em 0em 1em 0em' }}>
+                              <Icon name='calendar' />
+                              {`Your account needs to settle, which can take more than 30 days (due to possible returns). In this time, Earn and Trade users are credited with "Pending Points".`}
+                            </div>
+                            <div
+                              style={{ display: 'flex', justifyContent: 'center' }}
+                            >
+                              <Button
+                                content='Earn 20 points'
+                                size='large'
+                                style={{
+                                  color: 'white',
+                                  background: '#125CA1',
+                                  borderRadius: '15% 15% 15% 15% / 50% 50% 50% 50%',
+                                  marginTop: '1em',
+                                  marginBottom: resize ? null : '20px'
+                                }}
+                                href='/'
+                              />
+                            </div>
+                          </div>
+                        </Item>
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
+                  <div 
+                    style={{ 
+                      display: 'flex', 
+                      justifyContent: 'center',
+                      fontSize: '20px'
+                    }}
+                  >
+                    {showDescription}
+                  </div>
+                </Segment>
+            </>
+              )}
             </Container>
           </div>
         </div>
