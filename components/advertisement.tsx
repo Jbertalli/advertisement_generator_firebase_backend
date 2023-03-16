@@ -395,10 +395,18 @@ export default function Advertisement() {
                                 Choose File
                               </label>
                             </div>
-                            {mediaPreview.length > 0 ? (
+                            {mediaPreview.length > 0 || company.length > 0 || description.length > 0 ? (
                             <>
                               <Button
-                                onClick={() => setMediaPreview('')}
+                                onClick={() => {
+                                  setMediaPreview(''), 
+                                  setCompany(''), 
+                                  setDescription(''), 
+                                  setWidth(350), 
+                                  setHeight(350), 
+                                  setLeft(20), 
+                                  setTop(20)
+                                }}
                                 style={{
                                   background: 'transparent',
                                   color: 'red',
@@ -413,7 +421,7 @@ export default function Advertisement() {
                                   zIndex: '1'
                                 }}
                               >
-                                Delete Image
+                                Delete
                               </Button>
                             </>
                             ): null}
@@ -693,7 +701,7 @@ export default function Advertisement() {
                         </>
                         )}
                       </Grid.Column>
-                      <Grid.Column width={resize ? 8 : 16}>
+                      <Grid.Column width={resize ? 8 : 16} style={{ height: '80%' }}>
                         {company.length > 0 ||
                         description.length > 0 ||
                         url ||
@@ -714,7 +722,7 @@ export default function Advertisement() {
                             ): null}
                             <div
                               style={{
-                                marginBottom: '-15px',
+                                marginBottom: mediaPreview.length === 0 ? '30px' : '-15px',
                                 display: resize ? null : 'flex',
                                 justifyContent: resize ? null : 'center'
                               }}
@@ -735,8 +743,6 @@ export default function Advertisement() {
                                     <Grid.Column
                                       style={{
                                         width: resize ? '44%' : '100%',
-                                        maxHeight: '1000px',
-                                        maxWidth: '1000px',
                                         display: 'flex',
                                         justifyContent: 'center',
                                         position: 'relative'
@@ -744,14 +750,17 @@ export default function Advertisement() {
                                     >
                                       {currentUser === undefined ? (
                                       <>
-                                        <Image
-                                          src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
-                                          width={resize ? `${width/2.8}` : `${width/1.5}`}
-                                          height={resize ? `${height/2.8}` : `${height/1.5}`}
+                                        <div
                                           style={{
-                                            transform: resize ? `translate(${(left/2.8)}px, ${(top/4.8)}px)` : `translate(${(left/1.3)-30}px, ${(top/1.3)}px)`
+                                            transform: resize ? `translate(${(left/2.8)}px, ${(top/4.8)}px)` : `translate(${(left/1.3)-15}px, ${(top/1.3)-5}px)`,
                                           }}
-                                        />
+                                        >
+                                          <Image
+                                            src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
+                                            width={resize ? `${width/2.8}` : `${width/1.5}`}
+                                            height={resize ? `${height/2.8}` : `${height/1.5}`}
+                                          />
+                                        </div>
                                       </>
                                       ):(
                                       <>

@@ -541,7 +541,7 @@ export default function Custom() {
                           marginTop: '30px',
                           lineHeight: '1em',
                           wordBreak: 'break-word',
-                          width: '100%',
+                          width: '100%'
                         }}
                       >
                         {company}
@@ -574,14 +574,17 @@ export default function Custom() {
                       >
                         {currentUser === undefined ? (
                         <>
-                          <Image
-                            src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
-                            width={resize ? `${imageWidth/2.8}` : `${imageWidth/1.5}`}
-                            height={resize ? `${imageHeight/2.8}` : `${imageHeight/1.5}`}
+                          <div
                             style={{
-                              transform: resize ? `translate(${(imageLeft/2.8)}px, ${(imageTop/4.8)}px)` : `translate(${(imageLeft/1.3)-30}px, ${(imageTop/1.3)}px)`
+                              transform: resize ? `translate(${(imageLeft/2.8)}px, ${(imageTop/4.8)}px) rotate(${imageRotation}deg` : `translate(${(imageLeft/1.3)}px, ${(imageTop/1.3)}px) rotate(${imageRotation}deg`
                             }}
-                          />
+                          >
+                            <Image
+                              src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
+                              width={resize ? `${imageWidth/1.5}` : `${imageWidth/1.5}`}
+                              height={resize ? `${imageHeight/1.5}` : `${imageHeight/1.5}`}
+                            />
+                          </div>
                         </>
                         ):(
                         <>
@@ -1180,7 +1183,25 @@ export default function Custom() {
                         <>
                           <span>
                             <Button
-                              onClick={() => setMediaPreview('')}
+                              onClick={() => {
+                                setMediaPreview(''),
+                                setBackgroundColor(''), 
+                                setColor(''), 
+                                setBorderWidth(''), 
+                                setBorderColor('#FFFFFF'), 
+                                setTotalWidth(500), 
+                                setCompanyFontSize(''), 
+                                setCompanyFontWeight(''), 
+                                setCompany(''), 
+                                setDescriptionFontSize(''), 
+                                setDescriptionFontWeight(''), 
+                                setDescription(''),
+                                setImageWidth(150),
+                                setImageHeight(150),
+                                setImageLeft(0),
+                                setImageTop(0),
+                                setImageRotation(0)
+                              }}
                               style={{
                                 background: 'transparent',
                                 color: 'red',
