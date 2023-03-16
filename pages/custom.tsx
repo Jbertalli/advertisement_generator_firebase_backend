@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Draggable from 'react-draggable';
@@ -15,8 +16,10 @@ const db = getFirestore();
 
 const LOCAL_STORAGE_KEY_SAVED_CUSTOM = 'SavedCustom';
 const LOCAL_STORAGE_KEY_SELECTED_CUSTOM = 'CustomSelected';
+const LOCAL_STORAGE_KEY_IMAGE = 'Image';
 
 export default function Custom() {
+  const [mediaPreview, setMediaPreview] = useState<string>('');
   const [company, setCompany] = useState<string>('');
   const [companyFontSize, setCompanyFontSize] = useState<string>('');
   const [companyFontWeight, setCompanyFontWeight] = useState<string>('');
@@ -351,6 +354,15 @@ export default function Custom() {
   }, [selected]);
 
   useEffect(() => {
+    const adImage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE));
+    if (adImage) setMediaPreview(adImage);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE, JSON.stringify(mediaPreview));
+  }, [mediaPreview]);
+
+  useEffect(() => {
     setClicked(false);
   }, []);
 
@@ -372,6 +384,29 @@ export default function Custom() {
 
   console.log(saved);
   console.log(selected);
+
+  // convert image to base-64
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64: any = await convertBase64(file);
+    console.log(base64)
+    setMediaPreview(base64);
+  }
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      }
+    })
+  }
 
   return (
     <>
@@ -471,7 +506,8 @@ export default function Custom() {
                 Number(descriptionFontSize) > 0 || 
                 Number(borderWidth) > 0 ||
                 selected ||
-                saved > 0
+                saved > 0 ||
+                mediaPreview.length > 0
                 ) ? (
               <>
                 <div
@@ -536,16 +572,31 @@ export default function Custom() {
                           transform: 'translateY(50%)'
                         }}
                       >
-                        <input
-                          type='image'
-                          src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
-                          style={{
-                            width: `${imageWidth/1.1}px`,
-                            height: `${imageHeight/1.1}px`,
-                            transform: `translate(${imageLeft}px, ${imageTop}px) rotate(${showImageRotation}deg)`,
-                            cursor: 'grab'
-                          }}
-                        />
+                        {currentUser === undefined ? (
+                        <>
+                          <Image
+                            src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
+                            width={resize ? `${imageWidth/2.8}` : `${imageWidth/1.5}`}
+                            height={resize ? `${imageHeight/2.8}` : `${imageHeight/1.5}`}
+                            style={{
+                              transform: resize ? `translate(${(imageLeft/2.8)}px, ${(imageTop/4.8)}px)` : `translate(${(imageLeft/1.3)-30}px, ${(imageTop/1.3)}px)`
+                            }}
+                          />
+                        </>
+                        ):(
+                        <>
+                          <input
+                            type='image'
+                            src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
+                            style={{
+                              width: `${imageWidth/1.1}px`,
+                              height: `${imageHeight/1.1}px`,
+                              transform: `translate(${imageLeft}px, ${imageTop}px) rotate(${showImageRotation}deg)`,
+                              cursor: 'grab'
+                            }}
+                          />
+                        </>
+                        )}
                       </div>
                     </Draggable>
                   </div>
@@ -1095,41 +1146,99 @@ export default function Custom() {
                     </div>
                   </div>
                   <div style={{ color: 'black', marginLeft: '8vw' }}>
-                    <input
-                      name='media'
-                      type='file'
-                      id='actual-btn'
-                      hidden
-                      accept='image/*'
-                      style={{ 
-                        width: '150px', 
-                        transform: 'translateX(-.2vw)'
-                      }}
-                      // onChange={handleImageChange}
-                      onChange={(e) => {handleImageChange(e), setImageSaved(imageSaved + 1)}}
-                      onClick={() => {
-                        setSelected(true), 
-                        setClicked(true),
-                        setSaved(saved + 1)
-                      }}
-                    />
-                    <label 
-                      htmlFor="actual-btn" 
-                      style={{ 
-                        background: '#125CA1',
-                        color: '#FFF',
-                        cursor: 'pointer',
-                        padding: '11px 19.5px 11px 19.5px',
-                        display: 'inline-block',
-                        fontWeight: '700',
-                        fontSize: '14px',
-                        borderRadius: '6px',
-                        position: 'relative',
-                        zIndex: '1'
-                      }}
-                    >
-                      Choose File
-                    </label>
+                    {currentUser === undefined ? (
+                      <>
+                        <span>
+                          <input
+                            name="media"
+                            type="file"
+                            id='actual-btn'
+                            hidden
+                            accept="image/*"
+                            onChange={(e) => {uploadImage(e)}}
+                          />
+                          <label 
+                            htmlFor="actual-btn" 
+                            style={{ 
+                              background: '#125CA1',
+                              color: '#FFF',
+                              cursor: 'pointer',
+                              padding: '11px 21px 11px 21px',
+                              display: 'inline-block',
+                              fontWeight: '700',
+                              fontSize: '14px',
+                              borderRadius: '6px',
+                              position: 'relative',
+                              zIndex: '1',
+                              marginRight: '20px'
+                            }}
+                          >
+                            Choose File
+                          </label>
+                        </span>
+                        {mediaPreview.length > 0 ? (
+                        <>
+                          <span>
+                            <Button
+                              onClick={() => setMediaPreview('')}
+                              style={{
+                                background: 'transparent',
+                                color: 'red',
+                                cursor: 'pointer',
+                                display: 'inline-block',
+                                fontWeight: '700',
+                                fontSize: '14px',
+                                borderRadius: '6px',
+                                border: '2px solid red',
+                                position: 'relative',
+                                zIndex: '1'
+                              }}
+                            >
+                              Delete Image
+                            </Button>
+                          </span>
+                        </>
+                        ): null}
+                      </>
+                      ):(
+                      <>
+                        <input
+                          name='media'
+                          type='file'
+                          id='actual-btn'
+                          hidden
+                          accept='image/*'
+                          style={{ 
+                            width: '150px', 
+                            transform: 'translateX(-.2vw)'
+                          }}
+                          // onChange={handleImageChange}
+                          onChange={(e) => {handleImageChange(e), setImageSaved(imageSaved + 1)}}
+                          onClick={() => {
+                            setSelected(true), 
+                            setClicked(true),
+                            setSaved(saved + 1)
+                          }}
+                        />
+                        <label 
+                          htmlFor="actual-btn" 
+                          style={{ 
+                            background: '#125CA1',
+                            color: '#FFF',
+                            cursor: 'pointer',
+                            padding: '11px 19.5px 11px 19.5px',
+                            display: 'inline-block',
+                            fontWeight: '700',
+                            fontSize: '14px',
+                            borderRadius: '6px',
+                            position: 'relative',
+                            zIndex: '1'
+                          }}
+                        >
+                          Choose File
+                        </label>
+                      </>
+                      )}
                     <div style={{ marginBottom: '5px', marginTop: '15px' }}>Image Width (pixels)</div>
                     <div>
                       <Form.Input

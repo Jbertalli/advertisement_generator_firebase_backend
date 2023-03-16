@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import FocusLock from 'react-focus-lock';
 import Local from '../components/localStorage';
 import { Container, Segment, Button, Form, Icon, Grid, Item, Card, Table, Divider } from 'semantic-ui-react';
@@ -21,8 +22,10 @@ const db = getFirestore();
 
 const LOCAL_STORAGE_KEY_SAVED = 'Saved';
 const LOCAL_STORAGE_KEY_SELECTED = 'Selected';
+const LOCAL_STORAGE_KEY_IMAGE = 'Image';
 
 export default function Advertisement() {
+  const [mediaPreview, setMediaPreview] = useState<string>('');
   const [company, setCompany] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [width, setWidth] = useState<any>(350);
@@ -208,6 +211,15 @@ export default function Advertisement() {
   }, [selected]);
 
   useEffect(() => {
+    const adImage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE));
+    if (adImage) setMediaPreview(adImage);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE, JSON.stringify(mediaPreview));
+  }, [mediaPreview]);
+
+  useEffect(() => {
     setClicked(false);
   }, []);
 
@@ -229,6 +241,29 @@ export default function Advertisement() {
 
   console.log(saved);
   console.log(selected);
+
+  // convert image to base-64
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64: any = await convertBase64(file);
+    console.log(base64)
+    setMediaPreview(base64);
+  }
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      }
+    })
+  }
 
   return (
     <>
@@ -330,42 +365,99 @@ export default function Advertisement() {
                             display: 'flex'
                           }}
                         >
-                          <input
-                            name='media'
-                            type='file'
-                            id='actual-btn'
-                            hidden
-                            accept='image/*'
-                            style={{ 
-                              width: '150px', 
-                              transform: 'translateX(-.2vw)'
-                            }}
-                            onChange={handleImageChange}
-                            onClick={() => {
-                              setSelected(true), 
-                              setClicked(true), 
-                              setSaved(saved + 1)
-                            }}
-                          />
+                          {currentUser === undefined ? (
+                          <>
+                            <div>
+                              <input
+                                name="media"
+                                type="file"
+                                id='actual-btn'
+                                hidden
+                                accept="image/*"
+                                onChange={(e) => {uploadImage(e)}}
+                              />
+                              <label 
+                                htmlFor="actual-btn" 
+                                style={{ 
+                                  background: '#125CA1',
+                                  color: '#FFF',
+                                  cursor: 'pointer',
+                                  padding: '0.2em 1.5em',
+                                  display: 'inline-block',
+                                  fontWeight: '700',
+                                  fontSize: '14px',
+                                  borderRadius: '6px',
+                                  position: 'relative',
+                                  zIndex: '1',
+                                  marginRight: '20px'
+                                }}
+                              >
+                                Choose File
+                              </label>
+                            </div>
+                            {mediaPreview.length > 0 ? (
+                            <>
+                              <Button
+                                onClick={() => setMediaPreview('')}
+                                style={{
+                                  background: 'transparent',
+                                  color: 'red',
+                                  cursor: 'pointer',
+                                  padding: '0.2em 1.5em',
+                                  display: 'inline-block',
+                                  fontWeight: '700',
+                                  fontSize: '14px',
+                                  borderRadius: '6px',
+                                  border: '2px solid red',
+                                  position: 'relative',
+                                  zIndex: '1'
+                                }}
+                              >
+                                Delete Image
+                              </Button>
+                            </>
+                            ): null}
+                          </>
+                          ):(
+                          <>
+                            <input
+                              name='media'
+                              type='file'
+                              id='actual-btn'
+                              hidden
+                              accept='image/*'
+                              style={{ 
+                                width: '150px', 
+                                transform: 'translateX(-.2vw)'
+                              }}
+                              onChange={handleImageChange}
+                              onClick={() => {
+                                setSelected(true), 
+                                setClicked(true), 
+                                setSaved(saved + 1)
+                              }}
+                            />
+                            <label 
+                              htmlFor="actual-btn" 
+                              style={{ 
+                                background: '#125CA1',
+                                color: '#FFF',
+                                cursor: 'pointer',
+                                padding: '0.2em 1.5em',
+                                display: 'inline-block',
+                                fontWeight: '700',
+                                fontSize: '14px',
+                                borderRadius: '6px',
+                                position: 'relative',
+                                zIndex: '1'
+                              }}
+                            >
+                              Choose File
+                            </label>
+                          </>
+                          )}
                         </div>
-                        <label 
-                          htmlFor="actual-btn" 
-                          style={{ 
-                            background: '#125CA1',
-                            color: '#FFF',
-                            cursor: 'pointer',
-                            padding: '0.2em 1.5em',
-                            display: 'inline-block',
-                            fontWeight: '700',
-                            fontSize: '14px',
-                            borderRadius: '6px',
-                            position: 'relative',
-                            zIndex: '1'
-                          }}
-                        >
-                          Choose File
-                        </label>
-                        {(selected && saved > 0) ? (
+                        {(selected && saved > 0) || mediaPreview.length > 0 ? (
                         <>
                           {resize ? (
                           <>
@@ -606,9 +698,10 @@ export default function Advertisement() {
                         description.length > 0 ||
                         url ||
                         selected ||
-                        saved > 0 ? (
+                        saved > 0 ||
+                        mediaPreview.length > 0 ? (
                           <>
-                            {currentUser === undefined ? (
+                            {currentUser === undefined && !resize ? (
                             <>
                               <div
                                 style={{
@@ -642,23 +735,40 @@ export default function Advertisement() {
                                     <Grid.Column
                                       style={{
                                         width: resize ? '44%' : '100%',
+                                        maxHeight: '1000px',
+                                        maxWidth: '1000px',
                                         display: 'flex',
                                         justifyContent: 'center',
                                         position: 'relative'
                                       }}
                                     >
-                                      <input
-                                        type='image'
-                                        style={{
-                                          transform: resize ? `translate(${(left/2.8)}px, ${(top/2.8)+15}px)` : `translate(${(left/1.3)-30}px, ${(top/1.3)}px)`,
-                                          width: resize ? `${width/2.8}px` : `${width/1.5}px`,
-                                          height: resize ? `${height/2.8}px` : `${height/1.5}px`,
-                                          borderRadius: '5%',
-                                          maxWidth: '18em',
-                                          maxHeight: '18em'
-                                        }}
-                                        src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
-                                      />
+                                      {currentUser === undefined ? (
+                                      <>
+                                        <Image
+                                          src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
+                                          width={resize ? `${width/2.8}` : `${width/1.5}`}
+                                          height={resize ? `${height/2.8}` : `${height/1.5}`}
+                                          style={{
+                                            transform: resize ? `translate(${(left/2.8)}px, ${(top/4.8)}px)` : `translate(${(left/1.3)-30}px, ${(top/1.3)}px)`
+                                          }}
+                                        />
+                                      </>
+                                      ):(
+                                      <>
+                                        <input
+                                          type='image'
+                                          style={{
+                                            transform: resize ? `translate(${(left/2.8)}px, ${(top/2.8)+15}px)` : `translate(${(left/1.3)-30}px, ${(top/1.3)}px)`,
+                                            width: resize ? `${width/2.8}px` : `${width/1.5}px`,
+                                            height: resize ? `${height/2.8}px` : `${height/1.5}px`,
+                                            borderRadius: '5%',
+                                            maxWidth: '18em',
+                                            maxHeight: '18em'
+                                          }}
+                                          src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fadvertisement?alt=media&token=fa287dea-8216-4bcb-9b68-eb7f3a7672c5`}
+                                        />
+                                      </>
+                                      )}
                                     </Grid.Column>
                                     <Grid.Column style={{ width: resize ? '56%' : '100%' }}>
                                       <Item
@@ -766,7 +876,7 @@ export default function Advertisement() {
                           </>
                         ) : (
                           <>
-                            <Card fluid style={{ margin: '.5em 0em 0em 0em' }}>
+                            <Card fluid style={{ margin: '1em 0em 0em 0em' }}>
                               <Card.Content
                                 content='Create Advertisement'
                                 style={{
