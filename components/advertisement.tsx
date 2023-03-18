@@ -30,7 +30,7 @@ export default function Advertisement() {
   const [description, setDescription] = useState<string>('');
   const [width, setWidth] = useState<any>(350);
   const [height, setHeight] = useState<any>(350);
-  const [left, setLeft] = useState<any>(40);
+  const [left, setLeft] = useState<any>(20);
   const [top, setTop] = useState<any>(20);
   const [resize, setResize] = useState<boolean>(false);
   const [showCompany, setShowCompany] = useState<string>('');
@@ -108,48 +108,6 @@ export default function Advertisement() {
     }
   }
 
-  // async function deleteCompany() {
-  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
-  //   await updateDoc(docRef, {
-  //     company: deleteField()
-  //   });
-  // }
-
-  // async function deleteDescription() {
-  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
-  //   await updateDoc(docRef, {
-  //     description: deleteField()
-  //   });
-  // }
-
-  // async function deleteHeight() {
-  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
-  //   await updateDoc(docRef, {
-  //     height: deleteField()
-  //   });
-  // }
-
-  // async function deleteWidth() {
-  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
-  //   await updateDoc(docRef, {
-  //     width: deleteField()
-  //   });
-  // }
-
-  // async function deleteTop() {
-  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
-  //   await updateDoc(docRef, {
-  //     top: deleteField()
-  //   });
-  // }
-
-  // async function deleteLeft() {
-  //   const docRef = doc(db, '/users/' + currentUser + 'Ads');
-  //   await updateDoc(docRef, {
-  //     left: deleteField()
-  //   });
-  // }
-
   async function deleteAll() {
     const docRef = doc(db, '/users/' + currentUser + 'Ads');
     await updateDoc(docRef, {
@@ -224,20 +182,30 @@ export default function Advertisement() {
   }, []);
 
   useEffect(() => {
-    if (currentUser !== undefined) {
-      getData();
-    } else {
-      console.log('Login to get data');
-    }
+    getData();
   }, [saved]);
 
   useEffect(() => {
-    if (currentUser !== undefined) {
-      getData();
-    } else {
-      console.log('Login to get data');
-    }
+    getData();
   }, []);
+
+  // useEffect(() => {
+  //   if (currentUser === undefined && window.document.cookie.length === 17) {
+  //     console.log('Login to get data');
+  //   } else {
+  //     getData();
+  //     console.log('Data');
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   if (currentUser === undefined && window.document.cookie.length === 17) {
+  //     console.log('Login to get data');
+  //   } else {
+  //     getData();
+  //     console.log('Data');
+  //   }
+  // }, [saved]);
 
   console.log(saved);
   console.log(selected);
@@ -302,13 +270,13 @@ export default function Advertisement() {
               as='h1'
               size='massive'
               style={{ 
-                margin: '2.8em', 
+                margin: '2.8em',
                 boxShadow: '2px 2px 10px black',
                 transform: 'translateY(-20px)'
               }}
               // onMouseMove={getData}
             >
-              <Segment attached textAlign='center'>
+              <Segment attached={'top'} textAlign='center'>
                 <div
                   style={{
                     color: '#125CA1',
@@ -481,7 +449,10 @@ export default function Advertisement() {
                                   Logo Width
                                   <Form.Input
                                     placeholder='width (pixels)'
-                                    type='number'
+                                    type='text'
+                                    min="0"
+                                    max="400"
+                                    maxLength="3"
                                     value={width}
                                     onChange={(e) => setWidth(e.target.value)}
                                     style={{ 
@@ -496,7 +467,10 @@ export default function Advertisement() {
                                   Logo Height
                                   <Form.Input
                                     placeholder='height (pixels)'
-                                    type='number'
+                                    type='text'
+                                    min="0"
+                                    max="500"
+                                    maxLength="3"
                                     value={height}
                                     onChange={(e) => setHeight(e.target.value)}
                                     style={{ 
@@ -508,10 +482,13 @@ export default function Advertisement() {
                                   />
                                 </div>
                                 <div>
-                                  Logo Margin
+                                  Left Margin
                                   <Form.Input
                                     placeholder='left (pixels)'
-                                    type='number'
+                                    type='text'
+                                    min="-300"
+                                    max="300"
+                                    maxLength="3"
                                     value={left}
                                     onChange={(e) => setLeft(e.target.value)}
                                     style={{ 
@@ -526,7 +503,10 @@ export default function Advertisement() {
                                   Top Margin
                                   <Form.Input
                                     placeholder='top (pixels)'
-                                    type='number'
+                                    type='text'
+                                    min="-300"
+                                    max="300"
+                                    maxLength="3"
                                     value={top}
                                     onChange={(e) => setTop(e.target.value)}
                                     style={{ 
@@ -560,7 +540,10 @@ export default function Advertisement() {
                                   </div>
                                   <Form.Input
                                     placeholder='width (pixels)'
-                                    type='number'
+                                    type='text'
+                                    min="0"
+                                    max="400"
+                                    maxLength='3'
                                     style={{ width: resize ? '20vw' : '35vw' }}
                                     value={width}
                                     onChange={(e) => setWidth(e.target.value)}
@@ -576,7 +559,10 @@ export default function Advertisement() {
                                   </div>
                                   <Form.Input
                                     placeholder='height (pixels)'
-                                    type='number'
+                                    type='text'
+                                    min="0"
+                                    max="500"
+                                    maxLength='3'
                                     style={{ width: resize ? '20vw' : '35vw' }}
                                     value={height}
                                     onChange={(e) => setHeight(e.target.value)}
@@ -598,7 +584,10 @@ export default function Advertisement() {
                                   </div>
                                   <Form.Input
                                     placeholder='left (pixels)'
-                                    type='number'
+                                    type='text'
+                                    min="-300"
+                                    max="300"
+                                    maxLength='3'
                                     style={{ width: resize ? '20vw' : '35vw' }}
                                     value={left}
                                     onChange={(e) => setLeft(e.target.value)}
@@ -614,7 +603,10 @@ export default function Advertisement() {
                                   </div>
                                   <Form.Input
                                     placeholder='top (pixels)'
-                                    type='number'
+                                    type='text'
+                                    min="-300"
+                                    max="300"
+                                    maxLength='3'
                                     style={{ width: resize ? '20vw' : '35vw' }}
                                     value={top}
                                     onChange={(e) => setTop(e.target.value)}
@@ -682,7 +674,7 @@ export default function Advertisement() {
                                   setCompany(''), 
                                   setWidth(350), 
                                   setHeight(350), 
-                                  setLeft(40), 
+                                  setLeft(20), 
                                   setTop(20),
                                   deleteStoredImage(),
                                   setSaved(0)
@@ -701,7 +693,7 @@ export default function Advertisement() {
                         </>
                         )}
                       </Grid.Column>
-                      <Grid.Column width={resize ? 8 : 16} style={{ height: '80%' }}>
+                      <Grid.Column width={resize ? 8 : 16} style={{ height: '75%' }}>
                         {company.length > 0 ||
                         description.length > 0 ||
                         url ||
@@ -722,7 +714,7 @@ export default function Advertisement() {
                             ): null}
                             <div
                               style={{
-                                marginBottom: mediaPreview.length === 0 ? '30px' : '-15px',
+                                marginBottom: mediaPreview.length === 0 ? '30px' : '45px',
                                 display: resize ? null : 'flex',
                                 justifyContent: resize ? null : 'center'
                               }}
@@ -733,8 +725,8 @@ export default function Advertisement() {
                               fluid
                               style={{
                                 transform: resize ? null : 'scale(0.7)',
-                                marginBottom: resize ? null : (height < 300 ? '-80px' : '-130px'),
-                                top: resize ? null : '-15%'
+                                marginBottom: resize ? null : (height < 300 ? '-140px' : '-170px'),
+                                top: resize ? '-40px' : '-15%'
                               }}
                             >
                               <div>
@@ -752,13 +744,14 @@ export default function Advertisement() {
                                       <>
                                         <div
                                           style={{
-                                            transform: resize ? `translate(${(left/2.8)}px, ${(top/4.8)}px)` : `translate(${(left/1.3)-15}px, ${(top/1.3)-5}px)`,
-                                          }}
+                                            transform: resize ? `translate(${(left/2.8)+10}px, ${(top/4.8)+10}px)` : `translate(${(left/1.3)-15}px, ${(top/1.3)-5}px)`,
+                                            }}
                                         >
                                           <Image
                                             src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
                                             width={resize ? `${width/2.8}` : `${width/1.5}`}
                                             height={resize ? `${height/2.8}` : `${height/1.5}`}
+                                            alt='uploaded image'
                                           />
                                         </div>
                                       </>
@@ -766,6 +759,7 @@ export default function Advertisement() {
                                       <>
                                         <input
                                           type='image'
+                                          alt='uploaded image'
                                           style={{
                                             transform: resize ? `translate(${(left/2.8)}px, ${(top/2.8)+15}px)` : `translate(${(left/1.3)-30}px, ${(top/1.3)}px)`,
                                             width: resize ? `${width/2.8}px` : `${width/1.5}px`,
@@ -895,7 +889,7 @@ export default function Advertisement() {
                                   margin: '0em 0em 0em 0em',
                                   color: 'gray',
                                   padding: '4.5em 0em 4.5em 0em',
-                                  boxShadow: '2px 2px 10px black',
+                                  boxShadow: '2px 2px 10px black'
                                 }}
                               />
                             </Card>
@@ -908,13 +902,14 @@ export default function Advertisement() {
               </Form>
               {currentUser === undefined ? (
               <>
-                <Segment
-                  attached
+                <div
                   style={{
                     fontSize: resize ? '18px' : '14px',
                     fontWeight: '600',
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '50px'
                   }}
                 >
                   <Link 
@@ -933,11 +928,16 @@ export default function Advertisement() {
                   <span>
                     &nbsp;to Save Advertisement
                   </span>
-                </Segment>
+                </div>
               </>
               ) : (
               <>
-                <Segment attached>
+                <Segment 
+                  attached={'top'} 
+                  style={{ 
+                    transform: 'translateY(-15px)'
+                  }}
+                >
                   <Grid>
                     <Grid.Row>
                       <Grid.Column
@@ -950,6 +950,7 @@ export default function Advertisement() {
                       >
                         <input
                           type='image'
+                          alt='uploaded image'
                           style={{
                             transform: `translate(${showLeft}px, ${showTop}px) scale(.8)`,
                             width: `${showWidth}px`,
@@ -1032,7 +1033,7 @@ export default function Advertisement() {
                     {showDescription}
                   </div>
                 </Segment>
-            </>
+              </>
               )}
             </Container>
           </div>

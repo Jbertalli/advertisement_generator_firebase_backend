@@ -367,20 +367,30 @@ export default function Custom() {
   }, []);
 
   useEffect(() => {
-    if (currentUser !== undefined) {
-      getData();
-    } else {
-      console.log('Login to get data');
-    }
+    getData();
   }, [saved]);
 
   useEffect(() => {
-    if (currentUser !== undefined) {
-      getData();
-    } else {
-      console.log('Login to get data');
-    }
+    getData();
   }, []);
+
+  // useEffect(() => {
+  //   // if (currentUser !== undefined) {
+  //   //   getData();
+  //   // } else {
+  //   //   console.log('Login to get data');
+  //   // }
+  //   getData();
+  // }, [saved]);
+
+  // useEffect(() => {
+  //   // if (currentUser !== undefined) {
+  //   //   getData();
+  //   // } else {
+  //   //   console.log('Login to get data');
+  //   // }
+  //   getData();
+  // }, []);
 
   console.log(saved);
   console.log(selected);
@@ -468,11 +478,12 @@ export default function Custom() {
             size='massive'
             style={{
               margin: '0.5em',
-              boxShadow: '2px 2px 10px black'
+              boxShadow: '2px 2px 10px black',
+              marginBottom: '60px'
             }}
           >
             <Segment 
-              attached 
+              attached={'top'}
               textAlign='center'
             >
               <div
@@ -583,6 +594,7 @@ export default function Custom() {
                               src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
                               width={resize ? `${imageWidth/1.5}` : `${imageWidth/1.5}`}
                               height={resize ? `${imageHeight/1.5}` : `${imageHeight/1.5}`}
+                              alt='uploaded image'
                             />
                           </div>
                         </>
@@ -590,10 +602,11 @@ export default function Custom() {
                         <>
                           <input
                             type='image'
+                            alt='uploaded image'
                             src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
                             style={{
-                              width: `${imageWidth/1.1}px`,
-                              height: `${imageHeight/1.1}px`,
+                              width: `${imageWidth/1.5}px`,
+                              height: `${imageHeight/1.5}px`,
                               transform: `translate(${imageLeft}px, ${imageTop}px) rotate(${showImageRotation}deg)`,
                               cursor: 'grab'
                             }}
@@ -1266,7 +1279,8 @@ export default function Custom() {
                         min='0'
                         max='1000'
                         step='10'
-                        type='number'
+                        type='text'
+                        maxLength='3'
                         placeholder='width'
                         value={imageWidth}
                         onChange={(e) => setImageWidth(e.target.value)}
@@ -1282,7 +1296,8 @@ export default function Custom() {
                         min='0'
                         max='1000'
                         step='10'
-                        type='number'
+                        type='text'
+                        maxLength='3'
                         placeholder='height'
                         value={imageHeight}
                         onChange={(e) => setImageHeight(e.target.value)}
@@ -1298,7 +1313,8 @@ export default function Custom() {
                         min='-1000'
                         max='1000'
                         step='10'
-                        type='number'
+                        type='text'
+                        maxLength='3'
                         placeholder='left'
                         value={imageLeft}
                         onChange={(e) => setImageLeft(e.target.value)}
@@ -1314,7 +1330,8 @@ export default function Custom() {
                         min='-1000'
                         max='1000'
                         step='10'
-                        type='number'
+                        type='text'
+                        maxLength='4'
                         placeholder='top'
                         value={imageTop}
                         onChange={(e) => setImageTop(e.target.value)}
@@ -1332,7 +1349,8 @@ export default function Custom() {
                         min='0'
                         max='360'
                         step='5'
-                        type='number'
+                        type='text'
+                        maxLength='3'
                         placeholder='rotation'
                         value={imageRotation}
                         onChange={(e) => setImageRotation(e.target.value)}
@@ -1382,7 +1400,7 @@ export default function Custom() {
             {currentUser === undefined ? (
             <>
               <Segment
-                attached
+                attached={'top'}
                 style={{
                   fontSize: resize ? '18px' : '14px',
                   fontWeight: '600',
@@ -1421,16 +1439,7 @@ export default function Custom() {
       <>
         <div
           style={{
-            marginTop: '30px'
-          }}
-        >
-          <Divider />
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            padding: '20px 0px 20px 0px'
+            display: 'flex'
           }}
         >
           <Button
@@ -1467,7 +1476,8 @@ export default function Custom() {
             style={{
               border: '2px solid red',
               background: 'transparent',
-              color: 'red'
+              color: 'red',
+              transform: 'translate(15.1px)'
             }}
             onClick={() => {
               setBackgroundColor(''),
@@ -1527,14 +1537,14 @@ export default function Custom() {
             Delete Advertisement
           </Button>
         </div>
-        {(company.length > 0 || 
+        {/* {(company.length > 0 || 
           Number(companyFontSize) > 0 || 
-          description.length ||
+          description.length  > 0 ||
           Number(descriptionFontSize) > 0 || 
           Number(borderWidth) > 0) ||
           selected ||
           saved > 0 ? (
-        <>
+        <> */}
           <Divider />
           <div
             style={{
@@ -1595,11 +1605,12 @@ export default function Custom() {
                 >
                   <input
                     type='image'
+                    alt='uploaded image'
                     src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
                     style={{
-                      width: `${showImageWidth}px`,
-                      height: `${showImageHeight}px`,
-                      transform: `translate(${showImageLeft}px, ${showImageTop}px) rotate(${showImageRotation}deg)`,
+                      width: `${showImageWidth/1.2}px`,
+                      height: `${showImageHeight/1.2}px`,
+                      transform: `translate(${showImageLeft}px, ${showImageTop-20}px) rotate(${showImageRotation}deg)`,
                       cursor: 'grab'
                     }}
                   />
@@ -1607,8 +1618,8 @@ export default function Custom() {
               </Draggable>
             </div>
           </div>
-        </>
-        ): null}
+        {/* </>
+        ): null} */}
       </>
       )}
     </>
