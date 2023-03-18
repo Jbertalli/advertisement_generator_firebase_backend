@@ -726,7 +726,7 @@ export default function Advertisement() {
                               style={{
                                 transform: resize ? null : 'scale(0.7)',
                                 marginBottom: resize ? null : (height < 300 ? '-140px' : '-170px'),
-                                top: resize ? '-40px' : '-15%'
+                                top: resize ? '-25px' : '-15%'
                               }}
                             >
                               <div>
@@ -761,7 +761,7 @@ export default function Advertisement() {
                                           type='image'
                                           alt='uploaded image'
                                           style={{
-                                            transform: resize ? `translate(${(left/2.8)}px, ${(top/2.8)+15}px)` : `translate(${(left/1.3)-30}px, ${(top/1.3)}px)`,
+                                            transform: resize ? `translate(${(left/2.8)}px, ${(top/2.8)+15}px)` : `translate(${(left/1.3)-15}px, ${(top/1.3)-5}px)`,
                                             width: resize ? `${width/2.8}px` : `${width/1.5}px`,
                                             height: resize ? `${height/2.8}px` : `${height/1.5}px`,
                                             borderRadius: '5%',
@@ -952,7 +952,7 @@ export default function Advertisement() {
                           type='image'
                           alt='uploaded image'
                           style={{
-                            transform: `translate(${showLeft}px, ${showTop}px) scale(.8)`,
+                            transform: `translate(${showLeft+25}px, ${showTop}px) scale(.8)`,
                             width: `${showWidth}px`,
                             height: `${showHeight}px`,
                             borderRadius: '5%',
