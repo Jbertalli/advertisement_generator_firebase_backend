@@ -725,7 +725,7 @@ export default function Advertisement() {
                               fluid
                               style={{
                                 transform: resize ? null : 'scale(0.7)',
-                                marginBottom: resize ? null : (height < 300 ? '-140px' : '-170px'),
+                                marginBottom: resize ? null : (height < 300 ? '-120px' : '-170px'),
                                 top: resize ? '-25px' : '-13%'
                               }}
                             >
