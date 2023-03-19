@@ -726,7 +726,7 @@ export default function Advertisement() {
                               style={{
                                 transform: resize ? null : 'scale(0.7)',
                                 marginBottom: resize ? null : (height < 300 ? '-120px' : '-170px'),
-                                top: resize ? '-25px' : '-13%'
+                                top: resize ? (currentUser === undefined ? '-40px' : '-25px') : (currentUser === undefined ? '-15%' : '-13%')
                               }}
                             >
                               <div>

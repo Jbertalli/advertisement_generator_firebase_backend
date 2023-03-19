@@ -13,7 +13,7 @@ auth;
 function MyApp({ Component, pageProps }) {
   const [user] = useAuthState(auth);
   const router = useRouter();
-  console.log(user)
+  console.log(user);
 
   useEffect(() => {
     console.log(window.document.cookie.length);
@@ -30,10 +30,6 @@ function MyApp({ Component, pageProps }) {
   if (user === null && (router.pathname === '/history' || router.pathname === '/customHistory')) {
     return null;
   }
-
-  // if (user === null && router.pathname !== '/') {
-  //   return null;
-  // }
 
   return (
     <>

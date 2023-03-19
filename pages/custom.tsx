@@ -587,7 +587,7 @@ export default function Custom() {
                         <>
                           <div
                             style={{
-                              transform: resize ? `translate(${(imageLeft/2.8)}px, ${(imageTop/4.8)}px) rotate(${imageRotation}deg` : `translate(${(imageLeft/1.3)}px, ${(imageTop/1.3)}px) rotate(${imageRotation}deg`
+                              transform: resize ? `translate(${(imageLeft/2.8)}px, ${(imageTop/4.8)}px) rotate(${imageRotation}deg)` : `translate(${(imageLeft/1.3)}px, ${(imageTop/1.3)}px) rotate(${imageRotation}deg)`
                             }}
                           >
                             <Image
@@ -607,7 +607,7 @@ export default function Custom() {
                             style={{
                               width: `${imageWidth/1.5}px`,
                               height: `${imageHeight/1.5}px`,
-                              transform: `translate(${imageLeft}px, ${imageTop}px) rotate(${showImageRotation}deg)`,
+                              transform: `translate(${imageLeft}px, ${imageTop}px) rotate(${imageRotation}deg)`,
                               cursor: 'grab'
                             }}
                           />
