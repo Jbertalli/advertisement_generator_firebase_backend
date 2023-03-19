@@ -935,7 +935,8 @@ export default function Advertisement() {
                 <Segment 
                   attached={'top'} 
                   style={{ 
-                    transform: 'translateY(-15px)'
+                    transform: 'translateY(-15px)',
+                    borderBottom: currentUser ? '1px solid transparent' : null
                   }}
                 >
                   <Grid>
