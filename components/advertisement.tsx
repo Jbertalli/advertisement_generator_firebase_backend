@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import FocusLock from 'react-focus-lock';
 import Local from '../components/localStorage';
-import { Container, Segment, Button, Form, Icon, Grid, Item, Card, Table, Divider } from 'semantic-ui-react';
+import { Container, Segment, Button, Form, Icon, Grid, Item, Card, Divider } from 'semantic-ui-react';
 import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
 import { useDispatch } from 'react-redux';
@@ -726,7 +726,7 @@ export default function Advertisement() {
                               style={{
                                 transform: resize ? null : 'scale(0.7)',
                                 marginBottom: resize ? null : (height < 300 ? '-120px' : '-170px'),
-                                top: resize ? (currentUser === undefined ? '-40px' : '-25px') : (currentUser === undefined ? '-15%' : '-13%')
+                                top: resize ? '-40px' : '-15%'
                               }}
                             >
                               <div>
@@ -879,7 +879,7 @@ export default function Advertisement() {
                           </>
                         ) : (
                           <>
-                            <Card fluid style={{ margin: '1em 0em 0em 0em' }}>
+                            <Card fluid style={{ marginTop: '2em' }}>
                               <Card.Content
                                 content='Create Advertisement'
                                 style={{
@@ -888,7 +888,7 @@ export default function Advertisement() {
                                   fontWeight: '50',
                                   margin: '0em 0em 0em 0em',
                                   color: 'gray',
-                                  padding: '4.5em 0em 4.5em 0em',
+                                  padding: '3.6em 0em 3.6em 0em',
                                   boxShadow: '2px 2px 10px black'
                                 }}
                               />
