@@ -181,31 +181,13 @@ export default function Advertisement() {
     setClicked(false);
   }, []);
 
-  useEffect(() => {
-    getData();
-  }, [saved]);
-
-  useEffect(() => {
-    getData();
-  }, []);
-
   // useEffect(() => {
-  //   if (currentUser === undefined && window.document.cookie.length === 17) {
-  //     console.log('Login to get data');
-  //   } else {
-  //     getData();
-  //     console.log('Data');
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (currentUser === undefined && window.document.cookie.length === 17) {
-  //     console.log('Login to get data');
-  //   } else {
-  //     getData();
-  //     console.log('Data');
-  //   }
+  //   getData();
   // }, [saved]);
+
+  useEffect(() => {
+    {currentUser === undefined ? null : getData()}
+  }, []);
 
   console.log(saved);
   console.log(selected);
@@ -259,6 +241,7 @@ export default function Advertisement() {
             display: 'flex',
             justifyContent: 'center'
           }}
+          // onMouseOver={currentUser === undefined ? null : getData}
         >
           <div
             style={{
@@ -274,7 +257,7 @@ export default function Advertisement() {
                 boxShadow: '2px 2px 10px black',
                 transform: 'translateY(-20px)'
               }}
-              // onMouseMove={getData}
+              // onMouseMove={getData} 
             >
               <Segment attached={'top'} textAlign='center'>
                 <div
