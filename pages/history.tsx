@@ -108,12 +108,21 @@ export default function History() {
   }
 
   useEffect(() => {
-    getData();
+    window.scrollTo(0, -10);
   }, []);
 
   useEffect(() => {
-    window.scrollTo(0, -10);
+    getData();
   }, []);
+  
+  auth.onAuthStateChanged(function(user) {
+    if (user) {
+      getData();
+      console.log('USER');
+    } else {
+      console.log('NO USER');
+    }
+  })
 
   return (
     <>

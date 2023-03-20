@@ -182,15 +182,23 @@ export default function Advertisement() {
   }, []);
 
   // useEffect(() => {
-  //   getData();
+  //   if (currentUser !== undefined) {
+  //     getData();
+  //   } else {
+  //     console.log('Login to get data');
+  //   }
   // }, [saved]);
 
-  useEffect(() => {
-    {currentUser === undefined ? null : getData()}
-  }, []);
+  // useEffect(() => {
+  //   if (currentUser !== undefined) {
+  //     getData();
+  //   } else {
+  //     console.log('Login to get data');
+  //   }
+  // }, []);
 
-  console.log(saved);
-  console.log(selected);
+  // console.log(saved);
+  // console.log(selected);
 
   // convert image to base-64
   const uploadImage = async (e) => {
@@ -214,6 +222,23 @@ export default function Advertisement() {
       }
     })
   }
+
+  useEffect(() => {
+    if (currentUser !== undefined) {
+      getData();
+    } else {
+      console.log('Login to get data');
+    }
+  }, [saved]);
+
+  auth.onAuthStateChanged(function(user) {
+    if (user) {
+      getData();
+      console.log('USER');
+    } else {
+      console.log('NO USER');
+    }
+  })
 
   return (
     <>
@@ -241,7 +266,7 @@ export default function Advertisement() {
             display: 'flex',
             justifyContent: 'center'
           }}
-          // onMouseOver={currentUser === undefined ? null : getData}
+          // onMouseOver={currentUser === undefined ? null : getData} 
         >
           <div
             style={{

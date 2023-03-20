@@ -16,7 +16,7 @@ const db = getFirestore();
 
 const LOCAL_STORAGE_KEY_SAVED_CUSTOM = 'SavedCustom';
 const LOCAL_STORAGE_KEY_SELECTED_CUSTOM = 'CustomSelected';
-const LOCAL_STORAGE_KEY_IMAGE = 'Image';
+const LOCAL_STORAGE_KEY_IMAGE = 'CustomImage';
 
 export default function Custom() {
   const [mediaPreview, setMediaPreview] = useState<string>('');
@@ -366,30 +366,20 @@ export default function Custom() {
     setClicked(false);
   }, []);
 
-  useEffect(() => {
-    getData();
-  }, [saved]);
-
-  useEffect(() => {
-    getData();
-  }, []);
-
   // useEffect(() => {
-  //   // if (currentUser !== undefined) {
-  //   //   getData();
-  //   // } else {
-  //   //   console.log('Login to get data');
-  //   // }
-  //   getData();
+  //   if (currentUser !== undefined) {
+  //     getData();
+  //   } else {
+  //     console.log('Login to get data');
+  //   }
   // }, [saved]);
 
   // useEffect(() => {
-  //   // if (currentUser !== undefined) {
-  //   //   getData();
-  //   // } else {
-  //   //   console.log('Login to get data');
-  //   // }
-  //   getData();
+  //   if (currentUser !== undefined) {
+  //     getData();
+  //   } else {
+  //     console.log('Login to get data');
+  //   }
   // }, []);
 
   console.log(saved);
@@ -417,6 +407,23 @@ export default function Custom() {
       }
     })
   }
+
+  useEffect(() => {
+    if (currentUser !== undefined) {
+      getData();
+    } else {
+      console.log('Login to get data');
+    }
+  }, [saved]);
+
+  auth.onAuthStateChanged(function(user) {
+    if (user) {
+      getData();
+      console.log('USER');
+    } else {
+      console.log('NO USER');
+    }
+  })
 
   return (
     <>

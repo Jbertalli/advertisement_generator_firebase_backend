@@ -126,12 +126,21 @@ export default function History() {
   }
 
   useEffect(() => {
-    getData();
-  }, [])
-
-  useEffect(() => {
     window.scrollTo(0, -10);
   }, []);
+
+  useEffect(() => {
+    getData();
+  }, []);
+  
+  auth.onAuthStateChanged(function(user) {
+    if (user) {
+      getData();
+      console.log('USER');
+    } else {
+      console.log('NO USER');
+    }
+  })
 
   return (
     <>
@@ -152,7 +161,7 @@ export default function History() {
               background: 'linear-gradient(to top, blue, #125CA180)',
               height: '100vh'
             }}
-            onMouseMove={getData}
+            // onMouseMove={getData}
           >
             <div
               style={{
