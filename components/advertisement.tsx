@@ -238,7 +238,7 @@ export default function Advertisement() {
     } else {
       console.log('NO USER');
     }
-  })
+  });
 
   return (
     <>
@@ -266,7 +266,6 @@ export default function Advertisement() {
             display: 'flex',
             justifyContent: 'center'
           }}
-          // onMouseOver={currentUser === undefined ? null : getData} 
         >
           <div
             style={{
@@ -282,7 +281,6 @@ export default function Advertisement() {
                 boxShadow: '2px 2px 10px black',
                 transform: 'translateY(-20px)'
               }}
-              // onMouseMove={getData} 
             >
               <Segment attached={'top'} textAlign='center'>
                 <div
@@ -760,7 +758,7 @@ export default function Advertisement() {
                                             src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
                                             width={resize ? `${width/2.8}` : `${width/1.5}`}
                                             height={resize ? `${height/2.8}` : `${height/1.5}`}
-                                            alt='uploaded image'
+                                            alt='image'
                                           />
                                         </div>
                                       </>
@@ -768,7 +766,7 @@ export default function Advertisement() {
                                       <>
                                         <input
                                           type='image'
-                                          alt='uploaded image'
+                                          alt='image'
                                           style={{
                                             transform: resize ? `translate(${(left/2.8)}px, ${(top/2.8)+15}px)` : `translate(${(left/1.3)-15}px, ${(top/1.3)-5}px)`,
                                             width: resize ? `${width/2.8}px` : `${width/1.5}px`,
@@ -960,7 +958,7 @@ export default function Advertisement() {
                       >
                         <input
                           type='image'
-                          alt='uploaded image'
+                          alt='image'
                           style={{
                             transform: `translate(${showLeft+25}px, ${showTop}px) scale(.8)`,
                             width: `${showWidth}px`,

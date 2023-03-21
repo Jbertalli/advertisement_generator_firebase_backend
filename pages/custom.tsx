@@ -601,7 +601,7 @@ export default function Custom() {
                               src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
                               width={resize ? `${imageWidth/1.5}` : `${imageWidth/1.5}`}
                               height={resize ? `${imageHeight/1.5}` : `${imageHeight/1.5}`}
-                              alt='uploaded image'
+                              alt='image'
                             />
                           </div>
                         </>
@@ -609,7 +609,7 @@ export default function Custom() {
                         <>
                           <input
                             type='image'
-                            alt='uploaded image'
+                            alt='image'
                             src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
                             style={{
                               width: `${imageWidth/1.5}px`,
@@ -1446,7 +1446,10 @@ export default function Custom() {
       <>
         <div
           style={{
-            display: 'flex'
+            display: 'flex',
+            justifyContent: 'center',
+            transform: 'translateY(-30px)',
+            marginBottom: '-15px'
           }}
         >
           <Button
@@ -1612,7 +1615,7 @@ export default function Custom() {
                 >
                   <input
                     type='image'
-                    alt='uploaded image'
+                    alt='image'
                     src={clicked ? url : `https://firebasestorage.googleapis.com/v0/b/advertisement-generator-1fa98.appspot.com/o/image%2F${currentUser}%2Fcustom?alt=media&token=509c2369-ca51-406f-8ec2-028d465b24fb`}
                     style={{
                       width: `${showImageWidth/1.2}px`,

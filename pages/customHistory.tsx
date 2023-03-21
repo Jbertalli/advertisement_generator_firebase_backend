@@ -132,7 +132,7 @@ export default function History() {
   useEffect(() => {
     getData();
   }, []);
-  
+
   auth.onAuthStateChanged(function(user) {
     if (user) {
       getData();
@@ -161,7 +161,6 @@ export default function History() {
               background: 'linear-gradient(to top, blue, #125CA180)',
               height: '100vh'
             }}
-            // onMouseMove={getData}
           >
             <div
               style={{
