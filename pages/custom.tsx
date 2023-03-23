@@ -1449,9 +1449,7 @@ export default function Custom() {
                 totalWidth,
                 imageRotation
               ), getData(),
-                handleSubmit(),
-                setSaved(0),
-                setFull(true)
+                 setFull(true)
               }}
               style={{
                 border: '2px solid #125CA1',
@@ -1488,11 +1486,10 @@ export default function Custom() {
                 imageTop,
                 totalWidth,
                 imageRotation
-              ), getData(),
-                handleSubmit(),
-                setSaved(0),
-                getImg(),
-                setFull(true)
+              ), handleSubmit(),
+                 getData(),
+                 getImg(),
+                 setFull(true)
               }}
               style={{
                 border: '2px solid #125CA1',
