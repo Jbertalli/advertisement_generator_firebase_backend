@@ -20,10 +20,6 @@ import { storage } from '../firebase/clientApp';
 auth;
 const db = getFirestore();
 
-const LOCAL_STORAGE_KEY_SAVED = 'Saved';
-const LOCAL_STORAGE_KEY_SELECTED = 'Selected';
-const LOCAL_STORAGE_KEY_IMAGE = 'Image';
-
 export default function Advertisement() {
   const [mediaPreview, setMediaPreview] = useState<string>('');
   const [company, setCompany] = useState<string>('');
@@ -44,6 +40,7 @@ export default function Advertisement() {
   const [clicked, setClicked] = useState<boolean>(false);
   const [saved, setSaved] = useState<number>(0);
   const [url, setUrl] = useState(null);
+  const [full, setFull] = useState<boolean>(false);
 
   const currentUser = auth.currentUser?.uid;
 
@@ -91,12 +88,6 @@ export default function Advertisement() {
     const docSnap = await getDoc(docRef);
 
     if(docSnap.exists()) {
-      console.log('Document company:', docSnap.data().company);
-      console.log('Document description:', docSnap.data().description);
-      console.log('Document height:', docSnap.data().height);
-      console.log('Document width:', docSnap.data().width);
-      console.log('Document top:', docSnap.data().top);
-      console.log('Document left:', docSnap.data().left);
       setShowCompany(docSnap.data().company);
       setShowDescription(docSnap.data().description);
       setShowWidth(docSnap.data().width);
@@ -134,7 +125,6 @@ export default function Advertisement() {
       }).catch((error) => {
         console.log(error.message, 'error getting the image url');
       })
-      // setSaveImage(null);
     }).catch((error) => {
       console.log(error.message);
     });
@@ -151,54 +141,8 @@ export default function Advertisement() {
   }
 
   useEffect(() => {
-    const storedSaved = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SAVED));
-    if (storedSaved) setSaved(storedSaved);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_SAVED, JSON.stringify(saved));
-  }, [saved]);
-
-  useEffect(() => {
-    const storedSelected = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SELECTED));
-    if (storedSelected) setSelected(storedSelected);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_SELECTED, JSON.stringify(selected));
-  }, [selected]);
-
-  useEffect(() => {
-    const adImage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE));
-    if (adImage) setMediaPreview(adImage);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE, JSON.stringify(mediaPreview));
-  }, [mediaPreview]);
-
-  useEffect(() => {
     setClicked(false);
   }, []);
-
-  // useEffect(() => {
-  //   if (currentUser !== undefined) {
-  //     getData();
-  //   } else {
-  //     console.log('Login to get data');
-  //   }
-  // }, [saved]);
-
-  // useEffect(() => {
-  //   if (currentUser !== undefined) {
-  //     getData();
-  //   } else {
-  //     console.log('Login to get data');
-  //   }
-  // }, []);
-
-  // console.log(saved);
-  // console.log(selected);
 
   // convert image to base-64
   const uploadImage = async (e) => {
@@ -240,6 +184,21 @@ export default function Advertisement() {
     }
   });
 
+  const imageRef = ref(storage, `image/${currentUser}/advertisement`);
+
+  function getImg() {
+    getDownloadURL(imageRef).then(onResolve, onReject);
+  }
+
+  function onResolve(foundURL) {
+    console.log('full');
+    setFull(true);
+  }
+
+  function onReject(error) {
+    console.log(error.code);
+  }
+
   return (
     <>
       <Head>
@@ -253,12 +212,22 @@ export default function Advertisement() {
         setHeight={setHeight}
         setLeft={setLeft}
         setTop={setTop}
+        setSelected={setSelected}
+        setMediaPreview={setMediaPreview}
+        setSaved={setSaved}
+        setUrl={setUrl}
+        setFull={setFull}
         company={company}
         description={description}
         width={width}
         height={height}
         left={left}
         top={top}
+        selected={selected}
+        mediaPreview={mediaPreview}
+        saved={saved}
+        url={url}
+        full={full}
       />
       <FocusLock>
         <div
@@ -350,7 +319,7 @@ export default function Advertisement() {
                                 accept="image/*"
                                 onChange={(e) => {uploadImage(e)}}
                               />
-                              <label 
+                              <label
                                 htmlFor="actual-btn" 
                                 style={{ 
                                   background: '#125CA1',
@@ -416,7 +385,8 @@ export default function Advertisement() {
                               onClick={() => {
                                 setSelected(true), 
                                 setClicked(true), 
-                                setSaved(saved + 1)
+                                setSaved(saved + 1),
+                                setFull(false)
                               }}
                             />
                             <label 
@@ -433,13 +403,17 @@ export default function Advertisement() {
                                 position: 'relative',
                                 zIndex: '1'
                               }}
+                              onClick={() => {
+                                deleteAll(), 
+                                setUrl(null)
+                              }}
                             >
                               Choose File
                             </label>
                           </>
                           )}
                         </div>
-                        {(selected && saved > 0) || mediaPreview.length > 0 ? (
+                        {(selected && saved > 0) || mediaPreview.length > 0 || url !== null || full ? (
                         <>
                           {resize ? (
                           <>
@@ -632,45 +606,86 @@ export default function Advertisement() {
                               marginTop: '20px'
                             }}
                           >
-                            <div>
-                              <Button
-                                disabled={!company && !description && !url && !selected && saved == 0}
-                                onClick={() => {
-                                  addAdvertisement(
-                                    company,
-                                    description,
-                                    width,
-                                    height,
-                                    left,
-                                    top
-                                  ),
-                                    dispatch(incrementCompany(String(company))),
-                                    dispatch(incrementDescription(String(description))),
-                                    dispatch(incrementWidth(String(width))),
-                                    dispatch(incrementHeight(String(height))),
-                                    dispatch(incrementLeft(String(left))),
-                                    dispatch(incrementTop(String(top))),
-                                    getData(),
-                                    handleSubmit()
-                                }}
-                                style={{
-                                  border: '2px solid #125CA1',
-                                  background: 'transparent', 
-                                  color: '#125CA1',
-                                  padding: '10px 10px 10px 10px',
-                                  marginBottom: resize ? '-60px' : '15px'
-                                }}
-                              >
-                                Save to Database
-                              </Button>
-                            </div>
+                            {full ? (
+                            <>
+                              <div>
+                                <Button
+                                  disabled={!company && !description && !full && !selected && saved == 0}
+                                  onClick={() => {
+                                    addAdvertisement(
+                                      company,
+                                      description,
+                                      width,
+                                      height,
+                                      left,
+                                      top
+                                    ),
+                                      dispatch(incrementCompany(String(company))),
+                                      dispatch(incrementDescription(String(description))),
+                                      dispatch(incrementWidth(String(width))),
+                                      dispatch(incrementHeight(String(height))),
+                                      dispatch(incrementLeft(String(left))),
+                                      dispatch(incrementTop(String(top))),
+                                      getData(),
+                                      setFull(true)
+                                  }}
+                                  style={{
+                                    border: '2px solid #125CA1',
+                                    background: 'transparent', 
+                                    color: '#125CA1',
+                                    padding: '10px 10px 10px 10px',
+                                    marginBottom: resize ? '-60px' : '15px'
+                                  }}
+                                >
+                                  Update
+                                </Button>
+                              </div>
+                            </>
+                            ):(
+                            <>
+                              <div>
+                                <Button
+                                  disabled={!company && !description && !full && !selected && saved == 0}
+                                  onClick={() => {
+                                    addAdvertisement(
+                                      company,
+                                      description,
+                                      width,
+                                      height,
+                                      left,
+                                      top
+                                    ),
+                                      dispatch(incrementCompany(String(company))),
+                                      dispatch(incrementDescription(String(description))),
+                                      dispatch(incrementWidth(String(width))),
+                                      dispatch(incrementHeight(String(height))),
+                                      dispatch(incrementLeft(String(left))),
+                                      dispatch(incrementTop(String(top))),
+                                      handleSubmit(),
+                                      getData(),
+                                      getImg(),
+                                      setFull(true)
+                                  }}
+                                  style={{
+                                    border: '2px solid #125CA1',
+                                    background: 'transparent', 
+                                    color: '#125CA1',
+                                    padding: '10px 10px 10px 10px',
+                                    marginBottom: resize ? '-60px' : '15px'
+                                  }}
+                                >
+                                  Save to Database
+                                </Button>
+                              </div>
+                            </>
+                            )}
                             <div
                               style={{
                                 transform: 'translate(15.1px)'
                               }}
                             >
                               <Button
-                                disabled={!company && !description && !url && !selected && saved == 0}
+                                disabled={!company && !description && !full && !selected && saved == 0}
                                 onClick={() => {
                                   deleteAll(), 
                                   setUrl(null), 
@@ -683,7 +698,8 @@ export default function Advertisement() {
                                   setLeft(20), 
                                   setTop(20),
                                   deleteStoredImage(),
-                                  setSaved(0)
+                                  setSaved(0),
+                                  setFull(false)
                                 }}
                                 style={{
                                   border: '2px solid red',
@@ -702,10 +718,11 @@ export default function Advertisement() {
                       <Grid.Column width={resize ? 8 : 16} style={{ height: '75%' }}>
                         {company.length > 0 ||
                         description.length > 0 ||
-                        url ||
+                        url !== null ||
                         selected ||
                         saved > 0 ||
-                        mediaPreview.length > 0 ? (
+                        mediaPreview.length > 0 ||
+                        full ? (
                           <>
                             {currentUser === undefined && !resize ? (
                             <>
@@ -752,7 +769,7 @@ export default function Advertisement() {
                                         <div
                                           style={{
                                             transform: resize ? `translate(${(left/2.8)+10}px, ${(top/4.8)+10}px)` : `translate(${(left/1.3)-15}px, ${(top/1.3)-5}px)`,
-                                            }}
+                                          }}
                                         >
                                           <Image
                                             src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
@@ -950,7 +967,7 @@ export default function Advertisement() {
                     <Grid.Row>
                       <Grid.Column
                         style={{
-                          transform: resize ? 'translate(0px)' : 'translate(-12%)',
+                          transform: resize ? 'translate(0px)' : 'translate(-6%)',
                           width: resize ? '44%' : '100%',
                           display: 'flex',
                           justifyContent: 'center'
@@ -960,7 +977,7 @@ export default function Advertisement() {
                           type='image'
                           alt='image'
                           style={{
-                            transform: `translate(${showLeft+25}px, ${showTop}px) scale(.8)`,
+                            transform: `translate(${showLeft}px, ${showTop}px) scale(.8)`,
                             width: `${showWidth}px`,
                             height: `${showHeight}px`,
                             borderRadius: '5%',

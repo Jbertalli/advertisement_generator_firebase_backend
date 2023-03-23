@@ -45,7 +45,7 @@ export default function Header() {
   }
 
   function deleteLocal() {
-    localStorage.clear();
+    // localStorage.clear();
   }
 
   return (
