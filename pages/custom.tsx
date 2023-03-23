@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
 import { Divider, Container, Segment, Icon, Form, Button } from 'semantic-ui-react';
@@ -13,10 +12,6 @@ import { auth } from '../firebase/clientApp';
 
 auth;
 const db = getFirestore();
-
-const LOCAL_STORAGE_KEY_SAVED_CUSTOM = 'SavedCustom';
-const LOCAL_STORAGE_KEY_SELECTED_CUSTOM = 'CustomSelected';
-const LOCAL_STORAGE_KEY_IMAGE = 'CustomImage';
 
 export default function Custom() {
   const [mediaPreview, setMediaPreview] = useState<string>('');
@@ -64,10 +59,9 @@ export default function Custom() {
   const [imageSaved, setImageSaved] = useState<number>(0);
   const [saved, setSaved] = useState<number>(0);
   const [url, setUrl] = useState(null);
+  const [full, setFull] = useState<boolean>(false);
 
   const currentUser = auth.currentUser?.uid;
-
-  const router = useRouter();
 
   useEffect(() => {
     if (window.innerWidth > 650) {
@@ -87,24 +81,24 @@ export default function Custom() {
     return () => window.removeEventListener('resize', updateMedia);
   }, []);
 
-  console.log(
-    company,
-    companyFontSize,
-    companyFontWeight,
-    description,
-    descriptionFontSize,
-    descriptionFontWeight,
-    borderWidth,
-    borderColor,
-    color,
-    backgroundColor,
-    imageWidth,
-    imageHeight,
-    imageLeft,
-    imageTop,
-    totalWidth,
-    imageRotation
-  );
+  // console.log(
+  //   company,
+  //   companyFontSize,
+  //   companyFontWeight,
+  //   description,
+  //   descriptionFontSize,
+  //   descriptionFontWeight,
+  //   borderWidth,
+  //   borderColor,
+  //   color,
+  //   backgroundColor,
+  //   imageWidth,
+  //   imageHeight,
+  //   imageLeft,
+  //   imageTop,
+  //   totalWidth,
+  //   imageRotation
+  // );
 
   console.log(currentUser);
 
@@ -152,22 +146,6 @@ export default function Custom() {
     const docSnap = await getDoc(docRef);
 
     if(docSnap.exists()) {
-      // console.log('Document Company:', docSnap.data().company);
-      // console.log('Document CompanyFontSize:', docSnap.data().companyFontSize);
-      // console.log('Document CompanyFontWeight:', docSnap.data().companyFontWeight);
-      // console.log('Document Description:', docSnap.data().description);
-      // console.log('Document DescriptionFontSize:', docSnap.data().descriptionFontSize);
-      // console.log('Document DescriptionFontWeight:', docSnap.data().descriptionFontWeight);
-      // console.log('Document BorderWidth:', docSnap.data().borderWidth);
-      // console.log('Document BorderColor:', docSnap.data().borderColor);
-      // console.log('Document Color:', docSnap.data().color);
-      // console.log('Document BackgroundColor:', docSnap.data().backgroundColor);
-      // console.log('Document ImageWidth:', docSnap.data().imageWidth);
-      // console.log('Document ImageHeight:', docSnap.data().imageHeight);
-      // console.log('Document ImageLeft:', docSnap.data().imageLeft);
-      // console.log('Document ImageTop:', docSnap.data().imageTop);
-      // console.log('Document TotalWidth:', docSnap.data().totalWidth);
-      // console.log('Document ImageRotation:', docSnap.data().imageRotation);
       setShowCompany(docSnap.data().company);
       setShowCompanyFontSize(docSnap.data().companyFontSize);
       setShowCompanyFontWeight(docSnap.data().companyFontWeight);
@@ -302,7 +280,7 @@ export default function Custom() {
   }
 
   function deleteLocal() {
-    localStorage.clear();
+    // localStorage.clear();
   }
 
   const handleImageChange = (e) => {
@@ -319,7 +297,7 @@ export default function Custom() {
       }).catch((error) => {
         console.log(error.message, 'error getting the image url');
       })
-      setSaveImage(null);
+      // setSaveImage(null);
     }).catch((error) => {
       console.log(error.message);
     });
@@ -336,54 +314,8 @@ export default function Custom() {
   }
 
   useEffect(() => {
-    const storedSaved = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SAVED_CUSTOM));
-    if (storedSaved) setSaved(storedSaved);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_SAVED_CUSTOM, JSON.stringify(saved));
-  }, [saved]);
-
-  useEffect(() => {
-    const storedSelected = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SELECTED_CUSTOM));
-    if (storedSelected) setSelected(storedSelected);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_SELECTED_CUSTOM, JSON.stringify(selected));
-  }, [selected]);
-
-  useEffect(() => {
-    const adImage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE));
-    if (adImage) setMediaPreview(adImage);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE, JSON.stringify(mediaPreview));
-  }, [mediaPreview]);
-
-  useEffect(() => {
     setClicked(false);
   }, []);
-
-  // useEffect(() => {
-  //   if (currentUser !== undefined) {
-  //     getData();
-  //   } else {
-  //     console.log('Login to get data');
-  //   }
-  // }, [saved]);
-
-  // useEffect(() => {
-  //   if (currentUser !== undefined) {
-  //     getData();
-  //   } else {
-  //     console.log('Login to get data');
-  //   }
-  // }, []);
-
-  console.log(saved);
-  console.log(selected);
 
   // convert image to base-64
   const uploadImage = async (e) => {
@@ -423,7 +355,22 @@ export default function Custom() {
     } else {
       console.log('NO USER');
     }
-  })
+  });
+
+  const imageRef = ref(storage, `image/${currentUser}/custom`);
+
+  function getImg() {
+    getDownloadURL(imageRef).then(onResolve, onReject);
+  }
+
+  function onResolve(foundURL) {
+    console.log('full');
+    setFull(true);
+  }
+
+  function onReject(error) {
+    console.log(error.code);
+  }
 
   return (
     <>
@@ -468,6 +415,16 @@ export default function Custom() {
         setEditGlobal={setEditGlobal}
         editImage={editImage}
         setEditImage={setEditImage}
+        selected={selected}
+        setSelected={setSelected}
+        mediaPreview={mediaPreview}
+        setMediaPreview={setMediaPreview}
+        saved={saved}
+        setSaved={setSaved}
+        url={url}
+        setUrl={setUrl}
+        full={full}
+        setFull={setFull}
       />
       <div
         style={{
@@ -724,11 +681,11 @@ export default function Custom() {
                   <a href='#editTitle'>
                     <div
                       onClick={() => {
-                          setEditTitle(true),
-                          setEditDescription(false),
-                          setEditBorder(false),
-                          setEditGlobal(false),
-                          setEditImage(false);
+                        setEditTitle(true),
+                        setEditDescription(false),
+                        setEditBorder(false),
+                        setEditGlobal(false),
+                        setEditImage(false);
                       }}
                     >
                       <div
@@ -856,11 +813,11 @@ export default function Custom() {
                     <div
                       style={{ transform: 'translateY(-8px)' }}
                       onClick={() => {
-                          setEditDescription(true),
-                          setEditTitle(false),
-                          setEditBorder(false),
-                          setEditGlobal(false),
-                          setEditImage(false);
+                        setEditDescription(true),
+                        setEditTitle(false),
+                        setEditBorder(false),
+                        setEditGlobal(false),
+                        setEditImage(false);
                       }}
                     >
                       <div
@@ -965,11 +922,11 @@ export default function Custom() {
                     <div
                       style={{ transform: 'translateY(-8px)' }}
                       onClick={() => {
-                          setEditBorder(true),
-                          setEditTitle(false),
-                          setEditDescription(false),
-                          setEditGlobal(false),
-                          setEditImage(false);
+                        setEditBorder(true),
+                        setEditTitle(false),
+                        setEditDescription(false),
+                        setEditGlobal(false),
+                        setEditImage(false);
                       }}
                     >
                       <div
@@ -1096,10 +1053,10 @@ export default function Custom() {
                       style={{ transform: 'translateY(-8px)' }}
                       onClick={() => {
                         setEditGlobal(true),
-                          setEditTitle(false),
-                          setEditDescription(false),
-                          setEditBorder(false),
-                          setEditImage(false);
+                        setEditTitle(false),
+                        setEditDescription(false),
+                        setEditBorder(false),
+                        setEditImage(false);
                       }}
                     >
                       <div
@@ -1253,12 +1210,12 @@ export default function Custom() {
                             width: '150px', 
                             transform: 'translateX(-.2vw)'
                           }}
-                          // onChange={handleImageChange}
                           onChange={(e) => {handleImageChange(e), setImageSaved(imageSaved + 1)}}
                           onClick={() => {
                             setSelected(true), 
                             setClicked(true),
-                            setSaved(saved + 1)
+                            setSaved(saved + 1),
+                            setFull(false)
                           }}
                         />
                         <label 
@@ -1275,12 +1232,19 @@ export default function Custom() {
                             position: 'relative',
                             zIndex: '1'
                           }}
+                          onClick={() => {
+                            setUrl(null),
+                            deleteStoredImage(),
+                            setSaved(0)
+                          }}
                         >
                           Choose File
                         </label>
                       </>
                       )}
-                    <div style={{ marginBottom: '5px', marginTop: '15px' }}>Image Width (pixels)</div>
+                    <div style={{ marginBottom: '5px', marginTop: '15px' }}>
+                      Image Width (pixels)
+                    </div>
                     <div>
                       <Form.Input
                         min='0'
@@ -1297,7 +1261,9 @@ export default function Custom() {
                         }}
                       />
                     </div>
-                    <div style={{ marginBottom: '5px' }}>Image Height (pixels)</div>
+                    <div style={{ marginBottom: '5px' }}>
+                      Image Height (pixels)
+                    </div>
                     <div>
                       <Form.Input
                         min='0'
@@ -1314,7 +1280,9 @@ export default function Custom() {
                         }}
                       />
                     </div>
-                    <div style={{ marginBottom: '5px' }}>Image Left (pixels)</div>
+                    <div style={{ marginBottom: '5px' }}>
+                      Image Left (pixels)
+                    </div>
                     <div>
                       <Form.Input
                         min='-1000'
@@ -1331,7 +1299,9 @@ export default function Custom() {
                         }}
                       />
                     </div>
-                    <div style={{ marginBottom: '5px' }}>Image Top (pixels)</div>
+                    <div style={{ marginBottom: '5px' }}>
+                      Image Top (pixels)
+                    </div>
                     <div>
                       <Form.Input
                         min='-1000'
@@ -1376,10 +1346,10 @@ export default function Custom() {
                       style={{ transform: 'translateY(-8px)' }}
                       onClick={() => {
                         setEditImage(true),
-                          setEditTitle(false),
-                          setEditDescription(false),
-                          setEditBorder(false),
-                          setEditGlobal(false);
+                        setEditTitle(false),
+                        setEditDescription(false),
+                        setEditBorder(false),
+                        setEditGlobal(false);
                       }}
                     >
                       <div
@@ -1452,37 +1422,95 @@ export default function Custom() {
             marginBottom: '-15px'
           }}
         >
+          {full ? (
+          <>
+            <Button
+              disabled={!company &&
+                !description &&
+                !selected &&
+                saved == 0 &&
+                !full
+              }
+              onClick={() => {addCustom(
+                company,
+                companyFontSize,
+                companyFontWeight,
+                description,
+                descriptionFontSize,
+                descriptionFontWeight,
+                borderWidth,
+                borderColor,
+                color,
+                backgroundColor,
+                imageWidth,
+                imageHeight,
+                imageLeft,
+                imageTop,
+                totalWidth,
+                imageRotation
+              ), getData(),
+                handleSubmit(),
+                setSaved(0),
+                setFull(true)
+              }}
+              style={{
+                border: '2px solid #125CA1',
+                background: 'transparent',
+                color: '#125CA1'
+              }}
+            >
+              Update
+            </Button>
+          </>
+          ):(
+          <>
+            <Button
+              disabled={!company &&
+                !description &&
+                !selected &&
+                saved == 0 &&
+                !full
+              }
+              onClick={() => {addCustom(
+                company,
+                companyFontSize,
+                companyFontWeight,
+                description,
+                descriptionFontSize,
+                descriptionFontWeight,
+                borderWidth,
+                borderColor,
+                color,
+                backgroundColor,
+                imageWidth,
+                imageHeight,
+                imageLeft,
+                imageTop,
+                totalWidth,
+                imageRotation
+              ), getData(),
+                handleSubmit(),
+                setSaved(0),
+                getImg(),
+                setFull(true)
+              }}
+              style={{
+                border: '2px solid #125CA1',
+                background: 'transparent',
+                color: '#125CA1'
+              }}
+            >
+              Save to Database
+            </Button>
+          </>
+          )}
           <Button
-            onClick={() => {addCustom(
-              company,
-              companyFontSize,
-              companyFontWeight,
-              description,
-              descriptionFontSize,
-              descriptionFontWeight,
-              borderWidth,
-              borderColor,
-              color,
-              backgroundColor,
-              imageWidth,
-              imageHeight,
-              imageLeft,
-              imageTop,
-              totalWidth,
-              imageRotation
-            ), getData(),
-              handleSubmit(),
-              setSaved(0)
-          }}
-            style={{
-              border: '2px solid #125CA1',
-              background: 'transparent',
-              color: '#125CA1'
-            }}
-          >
-            Save to Database
-          </Button>
-          <Button
+            disabled={!company &&
+              !description &&
+              !selected &&
+              saved == 0 &&
+              !full
+            }
             style={{
               border: '2px solid red',
               background: 'transparent',
@@ -1541,7 +1569,8 @@ export default function Custom() {
               setShowTotalWidth(''),
               setShowImageRotation(''),
               deleteStoredImage(),
-              setSaved(0)
+              setSaved(0),
+              setFull(false)
             }}
           >
             Delete Advertisement

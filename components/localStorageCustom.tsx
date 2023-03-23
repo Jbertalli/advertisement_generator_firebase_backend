@@ -19,6 +19,11 @@ const LOCAL_STORAGE_KEY_EDIT_DESCRIPTION = 'Edit_Description';
 const LOCAL_STORAGE_KEY_EDIT_BORDER = 'Edit_Border';
 const LOCAL_STORAGE_KEY_EDIT_GLOBAL = 'Edit_Global';
 const LOCAL_STORAGE_KEY_EDIT_IMAGE = 'Edit_Image';
+const LOCAL_STORAGE_KEY_SAVED_CUSTOM = 'SavedCustom';
+const LOCAL_STORAGE_KEY_SELECTED_CUSTOM = 'CustomSelected';
+const LOCAL_STORAGE_KEY_IMAGE = 'CustomImage';
+const LOCAL_STORAGE_KEY_URL = 'CustomUrl';
+const LOCAL_STORAGE_KEY_FULL = 'CustomFull';
 
 export default function LocalCustom(values) {
     
@@ -59,6 +64,16 @@ export default function LocalCustom(values) {
     setEditGlobal,
     editImage,
     setEditImage,
+    selected,
+    setSelected,
+    mediaPreview,
+    setMediaPreview,
+    saved,
+    setSaved,
+    url,
+    setUrl,
+    full,
+    setFull,
   } = values;
 
   useEffect(() => {
@@ -308,6 +323,51 @@ export default function LocalCustom(values) {
       JSON.stringify(editImage)
     );
   }, [editImage]);
+
+  useEffect(() => {
+    const storedSaved = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SAVED_CUSTOM));
+    if (storedSaved) setSaved(storedSaved);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_SAVED_CUSTOM, JSON.stringify(saved));
+  }, [saved]);
+
+  useEffect(() => {
+    const storedSelected = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SELECTED_CUSTOM));
+    if (storedSelected) setSelected(storedSelected);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_SELECTED_CUSTOM, JSON.stringify(selected));
+  }, [selected]);
+
+  useEffect(() => {
+    const adImage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_IMAGE));
+    if (adImage) setMediaPreview(adImage);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_IMAGE, JSON.stringify(mediaPreview));
+  }, [mediaPreview]);
+
+  useEffect(() => {
+    const url = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_URL));
+    if (url) setUrl(url);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_URL, JSON.stringify(url));
+  }, [url]);
+
+  useEffect(() => {
+    const full = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_FULL));
+    if (full) setFull(full);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_FULL, JSON.stringify(full));
+  }, [full]);
 
   return <></>;
 }

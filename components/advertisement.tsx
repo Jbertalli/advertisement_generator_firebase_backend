@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import FocusLock from 'react-focus-lock';
 import Local from '../components/localStorage';
+import React, { useState, useEffect } from 'react';
 import { Container, Segment, Button, Form, Icon, Grid, Item, Card, Divider } from 'semantic-ui-react';
 import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } from 'firebase/firestore';
 import { auth } from '../firebase/clientApp';
