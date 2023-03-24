@@ -88,13 +88,13 @@ export default function History() {
     const docSnap = await getDoc(docRef);
 
     if(docSnap.exists()) {
-      console.log('Document company:', docSnap.data().company);
-      console.log('Document description:', docSnap.data().description);
-      console.log('Document height:', docSnap.data().height);
-      console.log('Document width:', docSnap.data().width);
-      console.log('Document top:', docSnap.data().top);
-      console.log('Document left:', docSnap.data().left);
-      console.log('Document mediaPreview:', docSnap.data().mediaPreview);
+      // console.log('Document company:', docSnap.data().company);
+      // console.log('Document description:', docSnap.data().description);
+      // console.log('Document height:', docSnap.data().height);
+      // console.log('Document width:', docSnap.data().width);
+      // console.log('Document top:', docSnap.data().top);
+      // console.log('Document left:', docSnap.data().left);
+      // console.log('Document mediaPreview:', docSnap.data().mediaPreview);
       setShowCompany(docSnap.data().company);
       setShowDescription(docSnap.data().description);
       setShowHeight(docSnap.data().height);

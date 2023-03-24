@@ -737,7 +737,7 @@ export default function Advertisement() {
                             ): null}
                             <div
                               style={{
-                                marginBottom: mediaPreview.length === 0 ? '30px' : '45px',
+                                marginBottom: '45px',
                                 display: resize ? null : 'flex',
                                 justifyContent: resize ? null : 'center'
                               }}
