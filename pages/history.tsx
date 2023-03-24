@@ -88,13 +88,6 @@ export default function History() {
     const docSnap = await getDoc(docRef);
 
     if(docSnap.exists()) {
-      // console.log('Document company:', docSnap.data().company);
-      // console.log('Document description:', docSnap.data().description);
-      // console.log('Document height:', docSnap.data().height);
-      // console.log('Document width:', docSnap.data().width);
-      // console.log('Document top:', docSnap.data().top);
-      // console.log('Document left:', docSnap.data().left);
-      // console.log('Document mediaPreview:', docSnap.data().mediaPreview);
       setShowCompany(docSnap.data().company);
       setShowDescription(docSnap.data().description);
       setShowHeight(docSnap.data().height);
@@ -171,22 +164,23 @@ export default function History() {
                 }}
               >
                 <Table.Body>
-                  <Table.Header
-                    style={{ 
-                      fontSize: '30px', 
-                      transform: 'translateX(50%)' 
-                    }}
-                  >
-                    <div
-                      style={{
-                        padding: '10px',
-                        lineHeight: '30px',
-                        transform: resize ? null : 'translate(20px)'
+                  <Table.Row>
+                    <Table.Cell
+                      style={{ 
+                        fontSize: '30px', 
+                        transform: 'translateX(50%)', 
+                        padding: '20px 0px 20px 0px'
                       }}
                     >
-                      {resize ? 'Saved Advertisements' : 'Saved Ads'}
-                    </div>
-                  </Table.Header>
+                      <div
+                        style={{
+                          lineHeight: '30px'
+                        }}
+                      >
+                        {resize ? 'Saved Advertisements' : 'Saved Ads'}
+                      </div>
+                    </Table.Cell>
+                  </Table.Row>
                   <Table.Row>
                     <Table.Cell>Database ID</Table.Cell>
                     <Table.Cell>{currentUser}</Table.Cell>

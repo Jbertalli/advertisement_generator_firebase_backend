@@ -92,20 +92,6 @@ export default function History() {
     const docSnap = await getDoc(docRef);
 
     if(docSnap.exists()) {
-      // console.log('Document Company:', docSnap.data().company);
-      // console.log('Document CompanyFontSize:', docSnap.data().companyFontSize);
-      // console.log('Document CompanyFontWeight:', docSnap.data().companyFontWeight);
-      // console.log('Document Description:', docSnap.data().description);
-      // console.log('Document DescriptionFontSize:', docSnap.data().descriptionFontSize);
-      // console.log('Document DescriptionFontWeight:', docSnap.data().descriptionFontWeight);
-      // console.log('Document BorderWidth:', docSnap.data().borderWidth);
-      // console.log('Document BorderColor:', docSnap.data().borderColor);
-      // console.log('Document Color:', docSnap.data().color);
-      // console.log('Document BackgroundColor:', docSnap.data().backgroundColor);
-      // console.log('Document MediaPreview:', docSnap.data().mediaPreview);
-      // console.log('Document ImageWidth:', docSnap.data().imageWidth);
-      // console.log('Document ImageHeight:', docSnap.data().imageHeight);
-      // console.log('Document ImageRotation:', docSnap.data().imageRotation);
       setShowCompany(docSnap.data().company);
       setShowCompanyFontSize(docSnap.data().companyFontSize);
       setShowCompanyFontWeight(docSnap.data().companyFontWeight);
@@ -189,18 +175,23 @@ export default function History() {
                 }}
               >
                 <Table.Body>
-                  <Table.Header
-                    style={{ fontSize: '30px', transform: 'translateX(50%)' }}
-                  >
-                    <div
-                      style={{
-                        padding: '10px',
-                        lineHeight: '30px'
+                  <Table.Row>
+                    <Table.Cell
+                      style={{ 
+                        fontSize: '30px', 
+                        transform: 'translateX(50%)', 
+                        padding: '20px 0px 20px 0px'
                       }}
                     >
-                      {resize ? 'Custom Advertisements' : 'Custom Ads'}
-                    </div>
-                  </Table.Header>
+                      <div
+                        style={{
+                          lineHeight: '30px'
+                        }}
+                      >
+                        {resize ? 'Custom Advertisements' : 'Custom Ads'}
+                      </div>
+                    </Table.Cell>
+                  </Table.Row>
                   <Table.Row>
                     <Table.Cell>Database ID</Table.Cell>
                     <Table.Cell>{currentUser}</Table.Cell>
