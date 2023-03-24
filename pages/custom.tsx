@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
+// import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import LocalCustom from '../components/localStorageCustom';
@@ -9,6 +9,8 @@ import { getDoc, getFirestore, doc, setDoc, Timestamp, updateDoc, deleteField } 
 import { ref, uploadBytes, getDownloadURL, getStorage, deleteObject } from 'firebase/storage';
 import { storage } from '../firebase/clientApp';
 import { auth } from '../firebase/clientApp';
+import LiveCustom from '../components/LiveCustom';
+import EditDrawers from '../components/EditDrawers';
 
 auth;
 const db = getFirestore();
@@ -80,25 +82,6 @@ export default function Custom() {
     window.addEventListener('resize', updateMedia);
     return () => window.removeEventListener('resize', updateMedia);
   }, []);
-
-  // console.log(
-  //   company,
-  //   companyFontSize,
-  //   companyFontWeight,
-  //   description,
-  //   descriptionFontSize,
-  //   descriptionFontWeight,
-  //   borderWidth,
-  //   borderColor,
-  //   color,
-  //   backgroundColor,
-  //   imageWidth,
-  //   imageHeight,
-  //   imageLeft,
-  //   imageTop,
-  //   totalWidth,
-  //   imageRotation
-  // );
 
   console.log(currentUser);
 
@@ -283,11 +266,11 @@ export default function Custom() {
     // localStorage.clear();
   }
 
-  const handleImageChange = (e) => {
-    if(e.target.files[0]) {
-      setSaveImage(e.target.files[0])
-    }
-  }
+  // const handleImageChange = (e) => {
+  //   if(e.target.files[0]) {
+  //     setSaveImage(e.target.files[0])
+  //   }
+  // }
 
   const handleSubmit = () => {
     const imageRef = ref(storage, `image/${currentUser}/custom`);
@@ -477,7 +460,32 @@ export default function Custom() {
               >
                 Create a Custom Advertisement
               </h1>
-              {(company.length > 0 || 
+              <LiveCustom 
+                company={company}
+                companyFontSize={companyFontSize}
+                description={description}
+                descriptionFontSize={descriptionFontSize}
+                borderWidth={borderWidth}
+                selected={selected}
+                saved={saved}
+                mediaPreview={mediaPreview}
+                backgroundColor={backgroundColor}
+                color={color}
+                borderColor={borderColor}
+                totalWidth={totalWidth}
+                descriptionFontWeight={descriptionFontWeight}
+                companyFontWeight={companyFontWeight}
+                currentUser={currentUser}
+                resize={resize}
+                imageLeft={imageLeft}
+                imageWidth={imageWidth}
+                imageHeight={imageHeight}
+                imageTop={imageTop}
+                imageRotation={imageRotation}
+                clicked={clicked}
+                url={url}
+              />
+              {/* {(company.length > 0 || 
                 Number(companyFontSize) > 0 || 
                 description.length ||
                 Number(descriptionFontSize) > 0 || 
@@ -584,9 +592,68 @@ export default function Custom() {
                   </div>
                 </div>
               </>
-              ): null}
+              ): null} */}
             </Segment>
-            <div
+            <EditDrawers 
+              editTitle={editTitle}
+              setEditTitle={setEditTitle}
+              company={company}
+              setCompany={setCompany}
+              resize={resize}
+              companyFontSize={companyFontSize}
+              setCompanyFontSize={setCompanyFontSize}
+              companyFontWeight={companyFontWeight}
+              setCompanyFontWeight={setCompanyFontWeight}
+              setEditDescription={setEditDescription}
+              setEditBorder={setEditBorder}
+              setEditGlobal={setEditGlobal}
+              setEditImage={setEditImage}
+              editDescription={editDescription}
+              description={description}
+              setDescription={setDescription}
+              descriptionFontSize={descriptionFontSize}
+              setDescriptionFontSize={setDescriptionFontSize}
+              descriptionFontWeight={descriptionFontWeight}
+              setDescriptionFontWeight={setDescriptionFontWeight}
+              editBorder={editBorder}
+              borderWidth={borderWidth}
+              setBorderWidth={setBorderWidth}
+              borderColor={borderColor}
+              setBorderColor={setBorderColor}
+              editGlobal={editGlobal}
+              totalWidth={totalWidth}
+              setTotalWidth={setTotalWidth}
+              color={color}
+              setColor={setColor}
+              backgroundColor={backgroundColor}
+              setBackgroundColor={setBackgroundColor}
+              editImage={editImage}
+              currentUser={currentUser}
+              uploadImage={uploadImage}
+              mediaPreview={mediaPreview}
+              setMediaPreview={setMediaPreview}
+              setImageWidth={setImageWidth}
+              setImageHeight={setImageHeight}
+              setImageLeft={setImageLeft}
+              setImageTop={setImageTop}
+              setImageRotation={setImageRotation}
+              setImageSaved={setImageSaved}
+              imageSaved={imageSaved}
+              setSelected={setSelected} 
+              setClicked={setClicked}
+              setSaved={setSaved}
+              saved={saved}
+              setFull={setFull}
+              setUrl={setUrl}
+              deleteStoredImage={deleteStoredImage}
+              imageLeft={imageLeft}
+              imageWidth={imageWidth}
+              imageHeight={imageHeight}
+              imageTop={imageTop}
+              imageRotation={imageRotation}
+              setSaveImage={setSaveImage}
+            />
+            {/* <div
               style={{
                 fontSize: '18px',
                 fontWeight: '500',
@@ -1375,7 +1442,7 @@ export default function Custom() {
                   </a>
                 </>
               )}
-            </div>
+            </div> */}
             {currentUser === undefined ? (
             <>
               <Segment
