@@ -613,7 +613,13 @@ export default function AdCard(values) {
                         </>
                         )}
                       </Grid.Column>
-                      <Grid.Column width={resize ? 8 : 16} style={{ height: '75%' }}>
+                      <Grid.Column 
+                        width={resize ? 8 : 16} 
+                        style={{ 
+                            height: '75%', 
+                            marginBottom: mediaPreview.length > 0 ? null : '60px' 
+                        }}
+                      >
                         {company.length > 0 ||
                         description.length > 0 ||
                         url !== null ||
@@ -671,8 +677,8 @@ export default function AdCard(values) {
                                         >
                                           <Image
                                             src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
-                                            width={resize ? `${width/2.8}` : `${width/1.5}`}
-                                            height={resize ? `${height/2.8}` : `${height/1.5}`}
+                                            width={mediaPreview.length > 0 ? (resize ? `${width/2.8}` : `${width/1.5}`) : 1}
+                                            height={mediaPreview.length > 0 ? (resize ? `${height/2.8}` : `${height/1.5}`) : 1}
                                             alt='image'
                                           />
                                         </div>

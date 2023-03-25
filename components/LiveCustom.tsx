@@ -112,8 +112,8 @@ export default function LiveCustom(values) {
                           >
                             <Image
                               src={mediaPreview.length > 0 ? mediaPreview : '/images/blank.png'}
-                              width={resize ? `${imageWidth/1.5}` : `${imageWidth/1.5}`}
-                              height={resize ? `${imageHeight/1.5}` : `${imageHeight/1.5}`}
+                              width={mediaPreview.length > 0 ? (resize ? `${imageWidth/1.5}` : `${imageWidth/1.5}`) : 100}
+                              height={mediaPreview.length > 0 ? (resize ? `${imageHeight/1.5}` : `${imageHeight/1.5}`) : 100}
                               alt='image'
                             />
                           </div>
