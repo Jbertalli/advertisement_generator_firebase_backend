@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
   console.log(user);
 
   useEffect(() => {
-    console.log(window.document.cookie.length);
+    // console.log(window.document.cookie.length);
     if (user || window.document.cookie.length > 17 || router.pathname === '/advertisement_generator' || router.pathname === '/custom') {
       console.log('Signed In or Public Page');
     } else if (user === null && window.document.cookie.length === 17 && (router.pathname === '/history' || router.pathname === '/customHistory')) {
