@@ -84,7 +84,6 @@ export default function Advertisement() {
   auth.onAuthStateChanged(function(user) {
     if (user) {
       getData();
-      console.log('USER');
     } else {
       console.log('NO USER');
     }

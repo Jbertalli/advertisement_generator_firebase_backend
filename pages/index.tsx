@@ -110,7 +110,7 @@ export default function Authentication() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      console.log(document.cookie.length);
+      // console.log(document.cookie.length);
       if (document.cookie.length > 6) {
         console.log('Authenticated!');
       } else if (document.cookie.length == 5) {

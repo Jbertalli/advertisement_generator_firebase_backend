@@ -63,14 +63,9 @@ export default function History() {
     });
   }, []);
 
-  console.log(userData.length);
-  console.log(user);
-  console.log(user?.uid);
-  console.log(userData);
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      console.log(document.cookie.length);
+      // console.log(document.cookie.length);
       if (document.cookie.length > 6) {
         console.log('Authenticated!');
       } else if (document.cookie.length == 5) {
@@ -111,7 +106,6 @@ export default function History() {
   auth.onAuthStateChanged(function(user) {
     if (user) {
       getData();
-      console.log('USER');
     } else {
       console.log('NO USER');
     }

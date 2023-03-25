@@ -134,7 +134,7 @@ export default function AdCard(values) {
     const uploadImage = async (e) => {
         const file = e.target.files[0];
         const base64: any = await convertBase64(file);
-        console.log(base64)
+        console.log(base64);
         setMediaPreview(base64);
     }
 
