@@ -141,7 +141,7 @@ export default function Authentication() {
           style={{
             display: 'flex',
             justifyContent: 'center',
-            paddingTop: resize ? '15vh' : '12vh',
+            paddingTop: resize ? '12vh' : '10vh'
           }}
         >
           <Card
