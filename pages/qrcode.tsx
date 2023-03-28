@@ -21,7 +21,10 @@ export default function qrCode() {
             <div
                 style={{
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    transform: 'scale(2.1)',
+                    marginTop: '100px',
+                    marginBottom: '100px'
                 }}
             >
                 <QRCode 
@@ -49,7 +52,10 @@ export default function qrCode() {
             <div
                 style={{
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    transform: 'scale(2.1)',
+                    marginTop: '100px',
+                    marginBottom: '100px'
                 }}
             >
                 <QRCode
@@ -77,7 +83,10 @@ export default function qrCode() {
             <div
                 style={{
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    transform: 'scale(2.1)',
+                    marginTop: '100px',
+                    marginBottom: '100px'
                 }}
             >
                 <QRCode
@@ -105,7 +114,10 @@ export default function qrCode() {
             <div
                 style={{
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    transform: 'scale(2.1)',
+                    marginTop: '100px',
+                    marginBottom: '100px'
                 }}
             >
                 <QRCode
@@ -126,18 +138,21 @@ export default function qrCode() {
                     justifyContent: 'center'
                 }}
             >
-                <a href='https://www.'>
+                <a href='https://www.healthstatcalculator.com'>
                     HealthStat.com
                 </a>
             </div>
             <div
                 style={{
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    transform: 'scale(2.1)',
+                    marginTop: '100px',
+                    marginBottom: '100px'
                 }}
             >
                 <QRCode
-                    // value='https://'
+                    value='https://www.healthstatcalculator.com'
                     logoImage='/images/healthstat.png'
                     eyeColor='black'
                     fgColor='black'
@@ -161,7 +176,10 @@ export default function qrCode() {
             <div
                 style={{
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    transform: 'scale(2.1)',
+                    marginTop: '100px',
+                    marginBottom: '100px'
                 }}
             >
                 <QRCode
